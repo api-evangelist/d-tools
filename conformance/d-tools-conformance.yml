@@ -1,0 +1,91 @@
+generated: '2026-08-11'
+method: derived
+source: >-
+  openapi/_original/d-tools-cloud-openapi.json, openapi/_original/d-tools-si-openapi.json,
+  https://www.d-tools.com/d-tools-cloud-hosting-security-data-protection,
+  https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: >-
+    SI API publishes OpenAPI 3.1.1 at https://api.d-tools.com/si/openapi/v1.json (56 operations, 93 schemas),
+    served to a Scalar reference UI at /si/doc.
+- id: openapi-3.0
+  conforms: true
+  evidence: >-
+    Cloud API publishes OpenAPI 3.0.4 at https://dtcloudapi.d-tools.cloud/swagger/v1/swagger.json (26 operations,
+    92 schemas), served to Swagger UI at /apidocs/index.html.
+- id: rest
+  conforms: partial
+  evidence: >-
+    HTTP + JSON with correct method semantics, but RPC-style verb-in-path naming on both APIs
+    (/api/v1/Clients/GetClients, /Publish/Projects/ArchiveProjects) rather than resource-oriented paths.
+- id: rfc9457
+  conforms: partial
+  evidence: >-
+    Cloud API returns Microsoft.AspNetCore.Mvc.ProblemDetails (type/title/status/detail/instance) on 400/401/404/409,
+    which is the RFC 9457 member set, but declares it under application/json rather than application/problem+json
+    and never populates a stable `type` URI. SI API declares no error responses at all.
+- id: oauth2
+  conforms: false
+  evidence: Neither API offers OAuth 2.0. Both are static header credentials. No authorization endpoint, no token
+    endpoint, no /.well-known/oauth-authorization-server on any host.
+- id: oidc
+  conforms: false
+  evidence: >-
+    Microsoft Entra External ID secures product sign-in for D-Tools Cloud, but no OpenID Connect surface is exposed
+    to API consumers and /.well-known/openid-configuration 404s on every host.
+- id: pagination
+  conforms: true
+  evidence: >-
+    Cloud uses page/pageSize with includeTotalCount and sort; SI uses pageNumber/pageSize. Documented cap of 500
+    records on GetClients.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No Idempotency-Key on either API and no documented replay semantics, on a surface where one API is an
+    enqueue-style publisher. See conventions/d-tools-conventions.yml.
+- id: rfc8594
+  conforms: false
+  evidence: No Sunset or Deprecation headers, no deprecation policy, and zero operations marked deprecated in
+    either specification.
+- id: rfc9116
+  conforms: false
+  evidence: >-
+    No security.txt on any D-Tools-controlled host. The one 200 found (docs.d-tools.cloud) is Intercom's
+    vendor-default file with Canonical app.intercom.com. See well-known/d-tools-well-known.yml.
+- id: asyncapi
+  conforms: false
+  evidence: Webhooks exist in the Cloud product UI but no AsyncAPI document and no event catalog is published.
+- id: mcp
+  conforms: false
+  evidence: >-
+    No MCP server. Probed /mcp and /sse on both API hosts and mcp.d-tools.com / mcp.d-tools.cloud — 404 or no
+    resolution.
+- id: a2a
+  conforms: false
+  evidence: >-
+    No agent card. /.well-known/agent-card.json and /.well-known/agent.json probed on all five hosts; every
+    D-Tools-controlled host 404s and d-tools.cloud returns an SPA HTML shell.
+- id: graphql
+  conforms: false
+  evidence: /graphql 404s on both API hosts.
+compliance:
+  certifications_published: []
+  note: >-
+    D-Tools names NO certification of its own. Its public hosting and data-protection page states that "D-Tools
+    Cloud operates within Microsoft Azure's enterprise infrastructure, which maintains numerous internationally
+    recognized security and compliance certifications" — that is Azure's compliance, inherited and unnamed, not a
+    D-Tools attestation. No SOC 2, ISO 27001, PCI DSS, HIPAA, GDPR or CCPA claim appears anywhere on the site.
+    Because nothing is attested, no Compliance and no TrustCenter pointer is wired into apis.yml.
+  self_declared_controls:
+    hosting: Microsoft Azure, US data centres, Microsoft-managed
+    encryption_in_transit: TLS/HTTPS
+    encryption_at_rest: Azure SQL
+    backups: continuous automated backups with a 35-day point-in-time recovery window
+    identity: Microsoft Entra External ID with multi-factor authentication
+    isolation: logical tenant isolation
+    process: "continuous security reviews, monitoring, and vulnerability remediation"
+    source: https://www.d-tools.com/d-tools-cloud-hosting-security-data-protection
+  penetration_testing: not stated
+  vulnerability_disclosure: none published — no security.txt, no bug bounty, no disclosure page, no security contact

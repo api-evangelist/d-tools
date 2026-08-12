@@ -1,0 +1,74 @@
+generated: '2026-08-11'
+method: searched
+source: >-
+  https://docs.d-tools.cloud/en/articles/8756132-authentication ,
+  https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks ,
+  https://api.d-tools.com/si/openapi/v1.json (info.description) ,
+  https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+spec_gap: >-
+  NEITHER OpenAPI declares components.securitySchemes and neither declares a root-level `security` block. Both APIs
+  are in fact authenticated on every operation, but a generated client or an agent reading either contract alone
+  would produce unauthenticated calls that fail 401. The auth model below is recovered from the prose docs, not
+  from the machine-readable contract. This is the single largest contract defect in the D-Tools surface and it is
+  the provider's to fix: adding `securitySchemes` with an `apiKey`-in-header scheme plus a root `security` block
+  costs a few lines and makes both specs self-describing.
+apis:
+- api: D-Tools Cloud API
+  base_url: https://dtcloudapi.d-tools.cloud
+  model: dual-credential
+  note: >-
+    Both credentials are required on every request; supplying only one returns 401. The Basic value is a single
+    fixed string that D-Tools publishes verbatim in its own public documentation and instructs every customer to
+    reuse ("Do not make your own, as it will not work"), so it is a shared, non-rotatable, non-secret constant
+    rather than a per-tenant credential. The only tenant-specific credential is the X-API-Key. That value is
+    deliberately NOT reproduced in this artifact.
+  schemes:
+  - name: api_key
+    type: apiKey
+    in: header
+    header: X-API-Key
+    scope: per-tenant
+    issued_via: 'D-Tools Cloud app: Settings > Integration > Developer > API Keys'
+    rotation: manual; keys can be edited to inactive or deleted from the same screen
+    max_active_keys: 5
+    docs: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - name: shared_basic
+    type: http
+    scheme: basic
+    in: header
+    header: Authorization
+    scope: shared-global
+    rotation: none documented
+    docs: https://docs.d-tools.cloud/en/articles/8756132-authentication
+    observation: >-
+      A fixed Basic credential published in public docs and identical for every customer. It adds no tenant
+      separation; the X-API-Key carries all of the actual authorization. Recorded as a finding, not as a secret.
+  failure_mode: 401 Unauthorized, body shaped as ASP.NET Core ProblemDetails
+  oauth2: false
+  openid_connect: false
+  mtls: false
+- api: D-Tools System Integrator (SI) API
+  base_url: https://api.d-tools.com/si
+  model: single-credential
+  schemes:
+  - name: api_key
+    type: apiKey
+    in: header
+    header: X-DTSI-ApiKey
+    scope: per SI user AND per integration
+    issued_via: 'SI 2016 Control Panel > Manage Integrations'
+    rotation: not documented
+    docs: https://docs.d-tools.com/en/articles/9203156-api-key
+    note: >-
+      One key binds one integration to one SI user, so a partner integrating with N SI customers holds N keys.
+      Access to the SI API is gated on enrollment in the D-Tools Software Assurance (SA) program.
+  oauth2: false
+  openid_connect: false
+  mtls: false
+end_user_identity:
+  sso: >-
+    Product-level only, not API-level. D-Tools Cloud sign-in uses Microsoft Entra External ID with MFA; SI supports
+    a Microsoft Entra ID integration. Neither is exposed to API consumers — there is no authorization-code flow, no
+    consent screen, and no delegated end-user token on either API.
+  delegated_authorization: false
+  scopes: false

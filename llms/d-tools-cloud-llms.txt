@@ -1,0 +1,283 @@
+# D-Tools Help Center
+
+> Help center for D-Tools
+
+## Getting Started
+
+- [Signing up for D-Tools Cloud](http://docs.d-tools.cloud/en/articles/2287472-signing-up-for-d-tools-cloud.md): How to sign up for D-Tools Cloud free trial
+- [Getting started with D-Tools Cloud](http://docs.d-tools.cloud/en/articles/7901587-getting-started-with-d-tools-cloud.md)
+- [Assigning or Changing the Account Owner in D-Tools Cloud](http://docs.d-tools.cloud/en/articles/8187131-assigning-or-changing-the-account-owner-in-d-tools-cloud.md): How to change ownership inside your D-Tools Cloud subscription. Written By: Megan Campbell Last Updated: June 6th, 2026
+- [Entering your SI License Key for exclusive benefits](http://docs.d-tools.cloud/en/articles/2323129-entering-your-si-license-key-for-exclusive-benefits.md): If you are a paying Software Assurance \(SA\) customer, you will receive a discount towards your D-Tools Cloud Subscription.
+- [Resending the invitation to a user](http://docs.d-tools.cloud/en/articles/8233456-resending-the-invitation-to-a-user.md): How to resend the email invitation to a user when they have not received the invitation email
+- [Assigning resource costs to users](http://docs.d-tools.cloud/en/articles/10456567-assigning-resource-costs-to-users.md): How to assign resource costs to Office users and Field users
+- [Help channels and resources](http://docs.d-tools.cloud/en/articles/1666041-help-channels-and-resources.md): How to contact us and get help for using D-Tools Cloud features
+- [D-Tools Cloud Ideas portal](http://docs.d-tools.cloud/en/articles/2302930-d-tools-cloud-ideas-portal.md): How to use the D-Tools Cloud Ideas portal for adding your ideas about features and tracking them
+- [How to report a bug?](http://docs.d-tools.cloud/en/articles/4136313-how-to-report-a-bug.md): Chat with the D-Tools Support team to report technical issues and bugs you see when using D-Tools Cloud  
+- [Share Your Ideas with the D-Tools Product Team](http://docs.d-tools.cloud/en/articles/14093232-share-your-ideas-with-the-d-tools-product-team.md): We build D-Tools Cloud for you — and the best ideas often come directly from the people using it every day. The D-Tools Ideas Portal is your place to submit feature requests, vote on ideas from oth...
+- [Checking D-Tools Cloud System Status and Subscribing to Updates](http://docs.d-tools.cloud/en/articles/15808034-checking-d-tools-cloud-system-status-and-subscribing-to-updates.md): How to check the real-time status of D-Tools Cloud and subscribe to incident and maintenance notifications via email, SMS, Slack, or Microsoft Teams
+
+## Getting Started Videos 
+
+- [Getting Started - Overview](http://docs.d-tools.cloud/en/articles/9119004-getting-started-overview.md)
+- [Setting up Labor - D-Tools Cloud Settings](http://docs.d-tools.cloud/en/articles/8987710-setting-up-labor-d-tools-cloud-settings.md)
+- [Connect to Pricing - Technical Video](http://docs.d-tools.cloud/en/articles/8993194-connect-to-pricing-technical-video.md)
+- [Create Your First Opportunity and Quote in D-Tools Cloud - Technical Video](http://docs.d-tools.cloud/en/articles/8993062-create-your-first-opportunity-and-quote-in-d-tools-cloud-technical-video.md)
+- [Alternates and Options - Technical Video](http://docs.d-tools.cloud/en/articles/8993185-alternates-and-options-technical-video.md)
+- [Visual Quoting - Technical Video](http://docs.d-tools.cloud/en/articles/8993179-visual-quoting-technical-video.md)
+- [Create and Share Your First Proposal - Technical Video](http://docs.d-tools.cloud/en/articles/8993192-create-and-share-your-first-proposal-technical-video.md)
+
+## Release Notes
+
+- [D-Tools Cloud R100 release: release notes](http://docs.d-tools.cloud/en/articles/15885021-d-tools-cloud-r100-release-release-notes.md)
+- [D-Tools Cloud R99 release: release notes](http://docs.d-tools.cloud/en/articles/15483201-d-tools-cloud-r99-release-release-notes.md)
+
+## FAQs
+
+- [Cloud Onboarding FAQs](http://docs.d-tools.cloud/en/articles/1724291-cloud-onboarding-faqs.md): Covers topics like mobile app capabilities, FSM, payment terms, estimate details, notifications, labor options, calendar sync...
+- [How can I export data from D-Tools Cloud?](http://docs.d-tools.cloud/en/articles/5501544-how-can-i-export-data-from-d-tools-cloud.md)
+- [What are products, labor, allowances, and packages?](http://docs.d-tools.cloud/en/articles/1661748-what-are-products-labor-allowances-and-packages.md)
+- [Can I import my catalog from D-Tools SI?](http://docs.d-tools.cloud/en/articles/1962496-can-i-import-my-catalog-from-d-tools-si.md)
+- [Can I import all product fields from SI to D-Tools Cloud?](http://docs.d-tools.cloud/en/articles/2429945-can-i-import-all-product-fields-from-si-to-d-tools-cloud.md)
+- [What fields can I import for products into D-Tools Cloud?](http://docs.d-tools.cloud/en/articles/2772339-what-fields-can-i-import-for-products-into-d-tools-cloud.md)
+- [Can I create my own categories in the catalog?](http://docs.d-tools.cloud/en/articles/1662142-can-i-create-my-own-categories-in-the-catalog.md)
+- [How do I add or change the picture of an item?](http://docs.d-tools.cloud/en/articles/2483786-how-do-i-add-or-change-the-picture-of-an-item.md): Adding or swapping out images of products, services, or allowances in your catalog or quote
+- [Can I create predefined packages with product and labor combined?](http://docs.d-tools.cloud/en/articles/2510403-can-i-create-predefined-packages-with-product-and-labor-combined.md)
+- [Can I import packages and allowances to the catalog?](http://docs.d-tools.cloud/en/articles/2772374-can-i-import-packages-and-allowances-to-the-catalog.md)
+- [How do I include the tariff in the product cost or price?](http://docs.d-tools.cloud/en/articles/3443954-how-do-i-include-the-tariff-in-the-product-cost-or-price.md)
+- [Can I select multiple or all products in a location or system in a quote?](http://docs.d-tools.cloud/en/articles/3547550-can-i-select-multiple-or-all-products-in-a-location-or-system-in-a-quote.md)
+- [What are my options for sharing proposals with customers?](http://docs.d-tools.cloud/en/articles/1691216-what-are-my-options-for-sharing-proposals-with-customers.md)
+- [Can I split an item with quantity \>1 into multiple items in the purchase order?](http://docs.d-tools.cloud/en/articles/2628840-can-i-split-an-item-with-quantity-1-into-multiple-items-in-the-purchase-order.md): I have a line item with quantity 4, but only want to order 2. Can I split them up to order half of them?
+- [Can I track the product shipments that were ordered from D-Tools Cloud?](http://docs.d-tools.cloud/en/articles/6833028-can-i-track-the-product-shipments-that-were-ordered-from-d-tools-cloud.md)
+- [Can I send purchase orders to suppliers from D-Tools Cloud?](http://docs.d-tools.cloud/en/articles/2628800-can-i-send-purchase-orders-to-suppliers-from-d-tools-cloud.md)
+
+## Best Practices
+
+- [Manage your Project Plan](http://docs.d-tools.cloud/en/articles/5370811-manage-your-project-plan.md): Grow beyond your sales team with D-Tools Cloud Project Management Suite
+- [Key Elements of a Winning Proposal](http://docs.d-tools.cloud/en/articles/7170045-key-elements-of-a-winning-proposal.md): Tips on how D-Tools Cloud helps improve the way your proposals look
+- [6 Easy Ways to Protect Your Margin on Jobs](http://docs.d-tools.cloud/en/articles/5350909-6-easy-ways-to-protect-your-margin-on-jobs.md): Maximize every sales opportunity with D-Tools Cloud proposal software
+- [Visual Quoting – Seeing is Believing](http://docs.d-tools.cloud/en/articles/5224751-visual-quoting-seeing-is-believing.md): Enhance communication and bring projects to life with D-Tools’ cloud-based av proposal software
+- [Let ADI Manage Your Pricing and Purchase Orders](http://docs.d-tools.cloud/en/articles/5071148-let-adi-manage-your-pricing-and-purchase-orders.md): Connect to ADI for Integrated Pricing and Purchase Orders in D-Tools' cloud-based bidding software
+- [Create Next-Level Sales Presentations with Multimedia Proposals](http://docs.d-tools.cloud/en/articles/5017280-create-next-level-sales-presentations-with-multimedia-proposals.md): Enhance client engagements with award-winning cloud-based bidding software
+- [The Power of Alternates](http://docs.d-tools.cloud/en/articles/4985257-the-power-of-alternates.md): D-Tools Cloud Proposal Software Tips
+
+## Opportunities
+
+- [Getting started with opportunities](http://docs.d-tools.cloud/en/articles/1712773-getting-started-with-opportunities.md): Everything you need to know to start using the Opportunity functionality on D-Tools Cloud
+- [Customizing the opportunity stages](http://docs.d-tools.cloud/en/articles/1695375-customizing-the-opportunity-stages.md): How to use opportunity stages and stage groups to keep track of your opportunities
+- [Creating a project opportunity](http://docs.d-tools.cloud/en/articles/8383347-creating-a-project-opportunity.md): How to create a project opportunity on Cloud
+- [Creating a service opportunity](http://docs.d-tools.cloud/en/articles/8386275-creating-a-service-opportunity.md): How to create a Service Opportunity on Cloud
+- [Setting a priority for the opportunity](http://docs.d-tools.cloud/en/articles/2429931-setting-a-priority-for-the-opportunity.md): How to set a priority for the opportunity based on urgency, value, or history with the customer
+- [Sharing the opportunity with members of your team](http://docs.d-tools.cloud/en/articles/1711920-sharing-the-opportunity-with-members-of-your-team.md): How to share an opportunity with other members of your team so they can contribute to the opportunity
+- [Changing the opportunity stage](http://docs.d-tools.cloud/en/articles/7156418-changing-the-opportunity-stage.md): User permission required to move opportunities through various stages
+- [Marking an opportunity as Won](http://docs.d-tools.cloud/en/articles/10695963-marking-an-opportunity-as-won.md): How to mark an opportunity as Won
+- [Downloading the list of opportunities](http://docs.d-tools.cloud/en/articles/8276191-downloading-the-list-of-opportunities.md): How to download the list of opportunities as a CSV file
+- [Making sense of Lost opportunities](http://docs.d-tools.cloud/en/articles/1721379-making-sense-of-lost-opportunities.md): How to learn from the opportunities that got away
+
+## Quotes
+
+- [Getting started with quotes](http://docs.d-tools.cloud/en/articles/1755724-getting-started-with-quotes.md): Everything you need to know to start using the Quoting functionality on D-Tools Cloud
+- [How to estimate material costs by area](http://docs.d-tools.cloud/en/articles/2369776-how-to-estimate-material-costs-by-area.md): How to use allowances to estimate material costs by square foot
+- [How to estimate miscellaneous material costs](http://docs.d-tools.cloud/en/articles/2369769-how-to-estimate-miscellaneous-material-costs.md): How to use allowances to automatically estimate misc material costs
+- [Using D-Tools AI to add the scope of work](http://docs.d-tools.cloud/en/articles/13249785-using-d-tools-ai-to-add-the-scope-of-work.md): How to use D-Tools AI to add the scope of work to the quote
+- [Quote Management permissions](http://docs.d-tools.cloud/en/articles/2993119-quote-management-permissions.md): What are the permissions to create quotes and update the details of items added to the quotes
+
+## Drawings
+
+- [Getting started with Drawings](http://docs.d-tools.cloud/en/articles/3351626-getting-started-with-drawings.md): Everything you need to know to start using the Drawings functionality on D-Tools Cloud
+- [Visual Quoting for takeoffs](http://docs.d-tools.cloud/en/articles/4253988-visual-quoting-for-takeoffs.md): A visual way of building a quote, starting with generic items, placing them on a floor plan, and later replacing with real model numbers
+- [Managing the drawings within a quote](http://docs.d-tools.cloud/en/articles/16118334-managing-the-drawings-within-a-quote.md): How to manage the drawings you create within a quote
+- [Deleting a drawing from the quote](http://docs.d-tools.cloud/en/articles/7251350-deleting-a-drawing-from-the-quote.md): How to delete a drawing from the quote
+- [Adding a drawing to the proposal](http://docs.d-tools.cloud/en/articles/5181341-adding-a-drawing-to-the-proposal.md): How to add a drawing created in a quote to the proposal
+
+## Proposals
+
+- [Getting started with proposals](http://docs.d-tools.cloud/en/articles/1721227-getting-started-with-proposals.md): Everything you need to know to start using the Proposal functionality on D-Tools Cloud
+- [Creating a proposal from the quote](http://docs.d-tools.cloud/en/articles/7156368-creating-a-proposal-from-the-quote.md): How to create a Proposal from the Quote
+- [Editing a proposal](http://docs.d-tools.cloud/en/articles/1694998-editing-a-proposal.md): How to edit the Proposal
+- [Sections in a proposal](http://docs.d-tools.cloud/en/articles/7938469-sections-in-a-proposal.md): Understanding the different sections in a proposal
+- [Proposal Analytics](http://docs.d-tools.cloud/en/articles/6819438-proposal-analytics.md): Analytics for proposals shared over email or via URL-Sharing
+- [Snippets](http://docs.d-tools.cloud/en/articles/8680342-snippets.md): How to create blocks of Rich Text upfront and use them for emails, descriptions, and tasks
+- [Showing Estimated Tax disclaimer on proposals](http://docs.d-tools.cloud/en/articles/15869058-showing-estimated-tax-disclaimer-on-proposals.md): How to show a disclaimer that tax displayed on proposals is an estimated value
+
+## Projects
+
+- [Getting started with projects](http://docs.d-tools.cloud/en/articles/1721055-getting-started-with-projects.md): Everything you need to know to start using the Project Management functionality on D-Tools Cloud
+- [Project Overview](http://docs.d-tools.cloud/en/articles/11040342-project-overview.md): How to monitor the progress of the project from the Overview tab of the project
+- [Viewing your biweekly schedule on My Calendar](http://docs.d-tools.cloud/en/articles/14035218-viewing-your-biweekly-schedule-on-my-calendar.md): How to view your biweekly schedule using the My Calendar functionality
+- [Viewing the overall schedule on Global Calendar](http://docs.d-tools.cloud/en/articles/14035369-viewing-the-overall-schedule-on-global-calendar.md): How to view the overall schedule by resource, project, and month using the Global Calendar functionality
+- [Communicating on projects](http://docs.d-tools.cloud/en/articles/6723197-communicating-on-projects.md): Explore the options to communicate with your team on projects
+- [Configuring email notification preferences](http://docs.d-tools.cloud/en/articles/6826981-configuring-email-notification-preferences.md): I don't want to get email notifications for all changes in my opportunities and projects
+- [Real-Time Chat](http://docs.d-tools.cloud/en/articles/6744266-real-time-chat.md): How to use real-time chat for instantaneous and interactive communication with your team
+- [Notes](http://docs.d-tools.cloud/en/articles/6725014-notes.md): How to add project notes with @mentions in projects and opportunities
+- [To-Dos](http://docs.d-tools.cloud/en/articles/6725010-to-dos.md): How to add to-dos in projects and opportunities and assign resources and due dates for completion
+- [Getting started with change orders](http://docs.d-tools.cloud/en/articles/3606969-getting-started-with-change-orders.md): Everything you need to know to start using the Change Order functionality on D-Tools Cloud
+- [Project Manager Approval for change orders](http://docs.d-tools.cloud/en/articles/3607045-project-manager-approval-for-change-orders.md): Understanding how the “Project Manager Approval” process work for change orders on Cloud
+- [External change order](http://docs.d-tools.cloud/en/articles/3642778-external-change-order.md): Understanding external change orders
+- [Internal change order](http://docs.d-tools.cloud/en/articles/8540178-internal-change-order.md): Understanding internal change orders
+- [Using separate numbering sequences for change orders](http://docs.d-tools.cloud/en/articles/5798708-using-separate-numbering-sequences-for-change-orders.md): How to use separate numbering sequences for internal and external change orders within a project
+- [Creating a change order](http://docs.d-tools.cloud/en/articles/3606999-creating-a-change-order.md): How to create a change order on Cloud
+- [Enabling taxes on a tax-exempt change order](http://docs.d-tools.cloud/en/articles/13229750-enabling-taxes-on-a-tax-exempt-change-order.md): How to enable taxes on a tax-exempt change order
+- [Adding new changes to an existing change order](http://docs.d-tools.cloud/en/articles/8540195-adding-new-changes-to-an-existing-change-order.md): How to add new changes in the project to an existing change order
+- [Reviewing a change order](http://docs.d-tools.cloud/en/articles/8540204-reviewing-a-change-order.md): How to review the changes in the change order before sending it for the project manager’s approval
+- [Templates for change order proposals and emails](http://docs.d-tools.cloud/en/articles/3607066-templates-for-change-order-proposals-and-emails.md): Applying templates to change order proposals and change order emails
+- [Sharing a change order](http://docs.d-tools.cloud/en/articles/8540188-sharing-a-change-order.md): How to share change order proposal with the customer
+- [Creating a change order estimate in QuickBooks](http://docs.d-tools.cloud/en/articles/8540201-creating-a-change-order-estimate-in-quickbooks.md): How to push change order estimates to QuickBooks
+- [Downloading the Change Order Summary report](http://docs.d-tools.cloud/en/articles/15337626-downloading-the-change-order-summary-report.md): How to download the details of the change orders in a project via the Change Order Summary report
+- [Project payments](http://docs.d-tools.cloud/en/articles/7251373-project-payments.md): Everything you need to know to start collecting payments for your projects
+- [Editing the payment schedule of a project](http://docs.d-tools.cloud/en/articles/6806518-editing-the-payment-schedule-of-a-project.md): How to edit the payment schedule of a project
+- [Creating an invoice for a project payment term](http://docs.d-tools.cloud/en/articles/7251371-creating-an-invoice-for-a-project-payment-term.md): How to create and share an invoice for a project payment term
+- [Creating an invoice with multiple project payment terms](http://docs.d-tools.cloud/en/articles/11205066-creating-an-invoice-with-multiple-project-payment-terms.md): How to create an invoice with multiple project payment terms and change order payments
+- [Creating multiple invoices for a project payment term](http://docs.d-tools.cloud/en/articles/11776139-creating-multiple-invoices-for-a-project-payment-term.md): How to collect the payment for a project payment term over multiple invoices
+- [Collecting payment for change orders](http://docs.d-tools.cloud/en/articles/7251376-collecting-payment-for-change-orders.md): How to collect payment for change orders
+- [Exporting project and change order payments](http://docs.d-tools.cloud/en/articles/10349576-exporting-project-and-change-order-payments.md): How to export the collected and upcoming payments for a project and its change orders to a CSV file
+
+## Service
+
+- [Service Management Overview](http://docs.d-tools.cloud/en/articles/7156437-service-management-overview.md): Introduction to Service Management and its key features
+- [D-Tools Cloud Service Management: QuickStart](http://docs.d-tools.cloud/en/articles/7251338-d-tools-cloud-service-management-quickstart.md): Everything you need to know to start using the Service Management functionality
+- [Service Management terminology](http://docs.d-tools.cloud/en/articles/6947311-service-management-terminology.md)
+- [Plan Length and Billing Frequency discounts](http://docs.d-tools.cloud/en/articles/8134535-plan-length-and-billing-frequency-discounts.md): How to specify discounts for plan length and billing frequency so that they are apply to the service contract value
+- [Service plan features](http://docs.d-tools.cloud/en/articles/8134563-service-plan-features.md): Learn about the types of features you can add to service plans
+- [User permissions for Service Management](http://docs.d-tools.cloud/en/articles/7911693-user-permissions-for-service-management.md): User permissions required to manage service plans and aervice calls on Cloud
+- [Creating a service plan](http://docs.d-tools.cloud/en/articles/6947312-creating-a-service-plan.md): How to add create a service plan on D-Tools Cloud
+- [Adding features to a service plan](http://docs.d-tools.cloud/en/articles/8134506-adding-features-to-a-service-plan.md): How to add features to a service plan
+- [Proposing service plans](http://docs.d-tools.cloud/en/articles/6947315-proposing-service-plans.md): How to propose service plans to customers for project opportunities and service opportunities, and for ongoing and completed projects
+- [Customizing the Service Plan section in the proposal](http://docs.d-tools.cloud/en/articles/7156361-customizing-the-service-plan-section-in-the-proposal.md)
+- [FAQ: How do my customers accept service plans?](http://docs.d-tools.cloud/en/articles/7156366-faq-how-do-my-customers-accept-service-plans.md): Customer view for selecting and accepting service plans
+- [Starting a service contract](http://docs.d-tools.cloud/en/articles/7156350-starting-a-service-contract.md): How to start the service contract on Cloud
+- [Service Management dashboard](http://docs.d-tools.cloud/en/articles/6947320-service-management-dashboard.md): A bird's-eye view of all your service offerings and service fulfillment status on the Service Management dashboard
+- [Cancelling a service contract](http://docs.d-tools.cloud/en/articles/8522859-cancelling-a-service-contract.md): How to cancel a service contract
+- [Renewing a service contract](http://docs.d-tools.cloud/en/articles/7156438-renewing-a-service-contract.md): How to renew and extend a service contract
+- [Service Call statuses](http://docs.d-tools.cloud/en/articles/7156377-service-call-statuses.md): Service call statuses and how they work on Cloud
+- [Tracking your team's service calls](http://docs.d-tools.cloud/en/articles/6947317-tracking-your-team-s-service-calls.md): How to keep track of service calls to improve service levels
+- [Technician views for service calls](http://docs.d-tools.cloud/en/articles/7156409-technician-views-for-service-calls.md): Working on service calls in the Field User view
+- [Working on a service call](http://docs.d-tools.cloud/en/articles/7156415-working-on-a-service-call.md): How to work on a service call
+- [Repair Product workflow](http://docs.d-tools.cloud/en/articles/7156412-repair-product-workflow.md): How to use Repair Product workflow and add repaired products to the service call log
+- [Replace Product workflow](http://docs.d-tools.cloud/en/articles/7156413-replace-product-workflow.md): How to use Replace Product workflow to add replacement products to the call log, request product availability, and schedule a return visit
+- [Additional Product Used workflow](http://docs.d-tools.cloud/en/articles/7156414-additional-product-used-workflow.md): How to use Additional Product Used workflow to add new products and accessories installed on the call to the call log
+- [Adding labor time manually](http://docs.d-tools.cloud/en/articles/7248454-adding-labor-time-manually.md): How to add labor time manually for a service call
+- [Obtaining a sign-off from the customer](http://docs.d-tools.cloud/en/articles/8671919-obtaining-a-sign-off-from-the-customer.md): How to obtain a sign-off from the customer upon completing the service call
+- [Setting email notification preferences for invoices](http://docs.d-tools.cloud/en/articles/8006136-setting-email-notification-preferences-for-invoices.md): How to enable email notifications for service contract invoices made to customers
+- [Pushing the contract, subscription, or call invoice to QuickBooks](http://docs.d-tools.cloud/en/articles/7248346-pushing-the-contract-subscription-or-call-invoice-to-quickbooks.md): How to push service contract, subscription, and service call invoices to QuickBooks Online or QuickBooks Desktop
+- [FAQ: Can I add a custom message on the contract, call, and subscription invoice?](http://docs.d-tools.cloud/en/articles/6771480-faq-can-i-add-a-custom-message-on-the-contract-call-and-subscription-invoice.md)
+
+## Inventory
+
+- [D-Tools Cloud Inventory Management: QuickStart](http://docs.d-tools.cloud/en/articles/10434312-d-tools-cloud-inventory-management-quickstart.md): How to set up and use the Inventory Management functionality on Cloud
+- [Inventory Pools vs Inventory Asset Management](http://docs.d-tools.cloud/en/articles/14865437-inventory-pools-vs-inventory-asset-management.md): A comparison between the features available in the Inventory Pools mode and the Inventory Asset Management \(IAM\) mode
+- [Change in the term stock item to inventory-tracked item](http://docs.d-tools.cloud/en/articles/9215661-change-in-the-term-stock-item-to-inventory-tracked-item.md)
+- [Disabling Inventory Management](http://docs.d-tools.cloud/en/articles/13644763-disabling-inventory-management.md): How to disable the complete Inventory Management functionality on Cloud
+- [Inventory Management FAQs](http://docs.d-tools.cloud/en/articles/10434326-inventory-management-faqs.md): Our customers frequently ask us the following questions about the D-Tools Inventory Management functionality.
+- [Inventory Management permissions](http://docs.d-tools.cloud/en/articles/1726847-inventory-management-permissions.md): What are user permissions with the Inventory Management functionality
+
+## Procurement
+
+- [Getting started with procurement](http://docs.d-tools.cloud/en/articles/2542875-getting-started-with-procurement.md): Everything you need to know to use the Procurement functionality on D-Tools Cloud
+- [Checking in inventory-tracked items into inventory locations](http://docs.d-tools.cloud/en/articles/10435595-checking-in-inventory-tracked-items-into-inventory-locations.md): How to check in inventory-tracked items into inventory locations
+- [Adding products from the catalog view](http://docs.d-tools.cloud/en/articles/3457063-adding-products-from-the-catalog-view.md): How to add products to purchase orders from the catalog view
+- [Adding products from the project view](http://docs.d-tools.cloud/en/articles/3607351-adding-products-from-the-project-view.md): How to add products to purchase orders from the project view
+- [Adding Ready-To-Order products](http://docs.d-tools.cloud/en/articles/2621181-adding-ready-to-order-products.md): How to add Ready-To-Order products across multiple projects to purchase orders
+- [Adding inventory-tracked items](http://docs.d-tools.cloud/en/articles/10435208-adding-inventory-tracked-items.md): How to add inventory-tracked items to purchase orders
+- [Purchase Order status](http://docs.d-tools.cloud/en/articles/2621132-purchase-order-status.md): Everything you need to know about keeping your purchase orders up-to-date
+- [Creating a purchase order](http://docs.d-tools.cloud/en/articles/5715053-creating-a-purchase-order.md): What are the different ways to create a purchase order on Cloud
+- [Draft purchase order](http://docs.d-tools.cloud/en/articles/2621127-draft-purchase-order.md): How to add more products to a draft purchase order
+- [Configuring a purchase order](http://docs.d-tools.cloud/en/articles/2621129-configuring-a-purchase-order.md): How to configure a purchase order before sending it to the supplier
+- [Removing products from a purchase order](http://docs.d-tools.cloud/en/articles/4387809-removing-products-from-a-purchase-order.md): How to remove products from a purchase order
+- [Updating the shipment delivery details](http://docs.d-tools.cloud/en/articles/10031477-updating-the-shipment-delivery-details.md): How to update the shipment delivery details in the purchase order
+- [Downloading purchase orders with products](http://docs.d-tools.cloud/en/articles/12514048-downloading-purchase-orders-with-products.md): How to download the list of purchase orders along with the list of products to a CSV file
+- [Deleting a purchase order](http://docs.d-tools.cloud/en/articles/2621245-deleting-a-purchase-order.md): How to delete a purchase order
+- [Sending a purchase order to the supplier](http://docs.d-tools.cloud/en/articles/2700685-sending-a-purchase-order-to-the-supplier.md): How to send the purchase order to the supplier from Cloud via email
+- [Exporting a purchase order as a PDF](http://docs.d-tools.cloud/en/articles/2700801-exporting-a-purchase-order-as-a-pdf.md): How to export the purchase order as a PDF
+- [Adding custom shipping methods](http://docs.d-tools.cloud/en/articles/6930076-adding-custom-shipping-methods.md): How to add custom shipping methods for suppliers
+
+## Time Entries
+
+- [Time Entries](http://docs.d-tools.cloud/en/articles/5159425-time-entries.md): An introduction to the Time Entries functionality on Cloud
+- [Employee Attendance tracking](http://docs.d-tools.cloud/en/articles/8528010-employee-attendance-tracking.md): How to use the Time Entries functionality on Cloud for tracking employee attendance
+
+## D-Tools Payments
+
+- [D-Tools Payments](http://docs.d-tools.cloud/en/articles/9449196-d-tools-payments.md): Introduction to the D-Tools Payments functionality
+
+## Billing
+
+- [Managing billing for projects and services](http://docs.d-tools.cloud/en/articles/8798891-managing-billing-for-projects-and-services.md): How to manage billing for all projects, service contracts, subscriptions, and service calls in one place
+
+## Catalog
+
+- [Catalog Management permissions](http://docs.d-tools.cloud/en/articles/9297625-catalog-management-permissions.md): What are the permissions required to manage the Cloud catalog
+- [Package](http://docs.d-tools.cloud/en/articles/3743799-package.md): Everything you need to know about creating, using, and adding packages to the quote
+- [Labor package](http://docs.d-tools.cloud/en/articles/3743687-labor-package.md): Everything you need to know about labor packages
+- [Allowance](http://docs.d-tools.cloud/en/articles/3743708-allowance.md): How to use allowances to quote future items that are not specified yet, or items you don't need to specify but need to charge the customer.
+- [Alternate Set](http://docs.d-tools.cloud/en/articles/8276200-alternate-set.md): How to use the Alternate Set functionality to let the customer choose their preferred item from similar items in the proposal
+- [Price adjustment](http://docs.d-tools.cloud/en/articles/8328180-price-adjustment.md): How to add predefined price adjustments that you can apply to the product value, labor value, or total value in the quote
+- [Discount](http://docs.d-tools.cloud/en/articles/6861583-discount.md): How to use discounts to reduce the prices of products, packages, alternate sets, and allowances
+- [Best Practices: Formatting a file for import](http://docs.d-tools.cloud/en/articles/2790040-best-practices-formatting-a-file-for-import.md): How to format your file for import to work as easily as possible
+- [Importing products into D-Tools Cloud](http://docs.d-tools.cloud/en/articles/2736427-importing-products-into-d-tools-cloud.md): How to import products via a CSV or Excel file into D-Tools Cloud
+- [Importing products from D-Tools SI to D-Tools Cloud](http://docs.d-tools.cloud/en/articles/2741340-importing-products-from-d-tools-si-to-d-tools-cloud.md): How to import products from D-Tools SI to D-Tools Cloud
+- [Importing products from QuickBooks Online](http://docs.d-tools.cloud/en/articles/2741312-importing-products-from-quickbooks-online.md): How to import products from QuickBooks Online into D-Tools Cloud
+- [Adding products from D-Tools Library](http://docs.d-tools.cloud/en/articles/11076826-adding-products-from-d-tools-library.md): How to add products to your catalog from D-Tools Library
+- [Configuring product updates from D-Tools Library to the Cloud catalog](http://docs.d-tools.cloud/en/articles/15095903-configuring-product-updates-from-d-tools-library-to-the-cloud-catalog.md): How to configure the updates to products from D-Tools Library to the Cloud catalog
+- [Setting Price by Length](http://docs.d-tools.cloud/en/articles/1646604-setting-price-by-length.md): How to price products such as cable, wire, and conduit by length in feet or meters
+- [Adding product barcodes](http://docs.d-tools.cloud/en/articles/9297402-adding-product-barcodes.md): How to add UPC, EAN, and ITF barcode numbers for products
+- [Marking items as favorites](http://docs.d-tools.cloud/en/articles/7181927-marking-items-as-favorites.md): Marking items as favorites in the catalog so they appear in a distinct tab when you search for them within the quote
+- [Managing product resource sheets](http://docs.d-tools.cloud/en/articles/4303292-managing-product-resource-sheets.md): View and download product specification sheets, installation manuals, and user manuals in PDF format.
+- [Removing discontinued products from the catalog](http://docs.d-tools.cloud/en/articles/9842177-removing-discontinued-products-from-the-catalog.md): How to filter and remove Discontinued products from the catalog
+- [Creating sell units and selling products in multiple quantities](http://docs.d-tools.cloud/en/articles/7251392-creating-sell-units-and-selling-products-in-multiple-quantities.md): How to create different sell units under Settings and apply them to products so you can add and sell products as multiple units
+- [Updating the Inventory mode of products](http://docs.d-tools.cloud/en/articles/15870309-updating-the-inventory-mode-of-products.md): How to update the Inventory mode of the products that are under Inventory Management
+- [Getting started with labor](http://docs.d-tools.cloud/en/articles/6622239-getting-started-with-labor.md): Everything you need to know to start using the Labor functionality on D-Tools Cloud
+- [Managing labor types](http://docs.d-tools.cloud/en/articles/1721106-managing-labor-types.md): How to set up labor types and labor rates so you can apply labor to products, services, and allowances
+- [Setting labor rates for fulfillment locations](http://docs.d-tools.cloud/en/articles/6863792-setting-labor-rates-for-fulfillment-locations.md): How to set different labor rates for the same labor types and use them when projects are executed from different offices or locations
+- [Getting started with accessories](http://docs.d-tools.cloud/en/articles/4278117-getting-started-with-accessories.md): Everything you need to know to start using the Accessories functionality on D-Tools Cloud
+- [Adding accessories to a product in the catalog](http://docs.d-tools.cloud/en/articles/2511035-adding-accessories-to-a-product-in-the-catalog.md): How to bundle accessories with a product in the catalog so you don't have to add them manually in the quote
+- [i3 Partners vs. Other Suppliers](http://docs.d-tools.cloud/en/articles/2302858-i3-partners-vs-other-suppliers.md): The benefit of working with i3 Partners
+- [Suppliers vs. Brands](http://docs.d-tools.cloud/en/articles/3314739-suppliers-vs-brands.md): Determining the difference between suppliers and brands on Cloud
+- [Category Rules](http://docs.d-tools.cloud/en/articles/6863698-category-rules.md): Learn how to use the Category Rules feature for products and reduce the burden of adding labor and accessories separately in your quotes
+- [How does the Category Option setting work on Cloud?](http://docs.d-tools.cloud/en/articles/6948876-how-does-the-category-option-setting-work-on-cloud.md)
+- [Adding labor for products via category rules](http://docs.d-tools.cloud/en/articles/6948871-adding-labor-for-products-via-category-rules.md): How to add labor for a product category or subcategory, and let these labor hours show up automatically in the quotes when you add products
+- [Using D-Tools labor recommendations](http://docs.d-tools.cloud/en/articles/7172740-using-d-tools-labor-recommendations.md): How to set the Category Option to Suggest and use D-Tools labor recommendations in quotes
+- [Adding accessories to products via category rules](http://docs.d-tools.cloud/en/articles/6948859-adding-accessories-to-products-via-category-rules.md): How to add basic accessories for products using category rules to reduce your efforts to add them at the product level in the catalog
+
+## Accounts
+
+- [Accounts vs Contacts](http://docs.d-tools.cloud/en/articles/2514493-accounts-vs-contacts.md): What is the difference between accounts and contacts on D-Tools Cloud?
+- [Account & Contact CSV import](http://docs.d-tools.cloud/en/articles/5653559-account-contact-csv-import.md): Get your customer data into Cloud faster, focus on winning quotes
+
+## Integrations
+
+- [Payment Integrations](http://docs.d-tools.cloud/en/articles/6881708-payment-integrations.md): Enable integration with a Payment Processing solution and collect payments for Projects, Contracts, and Calls with minimal effort
+- [Technical Support for Payment Integrations](http://docs.d-tools.cloud/en/articles/8167624-technical-support-for-payment-integrations.md)
+- [Clover Connect Integration](http://docs.d-tools.cloud/en/articles/6884195-clover-connect-integration.md): Enable integration with Clover Connect and collect all payments directly from D-Tools Cloud
+- [Stripe Integration](http://docs.d-tools.cloud/en/articles/5599839-stripe-integration.md): Enable integration with Stripe and collect all payments directly from D-Tools Cloud
+- [Can I automate payment tracking for payments made in person?](http://docs.d-tools.cloud/en/articles/8798892-can-i-automate-payment-tracking-for-payments-made-in-person.md)
+- [Google Contacts integration](http://docs.d-tools.cloud/en/articles/3087910-google-contacts-integration.md): Enable the integration with Google to automatically search your Google contacts when adding a contact
+
+## Cloud API Documentation
+
+- [Authentication](http://docs.d-tools.cloud/en/articles/8756132-authentication.md)
+- [API Endpoints](http://docs.d-tools.cloud/en/articles/8756121-api-endpoints.md)
+- [API Keys and Webhooks](http://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks.md)
+- [Using Postman to Test API Responses](http://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses.md)
+- [API Response Codes](http://docs.d-tools.cloud/en/articles/8756125-api-response-codes.md)
+- [API Limits](http://docs.d-tools.cloud/en/articles/9276121-api-limits.md)
+- [Best Practices for Developing API Integrations](http://docs.d-tools.cloud/en/articles/9344578-best-practices-for-developing-api-integrations.md): In this article, we explore tips for testing APIs and best practices for development.
+- [API Customer Advisory Board \(API-CAB\)](http://docs.d-tools.cloud/en/articles/9378558-api-customer-advisory-board-api-cab.md)
+- [Connecting the Cloud API to Zapier](http://docs.d-tools.cloud/en/articles/11181530-connecting-the-cloud-api-to-zapier.md)
+
+## Reports & Dashboard
+
+- [Cloud Dashboard](http://docs.d-tools.cloud/en/articles/6725602-cloud-dashboard.md): How to use the Cloud dashboard to track your sales pipeline and project execution status
+- [Sales reports](http://docs.d-tools.cloud/en/articles/4961800-sales-reports.md)
+
+## Account Management 
+
+- [How to Update Your Payment Method in D-Tools Cloud](http://docs.d-tools.cloud/en/articles/15331879-how-to-update-your-payment-method-in-d-tools-cloud.md): This guide walks you through how to update your payment method in D-Tools Cloud. You can switch to ACH \(bank transfer\) or update your credit card information directly from your account settings.
+- [How to Find Your D-Tools Cloud Account Number](http://docs.d-tools.cloud/en/articles/15332252-how-to-find-your-d-tools-cloud-account-number.md): This guide shows you where to locate your D-Tools Cloud account number. You may need this when completing a payment form, contacting our team, or referencing your account for billing purposes.
+- [How to Manage Your Subscription in D-Tools Cloud](http://docs.d-tools.cloud/en/articles/15332479-how-to-manage-your-subscription-in-d-tools-cloud.md): This guide walks you through the Subscription Summary page in D-Tools Cloud, where you can view your current plan, add or remove add-ons, and update your subscription at any time.
+- [How to View and Download Your D-Tools Cloud Invoices](http://docs.d-tools.cloud/en/articles/15411895-how-to-view-and-download-your-d-tools-cloud-invoices.md): Whether it's for your records, your accountant, or a quick review of charges, your billing history is just a few clicks away inside D-Tools Cloud. Written by Megan Campbell
+- [How to Update Your D-Tools Payments Deposit Account](http://docs.d-tools.cloud/en/articles/15436572-how-to-update-your-d-tools-payments-deposit-account.md): This guide walks you through how to request a change to the bank account where your D-Tools Payments \(DTP\) deposits are sent.
+- [What Are D-Tools Cloud After Dark Webinars and How Do I Register?](http://docs.d-tools.cloud/en/articles/15436944-what-are-d-tools-cloud-after-dark-webinars-and-how-do-i-register.md): D-Tools Cloud After Dark is our monthly webinar series hosted by the D-Tools Cloud Customer Success team. Each session covers practical tips, workflow best practices, product updates, and live Q&A ...
+- [How to Update Contacts for Billing and Account Communications 👥](http://docs.d-tools.cloud/en/articles/15437330-how-to-update-contacts-for-billing-and-account-communications.md): If the contacts responsible for your D-Tools subscription, billing, invoices, renewals, or account communications have changed, please let us know so we can update our records. Written by Megan Cam...
+- [What to Do If You Can't Log In to Your D-Tools Cloud Account 🤔](http://docs.d-tools.cloud/en/articles/15437386-what-to-do-if-you-can-t-log-in-to-your-d-tools-cloud-account.md): If you're unable to log in to D-Tools Cloud, the fastest way to get help is to contact our Support team. Written by Megan Campbell | June 2026
+- [What Happens When My D-Tools Cloud Account Is Canceled?](http://docs.d-tools.cloud/en/articles/15581578-what-happens-when-my-d-tools-cloud-account-is-canceled.md): If your D-Tools Cloud subscription has been canceled, this article outlines what to expect regarding your account and data, and explains how to restore access if you choose to reactivate your subsc...
+- [How to Update Your Business Name or Contact Information](http://docs.d-tools.cloud/en/articles/15437109-how-to-update-your-business-name-or-contact-information.md): You can update your company information directly in D-Tools Cloud, including your business name, address, phone number, and primary contact. Any changes you make are automatically updated in both y...

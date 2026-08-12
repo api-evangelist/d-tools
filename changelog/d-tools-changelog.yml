@@ -1,0 +1,49 @@
+generated: '2026-08-11'
+method: searched
+source: >-
+  https://docs.d-tools.cloud/en/collections/12262148-release-notes ,
+  https://docs.d-tools.com/en/articles/9207951-si-v24-release-notes
+scheme: dated product release notes published as help-center articles; no API-specific changelog
+current_version:
+  cloud: R100
+  si: v24
+api_changelog:
+  present: false
+  note: >-
+    Both release-note streams are PRODUCT release notes. Neither enumerates API changes — no added or removed
+    endpoints, no field changes, no breaking-change section, and no version stamp that a consumer could pin to.
+    The Cloud OpenAPI carries info.version "v1" and the SI OpenAPI carries "1.0.0"; neither has moved across the
+    releases below, so the specification itself provides no change signal either.
+entries:
+- version: R100
+  product: D-Tools Cloud
+  date: '2026-07-09'
+  url: https://docs.d-tools.cloud/en/articles/15885021-d-tools-cloud-r100-release-release-notes
+  breaking: not stated
+  api_changes: not enumerated
+  highlights:
+  - QuickBooks Online and Xero integration filters across project, invoice, purchase order, billing and change order views
+  - Accelerated ACH Deposits (T+1 funding) configurable in D-Tools Payments Settings
+  - Payment method details surfaced on paid digital and PDF invoices
+  - Redesigned invoice summaries covering totals, payments, fees, refunds and remaining balance
+- version: R99
+  product: D-Tools Cloud
+  date: '2026-06-11'
+  url: https://docs.d-tools.cloud/en/articles/15483201-d-tools-cloud-r99-release-release-notes
+  breaking: not stated
+  api_changes: not enumerated
+  highlights:
+  - PO number field addable to every invoice type and rendered on invoice views and PDFs
+  - Granular create / manage / delete invoice permissions
+  - Labor hours, phase, supplier and full category path columns on the catalog products grid
+- version: v24
+  product: D-Tools System Integrator
+  date: '2026-04-27'
+  url: https://docs.d-tools.com/en/articles/9207951-si-v24-release-notes
+  breaking: not stated
+  api_changes: not enumerated
+  highlights:
+  - Optional project rule enabling multiple users to edit the same project concurrently
+  - Instant save of project changes, change orders, status changes and approvals to the SI Server
+  - Check-in/check-out with undo and force-undo for Visio and AutoCAD project files
+  - Project editing session visibility with the ability to disconnect users

@@ -42,5 +42,17 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-D-Tools is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+D-Tools Inc. builds estimation, system design, project management and field-service software for audio-visual,
+low-voltage, security and systems-integration contractors. Two products carry two distinct public APIs, and both
+publish a machine-readable specification.
+
+- Website: https://www.d-tools.com/
+- **D-Tools Cloud API** — REST, OpenAPI 3.0.4, 26 operations.
+  Reference: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  Docs: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+- **D-Tools System Integrator (SI) API** — REST, OpenAPI 3.1.1, 56 operations. A cloud store-and-forward queue
+  that bridges the on-premises SI application to third-party systems.
+  Reference: https://api.d-tools.com/si/doc
+  Docs: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+- Status: https://status.d-tools.cloud/
+- Ideas / roadmap: https://feedback.d-tools.cloud/

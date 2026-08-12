@@ -1,0 +1,40 @@
+generated: '2026-08-11'
+method: searched
+source: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+limit_count: 2
+rate_limits:
+- api: D-Tools Cloud API
+  scope: per-api-key
+  window: 1 minute
+  limit: 120
+  burst: not documented
+  note: Stated as "A maximum of 120 API calls per minute per API key."
+- api: D-Tools Cloud API
+  scope: per-api-key
+  window: 1 day
+  limit: 10000
+  burst: not documented
+  note: Stated as "A maximum of 10,000 API calls per day per API key."
+response_headers:
+  published: []
+  note: >-
+    D-Tools publishes NO rate-limit response headers. There is no X-RateLimit-*, no RateLimit-*, and no
+    Retry-After documented, and no 429 response is declared on any of the 26 Cloud operations in the OpenAPI. The
+    numbers above exist only as prose in a help-center article, which means a client cannot discover its remaining
+    budget at runtime and cannot learn when it may retry — it can only count its own calls and guess. This is the
+    highest-value runtime fix available on this API: emit RateLimit-Limit / RateLimit-Remaining / RateLimit-Reset
+    and a 429 with Retry-After, and declare the 429 in the spec.
+exhaustion_status: not documented
+concurrent_key_limit:
+  max_active_api_keys: 5
+  scope: per D-Tools Cloud account
+  source: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+pagination_limits:
+- endpoint: /api/v1/Clients/GetClients
+  max_records_per_request: 500
+  source: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+si_api:
+  limit_count: 0
+  note: >-
+    The D-Tools SI API (api.d-tools.com/si) publishes no rate limits at all — not in the help center, not in the
+    SI API overview, and not in its OpenAPI. Recorded as an honest zero, not as "unlimited".

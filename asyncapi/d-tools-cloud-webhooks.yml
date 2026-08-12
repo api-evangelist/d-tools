@@ -1,0 +1,47 @@
+generated: '2026-08-11'
+method: searched
+source: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+kind: webhook-catalog
+asyncapi_published: false
+note: >-
+  D-Tools publishes no AsyncAPI document and no event catalog. D-Tools Cloud DOES ship an outbound webhook
+  facility, but it is configured entirely inside the application UI ("New Webhook" under the same Developer
+  settings screen that issues API keys) and the help center documents only the configuration form, not the
+  events. What is captured below is therefore the webhook SURFACE as the provider documents it. The event types,
+  payload schemas, delivery guarantees, retry policy and signature scheme are all absent from the public docs, so
+  they are recorded as gaps and are NOT guessed at here.
+webhooks:
+  supported: true
+  direction: outbound (D-Tools Cloud to subscriber endpoint)
+  managed_via: 'D-Tools Cloud app: Settings > Integration > Developer > New Webhook'
+  configuration:
+    target_url: caller-supplied
+    custom_headers: supported
+    authentication_types:
+    - {type: api-key, note: subscriber-side header credential}
+    - {type: basic, note: HTTP Basic against the subscriber endpoint}
+    - {type: bearer-token, note: static bearer against the subscriber endpoint}
+  events:
+    published: false
+    count: 0
+    note: The help center does not enumerate which entity events can trigger a webhook.
+  payload_schema:
+    published: false
+    note: No payload schema, no example body, and no reference from the OpenAPI (the Cloud spec declares an empty
+      `webhooks` block).
+  signature_verification:
+    published: false
+    note: >-
+      No HMAC signature, timestamp header or replay-window is documented. The three authentication types above
+      protect the SUBSCRIBER endpoint from unauthorized callers; none of them lets a subscriber verify that a
+      delivered payload actually originated from D-Tools and was not tampered with.
+  retries:
+    published: false
+  ordering:
+    published: false
+si_api:
+  webhooks: false
+  note: >-
+    The SI API has no push mechanism at all. It is a poll-and-acknowledge queue: subscribers GET from
+    /Subscribe/* and then PUT/POST the matching MarkAsImported endpoint. Recorded here so the absence is not read
+    as an unexamined gap.

@@ -1,0 +1,24 @@
+generated: '2026-08-11'
+method: generated
+source: openapi/d-tools-si-api-openapi.yml, openapi/d-tools-cloud-api-openapi.yml, and the D-Tools help centers
+note: >-
+  Packaged operating instructions for the marquee flows on each D-Tools API. Every operation referenced is
+  method+path taken verbatim from the published specifications; neither specification declares operationIds, so
+  none are cited. D-Tools publishes no skills or AGENTS.md of its own — searched both help centers, both API
+  hosts, and the github.com/D-Tools organization (0 public repos).
+skills:
+- file: d-tools-publish-a-project-to-si.md
+  name: d-tools-publish-a-project-to-si
+  api: D-Tools System Integrator (SI) API
+  summary: Enqueue a project and its change orders for an SI user and confirm the desktop application applied them.
+  operations: 6
+- file: d-tools-subscribe-and-acknowledge-si-exports.md
+  name: d-tools-subscribe-and-acknowledge-si-exports
+  api: D-Tools System Integrator (SI) API
+  summary: Poll every /Subscribe/* family, process, and acknowledge with the matching MarkAsImported.
+  operations: 19
+- file: d-tools-sync-cloud-clients-and-opportunities.md
+  name: d-tools-sync-cloud-clients-and-opportunities
+  api: D-Tools Cloud API
+  summary: Paginated, date-windowed read/write sync of clients, opportunities, quotes, projects and products.
+  operations: 19

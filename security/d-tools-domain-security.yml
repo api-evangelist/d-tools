@@ -1,0 +1,32 @@
+generated: '2026-08-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.d-tools.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 14 18:07:55 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: dtcloudapi.d-tools.cloud
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Mar  4 06:07:24 2027 GMT
+  hsts: null
+- host: api.d-tools.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 12 23:59:59 2027 GMT
+  hsts: null
+domains:
+- domain: d-tools.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: d-tools.cloud
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false

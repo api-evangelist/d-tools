@@ -1,0 +1,71 @@
+generated: '2026-08-11'
+method: derived
+source: >-
+  openapi/_original/d-tools-cloud-openapi.json (4xx/5xx responses),
+  openapi/_original/d-tools-si-openapi.json,
+  enriched from https://docs.d-tools.cloud/en/articles/8756125-api-response-codes
+format: problem-details
+envelope:
+  schema: Microsoft.AspNetCore.Mvc.ProblemDetails
+  media_type_declared: application/json
+  media_type_expected: application/problem+json
+  fields: [type, title, status, detail, instance]
+  note: >-
+    The D-Tools Cloud API returns an RFC 9457 / RFC 7807 shaped body — ASP.NET Core's stock ProblemDetails — but
+    declares it under `application/json` rather than `application/problem+json`. A client that content-negotiates
+    on the problem media type will not recognise it. Additionally, `type` is never populated with a stable problem
+    URI in the published schema, so there are no dereferenceable problem types to catalog; the taxonomy below is
+    keyed on HTTP status, which is all the provider actually distinguishes.
+problem_types:
+- status: 400
+  title: Bad Request
+  occurrences: 26
+  applies_to: every Cloud operation
+  meaning: The request was found to be invalid due to missing or incorrect query parameters.
+  remediation: Check the entire request for syntax errors and fix them.
+  schema: Microsoft.AspNetCore.Mvc.ProblemDetails
+- status: 401
+  title: Unauthorized
+  occurrences: 26
+  applies_to: every Cloud operation
+  meaning: Incorrect or missing authentication credentials.
+  remediation: >-
+    Both the Authorization (Basic) and X-API-Key headers must be present. Confirm the API key is still marked
+    active and that the account has not exceeded its maximum of 5 active keys.
+  schema: Microsoft.AspNetCore.Mvc.ProblemDetails
+- status: 404
+  title: Not Found
+  occurrences: 15
+  applies_to: single-entity Get* operations and update operations
+  meaning: The requested entities do not exist.
+  remediation: Confirm the entity ID(s) named in the request exist on D-Tools Cloud.
+  schema: Microsoft.AspNetCore.Mvc.ProblemDetails
+- status: 409
+  title: Conflict
+  occurrences: 5
+  applies_to: [CreateClient, UpdateClient, CreateOpportunity, UpdateOpportunity, UpdateProject]
+  meaning: >-
+    Declared on the write operations only. The docs' response-code table omits 409 entirely, so its trigger
+    conditions are undocumented — it is visible only in the OpenAPI.
+  remediation: Undocumented by the provider.
+  schema: Microsoft.AspNetCore.Mvc.ProblemDetails
+- status: 500
+  title: Internal Server Error
+  occurrences: 26
+  applies_to: every Cloud operation
+  meaning: An error on the server.
+  remediation: Retry after a delay; contact D-Tools Cloud support if it persists.
+  schema: none declared
+gaps:
+- api: D-Tools System Integrator (SI) API
+  finding: >-
+    All 56 SI operations declare exactly one response — 200 — and no error responses at all. The SI contract
+    therefore documents no failure mode: not the 401 its own API-key auth must return, not validation failures on
+    the Publish endpoints, nothing. An agent cannot plan retry or escalation behaviour from this spec.
+- api: D-Tools Cloud API
+  finding: >-
+    No error code registry, no `type` URIs, no rate-limit-exhaustion status. The docs' response-code table lists
+    five statuses and stops; 409 appears in the spec but not the table, and the 429/limit-exceeded behaviour
+    implied by the published rate limits appears in neither.
+- api: both
+  finding: No response examples are declared anywhere in either specification.

@@ -1,0 +1,66 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the D-Tools System Integrator (SI) API
+  version: 1.0.0
+extends: ../openapi/d-tools-si-api-openapi.yml
+x-generated: '2026-08-11'
+x-method: generated
+x-source: >-
+  Derived from https://api.d-tools.com/si/openapi/v1.json (info.description) and
+  https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview. Every value below is stated by D-Tools in
+  its own public documentation; nothing is invented. The original specification is never mutated.
+actions:
+- target: $
+  description: >-
+    Declare the API key the specification's own info.description requires on every call. The published document
+    has an empty components.securitySchemes and no root security block, so all 56 operations read as anonymous.
+  update:
+    security:
+    - DtsiApiKey: []
+- target: $.components
+  description: Add the securityScheme the API description narrates in prose.
+  update:
+    securitySchemes:
+      DtsiApiKey:
+        type: apiKey
+        in: header
+        name: X-DTSI-ApiKey
+        description: >-
+          API key scoped to one SI user AND one integration, generated in the SI 2016 Control Panel under Manage
+          Integrations. Access to the SI API requires enrollment in the D-Tools Software Assurance (SA) program.
+          Documented at https://docs.d-tools.com/en/articles/9203156-api-key
+- target: $.info
+  description: >-
+    Record the queue semantics that make this API unlike a normal REST surface — it is an asynchronous
+    publish/subscribe bridge to an on-premises product, not a live datastore.
+  update:
+    x-integration-model:
+      shape: store-and-forward queue
+      publish: >-
+        POST /Publish/* enqueues data that is held on the API server until the SI desktop application applies it.
+        A 200 means accepted into the queue, not applied to SI.
+      subscribe: >-
+        GET /Subscribe/* returns only what an SI user has exported (manually or by automation scheme). An empty
+        result means nothing was exported, not that nothing exists.
+      acknowledgement: >-
+        Consumers must call the matching MarkAsImported endpoint per entity family or the same messages are
+        redelivered on the next poll.
+      status_check: GET /Message/PublishedMessageStatus and /Message/PublishedMessagesStatus report whether a published message was applied.
+      source: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+    x-idempotency:
+      supported: false
+      nearest: >-
+        IntegrationChangeOrderId on POST /Publish/Projects/NewChangeOrder acts as an entity-level upsert key for
+        that one endpoint. It is not a request-level idempotency key and does not apply to the other 55 operations.
+    x-rate-limits:
+      published: false
+    x-error-responses:
+      declared: [200]
+      note: All 56 operations declare only a 200 response. No failure mode is described anywhere in the contract.
+    x-aggregation:
+      endpoint: /Subscribe/Projects
+      parameter: aggregateBy
+      dimensions: [Item, Location, System, Phase]
+      grouping_keys: [TypeId, LaborType, Manufacturer, Model, PackageName, PartNumber, IsOfe, IsNonBillable, UnitCost, UnitPrice, LaborHours, IsTaxable, TaxId, Vendor]
+      total_quantity_formula: TotalQuantity = Item Quantity x Parent Item Quantity x Package Item Quantity x Solution Item Quantity
+      source: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview

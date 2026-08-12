@@ -1,0 +1,62 @@
+generated: '2026-08-11'
+method: searched
+source: >-
+  https://status.d-tools.cloud/ , https://feedback.d-tools.cloud/ ,
+  https://docs.d-tools.cloud/en/articles/15885021-d-tools-cloud-r100-release-release-notes ,
+  https://docs.d-tools.com/en/articles/9207951-si-v24-release-notes ,
+  openapi/_original/*.json
+status_page:
+  present: true
+  url: https://status.d-tools.cloud/
+  vendor: hosted status page for D-Tools Cloud
+  subscriptions: [email, sms, slack, microsoft-teams]
+  scope: >-
+    Covers D-Tools Cloud only. No status page was found for the SI API host (api.d-tools.com); status.d-tools.com
+    does not resolve.
+  docs: https://docs.d-tools.cloud/en/articles/15808034-checking-d-tools-cloud-system-status-and-subscribing-to-updates
+versioning:
+  cloud: {style: path-segment, current: v1}
+  si: {style: none, note: no version segment in any path}
+release_cadence:
+  cloud:
+    scheme: sequential numbered releases (R99, R100, ...)
+    cadence: roughly monthly
+    recent: [{version: R100, date: '2026-07-09'}, {version: R99, date: '2026-06-11'}]
+  si:
+    scheme: major versions (v24, v20, v19, ...)
+    recent: [{version: v24, date: '2026-04-27'}]
+deprecation_policy:
+  published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations_in_spec: 0
+  note: >-
+    D-Tools publishes no API deprecation or sunset policy on either product, declares no operation, parameter or
+    schema as `deprecated: true` in either OpenAPI, and emits neither the Sunset nor the Deprecation response
+    header (RFC 8594 / RFC 9745). The one lifecycle marker present anywhere in the surface is prose: the SI
+    operation POST /Publish/DeleteTasks is labelled "(BETA)" in its summary. No Deprecation pointer is wired into
+    apis.yml because no policy exists to point at.
+sla:
+  published: false
+  note: No uptime or support SLA is published for either API. A paid "Gold Support" add-on exists on the Cloud
+    pricing page but is a support-response tier, not an API availability commitment.
+roadmap:
+  present: true
+  url: https://feedback.d-tools.cloud/
+  form: public Canny ideas portal with voting, an "API" category, and statuses including Planned
+  note: >-
+    Ideas board rather than a dated roadmap. /changelog on the same host renders the ideas board, so Canny's
+    changelog module is not enabled.
+support:
+  channels: [help-center, chat, email]
+  urls:
+    support: https://www.d-tools.com/support
+    cloud_help_center: https://docs.d-tools.cloud/en/
+    si_help_center: https://docs.d-tools.com/en/
+  api_specific: >-
+    An API Customer Advisory Board (API-CAB) is documented on both help centers as the channel for API feedback.
+  api_contact: api@d-toolshelp.com (declared as info.contact in the Cloud OpenAPI)
+access_gate:
+  si: SI API access requires enrollment in the D-Tools Software Assurance (SA) program.
+  cloud: API keys are self-service inside any D-Tools Cloud subscription.

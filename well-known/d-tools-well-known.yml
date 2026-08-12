@@ -1,0 +1,79 @@
+generated: '2026-08-11'
+method: probed
+source: live HTTP probes of every D-Tools host in apis.yml and both OpenAPI servers[] blocks
+note: >-
+  D-Tools serves no /.well-known/ document of its own on any host it controls. The single 200 recorded below is
+  Intercom's vendor-default security.txt, served because the two help centers (docs.d-tools.cloud and
+  docs.d-tools.com) are Intercom-hosted; its own Canonical field points at app.intercom.com and its Contact
+  addresses are Intercom's, not D-Tools'. It is recorded here as evidence, and NO WellKnown or SecurityTxt pointer
+  is wired into apis.yml, because the pointer would assert that D-Tools publishes a discovery/disclosure surface
+  and it does not. Separately, https://d-tools.cloud/ is a single-page app whose catch-all answers HTTP 200 with
+  the same 78KB HTML shell for every /.well-known/* path — those are recorded as soft-200 misses, not hits.
+hosts:
+- host: www.d-tools.com
+  paths:
+  - {path: /.well-known/security.txt, status: 404, result: miss}
+  - {path: /.well-known/openid-configuration, status: 404, result: miss}
+  - {path: /.well-known/oauth-authorization-server, status: 404, result: miss}
+  - {path: /.well-known/oauth-protected-resource, status: 404, result: miss}
+  - {path: /.well-known/api-catalog, status: 404, result: miss}
+  - {path: /.well-known/ai-plugin.json, status: 404, result: miss}
+  - {path: /.well-known/agent-card.json, status: 404, result: miss}
+  - {path: /.well-known/agent.json, status: 404, result: miss}
+- host: api.d-tools.com
+  note: SI API host; all probes return the IIS 404 page
+  paths:
+  - {path: /.well-known/security.txt, status: 404, result: miss}
+  - {path: /.well-known/openid-configuration, status: 404, result: miss}
+  - {path: /.well-known/oauth-authorization-server, status: 404, result: miss}
+  - {path: /.well-known/oauth-protected-resource, status: 404, result: miss}
+  - {path: /.well-known/api-catalog, status: 404, result: miss}
+  - {path: /.well-known/ai-plugin.json, status: 404, result: miss}
+  - {path: /.well-known/agent-card.json, status: 404, result: miss}
+  - {path: /.well-known/agent.json, status: 404, result: miss}
+- host: dtcloudapi.d-tools.cloud
+  note: Cloud API host; all probes return an empty-bodied 404
+  paths:
+  - {path: /.well-known/security.txt, status: 404, result: miss}
+  - {path: /.well-known/openid-configuration, status: 404, result: miss}
+  - {path: /.well-known/oauth-authorization-server, status: 404, result: miss}
+  - {path: /.well-known/oauth-protected-resource, status: 404, result: miss}
+  - {path: /.well-known/api-catalog, status: 404, result: miss}
+  - {path: /.well-known/ai-plugin.json, status: 404, result: miss}
+  - {path: /.well-known/agent-card.json, status: 404, result: miss}
+  - {path: /.well-known/agent.json, status: 404, result: miss}
+- host: docs.d-tools.cloud
+  note: Intercom-hosted help center
+  paths:
+  - path: /.well-known/security.txt
+    status: 200
+    result: third-party
+    file: well-known/d-tools-docs-security.txt
+    detail: >-
+      RFC 9116 document, but it is Intercom's. Canonical: https://app.intercom.com/.well-known/security.txt;
+      Contact: https://bugcrowd.com/intercom and mailto:security@intercom.com. Not a D-Tools disclosure program.
+  - {path: /.well-known/openid-configuration, status: 404, result: miss}
+  - {path: /.well-known/oauth-authorization-server, status: 404, result: miss}
+  - {path: /.well-known/oauth-protected-resource, status: 404, result: miss}
+  - {path: /.well-known/api-catalog, status: 404, result: miss}
+  - {path: /.well-known/ai-plugin.json, status: 404, result: miss}
+  - {path: /.well-known/agent-card.json, status: 404, result: miss}
+  - {path: /.well-known/agent.json, status: 404, result: miss}
+- host: d-tools.cloud
+  note: >-
+    Angular single-page app. Every path below returned HTTP 200 with the identical 78,534-byte HTML application
+    shell. These are soft-200 false positives, not documents.
+  paths:
+  - {path: /.well-known/security.txt, status: 200, result: soft-200-html-shell}
+  - {path: /.well-known/openid-configuration, status: 200, result: soft-200-html-shell}
+  - {path: /.well-known/oauth-authorization-server, status: 200, result: soft-200-html-shell}
+  - {path: /.well-known/oauth-protected-resource, status: 200, result: soft-200-html-shell}
+  - {path: /.well-known/api-catalog, status: 200, result: soft-200-html-shell}
+  - {path: /.well-known/ai-plugin.json, status: 200, result: soft-200-html-shell}
+  - {path: /.well-known/agent-card.json, status: 200, result: soft-200-html-shell}
+  - {path: /.well-known/agent.json, status: 200, result: soft-200-html-shell}
+summary:
+  real_documents_served_by_d_tools: 0
+  third_party_documents: 1
+  soft_200_html_shells: 8
+  agent_card_found: false

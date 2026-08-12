@@ -1,0 +1,37 @@
+generated: '2026-08-11'
+method: searched
+source: >-
+  registry.npmjs.org search, pypi.org, azuresearch-usnc.nuget.org, plus the D-Tools Cloud and SI help centers and
+  the two OpenAPI documents
+packages: []
+package_count: 0
+note: >-
+  D-Tools publishes no first-party client library on any public registry. Searched npm (registry.npmjs.org search
+  for "d-tools" and "dtools cloud api"), PyPI (dtools, d-tools, dtools-cloud, dtoolscloud), and NuGet
+  ("d-tools") — the only near-name hit is PyPI `dtools` 2.0.0, an unrelated relativedelta wrapper by
+  github.com/chermed. The github.com/D-Tools organization exists (created 2016-10-06) but publishes zero public
+  repositories, so there is no source-code distribution channel either. The distribution D-Tools does publish is a
+  Postman collection JSON, downloadable from the Cloud API docs; it is not a versioned package and carries no
+  registry metadata, so no version or published date can be recorded for it.
+registries_checked:
+- {registry: npm, query: 'd-tools', matches: 0}
+- {registry: npm, query: 'dtools cloud api', matches: 0}
+- {registry: pypi, package: dtools, status: 200, official: false, note: 'unrelated project (relativedelta wrapper)'}
+- {registry: pypi, package: d-tools, status: 404}
+- {registry: pypi, package: dtools-cloud, status: 404}
+- {registry: pypi, package: dtoolscloud, status: 404}
+- {registry: nuget, query: 'd-tools', matches: 0}
+- {registry: github, org: 'https://github.com/D-Tools', public_repos: 0}
+distributions:
+- name: D-Tools Cloud API Postman collection
+  kind: postman-collection
+  registry: none
+  official: true
+  version: null
+  published: null
+  docs: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  note: >-
+    Distributed as a signed, expiring Intercom attachment link from the docs article rather than from a stable
+    D-Tools URL or a public Postman workspace. Checked postman.com public workspace search for "D-Tools" — no
+    D-Tools-published workspace exists. Unversioned and undated, so a consumer cannot tell which build of the API
+    the collection matches.

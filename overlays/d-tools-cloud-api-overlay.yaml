@@ -1,0 +1,71 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the D-Tools Cloud API
+  version: 1.0.0
+extends: ../openapi/d-tools-cloud-api-openapi.yml
+x-generated: '2026-08-11'
+x-method: generated
+x-source: >-
+  Derived from https://dtcloudapi.d-tools.cloud/swagger/v1/swagger.json plus the published Cloud API help-center
+  articles (authentication, api-limits, api-response-codes). Every value below is stated by D-Tools in its own
+  public documentation; nothing is invented. The original specification is never mutated.
+actions:
+- target: $
+  description: >-
+    Declare the two credentials the docs require on every request. The published specification has an empty
+    components.securitySchemes and no root security block, so a generated client calls this API unauthenticated
+    and receives 401 on every operation.
+  update:
+    security:
+    - ApiKeyAuth: []
+      BasicAuth: []
+- target: $.components
+  description: Add the securitySchemes the documentation describes but the specification omits.
+  update:
+    securitySchemes:
+      ApiKeyAuth:
+        type: apiKey
+        in: header
+        name: X-API-Key
+        description: >-
+          Tenant API key generated in D-Tools Cloud under Settings > Integration > Developer > API Keys. Maximum
+          5 active keys per account. Documented at
+          https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+      BasicAuth:
+        type: http
+        scheme: basic
+        description: >-
+          A single fixed HTTP Basic value that D-Tools publishes in its public documentation and instructs every
+          customer to reuse verbatim. It is shared across all tenants and provides no tenant separation; the
+          X-API-Key carries the actual authorization. Documented at
+          https://docs.d-tools.cloud/en/articles/8756132-authentication
+- target: $.info
+  description: Record the published rate limits and the identifier of the API surface they apply to.
+  update:
+    x-rate-limits:
+      per_api_key_per_minute: 120
+      per_api_key_per_day: 10000
+      max_active_keys: 5
+      response_headers: none published
+      exhaustion_status: not documented
+      source: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+    x-pagination:
+      style: page-number
+      parameters: [page, pageSize]
+      max_records:
+        GetClients: 500
+    x-idempotency:
+      supported: false
+- target: $.info
+  description: >-
+    Record the error-envelope facts the specification implies but does not state — the ProblemDetails body is
+    served under application/json rather than application/problem+json, and `type` is never a dereferenceable URI.
+  update:
+    x-error-envelope:
+      schema: Microsoft.AspNetCore.Mvc.ProblemDetails
+      media_type_served: application/json
+      media_type_expected: application/problem+json
+      statuses_declared: [400, 401, 404, 409, 500]
+      status_documented_but_undeclared: []
+      status_declared_but_undocumented: [409]
+      source: https://docs.d-tools.cloud/en/articles/8756125-api-response-codes

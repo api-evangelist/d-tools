@@ -1,0 +1,105 @@
+generated: '2026-08-11'
+method: derived
+source: >-
+  openapi/_original/d-tools-cloud-openapi.json, openapi/_original/d-tools-si-openapi.json, and the Cloud API
+  help-center collection https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+auth_style:
+  cloud: 'Two headers together: Authorization (fixed shared Basic) + X-API-Key (per-tenant). See authentication/.'
+  si: 'One header: X-DTSI-ApiKey, scoped to one SI user and one integration.'
+  cross_ref: authentication/d-tools-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    Neither API supports idempotency. There is no Idempotency-Key header, no client-supplied request key, no
+    dedupe window and no documented replay semantics on any of the 26 Cloud operations or the 56 SI operations.
+    This matters more than usual here because the SI API is a QUEUE: POST /Publish/Projects enqueues a project for
+    an SI user to apply, and a retried POST after a timeout has no defined behaviour. The closest thing to a
+    dedupe mechanism the surface offers is the caller-supplied IntegrationChangeOrderId on
+    POST /Publish/Projects/NewChangeOrder, which the docs say is used to update an existing change order rather
+    than create a duplicate — an entity-level upsert key, not a request-level idempotency key, and it covers one
+    endpoint out of 56. No Idempotency pointer is wired into apis.yml, because there is nothing to point at.
+pagination:
+  cloud:
+    style: page-number
+    params: [page, pageSize]
+    extras: [includeTotalCount, sort, search]
+    response_fields: not documented
+    caps: 'GetClients returns at most 500 records per request'
+    note: All public GET list methods are paginated.
+  si:
+    style: page-number
+    params: [pageNumber, pageSize]
+    note: Present on 12 of the Subscribe endpoints.
+filtering:
+  cloud:
+    date_range: [fromCreatedDate, toCreatedDate, fromModifiedDate, toModifiedDate]
+    id_filters: [clientIds, projectIds, owners, types]
+    flags: [includeArchived, includeTotalCount]
+    free_text: search
+  si:
+    watermark: publishedOnUnixTimeMs
+    flags: [includeImported, includeDeleted]
+    free_text: searchText
+    note: >-
+      The SI queue model replaces filtering with a consume-and-acknowledge cycle. A subscriber reads with
+      includeImported=false, processes, then calls the matching MarkAsImported endpoint (there is one per entity
+      family: Projects, Tasks, ServiceOrders, PurchaseOrders, ServicePlans, TimeSheets, ProductCatalogs, Clients,
+      SubscribePartialProjects). Failing to acknowledge means re-delivery on the next poll.
+field_expansion:
+  supported: false
+  note: >-
+    No sparse-fieldsets or expand parameter. SI offers a related but different control — aggregateBy on the
+    Subscribe project endpoints, which groups project items by Item, Location, System and/or Phase to shrink the
+    payload, with grouping keyed on exact equality of TypeId, LaborType, Manufacturer, Model, PackageName,
+    PartNumber, IsOfe, IsNonBillable, UnitCost, UnitPrice, LaborHours, IsTaxable, TaxId and Vendor.
+metadata:
+  custom_fields: not exposed on either API
+request_id_tracing:
+  supported: false
+  note: No correlation-id or request-id header is documented or declared on either API.
+versioning:
+  cloud:
+    style: path
+    current: v1
+    pattern: /api/v1/{Entity}/{Operation}
+    spec_version: v1
+  si:
+    style: none
+    note: >-
+      The SI API carries no version segment in its paths at all (/Publish/..., /Subscribe/...). The OpenAPI
+      declares info.version 1.0.0 but nothing in the URL identifies a version, so there is no way for the provider
+      to ship a breaking change without breaking every caller, and no way for a caller to pin.
+  cross_ref: lifecycle/d-tools-lifecycle.yml
+error_envelope:
+  cloud: ASP.NET Core ProblemDetails (type/title/status/detail/instance) served as application/json
+  si: none declared — all 56 operations declare only a 200 response
+  cross_ref: errors/d-tools-problem-types.yml
+rate_limit_signaling:
+  headers: none published
+  exhaustion_status: not documented
+  cross_ref: rate-limits/d-tools-rate-limits.yml
+content_negotiation:
+  cloud: [application/json, text/json]
+  si: [application/json, text/json, application/xml, text/xml]
+  note: >-
+    The SI API still offers XML alongside JSON on 34 of its 56 operations — a legacy of the on-premises product
+    it bridges.
+naming:
+  paths: >-
+    Both APIs use RPC-style verb-in-path naming rather than resource paths — /api/v1/Clients/GetClients,
+    /Publish/Projects/ArchiveProjects. Method and path therefore duplicate intent, and the same entity appears
+    under several paths.
+  operation_ids:
+    cloud: absent on all 26 operations
+    si: absent on all 56 operations
+    note: >-
+      Neither specification declares a single operationId. Every generated SDK method name, every MCP tool name,
+      and every agent-side reference to these APIs is therefore synthesised by the tool doing the generating, and
+      two tools will not agree. Adding operationIds is the cheapest contract improvement available here.
+  summaries:
+    cloud: absent on all 26 operations
+    si: present on all 56 operations
+  descriptions:
+    cloud: absent
+    si: absent
