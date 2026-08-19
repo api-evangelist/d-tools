@@ -5,56 +5,106 @@ status: candidate
 hosted_server:
   exists: false
   probes:
-  - {url: 'https://dtcloudapi.d-tools.cloud/mcp', method: 'POST tools/list', status: 404}
-  - {url: 'https://dtcloudapi.d-tools.cloud/sse', method: 'POST tools/list', status: 404}
-  - {url: 'https://api.d-tools.com/mcp', method: 'POST tools/list', status: 404}
-  - {url: 'https://mcp.d-tools.com/', method: 'POST tools/list', status: 000, note: does not resolve}
-  - {url: 'https://mcp.d-tools.cloud/', method: 'POST tools/list', status: 000, note: does not resolve}
-note: >-
-  D-Tools operates no MCP server. The tool list below is a CANDIDATE derived from the published OpenAPI documents
-  — it is what an MCP server over these APIs would expose, not something D-Tools ships. It is recorded so the
-  agent surface can be evaluated, and it must not be read as a provider capability. No ToolCrosswalk artifact is
-  emitted, because a crosswalk binds a real MCP or GraphQL surface to REST operations and neither exists here.
-naming_caveat: >-
-  Neither specification declares a single operationId, so every tool name below had to be synthesised from the
-  path. Two different generators will produce two different tool names for the same operation. Adding
-  operationIds to both specs is the prerequisite for any stable MCP surface over this API.
+  - url: https://dtcloudapi.d-tools.cloud/mcp
+    method: POST tools/list
+    status: 404
+  - url: https://dtcloudapi.d-tools.cloud/sse
+    method: POST tools/list
+    status: 404
+  - url: https://api.d-tools.com/mcp
+    method: POST tools/list
+    status: 404
+  - url: https://mcp.d-tools.com/
+    method: POST tools/list
+    status: 0
+    note: does not resolve
+  - url: https://mcp.d-tools.cloud/
+    method: POST tools/list
+    status: 0
+    note: does not resolve
+note: D-Tools operates no MCP server. The tool list below is a CANDIDATE derived from the published OpenAPI
+  documents — it is what an MCP server over these APIs would expose, not something D-Tools ships. It is
+  recorded so the agent surface can be evaluated, and it must not be read as a provider capability. No
+  ToolCrosswalk artifact is emitted, because a crosswalk binds a real MCP or GraphQL surface to REST operations
+  and neither exists here.
+naming_caveat: Neither specification declares a single operationId, so every tool name below had to be
+  synthesised from the path. Two different generators will produce two different tool names for the same
+  operation. Adding operationIds to both specs is the prerequisite for any stable MCP surface over this
+  API.
 candidate_tools:
   cloud:
     read:
-    - {tool: list_clients, rest: 'GET /api/v1/Clients/GetClients'}
-    - {tool: get_client, rest: 'GET /api/v1/Clients/GetClient'}
-    - {tool: list_products, rest: 'GET /api/v1/Products/GetProducts'}
-    - {tool: get_product, rest: 'GET /api/v1/Products/GetProduct'}
-    - {tool: list_opportunities, rest: 'GET /api/v1/Opportunities/GetOpportunities'}
-    - {tool: get_opportunity, rest: 'GET /api/v1/Opportunities/GetOpportunity'}
-    - {tool: list_quotes, rest: 'GET /api/v1/Quotes/GetQuotes'}
-    - {tool: get_quote, rest: 'GET /api/v1/Quotes/GetQuote'}
-    - {tool: list_projects, rest: 'GET /api/v1/Projects/GetProjects'}
-    - {tool: get_project, rest: 'GET /api/v1/Projects/GetProject'}
-    - {tool: list_change_orders, rest: 'GET /api/v1/ChangeOrders/GetChangeOrders'}
-    - {tool: get_change_order, rest: 'GET /api/v1/ChangeOrders/GetChangeOrder'}
-    - {tool: list_purchase_orders, rest: 'GET /api/v1/PurchaseOrders/GetPurchaseOrders'}
-    - {tool: get_purchase_order, rest: 'GET /api/v1/PurchaseOrders/GetPurchaseOrder'}
-    - {tool: list_service_contracts, rest: 'GET /api/v1/ServiceContracts/GetServiceContracts'}
-    - {tool: get_service_contract, rest: 'GET /api/v1/ServiceContracts/GetServiceContract'}
-    - {tool: list_time_entries, rest: 'GET /api/v1/TimeEntries/GetTimeEntries'}
-    - {tool: get_file, rest: 'GET /api/v1/Files/GetFile'}
+    - tool: list_clients
+      rest: GET /api/v1/Clients/GetClients
+    - tool: get_client
+      rest: GET /api/v1/Clients/GetClient
+    - tool: list_products
+      rest: GET /api/v1/Products/GetProducts
+    - tool: get_product
+      rest: GET /api/v1/Products/GetProduct
+    - tool: list_opportunities
+      rest: GET /api/v1/Opportunities/GetOpportunities
+    - tool: get_opportunity
+      rest: GET /api/v1/Opportunities/GetOpportunity
+    - tool: list_quotes
+      rest: GET /api/v1/Quotes/GetQuotes
+    - tool: get_quote
+      rest: GET /api/v1/Quotes/GetQuote
+    - tool: list_projects
+      rest: GET /api/v1/Projects/GetProjects
+    - tool: get_project
+      rest: GET /api/v1/Projects/GetProject
+    - tool: list_change_orders
+      rest: GET /api/v1/ChangeOrders/GetChangeOrders
+    - tool: get_change_order
+      rest: GET /api/v1/ChangeOrders/GetChangeOrder
+    - tool: list_purchase_orders
+      rest: GET /api/v1/PurchaseOrders/GetPurchaseOrders
+    - tool: get_purchase_order
+      rest: GET /api/v1/PurchaseOrders/GetPurchaseOrder
+    - tool: list_service_contracts
+      rest: GET /api/v1/ServiceContracts/GetServiceContracts
+    - tool: get_service_contract
+      rest: GET /api/v1/ServiceContracts/GetServiceContract
+    - tool: list_time_entries
+      rest: GET /api/v1/TimeEntries/GetTimeEntries
+    - tool: get_file
+      rest: GET /api/v1/Files/GetFile
     write:
-    - {tool: create_client, rest: 'POST /api/v1/Clients/CreateClient', consequence: creates a record; no idempotency key available}
-    - {tool: update_client, rest: 'PUT /api/v1/Clients/UpdateClient'}
-    - {tool: create_opportunity, rest: 'POST /api/v1/Opportunities/CreateOpportunity', consequence: creates a record; no idempotency key available}
-    - {tool: update_opportunity, rest: 'PUT /api/v1/Opportunities/UpdateOpportunity'}
-    - {tool: update_project, rest: 'PUT /api/v1/Projects/UpdateProject'}
-    - {tool: update_product_prices, rest: 'PUT /api/v1/Products/UpdateProductPrices', consequence: changes commercial data}
-    - {tool: update_product_barcodes, rest: 'PUT /api/v1/Products/UpdateProductBarcodes'}
-    - {tool: update_product_statuses, rest: 'PUT /api/v1/Products/UpdateProductStatuses'}
+    - tool: create_client
+      rest: POST /api/v1/Clients/CreateClient
+      consequence: creates a record; no idempotency key available
+    - tool: update_client
+      rest: PUT /api/v1/Clients/UpdateClient
+    - tool: create_opportunity
+      rest: POST /api/v1/Opportunities/CreateOpportunity
+      consequence: creates a record; no idempotency key available
+    - tool: update_opportunity
+      rest: PUT /api/v1/Opportunities/UpdateOpportunity
+    - tool: update_project
+      rest: PUT /api/v1/Projects/UpdateProject
+    - tool: update_product_prices
+      rest: PUT /api/v1/Products/UpdateProductPrices
+      consequence: changes commercial data
+    - tool: update_product_barcodes
+      rest: PUT /api/v1/Products/UpdateProductBarcodes
+    - tool: update_product_statuses
+      rest: PUT /api/v1/Products/UpdateProductStatuses
   si:
-    note: >-
-      The SI API is a store-and-forward queue. Its Publish operations are fire-and-forget enqueues with no
-      idempotency key and no declared error response, which makes them a poor fit for autonomous tool calls
-      without a human confirmation step. Recorded here rather than enumerated as tools for that reason.
-    families: [Publish/Projects, Publish/Task, Publish/ServiceOrder, Publish/TimeSheets, Publish/ProductCatalogs, Publish/Clients, Publish/Vendors, Subscribe/*, Message/*]
+    note: The SI API is a store-and-forward queue. Its Publish operations are fire-and-forget enqueues
+      with no idempotency key and no declared error response, which makes them a poor fit for autonomous
+      tool calls without a human confirmation step. Recorded here rather than enumerated as tools for
+      that reason.
+    families:
+    - Publish/Projects
+    - Publish/Task
+    - Publish/ServiceOrder
+    - Publish/TimeSheets
+    - Publish/ProductCatalogs
+    - Publish/Clients
+    - Publish/Vendors
+    - Subscribe/*
+    - Message/*
     operation_count: 56
 agent_readiness_blockers:
 - No operationIds on either spec, so tool identity is unstable.
@@ -62,3 +112,8 @@ agent_readiness_blockers:
 - No error responses on the SI spec at all; no 429 or rate-limit headers on either.
 - No idempotency on any write operation.
 - No response examples anywhere in either specification.
+deployment:
+  mode: none
+  verified: derived
+  checked: '2026-08-12'
+  source: catalog MCP census

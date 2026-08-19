@@ -1,0 +1,1064 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "D-Tools Cloud API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ChangeOrders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/ChangeOrders/GetChangeOrders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/ChangeOrders/GetChangeOrders",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/ChangeOrders/GetChangeOrder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/ChangeOrders/GetChangeOrder",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/Clients/GetClients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Clients/GetClients",
+            "params": [
+              {
+                "name": "types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owners",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/Clients/GetClient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Clients/GetClient",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/Clients/CreateClient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Clients/CreateClient",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/Clients/UpdateClient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Clients/UpdateClient",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/Files/GetFile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Files/GetFile",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Opportunities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/Opportunities/GetOpportunities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Opportunities/GetOpportunities",
+            "params": [
+              {
+                "name": "types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clientIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "stageGroups",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "stages",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "priorities",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owners",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromEstimatedCloseDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toEstimatedCloseDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromActualCloseDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toActualCloseDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/Opportunities/GetOpportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Opportunities/GetOpportunity",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/v1/Opportunities/CreateOpportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Opportunities/CreateOpportunity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/Opportunities/UpdateOpportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Opportunities/UpdateOpportunity",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/Products/GetProducts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Products/GetProducts",
+            "params": [
+              {
+                "name": "brands",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "suppliers",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "stockItemsOnly",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/Products/GetProduct",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Products/GetProduct",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/Products/UpdateProductPrices",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Products/UpdateProductPrices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/Products/UpdateProductBarcodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Products/UpdateProductBarcodes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/Products/UpdateProductStatuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Products/UpdateProductStatuses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/Projects/GetProjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Projects/GetProjects",
+            "params": [
+              {
+                "name": "clientIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "stageGroups",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "stages",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "priorities",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectManagers",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromCompletedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toCompletedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/Projects/GetProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Projects/GetProject",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "PUT /api/v1/Projects/UpdateProject",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Projects/UpdateProject",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PurchaseOrders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/PurchaseOrders/GetPurchaseOrders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/PurchaseOrders/GetPurchaseOrders",
+            "params": [
+              {
+                "name": "suppliers",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromOrderedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toOrderedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromReceivedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toReceivedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/PurchaseOrders/GetPurchaseOrder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/PurchaseOrders/GetPurchaseOrder",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/Quotes/GetQuotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Quotes/GetQuotes",
+            "params": [
+              {
+                "name": "opportunityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/Quotes/GetQuote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/Quotes/GetQuote",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ServiceContracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/ServiceContracts/GetServiceContracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/ServiceContracts/GetServiceContracts",
+            "params": [
+              {
+                "name": "clientIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromStartDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toStartDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromEndDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toEndDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromPaymentDueDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toPaymentDueDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromCanceledDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toCanceledDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toCreatedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toModifiedDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v1/ServiceContracts/GetServiceContract",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/ServiceContracts/GetServiceContract",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TimeEntries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v1/TimeEntries/GetTimeEntries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dtcloudapi.d-tools.cloud/api/v1/TimeEntries/GetTimeEntries",
+            "params": [
+              {
+                "name": "types",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resources",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clientIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "serviceCallIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "laborTypes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "overtimesOnly",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

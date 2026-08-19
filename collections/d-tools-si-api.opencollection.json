@@ -1,0 +1,1562 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "D-Tools SI API Documentation",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PublishProjects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a new project to SI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Projects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish a new project to SI."
+        },
+        {
+          "info": {
+            "name": "Update an existing project in SI",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Projects/Update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing project in SI"
+        },
+        {
+          "info": {
+            "name": "Publish a new change order or update an existing change order (using the IntegrationChangeOrderId) for an existing SI project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Projects/NewChangeOrder",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish a new change order or update an existing change order (using the IntegrationChangeOrderId) for an existing SI project."
+        },
+        {
+          "info": {
+            "name": "Mark existing SI projects as archived (must be checked in).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Projects/ArchiveProjects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark existing SI projects as archived (must be checked in)."
+        },
+        {
+          "info": {
+            "name": "Mark existing SI projects as locked (must be checked in).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Projects/LockProjects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark existing SI projects as locked (must be checked in)."
+        },
+        {
+          "info": {
+            "name": "Mark existing SI projects as unarchived.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Projects/UnarchiveProjects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark existing SI projects as unarchived."
+        },
+        {
+          "info": {
+            "name": "Mark existing SI projects as unlocked (must be checked in).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Projects/UnlockProjects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark existing SI projects as unlocked (must be checked in)."
+        },
+        {
+          "info": {
+            "name": "Mark existing SI project change order status as locked or unlocked.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Projects/LockChangeOrderStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark existing SI project change order status as locked or unlocked."
+        },
+        {
+          "info": {
+            "name": "Publish comments to an existing SI project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Projects/ProjectComments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish comments to an existing SI project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SubscribeProjects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get projects and change orders published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/Projects",
+            "params": [
+              {
+                "name": "clients",
+                "value": "",
+                "type": "query",
+                "description": "Clients to filter projects (Optional)"
+              },
+              {
+                "name": "progresses",
+                "value": "",
+                "type": "query",
+                "description": "Progresses to filter projects (Optional)"
+              },
+              {
+                "name": "includeImported",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include already imported projects. Optional with default value false which means\r\nby default you will only see projects which are not imported."
+              },
+              {
+                "name": "includeArchived",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include archived projects. Optional with default value false which means\r\nby default you will only see projects which are not archived."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The search text."
+              },
+              {
+                "name": "includeDeleted",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include project deleted in SI. Optional with default value false which means\r\nby default you will only see active projects which are not deleted."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              },
+              {
+                "name": "projectNumber",
+                "value": "",
+                "type": "query",
+                "description": "The project number."
+              }
+            ]
+          },
+          "docs": "Get projects and change orders published by a SI user."
+        },
+        {
+          "info": {
+            "name": "Get a specific project or change order for a given message id published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/Projects/GetProjectByMessageId",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "query",
+                "description": "The message Id"
+              },
+              {
+                "name": "aggregateBy",
+                "value": "",
+                "type": "query",
+                "description": "aggregateBy is an optional parameter and the value can be Item, Location, System or\r\nPhase. If aggregateBy is not provided then the project is returned unit wise (not aggregated)."
+              },
+              {
+                "name": "getAdjustmentsByItem",
+                "value": "",
+                "type": "query",
+                "description": "getAdjustmentsByItem is an optional parameter.\r\nIf true then adjustments are returned with each project item.\r\nIf false the adjustments are aggregated and returned as project items."
+              }
+            ]
+          },
+          "docs": "Get a specific project or change order for a given message id published by a SI user."
+        },
+        {
+          "info": {
+            "name": "Get project comments published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/Projects/GetProjectComments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The project id."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              }
+            ]
+          },
+          "docs": "Get project comments published by a SI user."
+        },
+        {
+          "info": {
+            "name": "Mark a project or change order as imported for a given project id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.d-tools.com/si/Subscribe/Projects/MarkAsImported",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The project id."
+              },
+              {
+                "name": "coNumber",
+                "value": "",
+                "type": "query",
+                "description": "coNumber is an optional parameter and is the Change Order Number. For approved projects you can pass the change order number."
+              },
+              {
+                "name": "publishedOnUnixTimeMs",
+                "value": "",
+                "type": "query",
+                "description": "publishedOnUnixTimeMs is an optional parameter and is the date the project was published in Unix epoch milliseconds. This property can be read from the project property PublishedOnUnixTimeMs and if passed will make sure no one has updated this project since you last read it."
+              }
+            ]
+          },
+          "docs": "Mark a project or change order as imported for a given project id."
+        },
+        {
+          "info": {
+            "name": "Mark a project or change order as imported for a given message id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.d-tools.com/si/Subscribe/Projects/MarkAsImportedByMessageId",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "query",
+                "description": "The message Id"
+              },
+              {
+                "name": "publishedOnUnixTimeMs",
+                "value": "",
+                "type": "query",
+                "description": "publishedOnUnixTimeMs is an optional parameter and is the date the project was published in Unix epoch milliseconds. This property can be read from the project property PublishedOnUnixTimeMs and if passed will make sure no one has updated this project since you last read it."
+              }
+            ]
+          },
+          "docs": "Mark a project or change order as imported for a given message id."
+        },
+        {
+          "info": {
+            "name": "Get a specific project or change order for a given project id published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/Projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The project id."
+              },
+              {
+                "name": "coNumber",
+                "value": "",
+                "type": "query",
+                "description": "coNumber is an optional parameter and is the Change Order Number.\r\nFor approved project you can pass a change order number to get a specific change order for the approved project."
+              },
+              {
+                "name": "aggregateBy",
+                "value": "",
+                "type": "query",
+                "description": "aggregateBy is an optional parameter and the value can be Item, Location, System or\r\nPhase. If aggregateBy is not provided then the project is returned unit wise (not aggregated)."
+              },
+              {
+                "name": "getAdjustmentsByItem",
+                "value": "",
+                "type": "query",
+                "description": "getAdjustmentsByItem is an optional parameter.\r\nIf true then adjustments are returned with each project item.\r\nIf false the adjustments are aggregated and returned as project items."
+              }
+            ]
+          },
+          "docs": "Get a specific project or change order for a given project id published by a SI user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SubscribePartialProjects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get partial projects published by a SI user .",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/SubscribePartialProjects/Projects",
+            "params": [
+              {
+                "name": "clients",
+                "value": "",
+                "type": "query",
+                "description": "Clients to filter projects (Optional)"
+              },
+              {
+                "name": "progresses",
+                "value": "",
+                "type": "query",
+                "description": "Progresses to filter projects (Optional)"
+              },
+              {
+                "name": "includeImported",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include already imported projects. Optional with default value false which means\r\nby default you will only see projects which are not imported."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The search text."
+              },
+              {
+                "name": "includeDeleted",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include project deleted in SI. Optional with default value false which means\r\nby default you will only see active projects which are not deleted."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              },
+              {
+                "name": "projectNumber",
+                "value": "",
+                "type": "query",
+                "description": "The project number."
+              }
+            ]
+          },
+          "docs": "Get partial projects published by a SI user ."
+        },
+        {
+          "info": {
+            "name": "Mark a partial project as imported for a given message id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.d-tools.com/si/SubscribePartialProjects/MarkAsImported",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "query",
+                "description": "The message id."
+              }
+            ]
+          },
+          "docs": "Mark a partial project as imported for a given message id."
+        },
+        {
+          "info": {
+            "name": "Get a specific partial project for a given message id published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/SubscribePartialProjects/Projects/:messageId",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path",
+                "description": "The message id."
+              },
+              {
+                "name": "aggregateBy",
+                "value": "",
+                "type": "query",
+                "description": "aggregateBy is an optional parameter and the value can be Item, Location, System or\r\nPhase. If aggregateBy is not provided then the project is returned unit wise (not aggregated)."
+              },
+              {
+                "name": "getAdjustmentsByItem",
+                "value": "",
+                "type": "query",
+                "description": "getAdjustmentsByItem is an optional parameter. \r\nIf true then adjustments are returned with each project item. \r\nIf false the adjustments are aggreegated and returend as project items."
+              }
+            ]
+          },
+          "docs": "Get a specific partial project for a given message id published by a SI user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PublishTasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Allows an integration to publish a task to a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Task",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows an integration to publish a task to a SI user."
+        },
+        {
+          "info": {
+            "name": "Update an existing task in SI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/UpdateTask",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing task in SI."
+        },
+        {
+          "info": {
+            "name": "Delete existing tasks in SI (BETA).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/DeleteTasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete existing tasks in SI (BETA)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SubscribeTask",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get tasks published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/Tasks",
+            "params": [
+              {
+                "name": "clients",
+                "value": "",
+                "type": "query",
+                "description": "Clients to filter tasks (Optional)"
+              },
+              {
+                "name": "progresses",
+                "value": "",
+                "type": "query",
+                "description": "Progresses to filter tasks (Optional)"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "ProjectId to filter tasks (Optional)"
+              },
+              {
+                "name": "includeImported",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include already imported tasks. Optional with default value false which means by default you will only see tasks which are not imported."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The search text."
+              },
+              {
+                "name": "includeDeleted",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include task deleted in SI. Optional with default value false which means\r\nby default you will only see active tasks which are not deleted."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              }
+            ]
+          },
+          "docs": "Get tasks published by a SI user."
+        },
+        {
+          "info": {
+            "name": "Get Mobile Install task site notes for a given task id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/Task/GetMobileInstallSiteNotes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Task id."
+              }
+            ]
+          },
+          "docs": "Get Mobile Install task site notes for a given task id"
+        },
+        {
+          "info": {
+            "name": "Mark a task as imported for a given task id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.d-tools.com/si/Subscribe/Task/MarkAsImported",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The task id."
+              },
+              {
+                "name": "publishedOnUnixTimeMs",
+                "value": "",
+                "type": "query",
+                "description": "The published on Unix time in milliseconds."
+              }
+            ]
+          },
+          "docs": "Mark a task as imported for a given task id."
+        },
+        {
+          "info": {
+            "name": "Get a tasks for a given project id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/Tasks/ByProject/:projectId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The project id."
+              }
+            ]
+          },
+          "docs": "Get a tasks for a given project id."
+        },
+        {
+          "info": {
+            "name": "Get a task for a given task id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/Tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The task id."
+              }
+            ]
+          },
+          "docs": "Get a task for a given task id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PublishServiceOrders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a new service order to SI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/ServiceOrder",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish a new service order to SI."
+        },
+        {
+          "info": {
+            "name": "Update an existing service order in SI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/UpdateServiceOrder",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing service order in SI."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SubscribeServiceOrder",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get service order published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/ServiceOrders",
+            "params": [
+              {
+                "name": "clients",
+                "value": "",
+                "type": "query",
+                "description": "Clients to filter service orders (Optional)"
+              },
+              {
+                "name": "progresses",
+                "value": "",
+                "type": "query",
+                "description": "Progresses to filter servic orders (Optional)"
+              },
+              {
+                "name": "includeImported",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include already imported service orders. Optional with default value false which means by default you will only see service orders which are not imported."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The search text."
+              },
+              {
+                "name": "includeDeleted",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include service order deleted in SI. Optional with default value false which means\r\nby default you will only see active service orders which are not deleted."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              }
+            ]
+          },
+          "docs": "Get service order published by a SI user."
+        },
+        {
+          "info": {
+            "name": "Get Mobile Install service order site notes for a given service order id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/ServiceOrder/GetMobileInstallSiteNotes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Service order id."
+              }
+            ]
+          },
+          "docs": "Get Mobile Install service order site notes for a given service order id"
+        },
+        {
+          "info": {
+            "name": "Mark a service order as imported for a given service order id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.d-tools.com/si/Subscribe/ServiceOrders/MarkAsImported",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The service order id."
+              },
+              {
+                "name": "publishedOnUnixTimeMs",
+                "value": "",
+                "type": "query",
+                "description": "The published on Unix time in milliseconds."
+              }
+            ]
+          },
+          "docs": "Mark a service order as imported for a given service order id."
+        },
+        {
+          "info": {
+            "name": "Get a service order for a given service order id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/ServiceOrders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The service order id."
+              }
+            ]
+          },
+          "docs": "Get a service order for a given service order id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SubscribePurchaseOrder",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get purchase orders published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/PurchaseOrders",
+            "params": [
+              {
+                "name": "vendors",
+                "value": "",
+                "type": "query",
+                "description": "Vendors to filter purchase orders (Optional)"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Statuses to filter purchase orders (Optional)"
+              },
+              {
+                "name": "includeImported",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include already imported purchase orders. Optional with default value false which means by default you will only see purchase orders which are not imported."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The search text."
+              },
+              {
+                "name": "includeDeleted",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include purchase order deleted in SI. Optional with default value false which means\r\nby default you will only see active purchase orders which are not deleted."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              }
+            ]
+          },
+          "docs": "Get purchase orders published by a SI user."
+        },
+        {
+          "info": {
+            "name": "Mark a purchase order as imported for a given purchase order id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.d-tools.com/si/Subscribe/PurchaseOrders/MarkAsImported",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The purchase order id."
+              },
+              {
+                "name": "publishedOnUnixTimeMs",
+                "value": "",
+                "type": "query",
+                "description": "The published on Unix time in milliseconds."
+              }
+            ]
+          },
+          "docs": "Mark a purchase order as imported for a given purchase order id."
+        },
+        {
+          "info": {
+            "name": "Get a purchase order for a given purchase order id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/PurchaseOrders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The purchase order id."
+              }
+            ]
+          },
+          "docs": "Get a purchase order for a given purchase order id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SubscribeServicePlan",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get service plans published by a SI user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/ServicePlans",
+            "params": [
+              {
+                "name": "clients",
+                "value": "",
+                "type": "query",
+                "description": "Clients to filter service plans (Optional)"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Statuses to filter servic plans (Optional)"
+              },
+              {
+                "name": "includeImported",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include already imported service plans. Optional with default value false which means by default you will only see service plans which are not imported."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The search text."
+              },
+              {
+                "name": "includeDeleted",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include servic plan deleted in SI. Optional with default value false which means\r\nby default you will only see active servic plans which are not deleted."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              }
+            ]
+          },
+          "docs": "Get service plans published by a SI user"
+        },
+        {
+          "info": {
+            "name": "Mark a service plan as imported for a given service plan id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.d-tools.com/si/Subscribe/ServicePlans/MarkAsImported",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The service plan id."
+              },
+              {
+                "name": "publishedOnUnixTimeMs",
+                "value": "",
+                "type": "query",
+                "description": "The published on Unix time in milliseconds."
+              }
+            ]
+          },
+          "docs": "Mark a service plan as imported for a given service plan id."
+        },
+        {
+          "info": {
+            "name": "Get a service plan for a given service plan id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/ServicePlans/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The service plan id."
+              }
+            ]
+          },
+          "docs": "Get a service plan for a given service plan id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PublishTimeSheets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a new time sheet to SI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/TimeSheets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish a new time sheet to SI."
+        },
+        {
+          "info": {
+            "name": "Update an existing time sheets in SI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/UpdateTimeSheets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing time sheets in SI."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SubscribeTimeSheet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get time sheets published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/TimeSheets",
+            "params": [
+              {
+                "name": "clients",
+                "value": "",
+                "type": "query",
+                "description": "Clients to filter time sheets (Optional)"
+              },
+              {
+                "name": "includeImported",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include already imported time sheets. Optional with default value false which means by default you will only see time sheets which are not imported."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The search text."
+              },
+              {
+                "name": "includeDeleted",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include time sheet deleted in SI. Optional with default value false which means\r\nby default you will only see active time sheets which are not deleted."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              }
+            ]
+          },
+          "docs": "Get time sheets published by a SI user."
+        },
+        {
+          "info": {
+            "name": "Mark a time sheet as imported for a given time sheet id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.d-tools.com/si/Subscribe/TimeSheets/MarkAsImported",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The time sheet id."
+              },
+              {
+                "name": "publishedOnUnixTimeMs",
+                "value": "",
+                "type": "query",
+                "description": "The published on Unix time in milliseconds."
+              }
+            ]
+          },
+          "docs": "Mark a time sheet as imported for a given time sheet id"
+        },
+        {
+          "info": {
+            "name": "Get a time sheet for a given time sheet id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/TimeSheets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The time sheet id."
+              }
+            ]
+          },
+          "docs": "Get a time sheet for a given time sheet id"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PublishProductCatalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a product catalog to a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/ProductCatalogs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish a product catalog to a SI user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SubscribeProductCatalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get product catalogs published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/ProductCatalogs",
+            "params": [
+              {
+                "name": "includeImported",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include already imported product catalogs. Optional with default value false\r\nwhich means by default you will only see product catalogs which are not imported."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The search text."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              }
+            ]
+          },
+          "docs": "Get product catalogs published by a SI user."
+        },
+        {
+          "info": {
+            "name": "Mark a product catalog as imported for a given catalog id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.d-tools.com/si/Subscribe/ProductCatalogs/MarkAsImported",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The product catalog id."
+              }
+            ]
+          },
+          "docs": "Mark a product catalog as imported for a given catalog id."
+        },
+        {
+          "info": {
+            "name": "Get a product catalog for a given catalog id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/ProductCatalogs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The product catalog id."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              }
+            ]
+          },
+          "docs": "Get a product catalog for a given catalog id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PublishClients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a list of clients to SI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Clients",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish a list of clients to SI."
+        },
+        {
+          "info": {
+            "name": "Update an existing client in SI",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Clients/Update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing client in SI"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SubscribeClients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get clients published by a SI user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Subscribe/Clients",
+            "params": [
+              {
+                "name": "includeImported",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include already imported clients. Optional with default value false which means\r\nby default you will only see clients which are not imported."
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The search text."
+              },
+              {
+                "name": "includeDeleted",
+                "value": "",
+                "type": "query",
+                "description": "Boolean. Include client deleted in SI. Optional with default value false which means\r\nby default you will only see active clients which are not deleted."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page number."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The page size."
+              }
+            ]
+          },
+          "docs": "Get clients published by a SI user."
+        },
+        {
+          "info": {
+            "name": "Get clients for given client ids published by a SI user. You can pass a maximum of 100 client ids.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Subscribe/Clients/ClientList",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get clients for given client ids published by a SI user. You can pass a maximum of 100 client ids."
+        },
+        {
+          "info": {
+            "name": "Mark clients as imported for given client ids. You can pass a maximum of 100 client ids.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Subscribe/Clients/MarkAsImported",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark clients as imported for given client ids. You can pass a maximum of 100 client ids."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Message",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get status of a published message.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Message/PublishedMessageStatus",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "query",
+                "description": "Id of the message"
+              }
+            ]
+          },
+          "docs": "Get status of a published message."
+        },
+        {
+          "info": {
+            "name": "Get status of published messages.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.d-tools.com/si/Message/PublishedMessagesStatus",
+            "params": [
+              {
+                "name": "messageStatusIds",
+                "value": "",
+                "type": "query",
+                "description": "Message status Id: Pending = 1, Imported = 2, Failed = 3"
+              },
+              {
+                "name": "messageTypeIds",
+                "value": "",
+                "type": "query",
+                "description": "Message type Id: ProductCatalog = 1, Project = 11, UpdateProject = 12, NewProjectChangeOrderInfo = 13, UpdateClient = 21"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page Number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size"
+              }
+            ]
+          },
+          "docs": "Get status of published messages."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PublishVendors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a list of vendors to SI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Vendors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish a list of vendors to SI."
+        },
+        {
+          "info": {
+            "name": "Update an existing vendor in SI",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.d-tools.com/si/Publish/Vendors/Update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing vendor in SI"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
