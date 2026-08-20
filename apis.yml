@@ -19,6 +19,18 @@ created: '2026-08-11'
 modified: '2026-08-11'
 tags:
 - av-integration
+- Systems Integration
+- Project Management
+- Estimation
+- Quoting
+- Field Service Management
+- Construction Tech
+- low-voltage
+- Product Catalog
+- ERP Integration
+- Vertical SaaS
+tags_raw:
+- av-integration
 - systems-integration
 - project-management
 - estimation
@@ -45,6 +57,12 @@ apis:
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
+  - av-integration
+  - Project Management
+  - Quoting
+  - Field Service Management
+  - Product Catalog
+  tags_raw:
   - av-integration
   - project-management
   - quoting
@@ -79,6 +97,12 @@ apis:
   humanURL: https://api.d-tools.com/si/doc
   baseURL: https://api.d-tools.com/si
   tags:
+  - av-integration
+  - Systems Integration
+  - Project Management
+  - Estimation
+  - ERP Integration
+  tags_raw:
   - av-integration
   - systems-integration
   - project-management
