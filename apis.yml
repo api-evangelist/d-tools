@@ -47,30 +47,16 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- name: D-Tools Cloud API
-  description: >-
-    REST API for the D-Tools Cloud platform. Read, create and update Clients, Products, Opportunities, Quotes,
-    Projects, Change Orders, Purchase Orders, Service Contracts, Files and Time Entries. Requests carry two
-    credentials at once — a fixed HTTP Basic value that D-Tools publishes in its own documentation, plus a
-    tenant-specific X-API-Key generated in-app under Settings > Integration > Developer. Limits are 120 calls per
-    minute and 10,000 calls per day per API key, and list endpoints are paginated.
+- aid: d-tools:d-tools-changeorders-api
+  name: D-Tools Change Orders API
+  description: The ChangeOrders API from D-Tools — 2 operation(s) for changeorders.
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
-  - av-integration
-  - Project Management
-  - Quoting
-  - Field Service Management
-  - Product Catalog
-  tags_raw:
-  - av-integration
-  - project-management
-  - quoting
-  - field-service-management
-  - product-catalog
+  - ChangeOrders
   properties:
   - type: OpenAPI
-    url: openapi/d-tools-cloud-api-openapi.yml
+    url: openapi/d-tools-changeorders-api-openapi.yml
   - type: Documentation
     url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
   - type: APIReference
@@ -85,32 +71,6 @@ apis:
     url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
   - type: LLMsTxt
     url: llms/d-tools-cloud-llms.txt
-  - type: Overlay
-    url: overlays/d-tools-cloud-api-overlay.yaml
-- name: D-Tools System Integrator (SI) API
-  description: >-
-    Cloud middleware API that bridges the on-premises or hosted D-Tools System Integrator application to third-party
-    systems. It is a queue, not a live database: publishers POST projects, change orders, tasks, service orders,
-    time sheets, product catalogs, clients and vendors into the queue for an SI user to apply, and subscribers GET
-    what an SI user has exported, then mark each message imported. Authentication is a per-user, per-integration API
-    key passed in the X-DTSI-ApiKey header and generated in the SI Control Panel under Manage Integrations.
-  humanURL: https://api.d-tools.com/si/doc
-  baseURL: https://api.d-tools.com/si
-  tags:
-  - av-integration
-  - Systems Integration
-  - Project Management
-  - Estimation
-  - ERP Integration
-  tags_raw:
-  - av-integration
-  - systems-integration
-  - project-management
-  - estimation
-  - erp-integration
-  properties:
-  - type: OpenAPI
-    url: openapi/d-tools-si-api-openapi.yml
   - type: Documentation
     url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
   - type: APIReference
@@ -119,9 +79,843 @@ apis:
     url: https://docs.d-tools.com/en/articles/9203156-api-key
   - type: LLMsTxt
     url: llms/d-tools-si-llms.txt
-  - type: Overlay
-    url: overlays/d-tools-si-api-overlay.yaml
+- aid: d-tools:d-tools-clients-api
+  name: D-Tools Clients API
+  description: The Clients API from D-Tools — 4 operation(s) for clients.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-clients-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-files-api
+  name: D-Tools Files API
+  description: The Files API from D-Tools — 1 operation(s) for files.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-message-api
+  name: D-Tools Message API
+  description: The Message API from D-Tools — 2 operation(s) for message.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - Message
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-message-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-opportunities-api
+  name: D-Tools Opportunities API
+  description: The Opportunities API from D-Tools — 4 operation(s) for opportunities.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - Opportunities
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-opportunities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-products-api
+  name: D-Tools Products API
+  description: The Products API from D-Tools — 5 operation(s) for products.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-products-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-projects-api
+  name: D-Tools Projects API
+  description: The Projects API from D-Tools — 3 operation(s) for projects.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-publishclients-api
+  name: D-Tools Publish Clients API
+  description: Allows an integration to update a client list to a SI user.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - PublishClients
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-publishclients-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-publishproductcatalogs-api
+  name: D-Tools Publish Product Catalogs API
+  description: Allows an integration to publish a product catalog to a SI user.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - PublishProductCatalogs
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-publishproductcatalogs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-publishprojects-api
+  name: D-Tools Publish Projects API
+  description: Allows an integration to publish or update a project to a SI user.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - PublishProjects
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-publishprojects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-publishserviceorders-api
+  name: D-Tools Publish Service Orders API
+  description: Allows an integration to publish a service order to a SI user.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - PublishServiceOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-publishserviceorders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-publishtasks-api
+  name: D-Tools Publish Tasks API
+  description: Allows an integration to publish a task to a SI user.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - PublishTasks
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-publishtasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-publishtimesheets-api
+  name: D-Tools Publish Time Sheets API
+  description: Allows an integration to publish a time sheet to a SI user.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - PublishTimeSheets
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-publishtimesheets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-publishvendors-api
+  name: D-Tools Publish Vendors API
+  description: Allows an integration to update a vendor list to a SI user. d
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - PublishVendors
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-publishvendors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-purchaseorders-api
+  name: D-Tools Purchase Orders API
+  description: The PurchaseOrders API from D-Tools — 2 operation(s) for purchaseorders.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - PurchaseOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-purchaseorders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-quotes-api
+  name: D-Tools Quotes API
+  description: The Quotes API from D-Tools — 2 operation(s) for quotes.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-quotes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-servicecontracts-api
+  name: D-Tools Service Contracts API
+  description: The ServiceContracts API from D-Tools — 2 operation(s) for servicecontracts.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - ServiceContracts
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-servicecontracts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-subscribeclients-api
+  name: D-Tools Subscribe Clients API
+  description: Allows an integration to subscribe to clients published by SI users.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - SubscribeClients
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-subscribeclients-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-subscribepartialprojects-api
+  name: D-Tools Subscribe Partial Projects API
+  description: Allows an integration to subscribe to partial projects published by SI users.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - SubscribePartialProjects
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-subscribepartialprojects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-subscribeproductcatalogs-api
+  name: D-Tools Subscribe Product Catalogs API
+  description: Allows an integration to subscribe to product catalogs published by SI users.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - SubscribeProductCatalogs
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-subscribeproductcatalogs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-subscribeprojects-api
+  name: D-Tools Subscribe Projects API
+  description: Allows an integration to subscribe to projects and change orders published by SI users.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - SubscribeProjects
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-subscribeprojects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-subscribepurchaseorder-api
+  name: D-Tools Subscribe Purchase Order API
+  description: Allows an integration to subscribe to Purchase orders published by SI users.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - SubscribePurchaseOrder
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-subscribepurchaseorder-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-subscribeserviceorder-api
+  name: D-Tools Subscribe Service Order API
+  description: Allows an integration to subscribe to Service orders published by SI users.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - SubscribeServiceOrder
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-subscribeserviceorder-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-subscribeserviceplan-api
+  name: D-Tools Subscribe Service Plan API
+  description: Allows an integration to subscribe to Service plan published by SI users.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - SubscribeServicePlan
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-subscribeserviceplan-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-subscribetask-api
+  name: D-Tools Subscribe Task API
+  description: Allows an integration to subscribe to Tasks published by SI users.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - SubscribeTask
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-subscribetask-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-subscribetimesheet-api
+  name: D-Tools Subscribe Time Sheet API
+  description: Allows an integration to subscribe to Time sheets published by SI users.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - SubscribeTimeSheet
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-subscribetimesheet-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-timeentries-api
+  name: D-Tools Time Entries API
+  description: The TimeEntries API from D-Tools — 1 operation(s) for timeentries.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - TimeEntries
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-timeentries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
 common:
+- type: Overlay
+  url: overlays/d-tools-cloud-api-overlay.yaml
+- type: Overlay
+  url: overlays/d-tools-si-api-overlay.yaml
 - type: DomainSecurity
   url: security/d-tools-domain-security.yml
 - type: Website
