@@ -10,6 +10,18 @@ description: >-
   middleware queue at api.d-tools.com/si where third parties publish projects, change orders, tasks, service orders,
   purchase orders, time sheets, product catalogs, clients and vendors to an SI user and subscribe to what that SI
   user exports. Both APIs publish machine-readable specifications: OpenAPI 3.1.1 for SI and OpenAPI 3.0.4 for Cloud.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.d-tools.com/hubfs/D__only_PNG.png
 url: https://raw.githubusercontent.com/api-evangelist/d-tools/refs/heads/main/apis.yml
 x-type: company
