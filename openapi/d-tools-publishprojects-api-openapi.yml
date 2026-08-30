@@ -1,0 +1,4561 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Publish Projects API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: PublishProjects
+  description: Allows an integration to publish or update a project to a SI user.
+paths:
+  /Publish/Projects:
+    post:
+      tags:
+      - PublishProjects
+      summary: Publish a new project to SI.
+      requestBody:
+        description: The project.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Project'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishProjectResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishProjectResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishProjectResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishProjectResponse'
+  /Publish/Projects/Update:
+    post:
+      tags:
+      - PublishProjects
+      summary: Update an existing project in SI
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateProject'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProject'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProject'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateProject'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateProject'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateProject'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/UpdateProject'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/Projects/NewChangeOrder:
+    post:
+      tags:
+      - PublishProjects
+      summary: Publish a new change order or update an existing change order (using the IntegrationChangeOrderId) for an existing SI project.
+      requestBody:
+        description: The new change order information.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/NewChangeOrderInfo'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewChangeOrderInfo'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NewChangeOrderInfo'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/NewChangeOrderInfo'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/NewChangeOrderInfo'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/NewChangeOrderInfo'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/NewChangeOrderInfo'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/Projects/ArchiveProjects:
+    post:
+      tags:
+      - PublishProjects
+      summary: Mark existing SI projects as archived (must be checked in).
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          text/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          text/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+xml:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/Projects/LockProjects:
+    post:
+      tags:
+      - PublishProjects
+      summary: Mark existing SI projects as locked (must be checked in).
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          text/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          text/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+xml:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/Projects/UnarchiveProjects:
+    post:
+      tags:
+      - PublishProjects
+      summary: Mark existing SI projects as unarchived.
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          text/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          text/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+xml:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/Projects/UnlockProjects:
+    post:
+      tags:
+      - PublishProjects
+      summary: Mark existing SI projects as unlocked (must be checked in).
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          text/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          text/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+xml:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/Projects/LockChangeOrderStatus:
+    post:
+      tags:
+      - PublishProjects
+      summary: Mark existing SI project change order status as locked or unlocked.
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/LockChangeOrderStatus'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LockChangeOrderStatus'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/LockChangeOrderStatus'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/LockChangeOrderStatus'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/LockChangeOrderStatus'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/LockChangeOrderStatus'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/LockChangeOrderStatus'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/Projects/ProjectComments:
+    post:
+      tags:
+      - PublishProjects
+      summary: Publish comments to an existing SI project.
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AppProjectComment'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AppProjectComment'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AppProjectComment'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AppProjectComment'
+          application/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AppProjectComment'
+          text/xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AppProjectComment'
+          application/*+xml:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AppProjectComment'
+        required: true
+      responses:
+        '200':
+          description: ''
+components:
+  schemas:
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
+    PublishProjectResponse:
+      type: object
+      properties:
+        projectId:
+          type:
+          - 'null'
+          - string
+          description: Unique Id of project (will be generated if not provided. Can be used to update project)
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
+    Contact:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact (Required)
+        title:
+          type:
+          - 'null'
+          - string
+          description: Contact Title
+        email:
+          type:
+          - 'null'
+          - string
+          description: Contact Email
+        phone:
+          type:
+          - 'null'
+          - string
+          description: Contact Phone
+        mobile:
+          type:
+          - 'null'
+          - string
+          description: Contact Mobile
+        isPrimary:
+          type: boolean
+          description: Is contact the primary contact for the project? One contact can be marked as the primary contact in project.
+    Resource:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource (Required)
+        email:
+          type:
+          - 'null'
+          - string
+        roles:
+          type:
+          - 'null'
+          - string
+        isOwner:
+          type: boolean
+          description: Is resource the owner for the project? One resource can be marked as the owner in project.
+    UpdateProjectItem:
+      type: object
+      properties:
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: Component ID of the project item to update (matching field can be SI Item Id or Component ID)
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Quantity of the project item. For bulk wire is the wire length.
+          format: int64
+        siItemId:
+          type:
+          - 'null'
+          - string
+          description: SI Item ID - unique id of an item in SI project (matching field can be SI Item Id or Component ID)
+        serialNumber:
+          type:
+          - 'null'
+          - string
+          description: Serial number
+        ipAddress:
+          type:
+          - 'null'
+          - string
+          description: IP Address
+        ipAddress2:
+          type:
+          - 'null'
+          - string
+          description: IP Address 2
+        macAddress1:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 1
+        macAddress2:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 2
+        shortDescription:
+          type:
+          - 'null'
+          - string
+          description: Short Description
+        longDescription:
+          type:
+          - 'null'
+          - string
+          description: Long Description
+        location:
+          type:
+          - 'null'
+          - string
+          description: Location
+        system:
+          type:
+          - 'null'
+          - string
+          description: System
+        isOfe:
+          type:
+          - 'null'
+          - boolean
+          description: If project item owner furnished
+        isNonBillable:
+          type:
+          - 'null'
+          - boolean
+          description: Is project item non-billable
+        unitCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Unit Cost
+          format: double
+        unitPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Unit Price (includes Discount)
+          format: double
+        discount:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Discount
+          format: double
+        laborCalculationMethodId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Id of the LaborCalculation. Fixed = 1, Variable = 2, Phase = 3
+          format: uint8
+        phase:
+          type:
+          - 'null'
+          - string
+          description: Phase
+        laborHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Labor Hours
+          format: double
+        laborTypes:
+          type:
+          - 'null'
+          - string
+          description: Labor type (pass one labor type only)
+        itemLaborTypes:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ItemLaborType'
+          description: Collection of labor types for item with name and hours (pass one labor labor type only)
+        isTaxable:
+          type:
+          - 'null'
+          - boolean
+          description: Is project item taxable. Applicable if project has IsItemLevelTax = false
+        tax:
+          type:
+          - 'null'
+          - string
+          description: Tax for the project item. Applicable if project has IsItemLevelTax = true
+        doNotOrder:
+          type:
+          - 'null'
+          - boolean
+          description: Do not order item
+        orderStatus:
+          type:
+          - 'null'
+          - string
+          description: Order Status (Ordered, Not Ordered etc.).
+        orderNumber:
+          type:
+          - 'null'
+          - string
+          description: Order Number
+        orderedDate:
+          type:
+          - 'null'
+          - string
+          description: Ordered Date (ISO 8601 format - yyyy-mm-dd)
+        expectedDeliveryDate:
+          type:
+          - 'null'
+          - string
+          description: Expected Delivery Date (ISO 8601 format - yyyy-mm-dd)
+        receivedDate:
+          type:
+          - 'null'
+          - string
+          description: Received Date (ISO 8601 format - yyyy-mm-dd)
+        picked:
+          type:
+          - 'null'
+          - boolean
+          description: Picked (Is Item Picked?)
+        pickedDate:
+          type:
+          - 'null'
+          - string
+          description: Picked Date (ISO 8601 format - yyyy-mm-dd)
+        installed:
+          type:
+          - 'null'
+          - boolean
+          description: Installed (Is Item Installed?)
+        installedDate:
+          type:
+          - 'null'
+          - string
+          description: Installed Date (ISO 8601 format - yyyy-mm-dd)
+        installedNotes:
+          type:
+          - 'null'
+          - string
+          description: Install Notes
+        trackingNumber:
+          type:
+          - 'null'
+          - string
+          description: Tracking Number
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 1
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 2
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 3
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 4
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 5
+        customField6:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Field 6 (Decimal)
+          format: double
+        customField7:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Field 7 (Decimal)
+          format: double
+        customField8:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Field 8 (Decimal)
+          format: double
+        customField9:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 9 Date (ISO 8601 format - yyyy-mm-dd)
+        customField10:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 10 Date (ISO 8601 format - yyyy-mm-dd)
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 11 Date (ISO 8601 format - yyyy-mm-dd)
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 12 (Long Text)
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 13 (Long Text)
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 14 (Long Text)
+        customField15:
+          type:
+          - 'null'
+          - string
+          description: Custom field 15
+        customField16:
+          type:
+          - 'null'
+          - string
+          description: Custom field 16
+        customField17:
+          type:
+          - 'null'
+          - string
+          description: Custom field 17
+        customField18:
+          type:
+          - 'null'
+          - string
+          description: Custom field 18
+        customField19:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 19 (Boolean)
+        customField20:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 20 (Boolean)
+        customField21:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 21 (Boolean)
+        customField22:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 22 (Boolean)
+        customField23:
+          type:
+          - 'null'
+          - string
+          description: Custom field 23
+        customField24:
+          type:
+          - 'null'
+          - string
+          description: Custom field 24
+        customField25:
+          type:
+          - 'null'
+          - string
+          description: Custom field 25
+        customField26:
+          type:
+          - 'null'
+          - string
+          description: Custom field 26
+        customField27:
+          type:
+          - 'null'
+          - string
+          description: Custom field 27
+        customField28:
+          type:
+          - 'null'
+          - string
+          description: Custom field 28
+        customField29:
+          type:
+          - 'null'
+          - string
+          description: Custom field 29
+        customField30:
+          type:
+          - 'null'
+          - string
+          description: Custom field 30
+        customField31:
+          type:
+          - 'null'
+          - string
+          description: Custom field 31
+        customField32:
+          type:
+          - 'null'
+          - string
+          description: Custom field 32
+        customField33:
+          type:
+          - 'null'
+          - string
+          description: Custom field 33
+        customField34:
+          type:
+          - 'null'
+          - string
+          description: Custom field 34
+        customField35:
+          type:
+          - 'null'
+          - string
+          description: Custom field 35
+        customField36:
+          type:
+          - 'null'
+          - string
+          description: Custom field 36
+        customField37:
+          type:
+          - 'null'
+          - string
+          description: Custom field 37
+        customField38:
+          type:
+          - 'null'
+          - string
+          description: Custom field 38
+        customField39:
+          type:
+          - 'null'
+          - string
+          description: Custom field 39
+        customField40:
+          type:
+          - 'null'
+          - string
+          description: Custom field 40
+        customField41:
+          type:
+          - 'null'
+          - string
+          description: Custom field 41
+        customField42:
+          type:
+          - 'null'
+          - string
+          description: Custom field 42
+        customField43:
+          type:
+          - 'null'
+          - string
+          description: Custom field 43
+        customField44:
+          type:
+          - 'null'
+          - string
+          description: Custom field 44
+        customField45:
+          type:
+          - 'null'
+          - string
+          description: Custom field 45
+        customField46:
+          type:
+          - 'null'
+          - string
+          description: Custom field 46
+        customField47:
+          type:
+          - 'null'
+          - string
+          description: Custom field 47
+        customField48:
+          type:
+          - 'null'
+          - string
+          description: Custom field 48
+        customField49:
+          type:
+          - 'null'
+          - string
+          description: Custom field 49
+        customField50:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 50
+          format: double
+        customField51:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 51
+          format: double
+        customField52:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 52
+          format: double
+        customField53:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 53
+          format: double
+        customField54:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 54
+          format: double
+        customField55:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 55
+          format: double
+        customField56:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 56
+          format: double
+        customField57:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 57
+          format: double
+        customField58:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 58
+          format: double
+        customField59:
+          type:
+          - 'null'
+          - string
+          description: Custom field 59
+          format: date-time
+        customField60:
+          type:
+          - 'null'
+          - string
+          description: Custom field 60
+          format: date-time
+        customField61:
+          type:
+          - 'null'
+          - string
+          description: Custom field 61
+          format: date-time
+        customField62:
+          type:
+          - 'null'
+          - string
+          description: Custom field 62
+          format: date-time
+        customField63:
+          type:
+          - 'null'
+          - string
+          description: Custom field 63
+          format: date-time
+        customField64:
+          type:
+          - 'null'
+          - string
+          description: Custom field 64
+          format: date-time
+        customField65:
+          type:
+          - 'null'
+          - string
+          description: Custom field 65
+          format: date-time
+        customField66:
+          type:
+          - 'null'
+          - string
+          description: Custom field 66
+          format: date-time
+        customField67:
+          type:
+          - 'null'
+          - string
+          description: Custom field 67
+          format: date-time
+        customField68:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 68
+        customField69:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 69
+        customField70:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 70
+        customField71:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 71
+        customField72:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 72
+        customField73:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 73
+        customField74:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 74
+        customField75:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 75
+    Project:
+      type: object
+      properties:
+        templateName:
+          type:
+          - 'null'
+          - string
+          description: Project template name to use when project is imported to D-Tools SI
+        items:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ProjectItem'
+          description: Items in a project. Can be products, labor, allowance, bundled cable, and placeholder.
+        packages:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Package'
+          description: Packages in a project. Can be package and solution.
+        publishedOn:
+          type: string
+          description: Date project was published by SI user
+          format: date-time
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date project was imported by user
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date project was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Project as Imported method optionally to make sure the project was not updated in SI since it was published.
+          format: int64
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the project (must be Guid). Project will be created in SI with this Guid and will be used to update project.
+        integrationProjectId:
+          type:
+          - 'null'
+          - string
+          description: Id for the project sent by integration
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name for the project (Required)
+        clientId:
+          type:
+          - 'null'
+          - string
+          description: Client Id
+        integrationClientId:
+          type:
+          - 'null'
+          - string
+          description: Id for the client sent by integration
+        clientNumber:
+          type:
+          - 'null'
+          - string
+          description: Client Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Project name for the project (Required)
+        number:
+          type:
+          - 'null'
+          - string
+          description: Project Number
+        quantityBased:
+          type: boolean
+          description: Quantity Based Project
+        progress:
+          type:
+          - 'null'
+          - string
+          description: Project Progress
+        assignedTo:
+          type:
+          - 'null'
+          - string
+          description: Project Assigned To
+        salesRep:
+          type:
+          - 'null'
+          - string
+          description: Project Sales Rep
+        projectManager:
+          type:
+          - 'null'
+          - string
+          description: Project Project Manager
+        designer:
+          type:
+          - 'null'
+          - string
+          description: Project Designer
+        revision:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Project Revision
+          format: int16
+        currencyCode:
+          type:
+          - 'null'
+          - string
+          description: ISO currency symbol for the project
+        currencyRate:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Currency rate
+          format: double
+        cost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project cost
+          format: double
+        priceWithoutTax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Price without tax and without Miscellaneous Items. PriceWithoutTax only includes Equipment, labor, and adjustments.
+          format: double
+        margin:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project Margin
+          format: double
+        markup:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project Markup
+          format: double
+        tax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project tax
+          format: double
+        price:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Final Price of the project. It includes Tax, Misc. Items, Equipment, Labor, and adjustments.
+          format: double
+        hours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project labor hours
+          format: double
+        budget:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project budget
+          format: double
+        productPriceType:
+          type:
+          - 'null'
+          - string
+          description: Price type for products in project
+        clientPONumber:
+          type:
+          - 'null'
+          - string
+          description: Client Purchase Order Number
+        startDate:
+          type:
+          - 'null'
+          - string
+          description: Project Start Date
+          format: date-time
+        endDate:
+          type:
+          - 'null'
+          - string
+          description: Project End Date
+          format: date-time
+        estimatedCloseDate:
+          type:
+          - 'null'
+          - string
+          description: Project Estimated Close Date
+          format: date-time
+        closeDate:
+          type:
+          - 'null'
+          - string
+          description: Project Close Date
+          format: date-time
+        accountingEstimateNumbers:
+          type:
+          - 'null'
+          - string
+          description: Project Accounting Estimate Numbers
+        scopeOfWork:
+          type:
+          - 'null'
+          - string
+          description: Scope of work for project
+        notes:
+          type:
+          - 'null'
+          - string
+          description: Notes for project
+        siteAddress:
+          description: Project Site Address
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          description: Project Billing Address
+          $ref: '#/components/schemas/Address'
+        isItemLevelTax:
+          type: boolean
+          description: Does project support taxes at each item level
+        productTaxId:
+          type:
+          - 'null'
+          - string
+          description: Applicable if IsItemLevelTax = false. The Tax Id for all taxable products
+        laborTaxId:
+          type:
+          - 'null'
+          - string
+          description: Applicable if IsItemLevelTax = false. The Tax Id for all taxable labor
+        createdOn:
+          type:
+          - 'null'
+          - string
+          description: Date the project was created (UTC Time)
+          format: date-time
+        updatedOn:
+          type:
+          - 'null'
+          - string
+          description: Date the project was updated  (UTC Time)
+          format: date-time
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Project Updated By
+        updatedByEmail:
+          type:
+          - 'null'
+          - string
+          description: Project Updated By Email
+        createdBy:
+          type:
+          - 'null'
+          - string
+          description: Project Created By
+        publishedBy:
+          type:
+          - 'null'
+          - string
+          description: Project Published By
+        approved:
+          type: boolean
+          description: Is Project Approved
+        approvedOn:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is Approved. Project Approved Date
+          format: date-time
+        isChangeOrder:
+          type: boolean
+          description: Is Project a Change Order
+        coNumber:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Change Order Number
+        coId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int32
+        coName:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Change Order Name
+        coStatus:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Change Order Status
+        coType:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Change Order Type
+        coNotes:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Change Order Notes
+        coAcceptedOn:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is an Accepted Change Order. Change Order Accepted Date
+          format: date-time
+        coRejectedOn:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is an Rejected Change Order. Change Order Rejected Date
+          format: date-time
+        coCreatedOn:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Change Order Created Date
+          format: date-time
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 1
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 2
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 3
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 4
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 5
+        customField6:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 6
+        customField7:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 7
+        customField8:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 8
+        customField9:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 9
+        customField10:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 10
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 11
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 12
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 13
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 14
+        customField15:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 15
+          format: double
+        customField16:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 16
+          format: double
+        customField17:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 17
+          format: double
+        customField18:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 18
+          format: double
+        customField19:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 19
+          format: date-time
+        customField20:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 20
+          format: date-time
+        customField21:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 21
+          format: date-time
+        customField22:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 22
+          format: date-time
+        customField23:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 23
+        customField24:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 24
+        customField25:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 25
+        customField26:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 26
+        customField27:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 27
+        customField28:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 28
+        customField29:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 29
+        customField30:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 30
+        customField31:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 31
+        customField32:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 32
+        customField33:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 33
+        customField34:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 34
+        customField35:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 35
+        customField36:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 36
+        customField37:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 37
+        customField38:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 38
+        customField39:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 39
+        customField40:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 40
+        customField41:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 41
+        customField42:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 42
+        customField43:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 43
+        customField44:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 44
+        customField45:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 45
+        customField46:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 46
+        customField47:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 47
+        customField48:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 48
+        customField49:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 49
+        customField50:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 50
+        customField51:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 51
+        customField52:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 52
+        customField53:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 53
+        customField54:
+          type:
+          - 'null'
+          - string
+          description: Project custom field 54
+        customField55:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 55
+          format: double
+        customField56:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 56
+          format: double
+        customField57:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 57
+          format: double
+        customField58:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 58
+          format: double
+        customField59:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 59
+          format: double
+        customField60:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 60
+          format: double
+        customField61:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 61
+          format: double
+        customField62:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 62
+          format: double
+        customField63:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 63
+          format: double
+        customField64:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project custom field 64
+          format: double
+        customField65:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 65 (BETA)
+        customField66:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 66 (BETA)
+        customField67:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 67 (BETA)
+        customField68:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 68 (BETA)
+        customField69:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 69 (BETA)
+        customField70:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 70 (BETA)
+        customField71:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 71 (BETA)
+        customField72:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 72 (BETA)
+        customField73:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 73 (BETA)
+        customField74:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 74 (BETA)
+        customField75:
+          type:
+          - 'null'
+          - boolean
+          description: Project custom field 75 (BETA)
+        contacts:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Contact'
+          description: Contacts in a project
+        resources:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Resource'
+          description: Resources in a project
+        locations:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Location'
+          description: Locations in a project
+        systems:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/System'
+          description: Systems in a project
+        taxes:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Tax'
+          description: Taxes in a project
+        paymentTerms:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PaymentTerm'
+          description: Payment terms in a project
+        miscItems:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/MiscItem'
+          description: Misc. Items in a project
+        coCustomField1:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field1 (BETA)
+        coCustomField2:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field2 (BETA)
+        coCustomField3:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field3 (BETA)
+        coCustomField4:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field4 (BETA)
+        coCustomField5:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field5 (BETA)
+        coCustomField6:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field6 (BETA)
+        coCustomField7:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field7 (BETA)
+        coCustomField8:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field8 (BETA)
+        coCustomField9:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field9 (BETA)
+        coCustomField10:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field10 (BETA)
+        coCustomField11:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field11 (BETA)
+        coCustomField12:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field12 (BETA)
+        coCustomField13:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field13 (BETA)
+        coCustomField14:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field14 (BETA)
+        coCustomField15:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field15 (BETA)
+          format: double
+        coCustomField16:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field16 (BETA)
+          format: double
+        coCustomField17:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field17 (BETA)
+          format: double
+        coCustomField18:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field18 (BETA)
+          format: double
+        coCustomField19:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field19 (BETA)
+          format: date-time
+        coCustomField20:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field20 (BETA)
+          format: date-time
+        coCustomField21:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field21 (BETA)
+          format: date-time
+        coCustomField22:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field22 (BETA)
+          format: date-time
+        coCustomField23:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field23 (BETA)
+        coCustomField24:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field24 (BETA)
+        coCustomField25:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field25 (BETA)
+        coCustomField26:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field26 (BETA)
+        coCustomField27:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field27 (BETA)
+        coCustomField28:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field28 (BETA)
+        coCustomField29:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field29 (BETA)
+        coCustomField30:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field30 (BETA)
+        coCustomField31:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field31 (BETA)
+        coCustomField32:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field32 (BETA)
+        coCustomField33:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field33 (BETA)
+        coCustomField34:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field34 (BETA)
+        coCustomField35:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field35 (BETA)
+        coCustomField36:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field36 (BETA)
+        coCustomField37:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field37 (BETA)
+        coCustomField38:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field38 (BETA)
+        coCustomField39:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field39 (BETA)
+        coCustomField40:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field40 (BETA)
+        coCustomField41:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field41 (BETA)
+        coCustomField42:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field42 (BETA)
+        coCustomField43:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field43 (BETA)
+        coCustomField44:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field44 (BETA)
+        coCustomField45:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field45 (BETA)
+        coCustomField46:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field46 (BETA)
+        coCustomField47:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field47 (BETA)
+        coCustomField48:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field48 (BETA)
+        coCustomField49:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field49 (BETA)
+        coCustomField50:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field50 (BETA)
+        coCustomField51:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field51 (BETA)
+        coCustomField52:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field52 (BETA)
+        coCustomField53:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field53 (BETA)
+        coCustomField54:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Project Change Order Custom Field54 (BETA)
+        coCustomField55:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field55 (BETA)
+        coCustomField56:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field56 (BETA)
+        coCustomField57:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field57 (BETA)
+        coCustomField58:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field58 (BETA)
+        coCustomField59:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field59 (BETA)
+        coCustomField60:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field60 (BETA)
+        coCustomField61:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field61 (BETA)
+        coCustomField62:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field62 (BETA)
+        coCustomField63:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field63 (BETA)
+        coCustomField64:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field64 (BETA)
+        coCustomField65:
+          type:
+          - 'null'
+          - boolean
+          description: Applicable if project is a Change Order. Project Change Order Custom Field65 (BETA)
+    Package:
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Unique Id for the project item
+          format: int32
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: TypeId. 1 = Package, 2 = Solution
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the package.
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: Component ID
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part Number
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description of package
+        locationId:
+          type:
+          - 'null'
+          - string
+          description: Location Id for the package in project locations
+        systemId:
+          type:
+          - 'null'
+          - string
+          description: System Id for the package in project systems
+        parentId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: If package is in a solution Id of the solution.
+          format: int32
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 1
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 2
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 3
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 4
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 5
+        customField6:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Field 6 (Decimal)
+          format: double
+        customField7:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Field 7 (Decimal)
+          format: double
+        customField8:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Field 8 (Decimal)
+          format: double
+        customField9:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 9 Date (ISO 8601 format - yyyy-mm-dd)
+        customField10:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 10 Date (ISO 8601 format - yyyy-mm-dd)
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 11 Date (ISO 8601 format - yyyy-mm-dd)
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 12 (Long Text)
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 13 (Long Text)
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: Custom Field 14 (Long Text)
+        customField15:
+          type:
+          - 'null'
+          - string
+          description: Custom field 15
+        customField16:
+          type:
+          - 'null'
+          - string
+          description: Custom field 16
+        customField17:
+          type:
+          - 'null'
+          - string
+          description: Custom field 17
+        customField18:
+          type:
+          - 'null'
+          - string
+          description: Custom field 18
+        customField19:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 19 (Boolean)
+        customField20:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 20 (Boolean)
+        customField21:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 21 (Boolean)
+        customField22:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 22 (Boolean)
+        customField23:
+          type:
+          - 'null'
+          - string
+          description: Custom field 23
+        customField24:
+          type:
+          - 'null'
+          - string
+          description: Custom field 24
+        customField25:
+          type:
+          - 'null'
+          - string
+          description: Custom field 25
+        customField26:
+          type:
+          - 'null'
+          - string
+          description: Custom field 26
+        customField27:
+          type:
+          - 'null'
+          - string
+          description: Custom field 27
+        customField28:
+          type:
+          - 'null'
+          - string
+          description: Custom field 28
+        customField29:
+          type:
+          - 'null'
+          - string
+          description: Custom field 29
+        customField30:
+          type:
+          - 'null'
+          - string
+          description: Custom field 30
+        customField31:
+          type:
+          - 'null'
+          - string
+          description: Custom field 31
+        customField32:
+          type:
+          - 'null'
+          - string
+          description: Custom field 32
+        customField33:
+          type:
+          - 'null'
+          - string
+          description: Custom field 33
+        customField34:
+          type:
+          - 'null'
+          - string
+          description: Custom field 34
+        customField35:
+          type:
+          - 'null'
+          - string
+          description: Custom field 35
+        customField36:
+          type:
+          - 'null'
+          - string
+          description: Custom field 36
+        customField37:
+          type:
+          - 'null'
+          - string
+          description: Custom field 37
+        customField38:
+          type:
+          - 'null'
+          - string
+          description: Custom field 38
+        customField39:
+          type:
+          - 'null'
+          - string
+          description: Custom field 39
+        customField40:
+          type:
+          - 'null'
+          - string
+          description: Custom field 40
+        customField41:
+          type:
+          - 'null'
+          - string
+          description: Custom field 41
+        customField42:
+          type:
+          - 'null'
+          - string
+          description: Custom field 42
+        customField43:
+          type:
+          - 'null'
+          - string
+          description: Custom field 43
+        customField44:
+          type:
+          - 'null'
+          - string
+          description: Custom field 44
+        customField45:
+          type:
+          - 'null'
+          - string
+          description: Custom field 45
+        customField46:
+          type:
+          - 'null'
+          - string
+          description: Custom field 46
+        customField47:
+          type:
+          - 'null'
+          - string
+          description: Custom field 47
+        customField48:
+          type:
+          - 'null'
+          - string
+          description: Custom field 48
+        customField49:
+          type:
+          - 'null'
+          - string
+          description: Custom field 49
+        customField50:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 50
+          format: double
+        customField51:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 51
+          format: double
+        customField52:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 52
+          format: double
+        customField53:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 53
+          format: double
+        customField54:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 54
+          format: double
+        customField55:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 55
+          format: double
+        customField56:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 56
+          format: double
+        customField57:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 57
+          format: double
+        customField58:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom field 58
+          format: double
+        customField59:
+          type:
+          - 'null'
+          - string
+          description: Custom field 59
+          format: date-time
+        customField60:
+          type:
+          - 'null'
+          - string
+          description: Custom field 60
+          format: date-time
+        customField61:
+          type:
+          - 'null'
+          - string
+          description: Custom field 61
+          format: date-time
+        customField62:
+          type:
+          - 'null'
+          - string
+          description: Custom field 62
+          format: date-time
+        customField63:
+          type:
+          - 'null'
+          - string
+          description: Custom field 63
+          format: date-time
+        customField64:
+          type:
+          - 'null'
+          - string
+          description: Custom field 64
+          format: date-time
+        customField65:
+          type:
+          - 'null'
+          - string
+          description: Custom field 65
+          format: date-time
+        customField66:
+          type:
+          - 'null'
+          - string
+          description: Custom field 66
+          format: date-time
+        customField67:
+          type:
+          - 'null'
+          - string
+          description: Custom field 67
+          format: date-time
+        customField68:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 68
+        customField69:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 69
+        customField70:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 70
+        customField71:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 71
+        customField72:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 72
+        customField73:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 73
+        customField74:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 74
+        customField75:
+          type:
+          - 'null'
+          - boolean
+          description: Custom field 75
+      description: A project item of type package or solution
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    MiscItem:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of Misc. Item
+        description:
+          type:
+          - 'null'
+          - string
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        unitPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+    System:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the system (Required)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of system (Required)
+        fullName:
+          type:
+          - 'null'
+          - string
+          description: Full name for the system including parent name
+        description:
+          type:
+          - 'null'
+          - string
+          description: System Description
+        parentId:
+          type:
+          - 'null'
+          - string
+          description: Id of parent system
+    PaymentTerm:
+      type: object
+      properties:
+        payment:
+          type:
+          - 'null'
+          - string
+          description: Payment Term name
+        useFixedAmount:
+          type: boolean
+          description: Is the payment term a fixed amount
+        billingPercentage:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Billing percentage for the payment term
+          format: double
+        billingAmount:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Amount payable on this billing term
+          format: double
+        billingDate:
+          type:
+          - 'null'
+          - string
+          description: Date on which payment is to be made
+          format: date-time
+        coNumber:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Change Order Number
+    UpdateProject:
+      type: object
+      properties:
+        projectId:
+          type:
+          - 'null'
+          - string
+          description: Id of project to update (Required)
+        messageId:
+          type: string
+          format: uuid
+        date:
+          type: string
+          format: date-time
+        archive:
+          type:
+          - 'null'
+          - boolean
+        newPackages:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Package'
+          description: List of new package to add.
+        newProjectItems:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ProjectItem'
+          description: List of new project items to add.
+        updateProjectItems:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateProjectItem'
+          description: List of project items to update. Projects items are matched on Component ID
+        updateProjectItemFieldIds:
+          type:
+          - 'null'
+          - array
+          items:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+            - integer
+            - string
+            format: uint8
+          description: " List of update project item field ids to update. If you do not pass project item field ids all project fields will update in SI.  \nQuantity = 1, SerialNumber = 2, IPAddress = 3, IPAddress2 = 4, MACAddress1 = 5, MACAddress2 = 6, ShortDescription = 7, LongDescription = 8, Location = 9, System = 10, \nIsOfe = 11, IsNonBillable = 12, UnitCost = 13, UnitPrice = 14, Discount = 15, LaborCalculationMethodId = 16, Phase = 17, IsTaxable = 18, Tax = 19, DoNotOrder = 20,\nOrderStatus = 21, OrderNumber = 22, OrderedDate = 23, ExpectedDeliveryDate = 24, ReceivedDate = 25, Picked = 26, PickedDate = 27, Installed = 28, InstalledDate = 29, InstalledNotes = 30, TrackingNumber = 31,         \n CustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,\n CustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,\n CustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124, CustomField25 = 125, CustomField26 = 126, CustomField27 = 127, CustomField28 = 128, CustomField29 = 129, CustomField30 = 130\n CustomField31 = 131, CustomField32 = 132, CustomField33 = 133, CustomField34 = 134, CustomField35 = 135, CustomField36 = 136, CustomField37 = 137, CustomField38 = 138, CustomField39 = 139, CustomField40 = 140,\n CustomField41 = 141, CustomField42 = 142, CustomField43 = 143, CustomField44 = 144, CustomField45 = 145, CustomField46 = 146, CustomField47 = 147, CustomField48 = 148, CustomField49 = 149, CustomField50 = 150, \n CustomField51 = 151, CustomField52 = 152, CustomField53 = 153, CustomField54 = 154, CustomField55 = 155, CustomField56 = 156, CustomField57 = 157, CustomField58 = 158, CustomField59 = 159, CustomField160 = 160,\n CustomField61 = 161, CustomField62 = 162, CustomField63 = 163, CustomField64 = 164, CustomField65 = 165, CustomField66 = 166, CustomField67 = 167, CustomField68 = 168, CustomField69 = 169, CustomField70 = 170,\n CustomField71 = 171, CustomField72 = 172, CustomField73 = 173, CustomField74 = 174, CustomField75 = 175,"
+        locations:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Location'
+          description: Locations for new project items
+        systems:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/System'
+          description: Systems for new project items
+        taxes:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Tax'
+          description: Taxes for new project items
+        contacts:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Contact'
+          description: Contacts in a project
+        resources:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Resource'
+          description: Resources in a project
+        siteAddress:
+          description: Project Site Address
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          description: Project Billing Address
+          $ref: '#/components/schemas/Address'
+        updateFields:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateProjectField'
+          description: List of UpdateFields for the project. Each UpdateField has a Id and a Value.
+        siItemIdsToDelete:
+          type:
+          - 'null'
+          - array
+          items:
+            type: string
+          description: List of SIItemIds to delete
+        componentIdsToDelete:
+          type:
+          - 'null'
+          - array
+          items:
+            type: string
+          description: List of Component Ids to delete
+        projectItemInfosToDelete:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ProjectItemInfo'
+          description: List of Project Items to delete
+        lockChangeOrderInfos:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/LockChangeOrderInfo'
+          description: List of Change Order to lock or unlock
+        updateLocationOnApprovedChangeOrders:
+          type: boolean
+          description: Update location on Approved Change Orders
+      description: Update Project
+    AppProjectComment:
+      type: object
+      properties:
+        projectId:
+          type:
+          - 'null'
+          - string
+          description: ProjectId for project (must be a Guid). (Required)
+        comment:
+          type:
+          - 'null'
+          - string
+          description: Comment (Required)
+        commentedBy:
+          type:
+          - 'null'
+          - string
+          description: Commented By
+    NewChangeOrderInfo:
+      type: object
+      properties:
+        projectId:
+          type:
+          - 'null'
+          - string
+          description: ProjectId for project (must be a Guid). (Required)
+        integrationChangeOrderId:
+          type:
+          - 'null'
+          - string
+          description: Id for the change order sent by integration (Required). Can be used to update an existing change order.
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the change order (Required)
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'TypeId: 1 = Internal, 2 = External'
+          format: uint8
+        notes:
+          type:
+          - 'null'
+          - string
+          description: Change Order Notes
+        coCustomField1:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field1 (BETA)
+        coCustomField2:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field2 (BETA)
+        coCustomField3:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field3 (BETA)
+        coCustomField4:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field4 (BETA)
+        coCustomField5:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field5 (BETA)
+        coCustomField6:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field6 (BETA)
+        coCustomField7:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field7 (BETA)
+        coCustomField8:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field8 (BETA)
+        coCustomField9:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field9 (BETA)
+        coCustomField10:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field10 (BETA)
+        coCustomField11:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field11 (BETA)
+        coCustomField12:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field12 (BETA)
+        coCustomField13:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field13 (BETA)
+        coCustomField14:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field14 (BETA)
+        coCustomField15:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Change Order Custom Field15 (BETA)
+          format: double
+        coCustomField16:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Change Order Custom Field16 (BETA)
+          format: double
+        coCustomField17:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Change Order Custom Field17 (BETA)
+          format: double
+        coCustomField18:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Change Order Custom Field18 (BETA)
+          format: double
+        coCustomField19:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field19 (BETA)
+          format: date-time
+        coCustomField20:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field20 (BETA)
+          format: date-time
+        coCustomField21:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field21 (BETA)
+          format: date-time
+        coCustomField22:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field22 (BETA)
+          format: date-time
+        coCustomField23:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field23 (BETA)
+        coCustomField24:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field24 (BETA)
+        coCustomField25:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field25 (BETA)
+        coCustomField26:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field26 (BETA)
+        coCustomField27:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field27 (BETA)
+        coCustomField28:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field28 (BETA)
+        coCustomField29:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field29 (BETA)
+        coCustomField30:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field30 (BETA)
+        coCustomField31:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field31 (BETA)
+        coCustomField32:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field32 (BETA)
+        coCustomField33:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field33 (BETA)
+        coCustomField34:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field34 (BETA)
+        coCustomField35:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field35 (BETA)
+        coCustomField36:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field36 (BETA)
+        coCustomField37:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field37 (BETA)
+        coCustomField38:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field38 (BETA)
+        coCustomField39:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field39 (BETA)
+        coCustomField40:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field40 (BETA)
+        coCustomField41:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field41 (BETA)
+        coCustomField42:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field42 (BETA)
+        coCustomField43:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field43 (BETA)
+        coCustomField44:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field44 (BETA)
+        coCustomField45:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field45 (BETA)
+        coCustomField46:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field46 (BETA)
+        coCustomField47:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field47 (BETA)
+        coCustomField48:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field48 (BETA)
+        coCustomField49:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field49 (BETA)
+        coCustomField50:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field50 (BETA)
+        coCustomField51:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field51 (BETA)
+        coCustomField52:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field52 (BETA)
+        coCustomField53:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field53 (BETA)
+        coCustomField54:
+          type:
+          - 'null'
+          - string
+          description: Change Order Custom Field54 (BETA)
+        coCustomField55:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field55 (BETA)
+        coCustomField56:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field56 (BETA)
+        coCustomField57:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field57 (BETA)
+        coCustomField58:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field58 (BETA)
+        coCustomField59:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field59 (BETA)
+        coCustomField60:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field60 (BETA)
+        coCustomField61:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field61 (BETA)
+        coCustomField62:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field62 (BETA)
+        coCustomField63:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field63 (BETA)
+        coCustomField64:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field64 (BETA)
+        coCustomField65:
+          type:
+          - 'null'
+          - boolean
+          description: Change Order Custom Field65 (BETA)
+    ProjectItemInfo:
+      type: object
+      properties:
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer for the project item. Required for product and labor.
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model for the project item. Required for product and labor.
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Quantity of the project item to delete
+          format: int32
+      description: A project item info which can be product or labor
+    ProjectItem:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the project item (Required)
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'TypeId: 1 = Product, 2 = Labor Item, 3 = Allowance, 4 = Bundled Cable, 5 = Placeholder (Required)
+
+            Product and Labor items can be posted to a project. Allowances, Bundled Cable and placeholders cannot be posted to a project.'
+          format: uint8
+        siItemId:
+          type:
+          - 'null'
+          - string
+          description: SIItemId - unique id of an item in SI - can be used for updates to SI project. This will be blank for adjustment items and phase labor items (calculated items).
+        laborType:
+          type:
+          - 'null'
+          - string
+          description: 'LaborType: Item, Phase'
+        coChangeTypeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: The change order change type Id. 1 = Added on Change Order, 2 = Deleted on Change Order.
+          format: uint8
+        manufacturerId:
+          type:
+          - 'null'
+          - string
+          description: Id for the manufacturer.
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer for the project item. Required for product and labor.
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model for the project item. Required for product and labor.
+        packageName:
+          type:
+          - 'null'
+          - string
+          description: Package Name for the allowance, bundled cable and placeholder (required).
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part Number
+        category:
+          type:
+          - 'null'
+          - string
+          description: Category
+        subcategory:
+          type:
+          - 'null'
+          - string
+          description: Subcategory
+        description:
+          type:
+          - 'null'
+          - string
+          description: Short description
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: Component ID
+        bulkItem:
+          type: boolean
+          description: Bulk Item
+        serialNumber:
+          type:
+          - 'null'
+          - string
+          description: Serial number
+        ipAddress:
+          type:
+          - 'null'
+          - string
+          description: IP Address 1
+        ipAddress2:
+          type:
+          - 'null'
+          - string
+          description: IP Address 2
+        macAddress1:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 1
+        macAddress2:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 2
+        isOfe:
+          type: boolean
+          description: If project item owner furnished
+        isNonBillable:
+          type: boolean
+          description: Is project item non-billable
+        isOptional:
+          type:
+          - 'null'
+          - boolean
+          description: Is project item optional
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Quantity of the project item. For bulk wire is the wire length. For variable labor and phase labor is the labor hours.
+          format: double
+        priceType:
+          type:
+          - 'null'
+          - string
+          description: Price Type of the item
+        unitCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Unit Cost
+          format: double
+        unitPriceWithoutDiscount:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Unit Price (does not includes Discount)
+          format: double
+        unitPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Unit Price (includes Discount)
+          format: double
+        unitPriceRounded:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Rounded Unit Price
+          format: double
+        discount:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Discount
+          format: double
+        laborCalculationMethodId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Id of the LaborCalculation. Fixed = 1, Variable = 2, Phase = 3
+          format: uint8
+        phase:
+          type:
+          - 'null'
+          - string
+          description: Phase
+        laborHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: 'For products the labor hours are the associated labor hours for that product.
+
+            Fixed labor has labor hours as 0 (quantity is 1).
+
+            Variable labor has labor hours of the item (equal to quantity).
+
+            Phase labor has labor hours as 0 (quantity has the total labor hours for the phase).'
+          format: double
+        totalLaborHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
+          format: double
+        laborTypes:
+          type:
+          - 'null'
+          - string
+          description: Comma separated list of item labor types
+        itemLaborTypes:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ItemLaborType'
+          description: Collection of labor types for item with name and hours
+        productAdjustment:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Product Adjustment
+          format: double
+        miscPartAdjustment:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Miscellaneous Parts Adjustment
+          format: double
+        laborAdjustment:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Labor Adjustment
+          format: double
+        installPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Install Price is the sum of product price and labor price to install the item
+          format: double
+        isTaxable:
+          type: boolean
+          description: Is project item taxable. Applicable if project has IsItemLevelTax = false
+        taxId:
+          type:
+          - 'null'
+          - string
+          description: Tax ID for the project item in project taxes. Applicable if project has IsItemLevelTax = true
+        avalaraTaxCode:
+          type:
+          - 'null'
+          - string
+          description: Avalara tax code
+        avalaraLaborTaxCode:
+          type:
+          - 'null'
+          - string
+          description: Avalara labor tax code
+        acctgName:
+          type:
+          - 'null'
+          - string
+          description: Accounting Item Name
+        includedAccessory:
+          type:
+          - 'null'
+          - boolean
+          description: Included Accessory
+        vendor:
+          type:
+          - 'null'
+          - string
+          description: Vendor
+        orderUom:
+          type:
+          - 'null'
+          - string
+          description: UOM
+        orderUomUnits:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: UOM units
+          format: int32
+        doNotOrder:
+          type:
+          - 'null'
+          - boolean
+          description: Do not order item
+        bulkWire:
+          type:
+          - 'null'
+          - boolean
+          description: Item is Bulk Wire
+        rackMounted:
+          type:
+          - 'null'
+          - boolean
+          description: Rack Mounted
+        originalApprovedItemId:
+          type:
+          - 'null'
+          - string
+          description: Original Approved Item Id. The Original SI Item Id of an approved replaced item or an approved item whose quantity is reduced.
+        locationId:
+          type:
+          - 'null'
+          - string
+          description: Location Id for the project item in project locations
+        systemId:
+          type:
+          - 'null'
+          - string
+          description: System Id for the project item in project systems
+        parentId:
+          type:
+          - 'null'
+          - string
+          description: If project item is an accessory id of the parent item
+        catalogId:
+          type:
+          - 'null'
+          - string
+          description: Id of the item in the SI catalog
+        packageId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: If project item is in a package Id of the package (in Packages)
+          format: int32
+        solutionId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: If project item is in a solution Id of the solution (in Packages)
+          format: int32
+        orderStatus:
+          type:
+          - 'null'
+          - string
+          description: Order Status (Ordered, Not Ordered etc.).
+        orderNumber:
+          type:
+          - 'null'
+          - string
+          description: Order Number
+        orderedDate:
+          type:
+          - 'null'
+          - string
+          description: Ordered Date
+          format: date-time
+        orderedDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        expectedDeliveryDate:
+          type:
+          - 'null'
+          - string
+          description: Expected Delivery Date
+          format: date-time
+        expectedDeliveryDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        receivedDate:
+          type:
+          - 'null'
+          - string
+          description: Received Date
+          format: date-time
+        receivedDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        picked:
+          type: boolean
+          description: Picked (Is Item Picked?)
+        pickedDate:
+          type:
+          - 'null'
+          - string
+          description: Picked Date
+          format: date-time
+        pickedDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        installed:
+          type: boolean
+          description: Installed (Is Item Installed?)
+        installedDate:
+          type:
+          - 'null'
+          - string
+          description: Installed Date
+          format: date-time
+        installedDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        installedNotes:
+          type:
+          - 'null'
+          - string
+          description: Install Notes
+        trackingNumber:
+          type:
+          - 'null'
+          - string
+          description: Tracking Number
+        updatedOn:
+          type:
+          - 'null'
+          - string
+          description: Date the project item was updated. Populated only when data is returned unit wise (non aggregated). Not populated for calculated items like adjustments and phase labor.
+          format: date-time
+        updatedOnTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Updated On date in ticks (number)
+          format: int64
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 1
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 2
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 3
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 4
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 5
+        customField6:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 6
+          format: double
+        customField7:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 7
+          format: double
+        customField8:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 8
+          format: double
+        customField9:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 9
+          format: date-time
+        customField10:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 10
+          format: date-time
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 11
+          format: date-time
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 12
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 13
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 14
+        customField15:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 15
+        customField16:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 16
+        customField17:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 17
+        customField18:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 18
+        customField19:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 19
+        customField20:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 20
+        customField21:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 21
+        customField22:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 22
+        customField23:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 23
+        customField24:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 24
+        customField25:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 25
+        customField26:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 26
+        customField27:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 27
+        customField28:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 28
+        customField29:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 29
+        customField30:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 30
+        customField31:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 31
+        customField32:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 32
+        customField33:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 33
+        customField34:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 34
+        customField35:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 35
+        customField36:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 36
+        customField37:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 37
+        customField38:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 38
+        customField39:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 39
+        customField40:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 40
+        customField41:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 41
+        customField42:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 42
+        customField43:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 43
+        customField44:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 44
+        customField45:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 45
+        customField46:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 46
+        customField47:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 47
+        customField48:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 48
+        customField49:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 49
+        customField50:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 50
+          format: double
+        customField51:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 51
+          format: double
+        customField52:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 52
+          format: double
+        customField53:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 53
+          format: double
+        customField54:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 54
+          format: double
+        customField55:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 55
+          format: double
+        customField56:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 56
+          format: double
+        customField57:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 57
+          format: double
+        customField58:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 58
+          format: double
+        customField59:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 59
+          format: date-time
+        customField60:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 60
+          format: date-time
+        customField61:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 61
+          format: date-time
+        customField62:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 62
+          format: date-time
+        customField63:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 63
+          format: date-time
+        customField64:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 64
+          format: date-time
+        customField65:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 65
+          format: date-time
+        customField66:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 66
+          format: date-time
+        customField67:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 67
+          format: date-time
+        customField68:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 68
+        customField69:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 69
+        customField70:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 70
+        customField71:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 71
+        customField72:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 72
+        customField73:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 73
+        customField74:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 74
+        customField75:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 75
+      description: 'A project item which can be product or labor item or allowance or bundled cable or placeholder.
+
+        Product and Labor items can be posted to a project. Allowances, Bundled Cable and placeholders cannot be posted to a project.'
+    ItemLaborType:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Labor Type name
+        hours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Labor Type Hours
+          format: double
+        totalHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
+          format: double
+    LockChangeOrderStatusInfo:
+      type: object
+      properties:
+        integrationChangeOrderId:
+          type:
+          - 'null'
+          - string
+          description: Id for the change order sent by integration (matching field can be Integration ChangeOrder Id or (Number and Type))
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number of the change order (matching field can be Integration ChangeOrder Id or (Number and Type))
+        type:
+          type:
+          - 'null'
+          - string
+          description: Type of the change order (External or Internal) (matching field can be Integration ChangeOrder Id or (Number and Type))
+        lockStatus:
+          type: boolean
+          description: Change Order Lock Status
+    Tax:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the tax (Required)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of tax (Required)
+        rate:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Tax Rate
+          format: double
+        productTotal:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Calculated field. Total tax for all products in project
+          format: double
+        laborTotal:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Calculated field. Total tax for all labor in project
+          format: double
+        total:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Calculated field. Total tax in project (product and labor).
+          format: double
+    LockChangeOrderInfo:
+      type: object
+      properties:
+        integrationChangeOrderId:
+          type:
+          - 'null'
+          - string
+          description: Id for the change order sent by integration (matching field can be Integration ChangeOrder Id or (Number and Type))
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number of the change order (matching field can be Integration ChangeOrder Id or (Number and Type))
+        type:
+          type:
+          - 'null'
+          - string
+          description: Type of the change order (External or Internal) (matching field can be Integration ChangeOrder Id or (Number and Type))
+        lock:
+          type: boolean
+          description: Change Order Lock
+    LockChangeOrderStatus:
+      type: object
+      properties:
+        projectId:
+          type:
+          - 'null'
+          - string
+          description: Id of project to update (Required)
+        messageId:
+          type: string
+          format: uuid
+        date:
+          type: string
+          format: date-time
+        lockChangeOrderStatusInfos:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/LockChangeOrderStatusInfo'
+          description: List of Change Order to lock status or unlock status
+      description: Lock Change Order Status
+    Location:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the location (Required)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name for the location (Required)
+        fullName:
+          type:
+          - 'null'
+          - string
+          description: Full name for the location including parent name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number for the location
+        fullNumber:
+          type:
+          - 'null'
+          - string
+          description: Full number for the location including parent number
+        description:
+          type:
+          - 'null'
+          - string
+          description: Location description
+        parentId:
+          type:
+          - 'null'
+          - string
+          description: Id of parent location
+    UpdateProjectField:
+      type: object
+      properties:
+        projectFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: "ProjectFieldId (pass the correct Id for the field you want to update) \nProject Name = 1, Status = 2, Start Date = 3, End Date = 4, Estimated Close Date = 5, Close Date = 6, Budget = 7, Scope Of Work = 8,\nAssignedTo = 9, SalesRep = 10, ProjectManager = 11, Designer = 12, Client = 13 , Client Number = 14 , Client PO Number = 15 ,\nCustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,\nCustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,\nCustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124, CustomField25 = 125, CustomField26 = 126, CustomField27 = 127, CustomField28 = 128, CustomField29 = 129, CustomField30 = 130\nCustomField31 = 131, CustomField32 = 132, CustomField33 = 133, CustomField34 = 134, CustomField35 = 135, CustomField36 = 136, CustomField37 = 137, CustomField38 = 138, CustomField39 = 139, CustomField40 = 140,\nCustomField41 = 141, CustomField42 = 142, CustomField43 = 143, CustomField44 = 144, CustomField45 = 145, CustomField46 = 146, CustomField47 = 147, CustomField48 = 148, CustomField49 = 149, CustomField50 = 150, \nCustomField51 = 151, CustomField52 = 152, CustomField53 = 153, CustomField54 = 154, CustomField65 = 155, CustomField66 = 156, CustomField67 = 157, CustomField68 = 158, CustomField69 = 159, CustomField70 = 160,\nCustomField71 = 161, CustomField72 = 162, CustomField73 = 163, CustomField74 = 164, CustomField75 = 165"
+          format: uint8
+        value:
+          type:
+          - 'null'
+          - string
+          description: Value for the project field. Datetime and decimal should be invariant.

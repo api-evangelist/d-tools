@@ -1,0 +1,562 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Publish Tasks API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: PublishTasks
+  description: Allows an integration to publish a task to a SI user.
+paths:
+  /Publish/Task:
+    post:
+      tags:
+      - PublishTasks
+      summary: Allows an integration to publish a task to a SI user.
+      requestBody:
+        description: The Task.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/NewTask'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTask'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NewTask'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/NewTask'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/NewTask'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/NewTask'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/NewTask'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishTaskResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishTaskResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishTaskResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishTaskResponse'
+  /Publish/UpdateTask:
+    post:
+      tags:
+      - PublishTasks
+      summary: Update an existing task in SI.
+      requestBody:
+        description: Update Task.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateTask'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTask'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTask'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateTask'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateTask'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateTask'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/UpdateTask'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/DeleteTasks:
+    post:
+      tags:
+      - PublishTasks
+      summary: Delete existing tasks in SI (BETA).
+      requestBody:
+        description: Delete Task.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteTasksRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTasksRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTasksRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteTasksRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteTasksRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteTasksRequest'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/DeleteTasksRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+components:
+  schemas:
+    TaskResource:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+        estimatedHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        actualHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        cost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        estimatedCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        actualCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
+    DeleteTasksRequest:
+      type: object
+      properties:
+        ids:
+          type:
+          - 'null'
+          - array
+          items:
+            type: string
+          description: Ids of tasks to delete (Required and must match existing task ids in SI) (BETA).
+    PublishTaskResponse:
+      type: object
+      properties:
+        taskId:
+          type:
+          - 'null'
+          - string
+          description: Unique Id of task (will be generated if not provided. Can be used to update task)
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Task publish response
+    UpdateTask:
+      type: object
+      properties:
+        taskId:
+          type:
+          - 'null'
+          - string
+          description: Id of task to update (Required and must match an existing task id in SI).
+        contact:
+          description: Contact information
+          $ref: '#/components/schemas/ContactInfo'
+        siteAddress:
+          description: Site address information
+          $ref: '#/components/schemas/Address'
+        resources:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TaskResource'
+          description: Resources in a task
+        resourcesToDelete:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ResourceInfo'
+          description: Resource to delete on task
+        updateFields:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateTaskField'
+          description: List of UpdateFields for the task. Each UpdateField has a Id and a Value.
+    ResourceInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+          description: Email of the resource
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    UpdateTaskField:
+      type: object
+      properties:
+        taskFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: "TaskFieldId (pass the correct Id for the field you want to update)\nTask Name = 1, Description = 2, Start Date = 3, End Date = 4, Status = 5, Percent complete = 6, Notes = 7, \nCustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,\nCustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,\nCustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124"
+          format: uint8
+        value:
+          type:
+          - 'null'
+          - string
+          description: Value for the task field.
+    NewTask:
+      type: object
+      properties:
+        integrationId:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the task (must be Guid). The Id must be a valid Guid and can be used to retrieve and update task.
+        projectId:
+          type:
+          - 'null'
+          - string
+          description: Id of the Project (Required and ProjectId must exist in SI)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name (Required)
+        start:
+          type: string
+          description: Start date required (Required)
+          format: date-time
+        startTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        end:
+          type: string
+          description: End date required (Required)
+          format: date-time
+        endTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description of the task
+        contact:
+          description: Contact information
+          $ref: '#/components/schemas/ContactInfo'
+        siteAddress:
+          description: Site address information
+          $ref: '#/components/schemas/Address'
+        resources:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TaskResource'
+          description: Resources in a task
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: CustomField1 (Text)
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: CustomField2 (Text)
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: CustomField3 (Text)
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: CustomField4 (Text)
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: CustomField5 (Text)
+        customField6:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField6 (Boolean)
+        customField7:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField7 (Boolean)
+        customField8:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField8 (Boolean)
+        customField9:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField9 (Boolean)
+        customField10:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField10 (Boolean)
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: CustomField11 (DateTime)
+          format: date-time
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: CustomField12 (DateTime)
+          format: date-time
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: CustomField13 (DateTime)
+          format: date-time
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: CustomField14 (DateTime)
+          format: date-time
+        customField15:
+          type:
+          - 'null'
+          - string
+          description: CustomField15 (DateTime)
+          format: date-time
+        customField16:
+          type:
+          - 'null'
+          - string
+          description: CustomField16 (Text)
+        customField17:
+          type:
+          - 'null'
+          - string
+          description: CustomField17 (Text)
+        customField18:
+          type:
+          - 'null'
+          - string
+          description: CustomField18 (Text)
+        customField19:
+          type:
+          - 'null'
+          - string
+          description: CustomField19 (Text)
+        customField20:
+          type:
+          - 'null'
+          - string
+          description: CustomField20 (Text)
+        customField21:
+          type:
+          - 'null'
+          - string
+          description: CustomField21 (Text)
+        customField22:
+          type:
+          - 'null'
+          - string
+          description: CustomField22 (Text)
+        customField23:
+          type:
+          - 'null'
+          - string
+          description: CustomField23 (Text)
+        customField24:
+          type:
+          - 'null'
+          - string
+          description: CustomField24 (Text)
+      description: New Task
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string

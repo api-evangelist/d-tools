@@ -1,0 +1,770 @@
+openapi: 3.2.0
+info:
+  title: D-Tools Cloud Products API
+  description: API to integrate with the D-Tools Cloud application.
+  termsOfService: https://www.d-tools.com/d-tools-software-terms-of-services
+  contact:
+    name: api@d-toolshelp.com
+    email: api@d-toolshelp.com
+  license:
+    name: License Agreement
+    url: https://www.d-tools.com/license-agreement
+  version: v1
+servers:
+- url: https://dtcloudapi.d-tools.cloud
+tags:
+- name: Products
+paths:
+  /api/v1/Products/GetProducts:
+    get:
+      tags:
+      - Products
+      parameters:
+      - name: brands
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: categories
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: suppliers
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromCreatedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toCreatedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: fromModifiedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toModifiedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: stockItemsOnly
+        in: query
+        schema:
+          type: boolean
+      - name: includeInactive
+        in: query
+        schema:
+          type: boolean
+      - name: includeTotalCount
+        in: query
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: sort
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetProductsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetProductsResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/Products/GetProduct:
+    get:
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/Products/UpdateProductPrices:
+    put:
+      tags:
+      - Products
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductPrice'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductPrice'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductPrice'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductPrice'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/Products/UpdateProductBarcodes:
+    put:
+      tags:
+      - Products
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductBarcode'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductBarcode'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductBarcode'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductBarcode'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/Products/UpdateProductStatuses:
+    put:
+      tags:
+      - Products
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductStatus'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductStatus'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductStatus'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProductStatus'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    DTools.Cloud.Data.ProductStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        isDiscontinued:
+          type:
+          - boolean
+          - 'null'
+        isActive:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ProductSubscription:
+      type: object
+      properties:
+        itemId:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        quantity:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.GetProductsResult:
+      type: object
+      properties:
+        products:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProductDetail'
+        totalProducts:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ProductDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        brand:
+          type:
+          - string
+          - 'null'
+        model:
+          type:
+          - string
+          - 'null'
+        partNumber:
+          type:
+          - string
+          - 'null'
+        shortDescription:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        category:
+          type:
+          - string
+          - 'null'
+        keywords:
+          type:
+          - string
+          - 'null'
+        defaultQuantity:
+          type: integer
+          format: int32
+        sellUnit:
+          type:
+          - string
+          - 'null'
+        isLengthBased:
+          type: boolean
+        lengthName:
+          type:
+          - string
+          - 'null'
+        length:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        msrp:
+          type:
+          - number
+          - 'null'
+          format: double
+        unitCost:
+          type:
+          - number
+          - 'null'
+          format: double
+        unitPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        margin:
+          type:
+          - number
+          - 'null'
+          format: double
+        markup:
+          type:
+          - number
+          - 'null'
+          format: double
+        costPerLength:
+          type:
+          - number
+          - 'null'
+          format: double
+        pricePerLength:
+          type:
+          - number
+          - 'null'
+          format: double
+        isTaxable:
+          type: boolean
+        tax:
+          type:
+          - string
+          - 'null'
+        supplier:
+          type:
+          - string
+          - 'null'
+        system:
+          type:
+          - string
+          - 'null'
+        phase:
+          type:
+          - string
+          - 'null'
+        upcBarcode:
+          type:
+          - string
+          - 'null'
+        eanBarcode:
+          type:
+          - string
+          - 'null'
+        itfBarcode:
+          type:
+          - string
+          - 'null'
+        isStockItem:
+          type: boolean
+        quantityOnHand:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        quantityAllocated:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        quantityAvailable:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        quantityOnOrder:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        quantityNeeded:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        minimumStockLevel:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        reorderLevel:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isDiscontinued:
+          type: boolean
+        isClientSupplied:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProductImage'
+        specifications:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProductSpecification'
+        laborItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProductLaborItem'
+        accessories:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProductAccessory'
+        subscriptions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProductSubscription'
+      additionalProperties: false
+    DTools.Cloud.Data.ProductSpecification:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ProductBarcode:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        upcBarcode:
+          type:
+          - string
+          - 'null'
+        eanBarcode:
+          type:
+          - string
+          - 'null'
+        itfBarcode:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ProductPrice:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        msrp:
+          type:
+          - number
+          - 'null'
+          format: double
+        unitCost:
+          type:
+          - number
+          - 'null'
+          format: double
+        unitPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    DTools.Cloud.Data.ProductLaborItem:
+      type: object
+      properties:
+        laborType:
+          type:
+          - string
+          - 'null'
+        time:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        timePerLength:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        pricePerLength:
+          type:
+          - number
+          - 'null'
+          format: double
+        phase:
+          type:
+          - string
+          - 'null'
+        isBillable:
+          type: boolean
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DTools.Cloud.Data.ProductImage:
+      type: object
+      properties:
+        url:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        isDefault:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.ProductAccessory:
+      type: object
+      properties:
+        itemId:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        name:
+          type:
+          - string
+          - 'null'
+        quantity:
+          type: integer
+          format: int32
+        laborTime:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        laborPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        includeOption:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        isBillable:
+          type: boolean
+      additionalProperties: false

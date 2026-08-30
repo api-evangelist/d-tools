@@ -1,0 +1,562 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Subscribe Clients API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: SubscribeClients
+  description: Allows an integration to subscribe to clients published by SI users.
+paths:
+  /Subscribe/Clients:
+    get:
+      tags:
+      - SubscribeClients
+      summary: Get clients published by a SI user.
+      parameters:
+      - name: includeImported
+        in: query
+        description: 'Boolean. Include already imported clients. Optional with default value false which means
+
+          by default you will only see clients which are not imported.'
+        schema:
+          type: boolean
+          default: false
+      - name: searchText
+        in: query
+        description: The search text.
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        description: 'Boolean. Include client deleted in SI. Optional with default value false which means
+
+          by default you will only see active clients which are not deleted.'
+        schema:
+          type: boolean
+          default: false
+      - name: pageNumber
+        in: query
+        description: The page number.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: The page size.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ClientsResult'
+  /Subscribe/Clients/ClientList:
+    post:
+      tags:
+      - SubscribeClients
+      summary: Get clients for given client ids published by a SI user. You can pass a maximum of 100 client ids.
+      requestBody:
+        description: Send single or multiple clientIds
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          text/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+  /Subscribe/Clients/MarkAsImported:
+    post:
+      tags:
+      - SubscribeClients
+      summary: Mark clients as imported for given client ids. You can pass a maximum of 100 client ids.
+      requestBody:
+        description: Send single or multiple clientIds
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          text/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/*+json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: ''
+components:
+  schemas:
+    ClientsResult:
+      type: object
+      properties:
+        clientInfos:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ClientInfo'
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+    ClientContact:
+      type: object
+      properties:
+        firstName:
+          type:
+          - 'null'
+          - string
+        lastName:
+          type:
+          - 'null'
+          - string
+        company:
+          type:
+          - 'null'
+          - string
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        notes:
+          type:
+          - 'null'
+          - string
+      description: Client contact object
+    ClientInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the client list
+        name:
+          type:
+          - 'null'
+          - string
+          description: Client name
+        email:
+          type:
+          - 'null'
+          - string
+          description: Client Email
+        phone:
+          type:
+          - 'null'
+          - string
+          description: Client Phone
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Client deleted
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date client list was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date client list was published
+          format: date-time
+      description: Client List Information
+    Client:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the client (must be Guid). Client will be created in SI with this Guid and will be used to update client.
+        name:
+          type:
+          - 'null'
+          - string
+          description: Client name (Required)
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number
+        integrationId:
+          type:
+          - 'null'
+          - string
+          description: Optional Id provided by the Integration for client. The IntegrationId can be used to update clients
+        phone:
+          type:
+          - 'null'
+          - string
+          description: Phone
+        fax:
+          type:
+          - 'null'
+          - string
+          description: Fax
+        email:
+          type:
+          - 'null'
+          - string
+          description: Email
+        webSite:
+          type:
+          - 'null'
+          - string
+          description: Web site
+        clientType:
+          type:
+          - 'null'
+          - string
+          description: Client Type - must be Lead or Prospect or Client
+        leadSource:
+          type:
+          - 'null'
+          - string
+          description: Lead source
+        tax:
+          type:
+          - 'null'
+          - string
+          description: Tax
+        laborTax:
+          type:
+          - 'null'
+          - string
+          description: Labor tax
+        createdOn:
+          type: string
+          description: Date the client was created (UTC Time)
+          format: date-time
+        updatedOn:
+          type: string
+          description: Date the client was updated (UTC Time)
+          format: date-time
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Client Updated By
+        publishedBy:
+          type:
+          - 'null'
+          - string
+          description: Client Published By
+        clientAddresses:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ClientAddress'
+          description: Client addresses for client
+        clientContacts:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ClientContact'
+          description: Client contacts for client
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: CustomField1 (Text) (BETA).
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: CustomField2 (Text) (BETA).
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: CustomField3 (Text) (BETA).
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: CustomField4 (Text) (BETA).
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: CustomField5 (Text) (BETA).
+        customField6:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField6 (Boolean) (BETA).
+        customField7:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField7 (Boolean) (BETA).
+        customField8:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField8 (Boolean) (BETA).
+        customField9:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField9 (Boolean) (BETA).
+        customField10:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField10 (Boolean) (BETA).
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: CustomField11 (Date) (BETA).
+          format: date-time
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: CustomField12 (Date) (BETA).
+          format: date-time
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: CustomField13 (Date) (BETA).
+          format: date-time
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: CustomField14 (Date) (BETA).
+          format: date-time
+        customField15:
+          type:
+          - 'null'
+          - string
+          description: CustomField15 (Date) (BETA).
+          format: date-time
+        customField16:
+          type:
+          - 'null'
+          - string
+          description: CustomField16 (List) (BETA).
+        customField17:
+          type:
+          - 'null'
+          - string
+          description: CustomField17 (List) (BETA).
+        customField18:
+          type:
+          - 'null'
+          - string
+          description: CustomField18 (List) (BETA).
+        customField19:
+          type:
+          - 'null'
+          - string
+          description: CustomField19 (List) (BETA).
+        customField20:
+          type:
+          - 'null'
+          - string
+          description: CustomField20 (List) (BETA).
+        customField21:
+          type:
+          - 'null'
+          - string
+          description: CustomField21 (Hyperlink) (BETA).
+        customField22:
+          type:
+          - 'null'
+          - string
+          description: CustomField22 (Hyperlink) (BETA).
+        customField23:
+          type:
+          - 'null'
+          - string
+          description: CustomField23 (Hyperlink) (BETA).
+        customField24:
+          type:
+          - 'null'
+          - string
+          description: CustomField24 (Hyperlink) (BETA).
+      description: Client object
+    ClientAddress:
+      type: object
+      properties:
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Client Addres Type - must be type 1 = Billing, 2 = Site, 3 = Other
+          format: uint8
+        name:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+      description: Client address object

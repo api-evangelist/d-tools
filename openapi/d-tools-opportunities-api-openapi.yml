@@ -1,0 +1,1152 @@
+openapi: 3.2.0
+info:
+  title: D-Tools Cloud Opportunities API
+  description: API to integrate with the D-Tools Cloud application.
+  termsOfService: https://www.d-tools.com/d-tools-software-terms-of-services
+  contact:
+    name: api@d-toolshelp.com
+    email: api@d-toolshelp.com
+  license:
+    name: License Agreement
+    url: https://www.d-tools.com/license-agreement
+  version: v1
+servers:
+- url: https://dtcloudapi.d-tools.cloud
+tags:
+- name: Opportunities
+paths:
+  /api/v1/Opportunities/GetOpportunities:
+    get:
+      tags:
+      - Opportunities
+      parameters:
+      - name: types
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: clientIds
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid
+      - name: stageGroups
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: stages
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: priorities
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: owners
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromEstimatedCloseDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toEstimatedCloseDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: fromActualCloseDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toActualCloseDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: fromCreatedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toCreatedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: fromModifiedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toModifiedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: includeArchived
+        in: query
+        schema:
+          type: boolean
+      - name: includeTotalCount
+        in: query
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: sort
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetOpportunitiesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetOpportunitiesResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/Opportunities/GetOpportunity:
+    get:
+      tags:
+      - Opportunities
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.OpportunityDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.OpportunityDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/Opportunities/CreateOpportunity:
+    post:
+      tags:
+      - Opportunities
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.NewOpportunity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.NewOpportunity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.NewOpportunity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.NewOpportunity'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: uuid
+            text/json:
+              schema:
+                type: string
+                format: uuid
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/Opportunities/UpdateOpportunity:
+    put:
+      tags:
+      - Opportunities
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.UpdateOpportunity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.UpdateOpportunity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.UpdateOpportunity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.UpdateOpportunity'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    DTools.Cloud.Data.OpportunityDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        clientId:
+          type: string
+          format: uuid
+        clientName:
+          type:
+          - string
+          - 'null'
+        clientNumber:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        buildingType:
+          type:
+          - string
+          - 'null'
+        marketSector:
+          type:
+          - string
+          - 'null'
+        projectType:
+          type:
+          - string
+          - 'null'
+        quoteType:
+          type:
+          - string
+          - 'null'
+        quoteTemplate:
+          type:
+          - string
+          - 'null'
+        systemState:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        stageGroup:
+          type:
+          - string
+          - 'null'
+        stage:
+          type:
+          - string
+          - 'null'
+        priority:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        price:
+          type: number
+          format: double
+        servicePrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        subscriptionPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        total:
+          type: number
+          format: double
+          readOnly: true
+        budget:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        probability:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        owner:
+          type:
+          - string
+          - 'null'
+        projectArea:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        fulfillmentLocation:
+          type:
+          - string
+          - 'null'
+        isExemptFromTax:
+          type: boolean
+        estimatedCloseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        actualCloseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        estimatedProjectStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        estimatedProjectEndDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        leadSource:
+          type:
+          - string
+          - 'null'
+        lostReason:
+          type:
+          - string
+          - 'null'
+        lostDescription:
+          type:
+          - string
+          - 'null'
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+        billingAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.AddressDetail'
+        siteAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.AddressDetail'
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ContactDetail'
+        resources:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ResourceDetail'
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.FileInfo'
+        quoteIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+      additionalProperties: false
+    DTools.Cloud.Data.GetOpportunitiesResult:
+      type: object
+      properties:
+        opportunities:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.OpportunityLite'
+        totalOpportunities:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.FileInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ResourceDetail:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.NewOpportunity:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        associatedProjectId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        clientId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        clientType:
+          type:
+          - string
+          - 'null'
+        clientName:
+          type:
+          - string
+          - 'null'
+        clientEmail:
+          type:
+          - string
+          - 'null'
+        clientPhone:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        buildingType:
+          type:
+          - string
+          - 'null'
+        marketSector:
+          type:
+          - string
+          - 'null'
+        projectType:
+          type:
+          - string
+          - 'null'
+        quoteType:
+          type:
+          - string
+          - 'null'
+        quoteTemplate:
+          type:
+          - string
+          - 'null'
+        priority:
+          type:
+          - string
+          - 'null'
+        budget:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        owner:
+          type:
+          - string
+          - 'null'
+        projectArea:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        fulfillmentLocation:
+          type:
+          - string
+          - 'null'
+        estimatedCloseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        leadSource:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        siteAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.Contact'
+        resources:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    DTools.Cloud.Data.ContactDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        secondaryEmail:
+          type:
+          - string
+          - 'null'
+        mobile:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        fax:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        isActive:
+          type: boolean
+        isPrimary:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.UpdateOpportunity:
+      type: object
+      properties:
+        associatedProjectId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        clientId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        buildingType:
+          type:
+          - string
+          - 'null'
+        marketSector:
+          type:
+          - string
+          - 'null'
+        projectType:
+          type:
+          - string
+          - 'null'
+        quoteType:
+          type:
+          - string
+          - 'null'
+        quoteTemplate:
+          type:
+          - string
+          - 'null'
+        priority:
+          type:
+          - string
+          - 'null'
+        budget:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        probability:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        owner:
+          type:
+          - string
+          - 'null'
+        projectArea:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        fulfillmentLocation:
+          type:
+          - string
+          - 'null'
+        estimatedCloseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        actualCloseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        estimatedProjectStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        estimatedProjectEndDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        leadSource:
+          type:
+          - string
+          - 'null'
+        lostReason:
+          type:
+          - string
+          - 'null'
+        lostDescription:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        siteAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.Contact'
+        resources:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DTools.Cloud.Data.AddressDetail:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.Contact:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        secondaryEmail:
+          type:
+          - string
+          - 'null'
+        mobile:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        fax:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        isActive:
+          type:
+          - boolean
+          - 'null'
+        isPrimary:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.OpportunityLite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        clientId:
+          type: string
+          format: uuid
+        clientName:
+          type:
+          - string
+          - 'null'
+        clientNumber:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        systemState:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        stageGroup:
+          type:
+          - string
+          - 'null'
+        stage:
+          type:
+          - string
+          - 'null'
+        priority:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        price:
+          type: number
+          format: double
+        servicePrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        subscriptionPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        total:
+          type: number
+          format: double
+          readOnly: true
+        budget:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        probability:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        owner:
+          type:
+          - string
+          - 'null'
+        estimatedCloseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        actualCloseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.Address:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false

@@ -1,0 +1,786 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Subscribe Task API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: SubscribeTask
+  description: Allows an integration to subscribe to Tasks published by SI users.
+paths:
+  /Subscribe/Tasks:
+    get:
+      tags:
+      - SubscribeTask
+      summary: Get tasks published by a SI user.
+      parameters:
+      - name: clients
+        in: query
+        description: Clients to filter tasks (Optional)
+        schema:
+          type: array
+          items:
+            type: string
+      - name: progresses
+        in: query
+        description: Progresses to filter tasks (Optional)
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectId
+        in: query
+        description: ProjectId to filter tasks (Optional)
+        schema:
+          type: string
+      - name: includeImported
+        in: query
+        description: Boolean. Include already imported tasks. Optional with default value false which means by default you will only see tasks which are not imported.
+        schema:
+          type: boolean
+          default: false
+      - name: searchText
+        in: query
+        description: The search text.
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        description: 'Boolean. Include task deleted in SI. Optional with default value false which means
+
+          by default you will only see active tasks which are not deleted.'
+        schema:
+          type: boolean
+          default: false
+      - name: pageNumber
+        in: query
+        description: The page number.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: The page size.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TasksResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TasksResult'
+  /Subscribe/Task/GetMobileInstallSiteNotes:
+    get:
+      tags:
+      - SubscribeTask
+      summary: Get Mobile Install task site notes for a given task id
+      parameters:
+      - name: id
+        in: query
+        description: Task id.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SiteNote'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SiteNote'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SiteNote'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SiteNote'
+  /Subscribe/Task/MarkAsImported:
+    put:
+      tags:
+      - SubscribeTask
+      summary: Mark a task as imported for a given task id.
+      parameters:
+      - name: id
+        in: query
+        description: The task id.
+        schema:
+          type: string
+      - name: publishedOnUnixTimeMs
+        in: query
+        description: The published on Unix time in milliseconds.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int64
+      responses:
+        '200':
+          description: ''
+  /Subscribe/Tasks/ByProject/{projectId}:
+    get:
+      tags:
+      - SubscribeTask
+      summary: Get a tasks for a given project id.
+      parameters:
+      - name: projectId
+        in: path
+        description: The project id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SITask'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SITask'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SITask'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SITask'
+  /Subscribe/Tasks/{id}:
+    get:
+      tags:
+      - SubscribeTask
+      summary: Get a task for a given task id.
+      parameters:
+      - name: id
+        in: path
+        description: The task id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SITask'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SITask'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SITask'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SITask'
+components:
+  schemas:
+    TaskResource:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+        estimatedHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        actualHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        cost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        estimatedCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        actualCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+    TaskInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Task Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Task name
+        progress:
+          type:
+          - 'null'
+          - string
+          description: Project progress
+        description:
+          type:
+          - 'null'
+          - string
+          description: Task description
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date task was imported by SI
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date task was published by SI user
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date task was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Task as Imported method optionally to make sure the task was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Task deleted
+      description: Task Information
+    SiteNote:
+      type: object
+      properties:
+        notes:
+          type:
+          - 'null'
+          - string
+          description: Task Notes
+        updatedOn:
+          type: string
+          description: Updated On
+          format: date-time
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Updated By
+      description: Mobile Install Site Notes
+    TasksResult:
+      type: object
+      properties:
+        tasks:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TaskInfo'
+          description: Tasks array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of tasks
+          format: int32
+    TaskItem:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id (Required)
+        siItemId:
+          type:
+          - 'null'
+          - string
+          description: SIItemId - unique id of item in SI project
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'TypeId: 1 = Product, 2 = Labor, 3 = Allowance, 4 = Bundled Cable (Required)'
+          format: uint8
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer (Required for product and labor)
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model (Required for product and labor)
+        packageName:
+          type:
+          - 'null'
+          - string
+          description: Package Name for allowance, bundled cable and placeholder (required).
+        partNumber:
+          type:
+          - 'null'
+          - string
+        category:
+          type:
+          - 'null'
+          - string
+        subcategory:
+          type:
+          - 'null'
+          - string
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: ComponentId (Required)
+        location:
+          type:
+          - 'null'
+          - string
+        system:
+          type:
+          - 'null'
+          - string
+        serialNumber:
+          type:
+          - 'null'
+          - string
+        ipAddress1:
+          type:
+          - 'null'
+          - string
+        ipAddress2:
+          type:
+          - 'null'
+          - string
+        macAddress1:
+          type:
+          - 'null'
+          - string
+        macAddress2:
+          type:
+          - 'null'
+          - string
+        picked:
+          type: boolean
+        pickedDate:
+          type:
+          - 'null'
+          - string
+          format: date-time
+        installed:
+          type: boolean
+        installedOn:
+          type:
+          - 'null'
+          - string
+          format: date-time
+        installedNotes:
+          type:
+          - 'null'
+          - string
+      description: Task Item
+    SITask:
+      type: object
+      properties:
+        contact:
+          description: Contact information
+          $ref: '#/components/schemas/ContactInfo'
+        siteAddress:
+          description: Address information
+          $ref: '#/components/schemas/Address'
+        resources:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TaskResource'
+          description: Resource information
+        items:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TaskItem'
+        publishedOn:
+          type: string
+          description: Date task was published by SI user
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date task was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Task as Imported method optionally to make sure the task was not updated in SI since it was published.
+          format: int64
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name (Required)
+        projectId:
+          type:
+          - 'null'
+          - string
+          description: Project Id for the task.
+        project:
+          type:
+          - 'null'
+          - string
+          description: Project name (Required)
+        projectNumber:
+          type:
+          - 'null'
+          - string
+          description: Project number
+        projectStart:
+          type:
+          - 'null'
+          - string
+          description: Project start date
+          format: date-time
+        projectEnd:
+          type:
+          - 'null'
+          - string
+          description: Project end date
+          format: date-time
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name (Required)
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number (Required)
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description
+        start:
+          type: string
+          description: Start date (Required)
+          format: date-time
+        end:
+          type: string
+          description: End date (Required)
+          format: date-time
+        scheduledStart:
+          type:
+          - 'null'
+          - string
+          description: Scheduled start
+          format: date-time
+        scheduledEnd:
+          type:
+          - 'null'
+          - string
+          description: Scheduled end
+          format: date-time
+        progress:
+          type:
+          - 'null'
+          - string
+          description: Progress (Required)
+        percentComplete:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Percent complete
+          format: double
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: CustomField1
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: CustomField2
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: CustomField3
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: CustomField4
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: CustomField5
+        customField6:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField6
+        customField7:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField7
+        customField8:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField8
+        customField9:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField9
+        customField10:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField10
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: CustomField11
+          format: date-time
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: CustomField12
+          format: date-time
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: CustomField13
+          format: date-time
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: CustomField14
+          format: date-time
+        customField15:
+          type:
+          - 'null'
+          - string
+          description: CustomField15
+          format: date-time
+        customField16:
+          type:
+          - 'null'
+          - string
+          description: CustomField16
+        customField17:
+          type:
+          - 'null'
+          - string
+          description: CustomField17
+        customField18:
+          type:
+          - 'null'
+          - string
+          description: CustomField18
+        customField19:
+          type:
+          - 'null'
+          - string
+          description: CustomField19
+        customField20:
+          type:
+          - 'null'
+          - string
+          description: CustomField20
+        customField21:
+          type:
+          - 'null'
+          - string
+          description: CustomField21
+        customField22:
+          type:
+          - 'null'
+          - string
+          description: CustomField22
+        customField23:
+          type:
+          - 'null'
+          - string
+          description: CustomField23
+        customField24:
+          type:
+          - 'null'
+          - string
+          description: CustomField24
+        createdOn:
+          type:
+          - 'null'
+          - string
+          description: Date the task was created (UTC Time)
+          format: date-time
+        updatedOn:
+          type:
+          - 'null'
+          - string
+          description: Date the task was updated (UTC Time)
+          format: date-time
+        createdBy:
+          type:
+          - 'null'
+          - string
+          description: Task Created By
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Task Updated By
+        publishedBy:
+          type:
+          - 'null'
+          - string
+          description: Task Published By
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string

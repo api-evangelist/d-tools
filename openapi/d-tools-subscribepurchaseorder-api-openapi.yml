@@ -1,0 +1,670 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Subscribe Purchase Order API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: SubscribePurchaseOrder
+  description: Allows an integration to subscribe to Purchase orders published by SI users.
+paths:
+  /Subscribe/PurchaseOrders:
+    get:
+      tags:
+      - SubscribePurchaseOrder
+      summary: Get purchase orders published by a SI user.
+      parameters:
+      - name: vendors
+        in: query
+        description: Vendors to filter purchase orders (Optional)
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statuses
+        in: query
+        description: Statuses to filter purchase orders (Optional)
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeImported
+        in: query
+        description: Boolean. Include already imported purchase orders. Optional with default value false which means by default you will only see purchase orders which are not imported.
+        schema:
+          type: boolean
+          default: false
+      - name: searchText
+        in: query
+        description: The search text.
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        description: 'Boolean. Include purchase order deleted in SI. Optional with default value false which means
+
+          by default you will only see active purchase orders which are not deleted.'
+        schema:
+          type: boolean
+          default: false
+      - name: pageNumber
+        in: query
+        description: The page number.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: The page size.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrdersResult'
+  /Subscribe/PurchaseOrders/MarkAsImported:
+    put:
+      tags:
+      - SubscribePurchaseOrder
+      summary: Mark a purchase order as imported for a given purchase order id.
+      parameters:
+      - name: id
+        in: query
+        description: The purchase order id.
+        schema:
+          type: string
+      - name: publishedOnUnixTimeMs
+        in: query
+        description: The published on Unix time in milliseconds.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int64
+      responses:
+        '200':
+          description: ''
+  /Subscribe/PurchaseOrders/{id}:
+    get:
+      tags:
+      - SubscribePurchaseOrder
+      summary: Get a purchase order for a given purchase order id.
+      parameters:
+      - name: id
+        in: path
+        description: The purchase order id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+components:
+  schemas:
+    PurchaseOrder:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        vendor:
+          type:
+          - 'null'
+          - string
+          description: Vendor name (Rrequired)
+        projects:
+          type:
+          - 'null'
+          - string
+          description: Projects
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number (Required)
+        status:
+          type:
+          - 'null'
+          - string
+          description: Status (Required)
+        date:
+          type: string
+          description: Date
+          format: date-time
+        requestDeliveryDate:
+          type:
+          - 'null'
+          - string
+          description: Request delivery date
+          format: date-time
+        shipPref:
+          type:
+          - 'null'
+          - string
+          description: Shipment preference
+        vendorRefNumber:
+          type:
+          - 'null'
+          - string
+          description: Vendor reference number
+        trackingNumber:
+          type:
+          - 'null'
+          - string
+          description: Tracking number
+        acctgNumber:
+          type:
+          - 'null'
+          - string
+          description: Accounting number
+        terms:
+          type:
+          - 'null'
+          - string
+          description: Terms
+        notes:
+          type:
+          - 'null'
+          - string
+          description: Notes
+        serviceOrders:
+          type:
+          - 'null'
+          - string
+          description: Service Orders
+        currencyCode:
+          type:
+          - 'null'
+          - string
+          description: Currency code
+        currencyRate:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Currency rate
+          format: double
+        createdOn:
+          type:
+          - 'null'
+          - string
+          description: Date the purchase order was created (UTC Time)
+          format: date-time
+        updatedOn:
+          type:
+          - 'null'
+          - string
+          description: Date the purchase order was updated  (UTC Time)
+          format: date-time
+        createdBy:
+          type:
+          - 'null'
+          - string
+          description: Purchase order Created By
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Purchase order Updated By
+        publishedBy:
+          type:
+          - 'null'
+          - string
+          description: Purchase order Published By
+        contacts:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderContact'
+          description: Contacts information
+        vendorAddress:
+          description: Vendor address information
+          $ref: '#/components/schemas/Address'
+        shipToAddress:
+          description: Ship To address information
+          $ref: '#/components/schemas/ShipToAddress'
+        purchaseOrderItems:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderItem'
+        purchaseOrderTaxes:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderTax'
+        publishedOn:
+          type: string
+          description: Date purchase order was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date purchase order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Purchase Order as Imported method optionally to make sure the purchase order was not updated in SI since it was published.
+          format: int64
+      description: Purchase order object
+    PurchaseOrderTax:
+      type: object
+      properties:
+        taxId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+        rate:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        group:
+          type: boolean
+        items:
+          type:
+          - 'null'
+          - array
+          items:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+            - integer
+            - string
+            format: int32
+    ShipToAddress:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    PurchaseOrderItem:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id (Required)
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'TypeId: 1 = Product, 2 = Labor, 4 = Bundled Cable (Required)'
+          format: uint8
+        manufacturerId:
+          type:
+          - 'null'
+          - string
+          description: Id for the manufacturer.
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer for the project item. Required for product and labor.
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model for the project item. Required for product and labor.
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Quantity
+          format: double
+        packageName:
+          type:
+          - 'null'
+          - string
+          description: Package Name for the allowance, bundled cable and placeholder.
+        catalogId:
+          type:
+          - 'null'
+          - string
+          description: Id of the item in the SI catalog
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part Number
+        categoryType:
+          type:
+          - 'null'
+          - string
+          description: Category Type
+        description:
+          type:
+          - 'null'
+          - string
+          description: Short description
+        projectId:
+          type:
+          - 'null'
+          - string
+          description: Id of the Project
+        projectName:
+          type:
+          - 'null'
+          - string
+          description: Project name
+        projectSIItemIds:
+          type:
+          - 'null'
+          - string
+          description: Comma seperated list of SIItemIds from the project. Only available if item is part of a project.
+        serviceOrderId:
+          type:
+          - 'null'
+          - string
+          description: Id of the Service Order
+        serviceOrderName:
+          type:
+          - 'null'
+          - string
+          description: Service Order Name
+        laborHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Labor hours
+          format: double
+        uom:
+          type:
+          - 'null'
+          - string
+          description: UOM
+        uomUnits:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: UOM units
+          format: int32
+        projectUnits:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Project units
+          format: int64
+        price:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Price
+          format: double
+        totalPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Total price
+          format: double
+        receivedQuantity:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Received Quantity
+          format: int64
+        edd:
+          type:
+          - 'null'
+          - string
+          description: Expected Delivery Date
+          format: date-time
+        trackingNumber:
+          type:
+          - 'null'
+          - string
+          description: Tracking Number
+        taxId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: TaxId
+          format: int32
+    PurchaseOrdersResult:
+      type: object
+      properties:
+        purchaseOrders:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderInfo'
+          description: Purchase orders array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of purchase order
+          format: int32
+    PurchaseOrderInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        vendor:
+          type:
+          - 'null'
+          - string
+          description: Vendor name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Purchase order Number
+        status:
+          type:
+          - 'null'
+          - string
+          description: Status
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date purchase order was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date purchase order was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date purchase order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Purchase Order as Imported method optionally to make sure the purchase order was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Purchase order deleted
+      description: Purchase Order Information
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    PurchaseOrderContact:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        firstName:
+          type:
+          - 'null'
+          - string
+        lastName:
+          type:
+          - 'null'
+          - string
+        group:
+          type:
+          - 'null'
+          - string
+        company:
+          type:
+          - 'null'
+          - string
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+        notes:
+          type:
+          - 'null'
+          - string
+      description: Purchase Order Contact

@@ -1,0 +1,270 @@
+openapi: 3.2.0
+info:
+  title: D-Tools Cloud Time Entries API
+  description: API to integrate with the D-Tools Cloud application.
+  termsOfService: https://www.d-tools.com/d-tools-software-terms-of-services
+  contact:
+    name: api@d-toolshelp.com
+    email: api@d-toolshelp.com
+  license:
+    name: License Agreement
+    url: https://www.d-tools.com/license-agreement
+  version: v1
+servers:
+- url: https://dtcloudapi.d-tools.cloud
+tags:
+- name: TimeEntries
+paths:
+  /api/v1/TimeEntries/GetTimeEntries:
+    get:
+      tags:
+      - TimeEntries
+      parameters:
+      - name: types
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: resources
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: clientIds
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid
+      - name: projectIds
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid
+      - name: serviceCallIds
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid
+      - name: laborTypes
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: overtimesOnly
+        in: query
+        schema:
+          type: boolean
+      - name: includeArchived
+        in: query
+        schema:
+          type: boolean
+      - name: includeTotalCount
+        in: query
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: sort
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetTimeEntriesResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetTimeEntriesResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    DTools.Cloud.Data.GetTimeEntriesResult:
+      type: object
+      properties:
+        timeEntries:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.TimeEntryDetail'
+        totalTimeEntries:
+          type: integer
+          format: int32
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DTools.Cloud.Data.TimeEntryDetail:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        resource:
+          type:
+          - string
+          - 'null'
+        date:
+          type: string
+          format: date-time
+        startTime:
+          type:
+          - string
+          - 'null'
+          format: date-span
+        endTime:
+          type:
+          - string
+          - 'null'
+          format: date-span
+        hoursWorkedInMinutes:
+          type: integer
+          format: int32
+        isOvertime:
+          type: boolean
+        isLunch:
+          type: boolean
+        isBillable:
+          type: boolean
+        costPerHour:
+          type:
+          - number
+          - 'null'
+          format: double
+        totalCost:
+          type:
+          - number
+          - 'null'
+          format: double
+        clientId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        clientName:
+          type:
+          - string
+          - 'null'
+        clientNumber:
+          type:
+          - string
+          - 'null'
+        projectId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        projectName:
+          type:
+          - string
+          - 'null'
+        projectNumber:
+          type:
+          - string
+          - 'null'
+        projectTask:
+          type:
+          - string
+          - 'null'
+        serviceCallId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        serviceCallNumber:
+          type:
+          - string
+          - 'null'
+        laborType:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        createdDate:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      additionalProperties: false

@@ -1,0 +1,436 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Publish Vendors API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: PublishVendors
+  description: Allows an integration to update a vendor list to a SI user. d
+paths:
+  /Publish/Vendors:
+    post:
+      tags:
+      - PublishVendors
+      summary: Publish a list of vendors to SI.
+      requestBody:
+        description: The vendor list.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/VendorList'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorList'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/VendorList'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/VendorList'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/VendorList'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/VendorList'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/VendorList'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/Vendors/Update:
+    post:
+      tags:
+      - PublishVendors
+      summary: Update an existing vendor in SI
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateVendor'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVendor'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVendor'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateVendor'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateVendor'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateVendor'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/UpdateVendor'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+components:
+  schemas:
+    UpdateVendor:
+      type: object
+      properties:
+        integrationId:
+          type:
+          - 'null'
+          - string
+          description: Integration Id of vendor to update (Must pass either IntegrationId Or Vendor Number)
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number of vendor to update (Must pass either IntegrationId Or Vendor Number)
+        updateFields:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateVendorField'
+          description: List of UpdateFields for the vendor. Each UpdateField has a Id and a Value.
+        siteAddress:
+          description: Vendor Site Address
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          description: Vendor Billing Address
+          $ref: '#/components/schemas/Address'
+      description: Update Vendor
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
+    VendorContact:
+      type: object
+      properties:
+        firstName:
+          type:
+          - 'null'
+          - string
+        lastName:
+          type:
+          - 'null'
+          - string
+        company:
+          type:
+          - 'null'
+          - string
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        notes:
+          type:
+          - 'null'
+          - string
+      description: Vendor contact object
+    UpdateVendorField:
+      type: object
+      properties:
+        vendorFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'VendorFieldId (pass the correct Id for the field you want to update)
+
+            Name = 1, Number = 2, Phone = 3, Fax = 4, Email = 5, Website = 6, Inactive = 7,  IntegrationId = 8, Terms = 9'
+          format: uint8
+        value:
+          type:
+          - 'null'
+          - string
+          description: Value for the vendor field. date time and decimal should be invariant.
+    VendorAddress:
+      type: object
+      properties:
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Vendor Address Type - must be type 1 = Billing, 2 = Site, 3 = Other
+          format: uint8
+        name:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+      description: Vendor address object
+    Vendor:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the Vendor (must be Guid). Vendor will be created in SI with this Guid and will be used to update Vendor.
+        name:
+          type:
+          - 'null'
+          - string
+          description: Vendor name (Required)
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number
+        integrationId:
+          type:
+          - 'null'
+          - string
+          description: Optional Id provided by the Integration for Vendor. The IntegrationId can be used to update Vendors
+        phone:
+          type:
+          - 'null'
+          - string
+          description: Phone
+        fax:
+          type:
+          - 'null'
+          - string
+          description: Fax
+        email:
+          type:
+          - 'null'
+          - string
+          description: Email
+        webSite:
+          type:
+          - 'null'
+          - string
+          description: Web site
+        terms:
+          type:
+          - 'null'
+          - string
+          description: Terms
+        createdOn:
+          type: string
+          description: Date the Vendor was created (UTC Time)
+          format: date-time
+        updatedOn:
+          type: string
+          description: Date the Vendor was updated (UTC Time)
+          format: date-time
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Vendor Updated By
+        publishedBy:
+          type:
+          - 'null'
+          - string
+          description: Vendor Published By
+        vendorAddresses:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/VendorAddress'
+          description: Vendor addresses for Vendor
+        vendorContacts:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/VendorContact'
+          description: Vendor contacts for Vendor
+      description: Vendor object
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    VendorList:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the Vendor (Required)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name for the Vendor list (Required)
+        description:
+          type:
+          - 'null'
+          - string
+          description: Vendor list description
+        vendors:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Vendor'
+          description: Vendor list.
+      description: Vendor List objects

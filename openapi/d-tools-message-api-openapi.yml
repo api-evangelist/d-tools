@@ -1,0 +1,168 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Message API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: Message
+paths:
+  /Message/PublishedMessageStatus:
+    get:
+      tags:
+      - Message
+      summary: Get status of a published message.
+      parameters:
+      - name: messageId
+        in: query
+        description: Id of the message
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageStatus'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/MessageStatus'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MessageStatus'
+  /Message/PublishedMessagesStatus:
+    get:
+      tags:
+      - Message
+      summary: Get status of published messages.
+      parameters:
+      - name: messageStatusIds
+        in: query
+        description: 'Message status Id: Pending = 1, Imported = 2, Failed = 3'
+        schema:
+          type: array
+          items:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+            - integer
+            - string
+            format: uint8
+      - name: messageTypeIds
+        in: query
+        description: 'Message type Id: ProductCatalog = 1, Project = 11, UpdateProject = 12, NewProjectChangeOrderInfo = 13, UpdateClient = 21'
+        schema:
+          type: array
+          items:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+            - integer
+            - string
+            format: uint8
+      - name: pageNumber
+        in: query
+        description: Page Number
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Page Size
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponse'
+components:
+  schemas:
+    MessageStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of Message
+          format: uuid
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Type Id of the message. ProductCatalog = 1, Project = 11, UpdateProject = 12, NewProjectChangeOrderInfo = 13, UpdateClient = 21, ClientList = 22
+          format: uint8
+        statusId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Status Id of the message.  Pending = 1, Imported = 2, Failed = 3 (check Error Message)
+          format: uint8
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date imported to SI
+          format: date-time
+        errorMessage:
+          type:
+          - 'null'
+          - string
+          description: Error message (populated if StatusId = 3 (Failed)
+      description: Message status
+    MessageResponse:
+      type: object
+      properties:
+        messageStatuses:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/MessageStatus'
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+      description: Message response

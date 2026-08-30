@@ -1,0 +1,1033 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Subscribe Service Plan API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: SubscribeServicePlan
+  description: Allows an integration to subscribe to Service plan published by SI users.
+paths:
+  /Subscribe/ServicePlans:
+    get:
+      tags:
+      - SubscribeServicePlan
+      summary: Get service plans published by a SI user
+      parameters:
+      - name: clients
+        in: query
+        description: Clients to filter service plans (Optional)
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statuses
+        in: query
+        description: Statuses to filter servic plans (Optional)
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeImported
+        in: query
+        description: Boolean. Include already imported service plans. Optional with default value false which means by default you will only see service plans which are not imported.
+        schema:
+          type: boolean
+          default: false
+      - name: searchText
+        in: query
+        description: The search text.
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        description: 'Boolean. Include servic plan deleted in SI. Optional with default value false which means
+
+          by default you will only see active servic plans which are not deleted.'
+        schema:
+          type: boolean
+          default: false
+      - name: pageNumber
+        in: query
+        description: The page number.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: The page size.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicePlansResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ServicePlansResult'
+  /Subscribe/ServicePlans/MarkAsImported:
+    put:
+      tags:
+      - SubscribeServicePlan
+      summary: Mark a service plan as imported for a given service plan id.
+      parameters:
+      - name: id
+        in: query
+        description: The service plan id.
+        schema:
+          type: string
+      - name: publishedOnUnixTimeMs
+        in: query
+        description: The published on Unix time in milliseconds.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int64
+      responses:
+        '200':
+          description: ''
+  /Subscribe/ServicePlans/{id}:
+    get:
+      tags:
+      - SubscribeServicePlan
+      summary: Get a service plan for a given service plan id.
+      parameters:
+      - name: id
+        in: path
+        description: The service plan id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicePlan'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ServicePlan'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ServicePlan'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ServicePlan'
+components:
+  schemas:
+    ServicePlanInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Service Plan Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name
+        status:
+          type:
+          - 'null'
+          - string
+          description: Status
+        description:
+          type:
+          - 'null'
+          - string
+          description: Service plan description
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date service plan was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date service plan was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date service plan was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Plan as Imported method optionally to make sure the service plan was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Service plan deleted
+      description: Service Plan Information
+    ServicePlanProjectItem:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id (Required)
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'TypeId: 1 = Product, 2 = Labor, 3 = Allowance, 4 = Bundled Cable, 5 = Placeholder (Required)'
+          format: uint8
+        siItemId:
+          type:
+          - 'null'
+          - string
+          description: SIItemId - unique id of project item in SI.
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer for the project item. Required for product and labor.
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model for the project item. Required for product and labor.
+        acctgItemName:
+          type:
+          - 'null'
+          - string
+          description: Accounting item name.
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Quantity
+          format: double
+        packageName:
+          type:
+          - 'null'
+          - string
+          description: Package Name for the allowance, bundled cable and placeholder.
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part Number
+        category:
+          type:
+          - 'null'
+          - string
+          description: Category
+        subcategory:
+          type:
+          - 'null'
+          - string
+          description: Subcategory
+        description:
+          type:
+          - 'null'
+          - string
+          description: Short description
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: Component ID
+        serialNumber:
+          type:
+          - 'null'
+          - string
+          description: Serial number
+        ipAddress:
+          type:
+          - 'null'
+          - string
+          description: IP Address 1
+        ipAddress2:
+          type:
+          - 'null'
+          - string
+          description: IP Address 2
+        macAddress1:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 1
+        macAddress2:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 2
+        location:
+          type:
+          - 'null'
+          - string
+          description: Location
+        system:
+          type:
+          - 'null'
+          - string
+          description: System
+        name:
+          type:
+          - 'null'
+          - string
+    ServicePlanItem:
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Unique Id (Required)
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description
+        frequency:
+          type:
+          - 'null'
+          - string
+          description: Frequency
+        calculated:
+          type: boolean
+          description: Calculated field for service plan item.
+        price:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Price for the service plan item.
+          format: double
+        taxable:
+          type: boolean
+          description: Taxable
+        startDate:
+          type:
+          - 'null'
+          - string
+          description: Start Date
+          format: date-time
+        numberOfPayments:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Number of payments
+          format: int32
+      description: Service Plan Item object
+    ServicePlanFeature:
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+        description:
+          type:
+          - 'null'
+          - string
+      description: Service Plan Feature
+    ServicePlan:
+      type: object
+      properties:
+        contact:
+          description: Contact information
+          $ref: '#/components/schemas/ContactInfo'
+        billingAddress:
+          description: Billing address information
+          $ref: '#/components/schemas/Address'
+        siteAddress:
+          description: Site address information
+          $ref: '#/components/schemas/Address'
+        servicePlanItems:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServicePlanItem'
+          description: Service plan items in a service plan.
+        servicePlanProjectItems:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServicePlanProjectItem'
+          description: Project items in a service plan.
+        servicePlanFeatures:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServicePlanFeature'
+          description: Features in a service plan.
+        publishedOn:
+          type: string
+          description: Date service plan was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date service plan was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Plan as Imported method optionally to make sure the service plan was not updated in SI since it was published.
+          format: int64
+        oneTimePrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: One time price
+          format: double
+        monthlyPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Monthly price
+          format: double
+        quarterlyPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Quarterly price
+          format: double
+        annuallyPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Annual price
+          format: double
+        weeklyPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Weekly price
+          format: double
+        biweeklyPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Biweekly price
+          format: double
+        bimonthlyPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Bimonthly price
+          format: double
+        semiannuallyPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Semiannual price
+          format: double
+        oneTimePriceTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: One time Price In transaction currency
+          format: double
+        monthlyPriceTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Monthly Price In transaction currency
+          format: double
+        quarterlyPriceTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Quarterly Price In transaction currency
+          format: double
+        annuallyPriceTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Annual Price In transaction currency
+          format: double
+        weeklyPriceTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Weekly Price In transaction currency
+          format: double
+        biweeklyPriceTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Biweekly Price In transaction currency
+          format: double
+        bimonthlyPriceTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Bimonthly Price In transaction currency
+          format: double
+        semiannuallyPriceTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Semiannual Price In transaction currency
+          format: double
+        oneTimePriceWithTax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: One time priceWithTax
+          format: double
+        monthlyPriceWithTax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Monthly Price With Tax
+          format: double
+        quarterlyPriceWithTax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Quarterly Price With Tax
+          format: double
+        annuallyPriceWithTax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Annually priceWithTax
+          format: double
+        weeklyPriceWithTax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Weekly Price With Tax
+          format: double
+        biweeklyPriceWithTax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Biweekly Price With Tax
+          format: double
+        bimonthlyPriceWithTax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Bimonthly Price With Tax
+          format: double
+        semiannuallyPriceWithTax:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Semiannual Price With Tax
+          format: double
+        oneTimePriceWithTaxTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: One time Price With Tax in Transaction Currency
+          format: double
+        monthlyPriceWithTaxTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Monthly Price With Tax in Transaction Currency
+          format: double
+        quarterlyPriceWithTaxTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Quarterly Price With Tax in Transaction Currency
+          format: double
+        annuallyPriceWithTaxTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Annual Price With Tax in Transaction Currency
+          format: double
+        weeklyPriceWithTaxTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Weekly Price With Tax in Transaction Currency
+          format: double
+        biweeklyPriceWithTaxTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Biweekly Price With Tax in Transaction Currency
+          format: double
+        bimonthlyPriceWithTaxTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Bimonthly Price With Tax in Transaction Currency
+          format: double
+        semiannuallyPriceWithTaxTC:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Semiannual Price With Tax in Transaction Currency
+          format: double
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name (Required)
+        clientNumber:
+          type:
+          - 'null'
+          - string
+          description: Client number
+        clientId:
+          type: string
+          description: ClientId
+          format: uuid
+        projectId:
+          type:
+          - 'null'
+          - string
+          description: Id of project associated to the service plan
+        project:
+          type:
+          - 'null'
+          - string
+          description: Project name
+        projectNumber:
+          type:
+          - 'null'
+          - string
+          description: Project Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name required
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number (Required)
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description
+        start:
+          type:
+          - 'null'
+          - string
+          description: Start date
+          format: date-time
+        end:
+          type:
+          - 'null'
+          - string
+          description: End date
+          format: date-time
+        status:
+          type:
+          - 'null'
+          - string
+          description: Status (Required)
+        monthToMonth:
+          type: boolean
+          description: Month to month
+        planLength:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Plan length
+          format: int32
+        planLengthPeriod:
+          type:
+          - 'null'
+          - string
+          description: Plan length period
+        autoRenew:
+          type: boolean
+          description: Auto renew
+        allowableHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Allowable hours
+          format: double
+        allowableHoursFrequency:
+          type:
+          - 'null'
+          - string
+          description: Allowable hours frequency
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: CustomField1
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: CustomField2
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: CustomField3
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: CustomField4
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: CustomField5
+        customField6:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField6
+        customField7:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField7
+        customField8:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField8
+        customField9:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField9
+        customField10:
+          type:
+          - 'null'
+          - boolean
+          description: CustomField10
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: CustomField11
+          format: date-time
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: CustomField12
+          format: date-time
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: CustomField13
+          format: date-time
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: CustomField14
+          format: date-time
+        customField15:
+          type:
+          - 'null'
+          - string
+          description: CustomField15
+          format: date-time
+        customField16:
+          type:
+          - 'null'
+          - string
+          description: CustomField16
+        customField17:
+          type:
+          - 'null'
+          - string
+          description: CustomField17
+        customField18:
+          type:
+          - 'null'
+          - string
+          description: CustomField18
+        customField19:
+          type:
+          - 'null'
+          - string
+          description: CustomField19
+        customField20:
+          type:
+          - 'null'
+          - string
+          description: CustomField20
+        customField21:
+          type:
+          - 'null'
+          - string
+          description: CustomField21
+        customField22:
+          type:
+          - 'null'
+          - string
+          description: CustomField22
+        customField23:
+          type:
+          - 'null'
+          - string
+          description: CustomField23
+        customField24:
+          type:
+          - 'null'
+          - string
+          description: CustomField24
+        currencyCode:
+          type:
+          - 'null'
+          - string
+          description: Currency code
+        currencyRate:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Currency rate
+          format: double
+        createdOn:
+          type:
+          - 'null'
+          - string
+          description: Date the service plan was created (UTC Time)
+          format: date-time
+        updatedOn:
+          type:
+          - 'null'
+          - string
+          description: Date the service plan was updated  (UTC Time)
+          format: date-time
+        createdBy:
+          type:
+          - 'null'
+          - string
+          description: Service plan Created By
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Service plan Updated By
+        publishedBy:
+          type:
+          - 'null'
+          - string
+          description: Service plan Published By
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    ServicePlansResult:
+      type: object
+      properties:
+        servicePlans:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServicePlanInfo'
+          description: Service plans array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of service plans
+          format: int32

@@ -1,0 +1,595 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Subscribe Time Sheet API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: SubscribeTimeSheet
+  description: Allows an integration to subscribe to Time sheets published by SI users.
+paths:
+  /Subscribe/TimeSheets:
+    get:
+      tags:
+      - SubscribeTimeSheet
+      summary: Get time sheets published by a SI user.
+      parameters:
+      - name: clients
+        in: query
+        description: Clients to filter time sheets (Optional)
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeImported
+        in: query
+        description: Boolean. Include already imported time sheets. Optional with default value false which means by default you will only see time sheets which are not imported.
+        schema:
+          type: boolean
+          default: false
+      - name: searchText
+        in: query
+        description: The search text.
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        description: 'Boolean. Include time sheet deleted in SI. Optional with default value false which means
+
+          by default you will only see active time sheets which are not deleted.'
+        schema:
+          type: boolean
+          default: false
+      - name: pageNumber
+        in: query
+        description: The page number.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: The page size.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSheetsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TimeSheetsResult'
+  /Subscribe/TimeSheets/MarkAsImported:
+    put:
+      tags:
+      - SubscribeTimeSheet
+      summary: Mark a time sheet as imported for a given time sheet id
+      parameters:
+      - name: id
+        in: query
+        description: The time sheet id.
+        schema:
+          type: string
+      - name: publishedOnUnixTimeMs
+        in: query
+        description: The published on Unix time in milliseconds.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int64
+      responses:
+        '200':
+          description: ''
+  /Subscribe/TimeSheets/{id}:
+    get:
+      tags:
+      - SubscribeTimeSheet
+      summary: Get a time sheet for a given time sheet id
+      parameters:
+      - name: id
+        in: path
+        description: The time sheet id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSheet'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TimeSheet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/TimeSheet'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TimeSheet'
+components:
+  schemas:
+    TimeSheetEntry:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        phase:
+          type:
+          - 'null'
+          - string
+          description: Phase
+        laborType:
+          type:
+          - 'null'
+          - string
+          description: Labor Type
+        subLaborType:
+          type:
+          - 'null'
+          - string
+          description: 'Sub-Labor Type: Values can be Install, Miscellaneous, Management, Design'
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'Type: Duration = 1, Time In/Out = 2 (Required)'
+          format: uint8
+        duration:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Duration in Hours (applicable if TypeId =  1 (Duration))
+          format: double
+        startTime:
+          type:
+          - 'null'
+          - string
+          description: Start Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        endTime:
+          type:
+          - 'null'
+          - string
+          description: End Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        billable:
+          type:
+          - 'null'
+          - boolean
+          description: Billable
+        overtime:
+          type: boolean
+          description: Overtime
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description
+    TimeSheetInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Project Number or Task Number or Service Order Number
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date time sheet was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date time sheet was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date time sheet was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Time Sheet as Imported method optionally to make sure the time sheet was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Time sheet deleted
+      description: Time Sheet Information
+    TimeSheet:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        entityId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'Entity associated to Time Sheet: Project = 1, Task = 2, Service Order = 3, Company = 4'
+          format: uint8
+        entitySourceId:
+          type:
+          - 'null'
+          - string
+          description: Id of the Project or Task or Service Order. EntitySourceId is not required If company time sheet  (Required)
+        date:
+          type: string
+          description: Date
+          format: date-time
+        dateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        resource:
+          type:
+          - 'null'
+          - string
+          description: Resource
+        resourceEmail:
+          type:
+          - 'null'
+          - string
+          description: Resource Email
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client
+        projectName:
+          type:
+          - 'null'
+          - string
+          description: Project Name
+        projectNumber:
+          type:
+          - 'null'
+          - string
+          description: Project Number
+        taskOrSVOName:
+          type:
+          - 'null'
+          - string
+          description: Task or Service Order Name
+        taskOrSVONumber:
+          type:
+          - 'null'
+          - string
+          description: Task or Service Order Number
+        duration:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Duration for all non overtime entries in time sheet
+          format: double
+        durationOverTime:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Duration for all overtime entries in time sheet
+          format: double
+        createdOn:
+          type: string
+          description: Date the time sheet was created (UTC Time)
+          format: date-time
+        updatedOn:
+          type: string
+          description: Date the time sheet was updated  (UTC Time)
+          format: date-time
+        approved:
+          type:
+          - 'null'
+          - boolean
+          description: Is time sheet Approved
+        approvedBy:
+          type:
+          - 'null'
+          - string
+          description: If Time Sheet is approved the Time sheet Approved By
+        approvedOn:
+          type:
+          - 'null'
+          - string
+          description: If Time Sheet is approved the Time sheet Approved Date
+          format: date-time
+        costHr:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Cost Per Hr for non overtime work
+          format: double
+        costHrOverTime:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Cost Per Hr for overtime work
+          format: double
+        totalCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Cost
+          format: double
+        entries:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TimeSheetEntry'
+          description: Entries for time sheet
+        cF1:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 1 (Text)
+        cF2:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 2 (Text)
+        cF3:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 3 (Text)
+        cF4:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 4 (Text)
+        cF5:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 5 (Text)
+        cF6:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 6 (boolean)
+        cF7:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 7 (boolean)
+        cF8:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 8 (boolean)
+        cF9:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 9 (boolean)
+        cF10:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 10 (boolean)
+        cF11:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 11 (DateTime)
+          format: date-time
+        cF12:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 12 (DateTime)
+          format: date-time
+        cF13:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 13 (DateTime)
+          format: date-time
+        cF14:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 14 (DateTime)
+          format: date-time
+        cF15:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 15 (DateTime)
+          format: date-time
+        cF16:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 16 (List)
+        cF17:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 17 (List)
+        cF18:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 18 (List)
+        cF19:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 19 (List)
+        cF20:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 20 (List)
+        cF21:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 21 (Hyperlink)
+        cF22:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 22 (Hyperlink)
+        cF23:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 23 (Hyperlink)
+        cF24:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 24 (Hyperlink)
+        cF25:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 25 (Long Text)
+        cF26:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 26 (Long Text)
+        cF27:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 27 (Long Text)
+        cF28:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 28 (Number)
+          format: double
+        cF29:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 29 (Number)
+          format: double
+        cF30:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 30 (Number)
+          format: double
+        cF31:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 31 (Number)
+          format: double
+        cF32:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 32 (Number)
+          format: double
+        publishedOn:
+          type: string
+          description: Date time sheet was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date time sheet was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Time Sheet as Imported method optionally to make sure the time sheet was not updated in SI since it was published.
+          format: int64
+    TimeSheetsResult:
+      type: object
+      properties:
+        timeSheets:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TimeSheetInfo'
+          description: Time sheets array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of time sheet
+          format: int32

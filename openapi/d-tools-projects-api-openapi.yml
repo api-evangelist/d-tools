@@ -1,0 +1,1498 @@
+openapi: 3.2.0
+info:
+  title: D-Tools Cloud Projects API
+  description: API to integrate with the D-Tools Cloud application.
+  termsOfService: https://www.d-tools.com/d-tools-software-terms-of-services
+  contact:
+    name: api@d-toolshelp.com
+    email: api@d-toolshelp.com
+  license:
+    name: License Agreement
+    url: https://www.d-tools.com/license-agreement
+  version: v1
+servers:
+- url: https://dtcloudapi.d-tools.cloud
+tags:
+- name: Projects
+paths:
+  /api/v1/Projects/GetProjects:
+    get:
+      tags:
+      - Projects
+      parameters:
+      - name: clientIds
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid
+      - name: stageGroups
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: stages
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: priorities
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectManagers
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromCompletedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toCompletedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: fromCreatedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toCreatedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: fromModifiedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toModifiedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: includeArchived
+        in: query
+        schema:
+          type: boolean
+      - name: includeTotalCount
+        in: query
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: sort
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetProjectsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetProjectsResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/Projects/GetProject:
+    get:
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProjectDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.ProjectDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/Projects/UpdateProject:
+    put:
+      tags:
+      - Projects
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.UpdateProject'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.UpdateProject'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.UpdateProject'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DTools.Cloud.Data.UpdateProject'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    DTools.Cloud.Data.ProjectSystem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectAdjustment:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        isPercent:
+          type: boolean
+        percent:
+          type:
+          - number
+          - 'null'
+          format: double
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        isTaxable:
+          type: boolean
+        taxId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        applyTo:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectPayment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        integrationNumber:
+          type:
+          - string
+          - 'null'
+        billingDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        terms:
+          type:
+          - string
+          - 'null'
+        termsDaysDue:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        amount:
+          type: number
+          format: double
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        totalAmount:
+          type: number
+          format: double
+        paidAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        convenienceFee:
+          type:
+          - number
+          - 'null'
+          format: double
+        paidDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        paymentRequestMessage:
+          type:
+          - string
+          - 'null'
+        isDisplayPaymentSchedule:
+          type: boolean
+        isAutoGenerated:
+          type: boolean
+        isAutoPaid:
+          type: boolean
+        notes:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectTax:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        isGroup:
+          type: boolean
+        childIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+        rate:
+          type: number
+          format: double
+        applyOn:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        isPayByClient:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectItemLaborItem:
+      type: object
+      properties:
+        laborTypeId:
+          type: integer
+          format: int32
+        time:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        timePerLength:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        pricePerLength:
+          type:
+          - number
+          - 'null'
+          format: double
+        phaseId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isBillable:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.GetProjectsResult:
+      type: object
+      properties:
+        projects:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectLite'
+        totalProjects:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ResourceDetail:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectPaymentTerm:
+      type: object
+      properties:
+        paymentTermId:
+          type: string
+          format: uuid
+        paymentTerm:
+          type:
+          - string
+          - 'null'
+        isPercent:
+          type: boolean
+        percent:
+          type:
+          - number
+          - 'null'
+          format: double
+        billingDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        amount:
+          type: number
+          format: double
+        status:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        catalogId:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        allowanceType:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        packageType:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        laborTypeId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        brand:
+          type:
+          - string
+          - 'null'
+        model:
+          type:
+          - string
+          - 'null'
+        partNumber:
+          type:
+          - string
+          - 'null'
+        shortDescription:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        category:
+          type:
+          - string
+          - 'null'
+        imageUrl:
+          type:
+          - string
+          - 'null'
+        quantity:
+          type: integer
+          format: int32
+        isLengthBased:
+          type: boolean
+        lengthId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        length:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isIgnorePackageItemLaborItems:
+          type: boolean
+        msrp:
+          type:
+          - number
+          - 'null'
+          format: double
+        unitCost:
+          type:
+          - number
+          - 'null'
+          format: double
+        unitPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        margin:
+          type:
+          - number
+          - 'null'
+          format: double
+        markup:
+          type:
+          - number
+          - 'null'
+          format: double
+        costPerLength:
+          type:
+          - number
+          - 'null'
+          format: double
+        pricePerLength:
+          type:
+          - number
+          - 'null'
+          format: double
+        discountId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        discount:
+          type:
+          - number
+          - 'null'
+          format: double
+        unitLaborTime:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        unitLaborPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        isBillable:
+          type: boolean
+        isTaxable:
+          type: boolean
+        taxId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        supplier:
+          type:
+          - string
+          - 'null'
+        locationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        systemId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        phaseId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        upcBarcode:
+          type:
+          - string
+          - 'null'
+        eanBarcode:
+          type:
+          - string
+          - 'null'
+        itfBarcode:
+          type:
+          - string
+          - 'null'
+        isClientSupplied:
+          type: boolean
+        orderStatus:
+          type:
+          - string
+          - 'null'
+        installStatus:
+          type:
+          - string
+          - 'null'
+        parentId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        packageId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        laborItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectItemLaborItem'
+      additionalProperties: false
+    DTools.Cloud.Data.FileInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectLength:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        length:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ContactDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        secondaryEmail:
+          type:
+          - string
+          - 'null'
+        mobile:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        fax:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        isActive:
+          type: boolean
+        isPrimary:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectLite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        clientId:
+          type: string
+          format: uuid
+        clientName:
+          type:
+          - string
+          - 'null'
+        clientNumber:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        systemState:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        stageGroup:
+          type:
+          - string
+          - 'null'
+        stage:
+          type:
+          - string
+          - 'null'
+        priority:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        price:
+          type: number
+          format: double
+        projectManager:
+          type:
+          - string
+          - 'null'
+        completedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectLaborType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        catalogId:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        shortDescription:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        hourlyCost:
+          type:
+          - number
+          - 'null'
+          format: double
+        hourlyPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        margin:
+          type:
+          - number
+          - 'null'
+          format: double
+        markup:
+          type:
+          - number
+          - 'null'
+          format: double
+        difficultyFactor:
+          type: number
+          format: double
+        totalTimeInSeconds:
+          type: integer
+          format: int64
+        isTaxable:
+          type: boolean
+        taxId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.AddressDetail:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.Contact:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        secondaryEmail:
+          type:
+          - string
+          - 'null'
+        mobile:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        fax:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        isActive:
+          type:
+          - boolean
+          - 'null'
+        isPrimary:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.UpdateProject:
+      type: object
+      properties:
+        clientId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        priority:
+          type:
+          - string
+          - 'null'
+        budget:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        salesperson:
+          type:
+          - string
+          - 'null'
+        projectManager:
+          type:
+          - string
+          - 'null'
+        opportunityWonDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        startDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        completedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        billingAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        siteAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.Contact'
+        resources:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        clientId:
+          type: string
+          format: uuid
+        clientName:
+          type:
+          - string
+          - 'null'
+        clientNumber:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        systemState:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        stageGroup:
+          type:
+          - string
+          - 'null'
+        stage:
+          type:
+          - string
+          - 'null'
+        priority:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        price:
+          type: number
+          format: double
+        budget:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        salesperson:
+          type:
+          - string
+          - 'null'
+        projectManager:
+          type:
+          - string
+          - 'null'
+        projectArea:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        fulfillmentLocation:
+          type:
+          - string
+          - 'null'
+        isIgnoreItemLaborItems:
+          type: boolean
+        isExemptFromTax:
+          type: boolean
+        opportunityWonDate:
+          type: string
+          format: date-time
+        startDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        completedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+        scopeOfWork:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.AddressDetail'
+        siteAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.AddressDetail'
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ContactDetail'
+        resources:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ResourceDetail'
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.FileInfo'
+        planViews:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.FileInfo'
+        locations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectLocation'
+        systems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectSystem'
+        phases:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectPhase'
+        laborTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectLaborType'
+        lengths:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectLength'
+        discounts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectDiscount'
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectItem'
+        adjustments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectAdjustment'
+        taxSettings:
+          $ref: '#/components/schemas/DTools.Cloud.Data.ProjectTaxSettings'
+        taxes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectTax'
+        paymentTerms:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectPaymentTerm'
+        payments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProjectPayment'
+        changeOrderIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectTaxSettings:
+      type: object
+      properties:
+        isItemLevelTax:
+          type: boolean
+        taxId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        laborTaxId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectLocation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        fullName:
+          type:
+          - string
+          - 'null'
+        parentId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ProjectDiscount:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        isRange:
+          type: boolean
+        isPercent:
+          type: boolean
+        percent:
+          type:
+          - number
+          - 'null'
+          format: double
+        maximumPercent:
+          type:
+          - number
+          - 'null'
+          format: double
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        maximumAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    DTools.Cloud.Data.Address:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DTools.Cloud.Data.ProjectPhase:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false

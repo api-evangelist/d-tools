@@ -1,0 +1,702 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Publish Time Sheets API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: PublishTimeSheets
+  description: Allows an integration to publish a time sheet to a SI user.
+paths:
+  /Publish/TimeSheets:
+    post:
+      tags:
+      - PublishTimeSheets
+      summary: Publish a new time sheet to SI.
+      requestBody:
+        description: NewTimeSheetRequest.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/NewTimeSheetsRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTimeSheetsRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NewTimeSheetsRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/NewTimeSheetsRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/NewTimeSheetsRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/NewTimeSheetsRequest'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/NewTimeSheetsRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /Publish/UpdateTimeSheets:
+    post:
+      tags:
+      - PublishTimeSheets
+      summary: Update an existing time sheets in SI.
+      requestBody:
+        description: Update Time Sheets.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateTimeSheetsRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTimeSheetsRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTimeSheetsRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateTimeSheetsRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateTimeSheetsRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateTimeSheetsRequest'
+          application/*+xml:
+            schema:
+              $ref: '#/components/schemas/UpdateTimeSheetsRequest'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+components:
+  schemas:
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
+    NewTimeSheetsRequest:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name (Optional)
+        newTimeSheets:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/NewTimeSheet'
+          description: Array of new time sheets
+    UpdateTimeSheet:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id (Required and must the Id of the SI time sheet to update)
+        date:
+          type:
+          - 'null'
+          - string
+          description: Date
+          format: date-time
+        dateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        resource:
+          type:
+          - 'null'
+          - string
+          description: Resource
+        resourceEmail:
+          type:
+          - 'null'
+          - string
+          description: Resource Email
+        cF1:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 1 (Text)
+        cF2:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 2 (Text)
+        cF3:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 3 (Text)
+        cF4:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 4 (Text)
+        cF5:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 5 (Text)
+        cF6:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 6 (boolean)
+        cF7:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 7 (boolean)
+        cF8:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 8 (boolean)
+        cF9:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 9 (boolean)
+        cF10:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 10 (boolean)
+        cF11:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 11 (DateTime)
+          format: date-time
+        cF12:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 12 (DateTime)
+          format: date-time
+        cF13:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 13 (DateTime)
+          format: date-time
+        cF14:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 14 (DateTime)
+          format: date-time
+        cF15:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 15 (DateTime)
+          format: date-time
+        cF16:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 16 (List)
+        cF17:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 17 (List)
+        cF18:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 18 (List)
+        cF19:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 19 (List)
+        cF20:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 20 (List)
+        cF21:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 21 (Hyperlink)
+        cF22:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 22 (Hyperlink)
+        cF23:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 23 (Hyperlink)
+        cF24:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 24 (Hyperlink)
+        cF25:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 25 (Long Text)
+        cF26:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 26 (Long Text)
+        cF27:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 27 (Long Text)
+        cF28:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 28 (Number)
+          format: double
+        cF29:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 29 (Number)
+          format: double
+        cF30:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 30 (Number)
+          format: double
+        cF31:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 31 (Number)
+          format: double
+        cF32:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 32 (Number)
+          format: double
+        phase:
+          type:
+          - 'null'
+          - string
+          description: Phase
+        laborType:
+          type:
+          - 'null'
+          - string
+          description: Labor Type
+        subLaborType:
+          type:
+          - 'null'
+          - string
+          description: 'Sub-Labor Type: Values can be Install, Miscellaneous, Management, Design'
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'Type: Duration = 1, Time In/Out = 2 (Required)'
+          format: uint8
+        duration:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Duration in Hours (applicable if TypeId =  1 (Duration))
+          format: double
+        startTime:
+          type:
+          - 'null'
+          - string
+          description: Start Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        endTime:
+          type:
+          - 'null'
+          - string
+          description: End Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        billable:
+          type:
+          - 'null'
+          - boolean
+          description: Billable
+        overtime:
+          type: boolean
+          description: Overtime
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description
+    NewTimeSheet:
+      type: object
+      properties:
+        entityId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'Entity associated to Time Sheet: Project = 1, Task = 2, Service Order = 3, Company = 4'
+          format: uint8
+        entitySourceId:
+          type:
+          - 'null'
+          - string
+          description: Id of the Project or Task or Service Order. EntitySourceId is not required If company time sheet
+        date:
+          type: string
+          description: Date (Required)
+          format: date-time
+        dateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        resource:
+          type:
+          - 'null'
+          - string
+          description: Resource
+        resourceEmail:
+          type:
+          - 'null'
+          - string
+          description: Resource Email
+        cF1:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 1 (Text)
+        cF2:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 2 (Text)
+        cF3:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 3 (Text)
+        cF4:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 4 (Text)
+        cF5:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 5 (Text)
+        cF6:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 6 (boolean)
+        cF7:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 7 (boolean)
+        cF8:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 8 (boolean)
+        cF9:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 9 (boolean)
+        cF10:
+          type:
+          - 'null'
+          - boolean
+          description: Custom Fields 10 (boolean)
+        cF11:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 11 (DateTime)
+          format: date-time
+        cF12:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 12 (DateTime)
+          format: date-time
+        cF13:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 13 (DateTime)
+          format: date-time
+        cF14:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 14 (DateTime)
+          format: date-time
+        cF15:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 15 (DateTime)
+          format: date-time
+        cF16:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 16 (List)
+        cF17:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 17 (List)
+        cF18:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 18 (List)
+        cF19:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 19 (List)
+        cF20:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 20 (List)
+        cF21:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 21 (Hyperlink)
+        cF22:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 22 (Hyperlink)
+        cF23:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 23 (Hyperlink)
+        cF24:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 24 (Hyperlink)
+        cF25:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 25 (Long Text)
+        cF26:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 26 (Long Text)
+        cF27:
+          type:
+          - 'null'
+          - string
+          description: Custom Fields 27 (Long Text)
+        cF28:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 28 (Number)
+          format: double
+        cF29:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 29 (Number)
+          format: double
+        cF30:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 30 (Number)
+          format: double
+        cF31:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 31 (Number)
+          format: double
+        cF32:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Custom Fields 32 (Number)
+          format: double
+        phase:
+          type:
+          - 'null'
+          - string
+          description: Phase
+        laborType:
+          type:
+          - 'null'
+          - string
+          description: Labor Type
+        subLaborType:
+          type:
+          - 'null'
+          - string
+          description: 'Sub-Labor Type: Values can be Install, Miscellaneous, Management, Design'
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'Type: Duration = 1, Time In/Out = 2 (Required)'
+          format: uint8
+        duration:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Duration in Hours (applicable if TypeId =  1 (Duration))
+          format: double
+        startTime:
+          type:
+          - 'null'
+          - string
+          description: Start Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        endTime:
+          type:
+          - 'null'
+          - string
+          description: End Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        billable:
+          type:
+          - 'null'
+          - boolean
+          description: Billable
+        overtime:
+          type: boolean
+          description: Overtime
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description
+    UpdateTimeSheetsRequest:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name (Optional)
+        updateTimeSheets:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateTimeSheet'
+          description: Array of update time sheets

@@ -1,0 +1,585 @@
+openapi: 3.2.0
+info:
+  title: D-Tools Cloud Purchase Orders API
+  description: API to integrate with the D-Tools Cloud application.
+  termsOfService: https://www.d-tools.com/d-tools-software-terms-of-services
+  contact:
+    name: api@d-toolshelp.com
+    email: api@d-toolshelp.com
+  license:
+    name: License Agreement
+    url: https://www.d-tools.com/license-agreement
+  version: v1
+servers:
+- url: https://dtcloudapi.d-tools.cloud
+tags:
+- name: PurchaseOrders
+paths:
+  /api/v1/PurchaseOrders/GetPurchaseOrders:
+    get:
+      tags:
+      - PurchaseOrders
+      parameters:
+      - name: suppliers
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: projectIds
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid
+      - name: statuses
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromOrderedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toOrderedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: fromReceivedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toReceivedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: fromCreatedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toCreatedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: fromModifiedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: toModifiedDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: includeArchived
+        in: query
+        schema:
+          type: boolean
+      - name: includeTotalCount
+        in: query
+        schema:
+          type: boolean
+      - name: search
+        in: query
+        schema:
+          type: string
+      - name: sort
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetPurchaseOrdersResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.GetPurchaseOrdersResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+  /api/v1/PurchaseOrders/GetPurchaseOrder:
+    get:
+      tags:
+      - PurchaseOrders
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderDetail'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderDetail'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    DTools.Cloud.Data.PurchaseOrderSupplierContact:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        department:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        mobile:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        isPrimary:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.PurchaseOrderProduct:
+      type: object
+      properties:
+        catalogId:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        brand:
+          type:
+          - string
+          - 'null'
+        model:
+          type:
+          - string
+          - 'null'
+        partNumber:
+          type:
+          - string
+          - 'null'
+        supplierPartNumber:
+          type:
+          - string
+          - 'null'
+        upcBarcode:
+          type:
+          - string
+          - 'null'
+        eanBarcode:
+          type:
+          - string
+          - 'null'
+        itfBarcode:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        imageUrl:
+          type:
+          - string
+          - 'null'
+        quantity:
+          type: integer
+          format: int32
+        receivedQuantity:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        unitCost:
+          type: number
+          format: double
+        etaDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        shipmentTrackingNumber:
+          type:
+          - string
+          - 'null'
+        projectId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        project:
+          type:
+          - string
+          - 'null'
+        projectNumber:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.GetPurchaseOrdersResult:
+      type: object
+      properties:
+        purchaseOrders:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderLite'
+        totalPurchaseOrders:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.PurchaseOrderDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        supplier:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        quoteNumber:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        productsCount:
+          type: integer
+          format: int32
+        total:
+          type: number
+          format: double
+        shipping:
+          type:
+          - number
+          - 'null'
+          format: double
+        tax:
+          type:
+          - number
+          - 'null'
+          format: double
+        supplierAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.AddressDetail'
+        supplierContacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderSupplierContact'
+        accountNumber:
+          type:
+          - string
+          - 'null'
+        shipToName:
+          type:
+          - string
+          - 'null'
+        shippingAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.AddressDetail'
+        shippingMethod:
+          type:
+          - string
+          - 'null'
+        attention:
+          type:
+          - string
+          - 'null'
+        noteToSupplier:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.AddressDetail'
+        paymentMethod:
+          type:
+          - string
+          - 'null'
+        dealerContact:
+          $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderDealerContact'
+        notes:
+          type:
+          - string
+          - 'null'
+        shipmentTrackingNumber:
+          type:
+          - string
+          - 'null'
+        orderedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        receivedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.FileInfo'
+        products:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderProduct'
+      additionalProperties: false
+    DTools.Cloud.Data.FileInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.PurchaseOrderLite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        supplier:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        productsCount:
+          type: integer
+          format: int32
+        total:
+          type: number
+          format: double
+        orderedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        receivedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.PurchaseOrderDealerContact:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.AddressDetail:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}

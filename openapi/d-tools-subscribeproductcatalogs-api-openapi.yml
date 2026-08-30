@@ -1,0 +1,1016 @@
+openapi: 3.2.0
+info:
+  title: D-Tools SI API Documentation Subscribe Product Catalogs API
+  description: 'The API allows integrations to:
+
+
+    - Publish catalogs and projects to SI users.
+
+    - Subscribe to projects and catalogs published by SI users.
+
+
+    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
+
+
+    An API key is specific to a SI user and an integration.
+
+
+    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
+
+
+    ```
+
+    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
+
+    ```'
+  version: 1.0.0
+servers:
+- url: https://api.d-tools.com/si
+tags:
+- name: SubscribeProductCatalogs
+  description: Allows an integration to subscribe to product catalogs published by SI users.
+paths:
+  /Subscribe/ProductCatalogs:
+    get:
+      tags:
+      - SubscribeProductCatalogs
+      summary: Get product catalogs published by a SI user.
+      parameters:
+      - name: includeImported
+        in: query
+        description: 'Boolean. Include already imported product catalogs. Optional with default value false
+
+          which means by default you will only see product catalogs which are not imported.'
+        schema:
+          type: boolean
+          default: false
+      - name: searchText
+        in: query
+        description: The search text.
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        description: The page number.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: The page size.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CatalogsResult'
+  /Subscribe/ProductCatalogs/MarkAsImported:
+    put:
+      tags:
+      - SubscribeProductCatalogs
+      summary: Mark a product catalog as imported for a given catalog id.
+      parameters:
+      - name: id
+        in: query
+        description: The product catalog id.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+  /Subscribe/ProductCatalogs/{id}:
+    get:
+      tags:
+      - SubscribeProductCatalogs
+      summary: Get a product catalog for a given catalog id.
+      parameters:
+      - name: id
+        in: path
+        description: The product catalog id.
+        required: true
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        description: The page number.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: The page size.
+        schema:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+          default: 10000
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCatalog'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProductCatalog'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProductCatalog'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProductCatalog'
+components:
+  schemas:
+    CatalogsResult:
+      type: object
+      properties:
+        catalogs:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/CatalogInfo'
+          description: Catalogs array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of catalogs
+          format: int32
+    Product:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the product (Required)
+        integrationProductId:
+          type:
+          - 'null'
+          - string
+          description: Id for the product sent by integration.
+        manufacturerId:
+          type:
+          - 'null'
+          - string
+          description: Id for the manufacturer.
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer for the product. (Required)
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model for the product (Required)
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part Number
+        category:
+          type:
+          - 'null'
+          - string
+          description: Category
+        subcategory:
+          type:
+          - 'null'
+          - string
+          description: Subcategory
+        description:
+          type:
+          - 'null'
+          - string
+          description: Short description
+        url:
+          type:
+          - 'null'
+          - string
+          description: Product URL (BETA).
+        tags:
+          type:
+          - 'null'
+          - string
+          description: Tags
+        msrp:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: MSRP
+          format: double
+        unitCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Unit Cost
+          format: double
+        unitPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Unit Price
+          format: double
+        ofe:
+          type: boolean
+          description: Owner Furnished Equipment
+        allowZeroCost:
+          type:
+          - 'null'
+          - boolean
+          description: Allow Zero Cost (BETA)
+        phase:
+          type:
+          - 'null'
+          - string
+          description: Phase
+        laborHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Labor Hours to install the item
+          format: double
+        installPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Install Price is the sum of product price and labor price to install the item
+          format: double
+        laborTypes:
+          type:
+          - 'null'
+          - string
+          description: Comma separated list of product labor types
+        itemLaborTypes:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ItemLaborType'
+          description: Collection of labor types for product with name and hours
+        taxable:
+          type:
+          - 'null'
+          - boolean
+          description: Is product taxable. Applicable if SI has IsItemLevelTax = false
+        tax:
+          type:
+          - 'null'
+          - string
+          description: Tax for the product. Applicable if SI has IsItemLevelTax = true
+        laborTax:
+          type:
+          - 'null'
+          - string
+          description: Labor Tax for the product. Applicable if SI has IsItemLevelTax = true
+        avalaraTaxCode:
+          type:
+          - 'null'
+          - string
+          description: Avalara tax code
+        avalaraLaborTaxCode:
+          type:
+          - 'null'
+          - string
+          description: Avalara labor tax code
+        acctgName:
+          type:
+          - 'null'
+          - string
+          description: Accounting Item Name
+        vendor:
+          type:
+          - 'null'
+          - string
+          description: Vendor
+        vendorNumber:
+          type:
+          - 'null'
+          - string
+          description: Vendor Number
+        orderUom:
+          type:
+          - 'null'
+          - string
+          description: UOM
+        orderUomUnits:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: UOM units
+          format: int32
+        doNotOrder:
+          type: boolean
+          description: Do Not Order
+        purchaseCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Purchase Cost
+          format: double
+        purchaseCostCurrencyCode:
+          type:
+          - 'null'
+          - string
+          description: Purchase Cost Currency Code
+        height:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product Height
+          format: double
+        width:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product Width
+          format: double
+        depth:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product Depth
+          format: double
+        weight:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product Weight
+          format: double
+        rackMounted:
+          type: boolean
+          description: Product Rack Mounted
+        rackUnits:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Product Rack Units
+          format: int16
+        amps:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product Amps
+          format: double
+        volts:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product Volts
+          format: double
+        watts:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product Watts
+          format: double
+        btu:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product Btu
+          format: double
+        dispersion:
+          type:
+          - 'null'
+          - string
+          description: Product Dispersion
+        bulkWire:
+          type: boolean
+          description: Product Bulk Wire
+        inputTerminals:
+          type:
+          - 'null'
+          - string
+          description: Product Input Terminals
+        inputSignals:
+          type:
+          - 'null'
+          - string
+          description: Product Input Signals
+        inputLabels:
+          type:
+          - 'null'
+          - string
+          description: Product Input Labels
+        outputTerminals:
+          type:
+          - 'null'
+          - string
+          description: Product Output Terminals
+        outputSignals:
+          type:
+          - 'null'
+          - string
+          description: Product Output Signals
+        outputLabels:
+          type:
+          - 'null'
+          - string
+          description: Product Output Labels
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 1
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 2
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 3
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 4
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 5
+        customField6:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 6
+          format: double
+        customField7:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 7
+          format: double
+        customField8:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 8
+          format: double
+        customField9:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 9
+          format: date-time
+        customField10:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 10
+          format: date-time
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 11
+          format: date-time
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 12
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 13
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 14
+        customField15:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 15
+        customField16:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 16
+        customField17:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 17
+        customField18:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 18
+        customField19:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 19
+        customField20:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 20
+        customField21:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 21
+        customField22:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 22
+        customField23:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 23
+        customField24:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 24
+        customField25:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 25
+        customField26:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 26
+        customField27:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 27
+        customField28:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 28
+        customField29:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 29
+        customField30:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 30
+        customField31:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 31
+        customField32:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 32
+        customField33:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 33
+        customField34:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 34
+        customField35:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 35
+        customField36:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 36
+        customField37:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 37
+        customField38:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 38
+        customField39:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 39
+        customField40:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 40
+        customField41:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 41
+        customField42:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 42
+        customField43:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 43
+        customField44:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 44
+        customField45:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 45
+        customField46:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 46
+        customField47:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 47
+        customField48:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 48
+        customField49:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 49
+        customField50:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 50
+          format: double
+        customField51:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 51
+          format: double
+        customField52:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 52
+          format: double
+        customField53:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 53
+          format: double
+        customField54:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 54
+          format: double
+        customField55:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 55
+          format: double
+        customField56:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 56
+          format: double
+        customField57:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 57
+          format: double
+        customField58:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Product custom field 58
+          format: double
+        customField59:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 59
+          format: date-time
+        customField60:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 60
+          format: date-time
+        customField61:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 61
+          format: date-time
+        customField62:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 62
+          format: date-time
+        customField63:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 63
+          format: date-time
+        customField64:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 64
+          format: date-time
+        customField65:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 65
+          format: date-time
+        customField66:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 66
+          format: date-time
+        customField67:
+          type:
+          - 'null'
+          - string
+          description: Product custom field 67
+          format: date-time
+        customField68:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 68
+        customField69:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 69
+        customField70:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 70
+        customField71:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 71
+        customField72:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 72
+        customField73:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 73
+        customField74:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 74
+        customField75:
+          type:
+          - 'null'
+          - boolean
+          description: Product custom field 75
+        updatedOn:
+          type:
+          - 'null'
+          - string
+          description: Date the product was updated
+          format: date-time
+        updatedOnTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Updated on date in ticks (number)
+          format: int64
+        approved:
+          type:
+          - 'null'
+          - boolean
+          description: Product Approved
+        discontinued:
+          type:
+          - 'null'
+          - boolean
+          description: Product Discontinued
+      description: Product object
+    ProductCatalog:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the catalog
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name for the catalog (Required)
+        description:
+          type:
+          - 'null'
+          - string
+          description: Catalog description
+        priceType:
+          type:
+          - 'null'
+          - string
+          description: Price type
+        priceTypeDisplayName:
+          type:
+          - 'null'
+          - string
+          description: Price type display name
+        isMetric:
+          type: boolean
+          description: Catalog Item H,W,D are in inches for non-metric catalogs and millimeters for metric catalogs. Item weight is in pounds for non-metric catalogs and kilograms for metric catalogs.
+        totalProductsCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total Products Count
+          format: int32
+        products:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Product'
+          description: Products in the catalog.
+        deletedProductIds:
+          type:
+          - 'null'
+          - array
+          items:
+            type: string
+            format: uuid
+          description: Product Ids deleted (available only with automated SI Server Exports)
+      description: Product catalog object
+    ItemLaborType:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Labor Type name
+        hours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Labor Type Hours
+          format: double
+        totalHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
+          format: double
+    CatalogInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the catalog
+        name:
+          type:
+          - 'null'
+          - string
+          description: Catalog name
+        description:
+          type:
+          - 'null'
+          - string
+          description: Catalog description
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date catalog was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date catalog was published
+          format: date-time
+      description: Catalog Information
