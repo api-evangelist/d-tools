@@ -31,16 +31,16 @@ created: '2026-08-11'
 modified: '2026-08-11'
 tags:
 - av-integration
-- Systems Integration
-- Project Management
-- Estimation
+- systems-integration
+- project-management
+- estimation
 - Quoting
-- Field Service Management
-- Construction Tech
+- field-service-management
+- construction-tech
 - low-voltage
-- Product Catalog
-- ERP Integration
-- Vertical SaaS
+- product-catalog
+- erp-integration
+- vertical-saas
 tags_raw:
 - av-integration
 - systems-integration
@@ -65,6 +65,8 @@ apis:
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
+  - Change Orders
+  tags_raw:
   - ChangeOrders
   properties:
   - type: OpenAPI
@@ -129,6 +131,8 @@ apis:
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -225,6 +229,8 @@ apis:
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -257,6 +263,8 @@ apis:
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -513,6 +521,8 @@ apis:
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
+  - Purchase Orders
+  tags_raw:
   - PurchaseOrders
   properties:
   - type: OpenAPI
@@ -577,6 +587,8 @@ apis:
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
+  - Service Contracts
+  tags_raw:
   - ServiceContracts
   properties:
   - type: OpenAPI
@@ -897,6 +909,8 @@ apis:
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
+  - Time Entries
+  tags_raw:
   - TimeEntries
   properties:
   - type: OpenAPI
