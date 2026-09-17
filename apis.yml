@@ -74,40 +74,6 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- aid: d-tools:d-tools-changeorders-api
-  name: D-Tools Change Orders API
-  description: The ChangeOrders API from D-Tools — 2 operation(s) for changeorders.
-  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
-  baseURL: https://dtcloudapi.d-tools.cloud
-  tags:
-  - Change Orders
-  tags_raw:
-  - ChangeOrders
-  properties:
-  - type: OpenAPI
-    url: openapi/d-tools-changeorders-api-openapi.yml
-  - type: Documentation
-    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
-  - type: APIReference
-    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
-  - type: Authentication
-    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
-  - type: RateLimits
-    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
-  - type: Webhooks
-    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
-  - type: Postman
-    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
-  - type: LLMsTxt
-    url: llms/d-tools-cloud-llms.txt
-  - type: Documentation
-    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
-  - type: APIReference
-    url: https://api.d-tools.com/si/doc
-  - type: Authentication
-    url: https://docs.d-tools.com/en/articles/9203156-api-key
-  - type: LLMsTxt
-    url: llms/d-tools-si-llms.txt
 - aid: d-tools:d-tools-clients-api
   name: D-Tools Clients API
   description: The Clients API from D-Tools — 4 operation(s) for clients.
@@ -530,40 +496,6 @@ apis:
     url: https://docs.d-tools.com/en/articles/9203156-api-key
   - type: LLMsTxt
     url: llms/d-tools-si-llms.txt
-- aid: d-tools:d-tools-purchaseorders-api
-  name: D-Tools Purchase Orders API
-  description: The PurchaseOrders API from D-Tools — 2 operation(s) for purchaseorders.
-  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
-  baseURL: https://dtcloudapi.d-tools.cloud
-  tags:
-  - Purchase Orders
-  tags_raw:
-  - PurchaseOrders
-  properties:
-  - type: OpenAPI
-    url: openapi/d-tools-purchaseorders-api-openapi.yml
-  - type: Documentation
-    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
-  - type: APIReference
-    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
-  - type: Authentication
-    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
-  - type: RateLimits
-    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
-  - type: Webhooks
-    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
-  - type: Postman
-    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
-  - type: LLMsTxt
-    url: llms/d-tools-cloud-llms.txt
-  - type: Documentation
-    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
-  - type: APIReference
-    url: https://api.d-tools.com/si/doc
-  - type: Authentication
-    url: https://docs.d-tools.com/en/articles/9203156-api-key
-  - type: LLMsTxt
-    url: llms/d-tools-si-llms.txt
 - aid: d-tools:d-tools-quotes-api
   name: D-Tools Quotes API
   description: The Quotes API from D-Tools — 2 operation(s) for quotes.
@@ -918,18 +850,80 @@ apis:
     url: https://docs.d-tools.com/en/articles/9203156-api-key
   - type: LLMsTxt
     url: llms/d-tools-si-llms.txt
-- aid: d-tools:d-tools-timeentries-api
+- aid: d-tools:d-tools-change-orders-api
+  name: D-Tools Change Orders API
+  description: The Change Orders API from D-Tools — 2 operation(s) for change orders.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - Change Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-change-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-purchase-orders-api
+  name: D-Tools Purchase Orders API
+  description: The Purchase Orders API from D-Tools — 2 operation(s) for purchase orders.
+  humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  baseURL: https://dtcloudapi.d-tools.cloud
+  tags:
+  - Purchase Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/d-tools-purchase-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
+  - type: APIReference
+    url: https://dtcloudapi.d-tools.cloud/apidocs/index.html
+  - type: Authentication
+    url: https://docs.d-tools.cloud/en/articles/8756132-authentication
+  - type: RateLimits
+    url: https://docs.d-tools.cloud/en/articles/9276121-api-limits
+  - type: Webhooks
+    url: https://docs.d-tools.cloud/en/articles/8756116-api-keys-and-webhooks
+  - type: Postman
+    url: https://docs.d-tools.cloud/en/articles/8756124-using-postman-to-test-api-responses
+  - type: LLMsTxt
+    url: llms/d-tools-cloud-llms.txt
+  - type: Documentation
+    url: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
+  - type: APIReference
+    url: https://api.d-tools.com/si/doc
+  - type: Authentication
+    url: https://docs.d-tools.com/en/articles/9203156-api-key
+  - type: LLMsTxt
+    url: llms/d-tools-si-llms.txt
+- aid: d-tools:d-tools-time-entries-api
   name: D-Tools Time Entries API
-  description: The TimeEntries API from D-Tools — 1 operation(s) for timeentries.
+  description: The Time Entries API from D-Tools — 1 operation(s) for time entries.
   humanURL: https://dtcloudapi.d-tools.cloud/apidocs/index.html
   baseURL: https://dtcloudapi.d-tools.cloud
   tags:
   - Time Entries
-  tags_raw:
-  - TimeEntries
   properties:
   - type: OpenAPI
-    url: openapi/d-tools-timeentries-api-openapi.yml
+    url: openapi/d-tools-time-entries-api-openapi.yml
   - type: Documentation
     url: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
   - type: APIReference
