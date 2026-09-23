@@ -59,6 +59,10 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Get api quotes get quotes
+      x-summary-source: derived
+      operationId: getApiV1QuotesGetQuotes
+      x-operation-id-source: derived
   /api/v1/Quotes/GetQuote:
     get:
       tags:
@@ -108,22 +112,12 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Get api quotes get quote
+      x-summary-source: derived
+      operationId: getApiV1QuotesGetQuote
+      x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.QuoteServicePlanLength:
-      type: object
-      properties:
-        months:
-          type: integer
-          format: int32
-        discount:
-          type:
-          - number
-          - 'null'
-          format: double
-        isSuggested:
-          type: boolean
-      additionalProperties: false
     DTools.Cloud.Data.QuoteAdjustment:
       type: object
       properties:
@@ -156,19 +150,20 @@ components:
           - 'null'
           readOnly: true
       additionalProperties: false
-    DTools.Cloud.Data.QuoteServicePlan:
+    DTools.Cloud.Data.QuoteLaborType:
       type: object
       properties:
-        type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
+        id:
+          type: integer
+          format: int32
+        catalogId:
+          type: string
+          format: uuid
         name:
           type:
           - string
           - 'null'
-        imageUrl:
+        shortDescription:
           type:
           - string
           - 'null'
@@ -176,129 +171,41 @@ components:
           type:
           - string
           - 'null'
-        priceType:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        fixedPrice:
+        hourlyCost:
           type:
           - number
           - 'null'
           format: double
-        dynamicPriceFieldId:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        dynamicPricePercent:
+        hourlyPrice:
           type:
           - number
           - 'null'
           format: double
-        priceInterval:
+        margin:
           type:
-          - string
+          - number
           - 'null'
-          readOnly: true
-        pricePerMonth:
+          format: double
+        markup:
+          type:
+          - number
+          - 'null'
+          format: double
+        difficultyFactor:
           type: number
           format: double
-        tax:
-          type:
-          - string
-          - 'null'
-        taxRate:
-          type:
-          - number
-          - 'null'
-          format: double
-        length:
+        totalTimeInSeconds:
           type: integer
-          format: int32
-        lengthDiscount:
-          type:
-          - number
-          - 'null'
-          format: double
-        billingFrequency:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        billingFrequencyDiscount:
-          type:
-          - number
-          - 'null'
-          format: double
-        estimatedStartDateType:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        estimatedStartDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        estimatedStartDateDays:
+          format: int64
+        isTaxable:
+          type: boolean
+        taxId:
           type:
           - integer
           - 'null'
           format: int32
-        isClientAgreementRequired:
-          type: boolean
-        termsAndConditionsFileUrl:
-          type:
-          - string
-          - 'null'
-        termsAndConditionsText:
-          type:
-          - string
-          - 'null'
-        isRecommended:
-          type: boolean
-        isOptional:
-          type: boolean
-        isClientSelected:
-          type: boolean
-        isDeclined:
-          type: boolean
-        clusterId:
-          type: string
-          format: uuid
-        lengths:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.QuoteServicePlanLength'
-        billingFrequencies:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.QuoteServicePlanBillingFrequency'
-        features:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.QuoteServicePlanFeature'
-        notes:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        files:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.FileInfo'
       additionalProperties: false
-    DTools.Cloud.Data.QuoteLength:
+    DTools.Cloud.Data.QuoteDiscount:
       type: object
       properties:
         id:
@@ -308,9 +215,85 @@ components:
           type:
           - string
           - 'null'
-        length:
-          type: integer
-          format: int32
+        isRange:
+          type: boolean
+        isPercent:
+          type: boolean
+        percent:
+          type:
+          - number
+          - 'null'
+          format: double
+        maximumPercent:
+          type:
+          - number
+          - 'null'
+          format: double
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        maximumAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    DTools.Cloud.Data.QuoteLite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        version:
+          type: number
+          format: double
+        systemState:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        state:
+          type:
+          - string
+          - 'null'
+        price:
+          type: number
+          format: double
+        servicePrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        isIncludedInTotal:
+          type: boolean
+        isServiceQuote:
+          type: boolean
+        validUntilDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        acceptedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
       additionalProperties: false
     DTools.Cloud.Data.QuoteDetail:
       type: object
@@ -477,105 +460,72 @@ components:
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.QuoteServicePlan'
       additionalProperties: false
-    DTools.Cloud.Data.QuoteServicePlanFeature:
+    DTools.Cloud.Data.QuotePaymentTerm:
       type: object
       properties:
-        type:
+        paymentTermId:
+          type: string
+          format: uuid
+        paymentTerm:
           type:
           - string
           - 'null'
-          readOnly: true
-        price:
-          type:
-          - number
-          - 'null'
-          format: double
-        priceInterval:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        includedServiceCallType:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        includedServiceCalls:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        hours:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isAdditionalService:
+        isPercent:
           type: boolean
-        additionalServicePrice:
+        percent:
           type:
           - number
           - 'null'
           format: double
-        additionalServicePriceInterval:
+        billingDate:
           type:
           - string
           - 'null'
-          readOnly: true
-        serviceFrequency:
+          format: date-time
+        dueDate:
           type:
           - string
           - 'null'
-          readOnly: true
-        afterHoursServiceType:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        productDiscount:
-          type:
-          - number
-          - 'null'
+          format: date-time
+        amount:
+          type: number
           format: double
-        automaticPlanRenewalLength:
-          type:
-          - integer
-          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.QuoteAlternateSet:
+      type: object
+      properties:
+        id:
+          type: integer
           format: int32
-        automaticPlanRenewalPriceIncreasePercent:
-          type:
-          - number
-          - 'null'
-          format: double
-        includedSessions:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        sessionLengthInMinutes:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isAdditionalSupport:
-          type: boolean
-        additionalSupportPrice:
-          type:
-          - number
-          - 'null'
-          format: double
-        additionalSupportPriceInterval:
+        name:
           type:
           - string
           - 'null'
-          readOnly: true
-        displayText:
+        description:
           type:
           - string
           - 'null'
-        isShowInProposal:
+        hasRecommendedItem:
           type: boolean
           readOnly: true
+        isKeepLaborItemsOnReplace:
+          type: boolean
+        isKeepAccessoriesOnReplace:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.QuoteServicePlanLength:
+      type: object
+      properties:
+        months:
+          type: integer
+          format: int32
+        discount:
+          type:
+          - number
+          - 'null'
+          format: double
+        isSuggested:
+          type: boolean
       additionalProperties: false
     DTools.Cloud.Data.QuoteItem:
       type: object
@@ -793,236 +743,147 @@ components:
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.QuoteItemLaborItem'
       additionalProperties: false
-    DTools.Cloud.Data.QuoteServicePlanBillingFrequency:
+    DTools.Cloud.Data.QuoteServicePlan:
       type: object
       properties:
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        name:
+          type:
+          - string
+          - 'null'
+        imageUrl:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        priceType:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        fixedPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        dynamicPriceFieldId:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        dynamicPricePercent:
+          type:
+          - number
+          - 'null'
+          format: double
+        priceInterval:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        pricePerMonth:
+          type: number
+          format: double
+        tax:
+          type:
+          - string
+          - 'null'
+        taxRate:
+          type:
+          - number
+          - 'null'
+          format: double
+        length:
+          type: integer
+          format: int32
+        lengthDiscount:
+          type:
+          - number
+          - 'null'
+          format: double
         billingFrequency:
           type:
           - string
           - 'null'
           readOnly: true
-        discount:
+        billingFrequencyDiscount:
           type:
           - number
           - 'null'
           format: double
-        isSuggested:
-          type: boolean
-      additionalProperties: false
-    DTools.Cloud.Data.QuoteDiscount:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        isRange:
-          type: boolean
-        isPercent:
-          type: boolean
-        percent:
-          type:
-          - number
-          - 'null'
-          format: double
-        maximumPercent:
-          type:
-          - number
-          - 'null'
-          format: double
-        amount:
-          type:
-          - number
-          - 'null'
-          format: double
-        maximumAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-      additionalProperties: false
-    DTools.Cloud.Data.QuoteSystem:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        isOptional:
-          type: boolean
-        isOptionalRecommended:
-          type: boolean
-      additionalProperties: false
-    DTools.Cloud.Data.FileInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.QuoteItemLaborItem:
-      type: object
-      properties:
-        laborTypeId:
-          type: integer
-          format: int32
-        time:
-          type: integer
-          format: int32
-        price:
-          type: number
-          format: double
-        timePerLength:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        pricePerLength:
-          type:
-          - number
-          - 'null'
-          format: double
-        phaseId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isBillable:
-          type: boolean
-      additionalProperties: false
-    DTools.Cloud.Data.QuoteLaborType:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        catalogId:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        shortDescription:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        hourlyCost:
-          type:
-          - number
-          - 'null'
-          format: double
-        hourlyPrice:
-          type:
-          - number
-          - 'null'
-          format: double
-        margin:
-          type:
-          - number
-          - 'null'
-          format: double
-        markup:
-          type:
-          - number
-          - 'null'
-          format: double
-        difficultyFactor:
-          type: number
-          format: double
-        totalTimeInSeconds:
-          type: integer
-          format: int64
-        isTaxable:
-          type: boolean
-        taxId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    DTools.Cloud.Data.QuotePaymentTerm:
-      type: object
-      properties:
-        paymentTermId:
-          type: string
-          format: uuid
-        paymentTerm:
-          type:
-          - string
-          - 'null'
-        isPercent:
-          type: boolean
-        percent:
-          type:
-          - number
-          - 'null'
-          format: double
-        billingDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        amount:
-          type: number
-          format: double
-      additionalProperties: false
-    DTools.Cloud.Data.QuoteTax:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        isGroup:
-          type: boolean
-        childIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-            format: int32
-        rate:
-          type: number
-          format: double
-        applyOn:
+        estimatedStartDateType:
           type:
           - string
           - 'null'
           readOnly: true
-        isPayByClient:
+        estimatedStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        estimatedStartDateDays:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isClientAgreementRequired:
           type: boolean
+        termsAndConditionsFileUrl:
+          type:
+          - string
+          - 'null'
+        termsAndConditionsText:
+          type:
+          - string
+          - 'null'
+        isRecommended:
+          type: boolean
+        isOptional:
+          type: boolean
+        isClientSelected:
+          type: boolean
+        isDeclined:
+          type: boolean
+        clusterId:
+          type: string
+          format: uuid
+        lengths:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.QuoteServicePlanLength'
+        billingFrequencies:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.QuoteServicePlanBillingFrequency'
+        features:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.QuoteServicePlanFeature'
+        notes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.FileInfo'
       additionalProperties: false
     DTools.Cloud.Data.QuotePhase:
       type: object
@@ -1035,27 +896,21 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    DTools.Cloud.Data.QuoteAlternateSet:
+    DTools.Cloud.Data.QuoteTaxSettings:
       type: object
       properties:
-        id:
-          type: integer
+        isItemLevelTax:
+          type: boolean
+        taxId:
+          type:
+          - integer
+          - 'null'
           format: int32
-        name:
+        laborTaxId:
           type:
-          - string
+          - integer
           - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        hasRecommendedItem:
-          type: boolean
-          readOnly: true
-        isKeepLaborItemsOnReplace:
-          type: boolean
-        isKeepAccessoriesOnReplace:
-          type: boolean
+          format: int32
       additionalProperties: false
     DTools.Cloud.Data.QuoteLocation:
       type: object
@@ -1089,76 +944,214 @@ components:
         isOptionalRecommended:
           type: boolean
       additionalProperties: false
-    DTools.Cloud.Data.QuoteTaxSettings:
-      type: object
-      properties:
-        isItemLevelTax:
-          type: boolean
-        taxId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        laborTaxId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    DTools.Cloud.Data.QuoteLite:
+    DTools.Cloud.Data.QuoteTax:
       type: object
       properties:
         id:
-          type: string
-          format: uuid
+          type: integer
+          format: int32
         name:
           type:
           - string
           - 'null'
-        number:
+        isGroup:
+          type: boolean
+        childIds:
           type:
-          - string
+          - array
           - 'null'
-        version:
+          items:
+            type: integer
+            format: int32
+        rate:
           type: number
           format: double
-        systemState:
+        applyOn:
           type:
           - string
           - 'null'
           readOnly: true
-        state:
+        isPayByClient:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.QuoteServicePlanFeature:
+      type: object
+      properties:
+        type:
           type:
           - string
           - 'null'
+          readOnly: true
         price:
-          type: number
-          format: double
-        servicePrice:
           type:
           - number
           - 'null'
           format: double
-        isIncludedInTotal:
-          type: boolean
-        isServiceQuote:
-          type: boolean
-        validUntilDate:
+        priceInterval:
           type:
           - string
           - 'null'
-          format: date-time
-        acceptedDate:
+          readOnly: true
+        includedServiceCallType:
           type:
           - string
           - 'null'
-          format: date-time
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
+          readOnly: true
+        includedServiceCalls:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        hours:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isAdditionalService:
+          type: boolean
+        additionalServicePrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        additionalServicePriceInterval:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        serviceFrequency:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        afterHoursServiceType:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        productDiscount:
+          type:
+          - number
+          - 'null'
+          format: double
+        automaticPlanRenewalLength:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        automaticPlanRenewalPriceIncreasePercent:
+          type:
+          - number
+          - 'null'
+          format: double
+        includedSessions:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        sessionLengthInMinutes:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isAdditionalSupport:
+          type: boolean
+        additionalSupportPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        additionalSupportPriceInterval:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        displayText:
+          type:
+          - string
+          - 'null'
+        isShowInProposal:
+          type: boolean
+          readOnly: true
+      additionalProperties: false
+    DTools.Cloud.Data.QuoteLength:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        length:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.QuoteSystem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        isOptional:
+          type: boolean
+        isOptionalRecommended:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.QuoteServicePlanBillingFrequency:
+      type: object
+      properties:
+        billingFrequency:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        discount:
+          type:
+          - number
+          - 'null'
+          format: double
+        isSuggested:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.QuoteItemLaborItem:
+      type: object
+      properties:
+        laborTypeId:
+          type: integer
+          format: int32
+        time:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        timePerLength:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        pricePerLength:
+          type:
+          - number
+          - 'null'
+          format: double
+        phaseId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isBillable:
+          type: boolean
       additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
@@ -1185,3 +1178,18 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    DTools.Cloud.Data.FileInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false

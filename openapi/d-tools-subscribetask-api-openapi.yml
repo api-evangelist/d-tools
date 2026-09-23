@@ -4,25 +4,7 @@ info:
   description: 'The API allows integrations to:
 
 
-    - Publish catalogs and projects to SI users.
-
-    - Subscribe to projects and catalogs published by SI users.
-
-
-    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
-
-
-    An API key is specific to a SI user and an integration.
-
-
-    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
-
-
-    ```
-
-    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
-
-    ```'
+    - Publish catalogs and projects to SI users.'
   version: 1.0.0
 servers:
 - url: https://api.d-tools.com/si
@@ -34,7 +16,7 @@ paths:
     get:
       tags:
       - SubscribeTask
-      summary: Get tasks published by a SI user.
+      summary: Get tasks published by a SI user
       parameters:
       - name: clients
         in: query
@@ -104,6 +86,8 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/TasksResult'
+      operationId: getSubscribeTasks
+      x-operation-id-source: derived
   /Subscribe/Task/GetMobileInstallSiteNotes:
     get:
       tags:
@@ -139,11 +123,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/SiteNote'
+      operationId: getSubscribeTaskGetMobileInstallSiteNotes
+      x-operation-id-source: derived
   /Subscribe/Task/MarkAsImported:
     put:
       tags:
       - SubscribeTask
-      summary: Mark a task as imported for a given task id.
+      summary: Mark a task as imported for a given task id
       parameters:
       - name: id
         in: query
@@ -163,11 +149,13 @@ paths:
       responses:
         '200':
           description: ''
+      operationId: putSubscribeTaskMarkAsImported
+      x-operation-id-source: derived
   /Subscribe/Tasks/ByProject/{projectId}:
     get:
       tags:
       - SubscribeTask
-      summary: Get a tasks for a given project id.
+      summary: Get a tasks for a given project id
       parameters:
       - name: projectId
         in: path
@@ -191,11 +179,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/SITask'
+      operationId: getSubscribeTasksByProjectByProjectId
+      x-operation-id-source: derived
   /Subscribe/Tasks/{id}:
     get:
       tags:
       - SubscribeTask
-      summary: Get a task for a given task id.
+      summary: Get a task for a given task id
       parameters:
       - name: id
         in: path
@@ -219,8 +209,86 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/SITask'
+      operationId: getSubscribeTasksById
+      x-operation-id-source: derived
 components:
   schemas:
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    TasksResult:
+      type: object
+      properties:
+        tasks:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TaskInfo'
+          description: Tasks array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of tasks
+          format: int32
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
     TaskResource:
       type: object
       properties:
@@ -266,97 +334,6 @@ components:
           - number
           - string
           format: double
-    TaskInfo:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id
-        client:
-          type:
-          - 'null'
-          - string
-          description: Client name
-        number:
-          type:
-          - 'null'
-          - string
-          description: Task Number
-        name:
-          type:
-          - 'null'
-          - string
-          description: Task name
-        progress:
-          type:
-          - 'null'
-          - string
-          description: Project progress
-        description:
-          type:
-          - 'null'
-          - string
-          description: Task description
-        importedOn:
-          type:
-          - 'null'
-          - string
-          description: Date task was imported by SI
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date task was published by SI user
-          format: date-time
-        publishedOnUnixTimeMs:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Date task was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Task as Imported method optionally to make sure the task was not updated in SI since it was published.
-          format: int64
-        deleted:
-          type:
-          - 'null'
-          - boolean
-          description: Task deleted
-      description: Task Information
-    SiteNote:
-      type: object
-      properties:
-        notes:
-          type:
-          - 'null'
-          - string
-          description: Task Notes
-        updatedOn:
-          type: string
-          description: Updated On
-          format: date-time
-        updatedBy:
-          type:
-          - 'null'
-          - string
-          description: Updated By
-      description: Mobile Install Site Notes
-    TasksResult:
-      type: object
-      properties:
-        tasks:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/TaskInfo'
-          description: Tasks array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of tasks
-          format: int32
     TaskItem:
       type: object
       properties:
@@ -725,62 +702,77 @@ components:
           - 'null'
           - string
           description: Task Published By
-    ContactInfo:
+    TaskInfo:
       type: object
       properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Task Number
         name:
           type:
           - 'null'
           - string
-          description: Name of the contact
-        title:
+          description: Task name
+        progress:
           type:
           - 'null'
           - string
-        email:
+          description: Project progress
+        description:
           type:
           - 'null'
           - string
-        phone:
+          description: Task description
+        importedOn:
           type:
           - 'null'
           - string
-        mobile:
+          description: Date task was imported by SI
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date task was published by SI user
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date task was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Task as Imported method optionally to make sure the task was not updated in SI since it was published.
+          format: int64
+        deleted:
           type:
           - 'null'
-          - string
-    Address:
+          - boolean
+          description: Task deleted
+      description: Task Information
+    SiteNote:
       type: object
       properties:
-        street1:
+        notes:
           type:
           - 'null'
           - string
-        street2:
+          description: Task Notes
+        updatedOn:
+          type: string
+          description: Updated On
+          format: date-time
+        updatedBy:
           type:
           - 'null'
           - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
+          description: Updated By
+      description: Mobile Install Site Notes

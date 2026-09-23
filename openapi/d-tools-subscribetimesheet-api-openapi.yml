@@ -4,25 +4,7 @@ info:
   description: 'The API allows integrations to:
 
 
-    - Publish catalogs and projects to SI users.
-
-    - Subscribe to projects and catalogs published by SI users.
-
-
-    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
-
-
-    An API key is specific to a SI user and an integration.
-
-
-    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
-
-
-    ```
-
-    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
-
-    ```'
+    - Publish catalogs and projects to SI users.'
   version: 1.0.0
 servers:
 - url: https://api.d-tools.com/si
@@ -34,7 +16,7 @@ paths:
     get:
       tags:
       - SubscribeTimeSheet
-      summary: Get time sheets published by a SI user.
+      summary: Get time sheets published by a SI user
       parameters:
       - name: clients
         in: query
@@ -92,6 +74,8 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/TimeSheetsResult'
+      operationId: getSubscribeTimeSheets
+      x-operation-id-source: derived
   /Subscribe/TimeSheets/MarkAsImported:
     put:
       tags:
@@ -116,6 +100,8 @@ paths:
       responses:
         '200':
           description: ''
+      operationId: putSubscribeTimeSheetsMarkAsImported
+      x-operation-id-source: derived
   /Subscribe/TimeSheets/{id}:
     get:
       tags:
@@ -144,70 +130,10 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TimeSheet'
+      operationId: getSubscribeTimeSheetsById
+      x-operation-id-source: derived
 components:
   schemas:
-    TimeSheetEntry:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id
-        phase:
-          type:
-          - 'null'
-          - string
-          description: Phase
-        laborType:
-          type:
-          - 'null'
-          - string
-          description: Labor Type
-        subLaborType:
-          type:
-          - 'null'
-          - string
-          description: 'Sub-Labor Type: Values can be Install, Miscellaneous, Management, Design'
-        typeId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'Type: Duration = 1, Time In/Out = 2 (Required)'
-          format: uint8
-        duration:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Duration in Hours (applicable if TypeId =  1 (Duration))
-          format: double
-        startTime:
-          type:
-          - 'null'
-          - string
-          description: Start Time (applicable if TypeId =  2 (Time In/Out))
-          format: date-time
-        endTime:
-          type:
-          - 'null'
-          - string
-          description: End Time (applicable if TypeId =  2 (Time In/Out))
-          format: date-time
-        billable:
-          type:
-          - 'null'
-          - boolean
-          description: Billable
-        overtime:
-          type: boolean
-          description: Overtime
-        description:
-          type:
-          - 'null'
-          - string
-          description: Description
     TimeSheetInfo:
       type: object
       properties:
@@ -593,3 +519,65 @@ components:
           - string
           description: Total count of time sheet
           format: int32
+    TimeSheetEntry:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        phase:
+          type:
+          - 'null'
+          - string
+          description: Phase
+        laborType:
+          type:
+          - 'null'
+          - string
+          description: Labor Type
+        subLaborType:
+          type:
+          - 'null'
+          - string
+          description: 'Sub-Labor Type: Values can be Install, Miscellaneous, Management, Design'
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'Type: Duration = 1, Time In/Out = 2 (Required)'
+          format: uint8
+        duration:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Duration in Hours (applicable if TypeId =  1 (Duration))
+          format: double
+        startTime:
+          type:
+          - 'null'
+          - string
+          description: Start Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        endTime:
+          type:
+          - 'null'
+          - string
+          description: End Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        billable:
+          type:
+          - 'null'
+          - boolean
+          description: Billable
+        overtime:
+          type: boolean
+          description: Overtime
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description

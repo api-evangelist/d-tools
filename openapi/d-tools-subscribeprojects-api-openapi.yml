@@ -4,25 +4,7 @@ info:
   description: 'The API allows integrations to:
 
 
-    - Publish catalogs and projects to SI users.
-
-    - Subscribe to projects and catalogs published by SI users.
-
-
-    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
-
-
-    An API key is specific to a SI user and an integration.
-
-
-    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
-
-
-    ```
-
-    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
-
-    ```'
+    - Publish catalogs and projects to SI users.'
   version: 1.0.0
 servers:
 - url: https://api.d-tools.com/si
@@ -34,7 +16,7 @@ paths:
     get:
       tags:
       - SubscribeProjects
-      summary: Get projects and change orders published by a SI user.
+      summary: Get projects and change orders published by a SI user
       parameters:
       - name: clients
         in: query
@@ -114,11 +96,13 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ProjectsResult'
+      operationId: getSubscribeProjects
+      x-operation-id-source: derived
   /Subscribe/Projects/GetProjectByMessageId:
     get:
       tags:
       - SubscribeProjects
-      summary: Get a specific project or change order for a given message id published by a SI user.
+      summary: Get a specific project or change order for a given message id published by a SI…
       parameters:
       - name: messageId
         in: query
@@ -158,11 +142,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/Project'
+      operationId: getSubscribeProjectsGetProjectByMessageId
+      x-operation-id-source: derived
   /Subscribe/Projects/GetProjectComments:
     get:
       tags:
       - SubscribeProjects
-      summary: Get project comments published by a SI user.
+      summary: Get project comments published by a SI user
       parameters:
       - name: id
         in: query
@@ -199,11 +185,13 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ProjectCommentsResult'
+      operationId: getSubscribeProjectsGetProjectComments
+      x-operation-id-source: derived
   /Subscribe/Projects/MarkAsImported:
     put:
       tags:
       - SubscribeProjects
-      summary: Mark a project or change order as imported for a given project id.
+      summary: Mark a project or change order as imported for a given project id
       parameters:
       - name: id
         in: query
@@ -228,11 +216,13 @@ paths:
       responses:
         '200':
           description: ''
+      operationId: putSubscribeProjectsMarkAsImported
+      x-operation-id-source: derived
   /Subscribe/Projects/MarkAsImportedByMessageId:
     put:
       tags:
       - SubscribeProjects
-      summary: Mark a project or change order as imported for a given message id.
+      summary: Mark a project or change order as imported for a given message id
       parameters:
       - name: messageId
         in: query
@@ -252,11 +242,13 @@ paths:
       responses:
         '200':
           description: ''
+      operationId: putSubscribeProjectsMarkAsImportedByMessageId
+      x-operation-id-source: derived
   /Subscribe/Projects/{id}:
     get:
       tags:
       - SubscribeProjects
-      summary: Get a specific project or change order for a given project id published by a SI user.
+      summary: Get a specific project or change order for a given project id published by a SI…
       parameters:
       - name: id
         in: path
@@ -304,1230 +296,10 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/Project'
+      operationId: getSubscribeProjectsById
+      x-operation-id-source: derived
 components:
   schemas:
-    MiscItem:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of Misc. Item
-        description:
-          type:
-          - 'null'
-          - string
-        quantity:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        unitPrice:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-    Tax:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the tax (Required)
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of tax (Required)
-        rate:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Tax Rate
-          format: double
-        productTotal:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Calculated field. Total tax for all products in project
-          format: double
-        laborTotal:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Calculated field. Total tax for all labor in project
-          format: double
-        total:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Calculated field. Total tax in project (product and labor).
-          format: double
-    Location:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the location (Required)
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name for the location (Required)
-        fullName:
-          type:
-          - 'null'
-          - string
-          description: Full name for the location including parent name
-        number:
-          type:
-          - 'null'
-          - string
-          description: Number for the location
-        fullNumber:
-          type:
-          - 'null'
-          - string
-          description: Full number for the location including parent number
-        description:
-          type:
-          - 'null'
-          - string
-          description: Location description
-        parentId:
-          type:
-          - 'null'
-          - string
-          description: Id of parent location
-    ProjectItem:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the project item (Required)
-        typeId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'TypeId: 1 = Product, 2 = Labor Item, 3 = Allowance, 4 = Bundled Cable, 5 = Placeholder (Required)
-
-            Product and Labor items can be posted to a project. Allowances, Bundled Cable and placeholders cannot be posted to a project.'
-          format: uint8
-        siItemId:
-          type:
-          - 'null'
-          - string
-          description: SIItemId - unique id of an item in SI - can be used for updates to SI project. This will be blank for adjustment items and phase labor items (calculated items).
-        laborType:
-          type:
-          - 'null'
-          - string
-          description: 'LaborType: Item, Phase'
-        coChangeTypeId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          description: The change order change type Id. 1 = Added on Change Order, 2 = Deleted on Change Order.
-          format: uint8
-        manufacturerId:
-          type:
-          - 'null'
-          - string
-          description: Id for the manufacturer.
-        manufacturer:
-          type:
-          - 'null'
-          - string
-          description: Manufacturer for the project item. Required for product and labor.
-        model:
-          type:
-          - 'null'
-          - string
-          description: Model for the project item. Required for product and labor.
-        packageName:
-          type:
-          - 'null'
-          - string
-          description: Package Name for the allowance, bundled cable and placeholder (required).
-        partNumber:
-          type:
-          - 'null'
-          - string
-          description: Part Number
-        category:
-          type:
-          - 'null'
-          - string
-          description: Category
-        subcategory:
-          type:
-          - 'null'
-          - string
-          description: Subcategory
-        description:
-          type:
-          - 'null'
-          - string
-          description: Short description
-        componentId:
-          type:
-          - 'null'
-          - string
-          description: Component ID
-        bulkItem:
-          type: boolean
-          description: Bulk Item
-        serialNumber:
-          type:
-          - 'null'
-          - string
-          description: Serial number
-        ipAddress:
-          type:
-          - 'null'
-          - string
-          description: IP Address 1
-        ipAddress2:
-          type:
-          - 'null'
-          - string
-          description: IP Address 2
-        macAddress1:
-          type:
-          - 'null'
-          - string
-          description: MAC Address 1
-        macAddress2:
-          type:
-          - 'null'
-          - string
-          description: MAC Address 2
-        isOfe:
-          type: boolean
-          description: If project item owner furnished
-        isNonBillable:
-          type: boolean
-          description: Is project item non-billable
-        isOptional:
-          type:
-          - 'null'
-          - boolean
-          description: Is project item optional
-        quantity:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Quantity of the project item. For bulk wire is the wire length. For variable labor and phase labor is the labor hours.
-          format: double
-        priceType:
-          type:
-          - 'null'
-          - string
-          description: Price Type of the item
-        unitCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Unit Cost
-          format: double
-        unitPriceWithoutDiscount:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Unit Price (does not includes Discount)
-          format: double
-        unitPrice:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Unit Price (includes Discount)
-          format: double
-        unitPriceRounded:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Rounded Unit Price
-          format: double
-        discount:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Discount
-          format: double
-        laborCalculationMethodId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          description: Id of the LaborCalculation. Fixed = 1, Variable = 2, Phase = 3
-          format: uint8
-        phase:
-          type:
-          - 'null'
-          - string
-          description: Phase
-        laborHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: 'For products the labor hours are the associated labor hours for that product.
-
-            Fixed labor has labor hours as 0 (quantity is 1).
-
-            Variable labor has labor hours of the item (equal to quantity).
-
-            Phase labor has labor hours as 0 (quantity has the total labor hours for the phase).'
-          format: double
-        totalLaborHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
-          format: double
-        laborTypes:
-          type:
-          - 'null'
-          - string
-          description: Comma separated list of item labor types
-        itemLaborTypes:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ItemLaborType'
-          description: Collection of labor types for item with name and hours
-        productAdjustment:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Product Adjustment
-          format: double
-        miscPartAdjustment:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Miscellaneous Parts Adjustment
-          format: double
-        laborAdjustment:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Labor Adjustment
-          format: double
-        installPrice:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Install Price is the sum of product price and labor price to install the item
-          format: double
-        isTaxable:
-          type: boolean
-          description: Is project item taxable. Applicable if project has IsItemLevelTax = false
-        taxId:
-          type:
-          - 'null'
-          - string
-          description: Tax ID for the project item in project taxes. Applicable if project has IsItemLevelTax = true
-        avalaraTaxCode:
-          type:
-          - 'null'
-          - string
-          description: Avalara tax code
-        avalaraLaborTaxCode:
-          type:
-          - 'null'
-          - string
-          description: Avalara labor tax code
-        acctgName:
-          type:
-          - 'null'
-          - string
-          description: Accounting Item Name
-        includedAccessory:
-          type:
-          - 'null'
-          - boolean
-          description: Included Accessory
-        vendor:
-          type:
-          - 'null'
-          - string
-          description: Vendor
-        orderUom:
-          type:
-          - 'null'
-          - string
-          description: UOM
-        orderUomUnits:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          description: UOM units
-          format: int32
-        doNotOrder:
-          type:
-          - 'null'
-          - boolean
-          description: Do not order item
-        bulkWire:
-          type:
-          - 'null'
-          - boolean
-          description: Item is Bulk Wire
-        rackMounted:
-          type:
-          - 'null'
-          - boolean
-          description: Rack Mounted
-        originalApprovedItemId:
-          type:
-          - 'null'
-          - string
-          description: Original Approved Item Id. The Original SI Item Id of an approved replaced item or an approved item whose quantity is reduced.
-        locationId:
-          type:
-          - 'null'
-          - string
-          description: Location Id for the project item in project locations
-        systemId:
-          type:
-          - 'null'
-          - string
-          description: System Id for the project item in project systems
-        parentId:
-          type:
-          - 'null'
-          - string
-          description: If project item is an accessory id of the parent item
-        catalogId:
-          type:
-          - 'null'
-          - string
-          description: Id of the item in the SI catalog
-        packageId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          description: If project item is in a package Id of the package (in Packages)
-          format: int32
-        solutionId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          description: If project item is in a solution Id of the solution (in Packages)
-          format: int32
-        orderStatus:
-          type:
-          - 'null'
-          - string
-          description: Order Status (Ordered, Not Ordered etc.).
-        orderNumber:
-          type:
-          - 'null'
-          - string
-          description: Order Number
-        orderedDate:
-          type:
-          - 'null'
-          - string
-          description: Ordered Date
-          format: date-time
-        orderedDateTicks:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int64
-        expectedDeliveryDate:
-          type:
-          - 'null'
-          - string
-          description: Expected Delivery Date
-          format: date-time
-        expectedDeliveryDateTicks:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int64
-        receivedDate:
-          type:
-          - 'null'
-          - string
-          description: Received Date
-          format: date-time
-        receivedDateTicks:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int64
-        picked:
-          type: boolean
-          description: Picked (Is Item Picked?)
-        pickedDate:
-          type:
-          - 'null'
-          - string
-          description: Picked Date
-          format: date-time
-        pickedDateTicks:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int64
-        installed:
-          type: boolean
-          description: Installed (Is Item Installed?)
-        installedDate:
-          type:
-          - 'null'
-          - string
-          description: Installed Date
-          format: date-time
-        installedDateTicks:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int64
-        installedNotes:
-          type:
-          - 'null'
-          - string
-          description: Install Notes
-        trackingNumber:
-          type:
-          - 'null'
-          - string
-          description: Tracking Number
-        updatedOn:
-          type:
-          - 'null'
-          - string
-          description: Date the project item was updated. Populated only when data is returned unit wise (non aggregated). Not populated for calculated items like adjustments and phase labor.
-          format: date-time
-        updatedOnTicks:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Updated On date in ticks (number)
-          format: int64
-        customField1:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 1
-        customField2:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 2
-        customField3:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 3
-        customField4:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 4
-        customField5:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 5
-        customField6:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 6
-          format: double
-        customField7:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 7
-          format: double
-        customField8:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 8
-          format: double
-        customField9:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 9
-          format: date-time
-        customField10:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 10
-          format: date-time
-        customField11:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 11
-          format: date-time
-        customField12:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 12
-        customField13:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 13
-        customField14:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 14
-        customField15:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 15
-        customField16:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 16
-        customField17:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 17
-        customField18:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 18
-        customField19:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 19
-        customField20:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 20
-        customField21:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 21
-        customField22:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 22
-        customField23:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 23
-        customField24:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 24
-        customField25:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 25
-        customField26:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 26
-        customField27:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 27
-        customField28:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 28
-        customField29:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 29
-        customField30:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 30
-        customField31:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 31
-        customField32:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 32
-        customField33:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 33
-        customField34:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 34
-        customField35:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 35
-        customField36:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 36
-        customField37:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 37
-        customField38:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 38
-        customField39:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 39
-        customField40:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 40
-        customField41:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 41
-        customField42:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 42
-        customField43:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 43
-        customField44:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 44
-        customField45:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 45
-        customField46:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 46
-        customField47:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 47
-        customField48:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 48
-        customField49:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 49
-        customField50:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 50
-          format: double
-        customField51:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 51
-          format: double
-        customField52:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 52
-          format: double
-        customField53:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 53
-          format: double
-        customField54:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 54
-          format: double
-        customField55:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 55
-          format: double
-        customField56:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 56
-          format: double
-        customField57:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 57
-          format: double
-        customField58:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Project item custom field 58
-          format: double
-        customField59:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 59
-          format: date-time
-        customField60:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 60
-          format: date-time
-        customField61:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 61
-          format: date-time
-        customField62:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 62
-          format: date-time
-        customField63:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 63
-          format: date-time
-        customField64:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 64
-          format: date-time
-        customField65:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 65
-          format: date-time
-        customField66:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 66
-          format: date-time
-        customField67:
-          type:
-          - 'null'
-          - string
-          description: Project item custom field 67
-          format: date-time
-        customField68:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 68
-        customField69:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 69
-        customField70:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 70
-        customField71:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 71
-        customField72:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 72
-        customField73:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 73
-        customField74:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 74
-        customField75:
-          type:
-          - 'null'
-          - boolean
-          description: Project item custom field 75
-      description: 'A project item which can be product or labor item or allowance or bundled cable or placeholder.
-
-        Product and Labor items can be posted to a project. Allowances, Bundled Cable and placeholders cannot be posted to a project.'
-    ItemLaborType:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Labor Type name
-        hours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Labor Type Hours
-          format: double
-        totalHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
-          format: double
-    Contact:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the contact (Required)
-        title:
-          type:
-          - 'null'
-          - string
-          description: Contact Title
-        email:
-          type:
-          - 'null'
-          - string
-          description: Contact Email
-        phone:
-          type:
-          - 'null'
-          - string
-          description: Contact Phone
-        mobile:
-          type:
-          - 'null'
-          - string
-          description: Contact Mobile
-        isPrimary:
-          type: boolean
-          description: Is contact the primary contact for the project? One contact can be marked as the primary contact in project.
-    System:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the system (Required)
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of system (Required)
-        fullName:
-          type:
-          - 'null'
-          - string
-          description: Full name for the system including parent name
-        description:
-          type:
-          - 'null'
-          - string
-          description: System Description
-        parentId:
-          type:
-          - 'null'
-          - string
-          description: Id of parent system
-    Resource:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the resource (Required)
-        email:
-          type:
-          - 'null'
-          - string
-        roles:
-          type:
-          - 'null'
-          - string
-        isOwner:
-          type: boolean
-          description: Is resource the owner for the project? One resource can be marked as the owner in project.
-    PaymentTerm:
-      type: object
-      properties:
-        payment:
-          type:
-          - 'null'
-          - string
-          description: Payment Term name
-        useFixedAmount:
-          type: boolean
-          description: Is the payment term a fixed amount
-        billingPercentage:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Billing percentage for the payment term
-          format: double
-        billingAmount:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Amount payable on this billing term
-          format: double
-        billingDate:
-          type:
-          - 'null'
-          - string
-          description: Date on which payment is to be made
-          format: date-time
-        coNumber:
-          type:
-          - 'null'
-          - string
-          description: Applicable if project is a Change Order. Change Order Number
-    ProjectComment:
-      type: object
-      properties:
-        comment:
-          type:
-          - 'null'
-          - string
-          description: Comment
-        commentedOn:
-          type: string
-          description: Commented Date
-          format: date-time
-        commentedBy:
-          type:
-          - 'null'
-          - string
-          description: Commented By
-    ProjectInfo:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the project (must be Guid). Project will be created in SI with this Guid and will be used to update project.
-        integrationProjectId:
-          type:
-          - 'null'
-          - string
-          description: Id for the project sent by integration
-        messageId:
-          type:
-          - 'null'
-          - string
-          description: Unique message Id (Guid).
-        clientId:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the client
-        client:
-          type:
-          - 'null'
-          - string
-          description: Client name for the project
-        clientNumber:
-          type:
-          - 'null'
-          - string
-          description: Client Number
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the project
-        number:
-          type:
-          - 'null'
-          - string
-          description: Project Number
-        progress:
-          type:
-          - 'null'
-          - string
-          description: Project Progress
-        approved:
-          type: boolean
-          description: Project Approved
-        coNumber:
-          type:
-          - 'null'
-          - string
-          description: Project Change Order Number
-        currencyCode:
-          type:
-          - 'null'
-          - string
-          description: ISO currency symbol for the project
-        price:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Total price of the project including taxes
-          format: double
-        importedOn:
-          type:
-          - 'null'
-          - string
-          description: Date project was imported by SI user
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date project was published by SI user
-          format: date-time
-        publishedOnUnixTimeMs:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Date project was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Project as Imported method optionally to make sure the project was not updated in SI since it was published.
-          format: int64
-        deleted:
-          type:
-          - 'null'
-          - boolean
-          description: Project deleted
-        archived:
-          type:
-          - 'null'
-          - boolean
-          description: Project Archived
-      description: Project Information
     Project:
       type: object
       properties:
@@ -2692,6 +1464,323 @@ components:
           - 'null'
           - boolean
           description: Applicable if project is a Change Order. Project Change Order Custom Field65 (BETA)
+    PaymentTerm:
+      type: object
+      properties:
+        payment:
+          type:
+          - 'null'
+          - string
+          description: Payment Term name
+        useFixedAmount:
+          type: boolean
+          description: Is the payment term a fixed amount
+        billingPercentage:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Billing percentage for the payment term
+          format: double
+        billingAmount:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Amount payable on this billing term
+          format: double
+        billingDate:
+          type:
+          - 'null'
+          - string
+          description: Date on which payment is to be made
+          format: date-time
+        coNumber:
+          type:
+          - 'null'
+          - string
+          description: Applicable if project is a Change Order. Change Order Number
+    ProjectsResult:
+      type: object
+      properties:
+        projects:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ProjectInfo'
+          description: Projects array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of projects
+          format: int32
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    ProjectInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the project (must be Guid). Project will be created in SI with this Guid and will be used to update project.
+        integrationProjectId:
+          type:
+          - 'null'
+          - string
+          description: Id for the project sent by integration
+        messageId:
+          type:
+          - 'null'
+          - string
+          description: Unique message Id (Guid).
+        clientId:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the client
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name for the project
+        clientNumber:
+          type:
+          - 'null'
+          - string
+          description: Client Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the project
+        number:
+          type:
+          - 'null'
+          - string
+          description: Project Number
+        progress:
+          type:
+          - 'null'
+          - string
+          description: Project Progress
+        approved:
+          type: boolean
+          description: Project Approved
+        coNumber:
+          type:
+          - 'null'
+          - string
+          description: Project Change Order Number
+        currencyCode:
+          type:
+          - 'null'
+          - string
+          description: ISO currency symbol for the project
+        price:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Total price of the project including taxes
+          format: double
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date project was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date project was published by SI user
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date project was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Project as Imported method optionally to make sure the project was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Project deleted
+        archived:
+          type:
+          - 'null'
+          - boolean
+          description: Project Archived
+      description: Project Information
+    Location:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the location (Required)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name for the location (Required)
+        fullName:
+          type:
+          - 'null'
+          - string
+          description: Full name for the location including parent name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number for the location
+        fullNumber:
+          type:
+          - 'null'
+          - string
+          description: Full number for the location including parent number
+        description:
+          type:
+          - 'null'
+          - string
+          description: Location description
+        parentId:
+          type:
+          - 'null'
+          - string
+          description: Id of parent location
+    System:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the system (Required)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of system (Required)
+        fullName:
+          type:
+          - 'null'
+          - string
+          description: Full name for the system including parent name
+        description:
+          type:
+          - 'null'
+          - string
+          description: System Description
+        parentId:
+          type:
+          - 'null'
+          - string
+          description: Id of parent system
+    MiscItem:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of Misc. Item
+        description:
+          type:
+          - 'null'
+          - string
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        unitPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+    ItemLaborType:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Labor Type name
+        hours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Labor Type Hours
+          format: double
+        totalHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
+          format: double
+    Resource:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource (Required)
+        email:
+          type:
+          - 'null'
+          - string
+        roles:
+          type:
+          - 'null'
+          - string
+        isOwner:
+          type: boolean
+          description: Is resource the owner for the project? One resource can be marked as the owner in project.
     ProjectCommentsResult:
       type: object
       properties:
@@ -2709,6 +1798,95 @@ components:
           - string
           description: Total count of project comments
           format: int32
+    ProjectComment:
+      type: object
+      properties:
+        comment:
+          type:
+          - 'null'
+          - string
+          description: Comment
+        commentedOn:
+          type: string
+          description: Commented Date
+          format: date-time
+        commentedBy:
+          type:
+          - 'null'
+          - string
+          description: Commented By
+    Tax:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the tax (Required)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of tax (Required)
+        rate:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Tax Rate
+          format: double
+        productTotal:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Calculated field. Total tax for all products in project
+          format: double
+        laborTotal:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Calculated field. Total tax for all labor in project
+          format: double
+        total:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Calculated field. Total tax in project (product and labor).
+          format: double
+    Contact:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact (Required)
+        title:
+          type:
+          - 'null'
+          - string
+          description: Contact Title
+        email:
+          type:
+          - 'null'
+          - string
+          description: Contact Email
+        phone:
+          type:
+          - 'null'
+          - string
+          description: Contact Phone
+        mobile:
+          type:
+          - 'null'
+          - string
+          description: Contact Mobile
+        isPrimary:
+          type: boolean
+          description: Is contact the primary contact for the project? One contact can be marked as the primary contact in project.
     Package:
       type: object
       properties:
@@ -3185,55 +2363,871 @@ components:
           - boolean
           description: Custom field 75
       description: A project item of type package or solution
-    Address:
+    ProjectItem:
       type: object
       properties:
-        street1:
+        id:
           type:
           - 'null'
           - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-    ProjectsResult:
-      type: object
-      properties:
-        projects:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ProjectInfo'
-          description: Projects array
-        totalCount:
+          description: Unique Id for the project item (Required)
+        typeId:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
-          description: Total count of projects
+          description: 'TypeId: 1 = Product, 2 = Labor Item, 3 = Allowance, 4 = Bundled Cable, 5 = Placeholder (Required)
+
+            Product and Labor items can be posted to a project. Allowances, Bundled Cable and placeholders cannot be posted to a project.'
+          format: uint8
+        siItemId:
+          type:
+          - 'null'
+          - string
+          description: SIItemId - unique id of an item in SI - can be used for updates to SI project. This will be blank for adjustment items and phase labor items (calculated items).
+        laborType:
+          type:
+          - 'null'
+          - string
+          description: 'LaborType: Item, Phase'
+        coChangeTypeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: The change order change type Id. 1 = Added on Change Order, 2 = Deleted on Change Order.
+          format: uint8
+        manufacturerId:
+          type:
+          - 'null'
+          - string
+          description: Id for the manufacturer.
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer for the project item. Required for product and labor.
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model for the project item. Required for product and labor.
+        packageName:
+          type:
+          - 'null'
+          - string
+          description: Package Name for the allowance, bundled cable and placeholder (required).
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part Number
+        category:
+          type:
+          - 'null'
+          - string
+          description: Category
+        subcategory:
+          type:
+          - 'null'
+          - string
+          description: Subcategory
+        description:
+          type:
+          - 'null'
+          - string
+          description: Short description
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: Component ID
+        bulkItem:
+          type: boolean
+          description: Bulk Item
+        serialNumber:
+          type:
+          - 'null'
+          - string
+          description: Serial number
+        ipAddress:
+          type:
+          - 'null'
+          - string
+          description: IP Address 1
+        ipAddress2:
+          type:
+          - 'null'
+          - string
+          description: IP Address 2
+        macAddress1:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 1
+        macAddress2:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 2
+        isOfe:
+          type: boolean
+          description: If project item owner furnished
+        isNonBillable:
+          type: boolean
+          description: Is project item non-billable
+        isOptional:
+          type:
+          - 'null'
+          - boolean
+          description: Is project item optional
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Quantity of the project item. For bulk wire is the wire length. For variable labor and phase labor is the labor hours.
+          format: double
+        priceType:
+          type:
+          - 'null'
+          - string
+          description: Price Type of the item
+        unitCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Unit Cost
+          format: double
+        unitPriceWithoutDiscount:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Unit Price (does not includes Discount)
+          format: double
+        unitPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Unit Price (includes Discount)
+          format: double
+        unitPriceRounded:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Rounded Unit Price
+          format: double
+        discount:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Discount
+          format: double
+        laborCalculationMethodId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Id of the LaborCalculation. Fixed = 1, Variable = 2, Phase = 3
+          format: uint8
+        phase:
+          type:
+          - 'null'
+          - string
+          description: Phase
+        laborHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: 'For products the labor hours are the associated labor hours for that product.
+
+            Fixed labor has labor hours as 0 (quantity is 1).
+
+            Variable labor has labor hours of the item (equal to quantity).
+
+            Phase labor has labor hours as 0 (quantity has the total labor hours for the phase).'
+          format: double
+        totalLaborHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
+          format: double
+        laborTypes:
+          type:
+          - 'null'
+          - string
+          description: Comma separated list of item labor types
+        itemLaborTypes:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ItemLaborType'
+          description: Collection of labor types for item with name and hours
+        productAdjustment:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Product Adjustment
+          format: double
+        miscPartAdjustment:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Miscellaneous Parts Adjustment
+          format: double
+        laborAdjustment:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Labor Adjustment
+          format: double
+        installPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Install Price is the sum of product price and labor price to install the item
+          format: double
+        isTaxable:
+          type: boolean
+          description: Is project item taxable. Applicable if project has IsItemLevelTax = false
+        taxId:
+          type:
+          - 'null'
+          - string
+          description: Tax ID for the project item in project taxes. Applicable if project has IsItemLevelTax = true
+        avalaraTaxCode:
+          type:
+          - 'null'
+          - string
+          description: Avalara tax code
+        avalaraLaborTaxCode:
+          type:
+          - 'null'
+          - string
+          description: Avalara labor tax code
+        acctgName:
+          type:
+          - 'null'
+          - string
+          description: Accounting Item Name
+        includedAccessory:
+          type:
+          - 'null'
+          - boolean
+          description: Included Accessory
+        vendor:
+          type:
+          - 'null'
+          - string
+          description: Vendor
+        orderUom:
+          type:
+          - 'null'
+          - string
+          description: UOM
+        orderUomUnits:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: UOM units
           format: int32
+        doNotOrder:
+          type:
+          - 'null'
+          - boolean
+          description: Do not order item
+        bulkWire:
+          type:
+          - 'null'
+          - boolean
+          description: Item is Bulk Wire
+        rackMounted:
+          type:
+          - 'null'
+          - boolean
+          description: Rack Mounted
+        originalApprovedItemId:
+          type:
+          - 'null'
+          - string
+          description: Original Approved Item Id. The Original SI Item Id of an approved replaced item or an approved item whose quantity is reduced.
+        locationId:
+          type:
+          - 'null'
+          - string
+          description: Location Id for the project item in project locations
+        systemId:
+          type:
+          - 'null'
+          - string
+          description: System Id for the project item in project systems
+        parentId:
+          type:
+          - 'null'
+          - string
+          description: If project item is an accessory id of the parent item
+        catalogId:
+          type:
+          - 'null'
+          - string
+          description: Id of the item in the SI catalog
+        packageId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: If project item is in a package Id of the package (in Packages)
+          format: int32
+        solutionId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: If project item is in a solution Id of the solution (in Packages)
+          format: int32
+        orderStatus:
+          type:
+          - 'null'
+          - string
+          description: Order Status (Ordered, Not Ordered etc.).
+        orderNumber:
+          type:
+          - 'null'
+          - string
+          description: Order Number
+        orderedDate:
+          type:
+          - 'null'
+          - string
+          description: Ordered Date
+          format: date-time
+        orderedDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        expectedDeliveryDate:
+          type:
+          - 'null'
+          - string
+          description: Expected Delivery Date
+          format: date-time
+        expectedDeliveryDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        receivedDate:
+          type:
+          - 'null'
+          - string
+          description: Received Date
+          format: date-time
+        receivedDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        picked:
+          type: boolean
+          description: Picked (Is Item Picked?)
+        pickedDate:
+          type:
+          - 'null'
+          - string
+          description: Picked Date
+          format: date-time
+        pickedDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        installed:
+          type: boolean
+          description: Installed (Is Item Installed?)
+        installedDate:
+          type:
+          - 'null'
+          - string
+          description: Installed Date
+          format: date-time
+        installedDateTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        installedNotes:
+          type:
+          - 'null'
+          - string
+          description: Install Notes
+        trackingNumber:
+          type:
+          - 'null'
+          - string
+          description: Tracking Number
+        updatedOn:
+          type:
+          - 'null'
+          - string
+          description: Date the project item was updated. Populated only when data is returned unit wise (non aggregated). Not populated for calculated items like adjustments and phase labor.
+          format: date-time
+        updatedOnTicks:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Updated On date in ticks (number)
+          format: int64
+        customField1:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 1
+        customField2:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 2
+        customField3:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 3
+        customField4:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 4
+        customField5:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 5
+        customField6:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 6
+          format: double
+        customField7:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 7
+          format: double
+        customField8:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 8
+          format: double
+        customField9:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 9
+          format: date-time
+        customField10:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 10
+          format: date-time
+        customField11:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 11
+          format: date-time
+        customField12:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 12
+        customField13:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 13
+        customField14:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 14
+        customField15:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 15
+        customField16:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 16
+        customField17:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 17
+        customField18:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 18
+        customField19:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 19
+        customField20:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 20
+        customField21:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 21
+        customField22:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 22
+        customField23:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 23
+        customField24:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 24
+        customField25:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 25
+        customField26:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 26
+        customField27:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 27
+        customField28:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 28
+        customField29:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 29
+        customField30:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 30
+        customField31:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 31
+        customField32:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 32
+        customField33:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 33
+        customField34:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 34
+        customField35:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 35
+        customField36:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 36
+        customField37:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 37
+        customField38:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 38
+        customField39:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 39
+        customField40:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 40
+        customField41:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 41
+        customField42:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 42
+        customField43:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 43
+        customField44:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 44
+        customField45:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 45
+        customField46:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 46
+        customField47:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 47
+        customField48:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 48
+        customField49:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 49
+        customField50:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 50
+          format: double
+        customField51:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 51
+          format: double
+        customField52:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 52
+          format: double
+        customField53:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 53
+          format: double
+        customField54:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 54
+          format: double
+        customField55:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 55
+          format: double
+        customField56:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 56
+          format: double
+        customField57:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 57
+          format: double
+        customField58:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Project item custom field 58
+          format: double
+        customField59:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 59
+          format: date-time
+        customField60:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 60
+          format: date-time
+        customField61:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 61
+          format: date-time
+        customField62:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 62
+          format: date-time
+        customField63:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 63
+          format: date-time
+        customField64:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 64
+          format: date-time
+        customField65:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 65
+          format: date-time
+        customField66:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 66
+          format: date-time
+        customField67:
+          type:
+          - 'null'
+          - string
+          description: Project item custom field 67
+          format: date-time
+        customField68:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 68
+        customField69:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 69
+        customField70:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 70
+        customField71:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 71
+        customField72:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 72
+        customField73:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 73
+        customField74:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 74
+        customField75:
+          type:
+          - 'null'
+          - boolean
+          description: Project item custom field 75
+      description: 'A project item which can be product or labor item or allowance or bundled cable or placeholder.
+
+        Product and Labor items can be posted to a project. Allowances, Bundled Cable and placeholders cannot be posted to a project.'

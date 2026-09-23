@@ -4,25 +4,7 @@ info:
   description: 'The API allows integrations to:
 
 
-    - Publish catalogs and projects to SI users.
-
-    - Subscribe to projects and catalogs published by SI users.
-
-
-    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
-
-
-    An API key is specific to a SI user and an integration.
-
-
-    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
-
-
-    ```
-
-    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
-
-    ```'
+    - Publish catalogs and projects to SI users.'
   version: 1.0.0
 servers:
 - url: https://api.d-tools.com/si
@@ -33,7 +15,7 @@ paths:
     get:
       tags:
       - Message
-      summary: Get status of a published message.
+      summary: Get status of a published message
       parameters:
       - name: messageId
         in: query
@@ -57,11 +39,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MessageStatus'
+      operationId: getMessagePublishedMessageStatus
+      x-operation-id-source: derived
   /Message/PublishedMessagesStatus:
     get:
       tags:
       - Message
-      summary: Get status of published messages.
+      summary: Get status of published messages
       parameters:
       - name: messageStatusIds
         in: query
@@ -115,8 +99,26 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/MessageResponse'
+      operationId: getMessagePublishedMessagesStatus
+      x-operation-id-source: derived
 components:
   schemas:
+    MessageResponse:
+      type: object
+      properties:
+        messageStatuses:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/MessageStatus'
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+      description: Message response
     MessageStatus:
       type: object
       properties:
@@ -150,19 +152,3 @@ components:
           - string
           description: Error message (populated if StatusId = 3 (Failed)
       description: Message status
-    MessageResponse:
-      type: object
-      properties:
-        messageStatuses:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/MessageStatus'
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-      description: Message response

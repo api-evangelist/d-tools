@@ -13,12 +13,12 @@ info:
 servers:
 - url: https://dtcloudapi.d-tools.cloud
 tags:
-- name: ChangeOrders
+- name: Change Orders
 paths:
   /api/v1/ChangeOrders/GetChangeOrders:
     get:
       tags:
-      - ChangeOrders
+      - Change Orders
       parameters:
       - name: projectId
         in: query
@@ -59,10 +59,14 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Get api change orders get change orders
+      x-summary-source: derived
+      operationId: getApiV1ChangeOrdersGetChangeOrders
+      x-operation-id-source: derived
   /api/v1/ChangeOrders/GetChangeOrder:
     get:
       tags:
-      - ChangeOrders
+      - Change Orders
       parameters:
       - name: id
         in: query
@@ -108,74 +112,52 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Get api change orders get change order
+      x-summary-source: derived
+      operationId: getApiV1ChangeOrdersGetChangeOrder
+      x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.ChangeOrderLite:
+    DTools.Cloud.Data.ChangeOrderTax:
       type: object
       properties:
         id:
-          type: string
-          format: uuid
+          type: integer
+          format: int32
         name:
           type:
           - string
           - 'null'
-        number:
-          type: integer
-          format: int32
-        type:
+        isGroup:
+          type: boolean
+        childIds:
           type:
-          - string
+          - array
           - 'null'
-          readOnly: true
-        systemState:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        state:
-          type:
-          - string
-          - 'null'
-        price:
+          items:
+            type: integer
+            format: int32
+        rate:
           type: number
           format: double
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
+        applyOn:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        isPayByClient:
+          type: boolean
       additionalProperties: false
-    DTools.Cloud.Data.ChangeOrderItemLaborItem:
+    DTools.Cloud.Data.ChangeOrderPhase:
       type: object
       properties:
-        laborTypeId:
+        id:
           type: integer
           format: int32
-        time:
-          type: integer
-          format: int32
-        price:
-          type: number
-          format: double
-        timePerLength:
+        name:
           type:
-          - integer
+          - string
           - 'null'
-          format: int32
-        pricePerLength:
-          type:
-          - number
-          - 'null'
-          format: double
-        phaseId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isBillable:
-          type: boolean
       additionalProperties: false
     DTools.Cloud.Data.ChangeOrderTaxSettings:
       type: object
@@ -192,6 +174,142 @@ components:
           - integer
           - 'null'
           format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ChangeOrderLaborType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        catalogId:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        shortDescription:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        hourlyCost:
+          type:
+          - number
+          - 'null'
+          format: double
+        hourlyPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        margin:
+          type:
+          - number
+          - 'null'
+          format: double
+        markup:
+          type:
+          - number
+          - 'null'
+          format: double
+        difficultyFactor:
+          type: number
+          format: double
+        totalTimeInSeconds:
+          type: integer
+          format: int64
+        isTaxable:
+          type: boolean
+        taxId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ChangeOrderDiscount:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        isRange:
+          type: boolean
+        isPercent:
+          type: boolean
+        percent:
+          type:
+          - number
+          - 'null'
+          format: double
+        maximumPercent:
+          type:
+          - number
+          - 'null'
+          format: double
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        maximumAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    DTools.Cloud.Data.ChangeOrderLength:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        length:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ChangeOrderAdjustment:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        isPercent:
+          type: boolean
+        percent:
+          type:
+          - number
+          - 'null'
+          format: double
+        amount:
+          type:
+          - number
+          - 'null'
+          format: double
+        isTaxable:
+          type: boolean
+        taxId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        applyTo:
+          type:
+          - string
+          - 'null'
+          readOnly: true
       additionalProperties: false
     DTools.Cloud.Data.ChangeOrderDetail:
       type: object
@@ -311,6 +429,101 @@ components:
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.ChangeOrderPayment'
       additionalProperties: false
+    DTools.Cloud.Data.ChangeOrderItemLaborItem:
+      type: object
+      properties:
+        laborTypeId:
+          type: integer
+          format: int32
+        time:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        timePerLength:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        pricePerLength:
+          type:
+          - number
+          - 'null'
+          format: double
+        phaseId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isBillable:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.ChangeOrderLocation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        fullName:
+          type:
+          - string
+          - 'null'
+        parentId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ChangeOrderLite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type: integer
+          format: int32
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        systemState:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        state:
+          type:
+          - string
+          - 'null'
+        price:
+          type: number
+          format: double
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+      additionalProperties: false
     DTools.Cloud.Data.ChangeOrderPayment:
       type: object
       properties:
@@ -409,184 +622,31 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    DTools.Cloud.Data.ChangeOrderLaborType:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        catalogId:
-          type: string
-          format: uuid
-        name:
+        type:
           type:
           - string
           - 'null'
-        shortDescription:
+        title:
           type:
           - string
           - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        hourlyCost:
-          type:
-          - number
-          - 'null'
-          format: double
-        hourlyPrice:
-          type:
-          - number
-          - 'null'
-          format: double
-        margin:
-          type:
-          - number
-          - 'null'
-          format: double
-        markup:
-          type:
-          - number
-          - 'null'
-          format: double
-        difficultyFactor:
-          type: number
-          format: double
-        totalTimeInSeconds:
-          type: integer
-          format: int64
-        isTaxable:
-          type: boolean
-        taxId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    DTools.Cloud.Data.ChangeOrderPaymentTerm:
-      type: object
-      properties:
-        paymentTermId:
-          type: string
-          format: uuid
-        paymentTerm:
-          type:
-          - string
-          - 'null'
-        isPercent:
-          type: boolean
-        percent:
-          type:
-          - number
-          - 'null'
-          format: double
-        billingDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        amount:
-          type: number
-          format: double
         status:
           type:
-          - string
-          - 'null'
-          readOnly: true
-      additionalProperties: false
-    DTools.Cloud.Data.ChangeOrderAdjustment:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        isPercent:
-          type: boolean
-        percent:
-          type:
-          - number
-          - 'null'
-          format: double
-        amount:
-          type:
-          - number
-          - 'null'
-          format: double
-        isTaxable:
-          type: boolean
-        taxId:
-          type:
           - integer
           - 'null'
           format: int32
-        applyTo:
+        detail:
           type:
           - string
           - 'null'
-          readOnly: true
-      additionalProperties: false
-    DTools.Cloud.Data.ChangeOrderTax:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
+        instance:
           type:
           - string
           - 'null'
-        isGroup:
-          type: boolean
-        childIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-            format: int32
-        rate:
-          type: number
-          format: double
-        applyOn:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        isPayByClient:
-          type: boolean
-      additionalProperties: false
-    DTools.Cloud.Data.ChangeOrderLength:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        length:
-          type: integer
-          format: int32
-      additionalProperties: false
-    DTools.Cloud.Data.ChangeOrderPhase:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
+      additionalProperties: {}
     DTools.Cloud.Data.ChangeOrderItem:
       type: object
       properties:
@@ -791,43 +851,16 @@ components:
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.ChangeOrderItemLaborItem'
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
+    DTools.Cloud.Data.ChangeOrderPaymentTerm:
       type: object
       properties:
-        type:
+        paymentTermId:
+          type: string
+          format: uuid
+        paymentTerm:
           type:
           - string
           - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    DTools.Cloud.Data.ChangeOrderDiscount:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        isRange:
-          type: boolean
         isPercent:
           type: boolean
         percent:
@@ -835,47 +868,22 @@ components:
           - number
           - 'null'
           format: double
-        maximumPercent:
+        billingDate:
           type:
-          - number
+          - string
           - 'null'
-          format: double
+          format: date-time
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
         amount:
-          type:
-          - number
-          - 'null'
+          type: number
           format: double
-        maximumAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-      additionalProperties: false
-    DTools.Cloud.Data.ChangeOrderLocation:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
+        status:
           type:
           - string
           - 'null'
-        number:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        fullName:
-          type:
-          - string
-          - 'null'
-        parentId:
-          type:
-          - integer
-          - 'null'
-          format: int32
+          readOnly: true
       additionalProperties: false

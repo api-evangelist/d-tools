@@ -13,12 +13,12 @@ info:
 servers:
 - url: https://dtcloudapi.d-tools.cloud
 tags:
-- name: TimeEntries
+- name: Time Entries
 paths:
   /api/v1/TimeEntries/GetTimeEntries:
     get:
       tags:
-      - TimeEntries
+      - Time Entries
       parameters:
       - name: types
         in: query
@@ -131,46 +131,12 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Get api time entries get time entries
+      x-summary-source: derived
+      operationId: getApiV1TimeEntriesGetTimeEntries
+      x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.GetTimeEntriesResult:
-      type: object
-      properties:
-        timeEntries:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.TimeEntryDetail'
-        totalTimeEntries:
-          type: integer
-          format: int32
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     DTools.Cloud.Data.TimeEntryDetail:
       type: object
       properties:
@@ -267,4 +233,42 @@ components:
           format: date-time
         isArchived:
           type: boolean
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DTools.Cloud.Data.GetTimeEntriesResult:
+      type: object
+      properties:
+        timeEntries:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.TimeEntryDetail'
+        totalTimeEntries:
+          type: integer
+          format: int32
       additionalProperties: false

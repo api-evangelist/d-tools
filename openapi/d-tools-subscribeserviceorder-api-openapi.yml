@@ -4,25 +4,7 @@ info:
   description: 'The API allows integrations to:
 
 
-    - Publish catalogs and projects to SI users.
-
-    - Subscribe to projects and catalogs published by SI users.
-
-
-    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
-
-
-    An API key is specific to a SI user and an integration.
-
-
-    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
-
-
-    ```
-
-    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
-
-    ```'
+    - Publish catalogs and projects to SI users.'
   version: 1.0.0
 servers:
 - url: https://api.d-tools.com/si
@@ -34,7 +16,7 @@ paths:
     get:
       tags:
       - SubscribeServiceOrder
-      summary: Get service order published by a SI user.
+      summary: Get service order published by a SI user
       parameters:
       - name: clients
         in: query
@@ -99,6 +81,8 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ServiceOrdersResult'
+      operationId: getSubscribeServiceOrders
+      x-operation-id-source: derived
   /Subscribe/ServiceOrder/GetMobileInstallSiteNotes:
     get:
       tags:
@@ -134,11 +118,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/SiteNote'
+      operationId: getSubscribeServiceOrderGetMobileInstallSiteNotes
+      x-operation-id-source: derived
   /Subscribe/ServiceOrders/MarkAsImported:
     put:
       tags:
       - SubscribeServiceOrder
-      summary: Mark a service order as imported for a given service order id.
+      summary: Mark a service order as imported for a given service order id
       parameters:
       - name: id
         in: query
@@ -158,11 +144,13 @@ paths:
       responses:
         '200':
           description: ''
+      operationId: putSubscribeServiceOrdersMarkAsImported
+      x-operation-id-source: derived
   /Subscribe/ServiceOrders/{id}:
     get:
       tags:
       - SubscribeServiceOrder
-      summary: Get a service order for a given service order id.
+      summary: Get a service order for a given service order id
       parameters:
       - name: id
         in: path
@@ -186,8 +174,251 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ServiceOrder'
+      operationId: getSubscribeServiceOrdersById
+      x-operation-id-source: derived
 components:
   schemas:
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    ServiceOrderRepairItem:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id required
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer required for repair item.
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model required for repair item.
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part number of the repair item.
+        category:
+          type:
+          - 'null'
+          - string
+          description: Category of the repair item.
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: ComponentId of the repair item.
+        serialNumber:
+          type:
+          - 'null'
+          - string
+          description: Serial number of the repair item.
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description of the repair item.
+        notes:
+          type:
+          - 'null'
+          - string
+          description: Notes of the repair item.
+        location:
+          type:
+          - 'null'
+          - string
+          description: Location of the repair item.
+        system:
+          type:
+          - 'null'
+          - string
+          description: Description of the repair item.
+      description: Repair item Object
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    ServiceOrderInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the service order
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client Name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Service Order Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Service order name
+        progress:
+          type:
+          - 'null'
+          - string
+          description: Project progress
+        description:
+          type:
+          - 'null'
+          - string
+          description: Service order description
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date service order was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date service order was published by SI user
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date service order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Order as Imported method optionally to make sure the service order was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Service order deleted
+      description: Service Order Information
+    ServiceOrdersResult:
+      type: object
+      properties:
+        serviceOrders:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServiceOrderInfo'
+          description: Service orders
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of service orders
+          format: int32
+    ServiceOrderResource:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+          description: Email
+        estimatedHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Estimated hours
+          format: double
+        actualHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Actual hours
+          format: double
+        cost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Cost
+          format: double
+        estimatedCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        actualCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+      description: Service Order Resource Object
     ServiceOrder:
       type: object
       properties:
@@ -518,6 +749,243 @@ components:
           - 'null'
           - string
           description: Service order Published By
+    ServiceOrderProduct:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id required
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer required for product.
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model required for product.
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Quantity of product.
+          format: int32
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part number of the product.
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description of the product.
+        packageName:
+          type:
+          - 'null'
+          - string
+          description: Package name.
+        acctgItemName:
+          type:
+          - 'null'
+          - string
+          description: Accounting item name.
+        unitCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Unit cost.
+          format: double
+        unitPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Unit price.
+          format: double
+        totalCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total cost.
+          format: double
+        totalPrice:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total price.
+          format: double
+        taxable:
+          type: boolean
+          description: Taxable.
+        warranty:
+          type: boolean
+          description: Warranty.
+        orderNumber:
+          type:
+          - 'null'
+          - string
+          description: Order Number (if on purchase order)
+        orderDate:
+          type:
+          - 'null'
+          - string
+          description: Order Date (if on purchase order)
+          format: date-time
+        orderStatus:
+          type:
+          - 'null'
+          - string
+          description: Order Status (if on purchase order)
+        receivedDate:
+          type:
+          - 'null'
+          - string
+          description: Received Date (if on purchase order)
+          format: date-time
+        vendorName:
+          type:
+          - 'null'
+          - string
+          description: Vendor name  (if on purchase order)
+        itemCustomField1:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField1
+        itemCustomField2:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField2
+        itemCustomField3:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField3
+        itemCustomField4:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField4
+        itemCustomField5:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField5
+        itemCustomField6:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: ItemCustomField6
+          format: double
+        itemCustomField7:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: ItemCustomField7
+          format: double
+        itemCustomField8:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: ItemCustomField8
+          format: double
+        itemCustomField9:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField9
+          format: date-time
+        itemCustomField10:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField10
+          format: date-time
+        itemCustomField11:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField11
+          format: date-time
+        itemCustomField12:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField12
+        itemCustomField13:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField13
+        itemCustomField14:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField14
+        itemCustomField15:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField15
+        itemCustomField16:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField16
+        itemCustomField17:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField17
+        itemCustomField18:
+          type:
+          - 'null'
+          - string
+          description: ItemCustomField18
+        itemCustomField19:
+          type:
+          - 'null'
+          - boolean
+          description: ItemCustomField19
+        itemCustomField20:
+          type:
+          - 'null'
+          - boolean
+          description: ItemCustomField20
+        itemCustomField21:
+          type:
+          - 'null'
+          - boolean
+          description: ItemCustomField21
+        itemCustomField22:
+          type:
+          - 'null'
+          - boolean
+          description: ItemCustomField22
+        name:
+          type:
+          - 'null'
+          - string
+      description: Product Object
     SiteNote:
       type: object
       properties:
@@ -536,138 +1004,6 @@ components:
           - string
           description: Updated By
       description: Mobile Install Site Notes
-    ServiceOrdersResult:
-      type: object
-      properties:
-        serviceOrders:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ServiceOrderInfo'
-          description: Service orders
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of service orders
-          format: int32
-    ServiceOrderInfo:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the service order
-        client:
-          type:
-          - 'null'
-          - string
-          description: Client Name
-        number:
-          type:
-          - 'null'
-          - string
-          description: Service Order Number
-        name:
-          type:
-          - 'null'
-          - string
-          description: Service order name
-        progress:
-          type:
-          - 'null'
-          - string
-          description: Project progress
-        description:
-          type:
-          - 'null'
-          - string
-          description: Service order description
-        importedOn:
-          type:
-          - 'null'
-          - string
-          description: Date service order was imported by SI user
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date service order was published by SI user
-          format: date-time
-        publishedOnUnixTimeMs:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Date service order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Order as Imported method optionally to make sure the service order was not updated in SI since it was published.
-          format: int64
-        deleted:
-          type:
-          - 'null'
-          - boolean
-          description: Service order deleted
-      description: Service Order Information
-    ServiceOrderRepairItem:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id required
-        manufacturer:
-          type:
-          - 'null'
-          - string
-          description: Manufacturer required for repair item.
-        model:
-          type:
-          - 'null'
-          - string
-          description: Model required for repair item.
-        partNumber:
-          type:
-          - 'null'
-          - string
-          description: Part number of the repair item.
-        category:
-          type:
-          - 'null'
-          - string
-          description: Category of the repair item.
-        componentId:
-          type:
-          - 'null'
-          - string
-          description: ComponentId of the repair item.
-        serialNumber:
-          type:
-          - 'null'
-          - string
-          description: Serial number of the repair item.
-        description:
-          type:
-          - 'null'
-          - string
-          description: Description of the repair item.
-        notes:
-          type:
-          - 'null'
-          - string
-          description: Notes of the repair item.
-        location:
-          type:
-          - 'null'
-          - string
-          description: Location of the repair item.
-        system:
-          type:
-          - 'null'
-          - string
-          description: Description of the repair item.
-      description: Repair item Object
     ServiceOrderLabor:
       type: object
       properties:
@@ -934,349 +1270,3 @@ components:
           - 'null'
           - string
       description: Labor Object
-    ContactInfo:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the contact
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
-    ServiceOrderResource:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the resource
-        email:
-          type:
-          - 'null'
-          - string
-          description: Email
-        estimatedHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Estimated hours
-          format: double
-        actualHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Actual hours
-          format: double
-        cost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Cost
-          format: double
-        estimatedCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-        actualCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-      description: Service Order Resource Object
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-    ServiceOrderProduct:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id required
-        manufacturer:
-          type:
-          - 'null'
-          - string
-          description: Manufacturer required for product.
-        model:
-          type:
-          - 'null'
-          - string
-          description: Model required for product.
-        quantity:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Quantity of product.
-          format: int32
-        partNumber:
-          type:
-          - 'null'
-          - string
-          description: Part number of the product.
-        description:
-          type:
-          - 'null'
-          - string
-          description: Description of the product.
-        packageName:
-          type:
-          - 'null'
-          - string
-          description: Package name.
-        acctgItemName:
-          type:
-          - 'null'
-          - string
-          description: Accounting item name.
-        unitCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Unit cost.
-          format: double
-        unitPrice:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Unit price.
-          format: double
-        totalCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Total cost.
-          format: double
-        totalPrice:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Total price.
-          format: double
-        taxable:
-          type: boolean
-          description: Taxable.
-        warranty:
-          type: boolean
-          description: Warranty.
-        orderNumber:
-          type:
-          - 'null'
-          - string
-          description: Order Number (if on purchase order)
-        orderDate:
-          type:
-          - 'null'
-          - string
-          description: Order Date (if on purchase order)
-          format: date-time
-        orderStatus:
-          type:
-          - 'null'
-          - string
-          description: Order Status (if on purchase order)
-        receivedDate:
-          type:
-          - 'null'
-          - string
-          description: Received Date (if on purchase order)
-          format: date-time
-        vendorName:
-          type:
-          - 'null'
-          - string
-          description: Vendor name  (if on purchase order)
-        itemCustomField1:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField1
-        itemCustomField2:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField2
-        itemCustomField3:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField3
-        itemCustomField4:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField4
-        itemCustomField5:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField5
-        itemCustomField6:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: ItemCustomField6
-          format: double
-        itemCustomField7:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: ItemCustomField7
-          format: double
-        itemCustomField8:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: ItemCustomField8
-          format: double
-        itemCustomField9:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField9
-          format: date-time
-        itemCustomField10:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField10
-          format: date-time
-        itemCustomField11:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField11
-          format: date-time
-        itemCustomField12:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField12
-        itemCustomField13:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField13
-        itemCustomField14:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField14
-        itemCustomField15:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField15
-        itemCustomField16:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField16
-        itemCustomField17:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField17
-        itemCustomField18:
-          type:
-          - 'null'
-          - string
-          description: ItemCustomField18
-        itemCustomField19:
-          type:
-          - 'null'
-          - boolean
-          description: ItemCustomField19
-        itemCustomField20:
-          type:
-          - 'null'
-          - boolean
-          description: ItemCustomField20
-        itemCustomField21:
-          type:
-          - 'null'
-          - boolean
-          description: ItemCustomField21
-        itemCustomField22:
-          type:
-          - 'null'
-          - boolean
-          description: ItemCustomField22
-        name:
-          type:
-          - 'null'
-          - string
-      description: Product Object

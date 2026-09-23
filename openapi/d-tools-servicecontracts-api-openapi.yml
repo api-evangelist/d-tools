@@ -148,6 +148,10 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Get api service contracts get service contracts
+      x-summary-source: derived
+      operationId: getApiV1ServiceContractsGetServiceContracts
+      x-operation-id-source: derived
   /api/v1/ServiceContracts/GetServiceContract:
     get:
       tags:
@@ -197,351 +201,12 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Get api service contracts get service contract
+      x-summary-source: derived
+      operationId: getApiV1ServiceContractsGetServiceContract
+      x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.ServiceContractLite:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        clientId:
-          type: string
-          format: uuid
-        clientName:
-          type:
-          - string
-          - 'null'
-        clientNumber:
-          type:
-          - string
-          - 'null'
-        projectId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        projectName:
-          type:
-          - string
-          - 'null'
-        projectNumber:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        number:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        pricePerMonth:
-          type: number
-          format: double
-        startDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        endDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        paymentDueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        canceledDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
-      additionalProperties: false
-    DTools.Cloud.Data.FileInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.ServiceContractFeature:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        price:
-          type:
-          - number
-          - 'null'
-          format: double
-        priceInterval:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        includedServiceCallType:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        includedServiceCalls:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        hours:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isAdditionalService:
-          type: boolean
-        additionalServicePrice:
-          type:
-          - number
-          - 'null'
-          format: double
-        additionalServicePriceInterval:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        serviceFrequency:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        afterHoursServiceType:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        productDiscount:
-          type:
-          - number
-          - 'null'
-          format: double
-        automaticPlanRenewalLength:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        automaticPlanRenewalPriceIncreasePercent:
-          type:
-          - number
-          - 'null'
-          format: double
-        includedSessions:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        sessionLengthInMinutes:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        isAdditionalSupport:
-          type: boolean
-        additionalSupportPrice:
-          type:
-          - number
-          - 'null'
-          format: double
-        additionalSupportPriceInterval:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        displayText:
-          type:
-          - string
-          - 'null'
-        isShowInProposal:
-          type: boolean
-          readOnly: true
-      additionalProperties: false
-    DTools.Cloud.Data.ServiceContractPaymentSchedule:
-      type: object
-      properties:
-        paymentTermId:
-          type: string
-          format: uuid
-        payment:
-          type:
-          - string
-          - 'null'
-        billingDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        amount:
-          type: number
-          format: double
-        status:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      additionalProperties: false
-    DTools.Cloud.Data.GetServiceContractsResult:
-      type: object
-      properties:
-        serviceContracts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.ServiceContractLite'
-        totalServiceContracts:
-          type: integer
-          format: int32
-      additionalProperties: false
-    DTools.Cloud.Data.ServiceContractPayment:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        number:
-          type:
-          - string
-          - 'null'
-        integrationNumber:
-          type:
-          - string
-          - 'null'
-        billingDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        terms:
-          type:
-          - string
-          - 'null'
-        termsDaysDue:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        amount:
-          type: number
-          format: double
-        taxAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        totalAmount:
-          type: number
-          format: double
-        paidAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        convenienceFee:
-          type:
-          - number
-          - 'null'
-          format: double
-        paidDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        status:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        paymentRequestMessage:
-          type:
-          - string
-          - 'null'
-        isDisplayPaymentSchedule:
-          type: boolean
-        isAutoGenerated:
-          type: boolean
-        isAutoPaid:
-          type: boolean
-        notes:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     DTools.Cloud.Data.ServiceContractDetail:
       type: object
       properties:
@@ -741,4 +406,347 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.ServiceContractPayment'
+      additionalProperties: false
+    DTools.Cloud.Data.ServiceContractLite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        clientId:
+          type: string
+          format: uuid
+        clientName:
+          type:
+          - string
+          - 'null'
+        clientNumber:
+          type:
+          - string
+          - 'null'
+        projectId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        projectName:
+          type:
+          - string
+          - 'null'
+        projectNumber:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        pricePerMonth:
+          type: number
+          format: double
+        startDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentDueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        canceledDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+      additionalProperties: false
+    DTools.Cloud.Data.ServiceContractPayment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        integrationNumber:
+          type:
+          - string
+          - 'null'
+        billingDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        terms:
+          type:
+          - string
+          - 'null'
+        termsDaysDue:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        amount:
+          type: number
+          format: double
+        taxAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        totalAmount:
+          type: number
+          format: double
+        paidAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        convenienceFee:
+          type:
+          - number
+          - 'null'
+          format: double
+        paidDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        paymentRequestMessage:
+          type:
+          - string
+          - 'null'
+        isDisplayPaymentSchedule:
+          type: boolean
+        isAutoGenerated:
+          type: boolean
+        isAutoPaid:
+          type: boolean
+        notes:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ServiceContractFeature:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        price:
+          type:
+          - number
+          - 'null'
+          format: double
+        priceInterval:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        includedServiceCallType:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        includedServiceCalls:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        hours:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isAdditionalService:
+          type: boolean
+        additionalServicePrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        additionalServicePriceInterval:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        serviceFrequency:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        afterHoursServiceType:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        productDiscount:
+          type:
+          - number
+          - 'null'
+          format: double
+        automaticPlanRenewalLength:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        automaticPlanRenewalPriceIncreasePercent:
+          type:
+          - number
+          - 'null'
+          format: double
+        includedSessions:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        sessionLengthInMinutes:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isAdditionalSupport:
+          type: boolean
+        additionalSupportPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+        additionalSupportPriceInterval:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        displayText:
+          type:
+          - string
+          - 'null'
+        isShowInProposal:
+          type: boolean
+          readOnly: true
+      additionalProperties: false
+    DTools.Cloud.Data.ServiceContractPaymentSchedule:
+      type: object
+      properties:
+        paymentTermId:
+          type: string
+          format: uuid
+        payment:
+          type:
+          - string
+          - 'null'
+        billingDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        amount:
+          type: number
+          format: double
+        status:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      additionalProperties: false
+    DTools.Cloud.Data.GetServiceContractsResult:
+      type: object
+      properties:
+        serviceContracts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ServiceContractLite'
+        totalServiceContracts:
+          type: integer
+          format: int32
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DTools.Cloud.Data.FileInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
       additionalProperties: false

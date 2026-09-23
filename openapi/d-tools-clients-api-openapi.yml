@@ -110,6 +110,10 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Get api clients get clients
+      x-summary-source: derived
+      operationId: getApiV1ClientsGetClients
+      x-operation-id-source: derived
   /api/v1/Clients/GetClient:
     get:
       tags:
@@ -159,6 +163,10 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Get api clients get client
+      x-summary-source: derived
+      operationId: getApiV1ClientsGetClient
+      x-operation-id-source: derived
   /api/v1/Clients/CreateClient:
     post:
       tags:
@@ -218,6 +226,10 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Create api clients create client
+      x-summary-source: derived
+      operationId: postApiV1ClientsCreateClient
+      x-operation-id-source: derived
   /api/v1/Clients/UpdateClient:
     put:
       tags:
@@ -290,73 +302,24 @@ paths:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
         '500':
           description: Internal Server Error
+      summary: Replace api clients update client
+      x-summary-source: derived
+      operationId: putApiV1ClientsUpdateClient
+      x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.Client:
+    DTools.Cloud.Data.GetClientsResult:
       type: object
       properties:
-        type:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        number:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        secondaryEmail:
-          type:
-          - string
-          - 'null'
-        mobile:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-        fax:
-          type:
-          - string
-          - 'null'
-        website:
-          type:
-          - string
-          - 'null'
-        owner:
-          type:
-          - string
-          - 'null'
-        isExemptFromTax:
-          type:
-          - boolean
-          - 'null'
-        isActive:
-          type:
-          - boolean
-          - 'null'
-        billingAddress:
-          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
-        siteAddresses:
+        clients:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.Address'
-        contacts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.Contact'
+            $ref: '#/components/schemas/DTools.Cloud.Data.ClientLite'
+        totalClients:
+          type: integer
+          format: int32
       additionalProperties: false
     DTools.Cloud.Data.ClientDetail:
       type: object
@@ -447,34 +410,6 @@ components:
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.FileInfo'
       additionalProperties: false
-    DTools.Cloud.Data.FileInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.GetClientsResult:
-      type: object
-      properties:
-        clients:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.ClientLite'
-        totalClients:
-          type: integer
-          format: int32
-      additionalProperties: false
     DTools.Cloud.Data.Contact:
       type: object
       properties:
@@ -560,55 +495,69 @@ components:
           - boolean
           - 'null'
       additionalProperties: false
-    DTools.Cloud.Data.ClientLite:
+    DTools.Cloud.Data.AddressDetail:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
         name:
           type:
           - string
           - 'null'
-        number:
+        addressLine1:
           type:
           - string
           - 'null'
-        contactName:
+        addressLine2:
           type:
           - string
           - 'null'
-        email:
+        city:
           type:
           - string
           - 'null'
-        mobile:
+        state:
           type:
           - string
           - 'null'
-        phone:
+        postalCode:
           type:
           - string
           - 'null'
-        owner:
+        country:
           type:
           - string
           - 'null'
-        hasSubaccounts:
-          type: boolean
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
-        isActive:
-          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.Address:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     DTools.Cloud.Data.ContactDetail:
       type: object
@@ -689,69 +638,121 @@ components:
         isPrimary:
           type: boolean
       additionalProperties: false
-    DTools.Cloud.Data.Address:
+    DTools.Cloud.Data.ClientLite:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
         name:
           type:
           - string
           - 'null'
-        addressLine1:
+        number:
           type:
           - string
           - 'null'
-        addressLine2:
+        contactName:
           type:
           - string
           - 'null'
-        city:
+        email:
           type:
           - string
           - 'null'
-        state:
+        mobile:
           type:
           - string
           - 'null'
-        postalCode:
+        phone:
           type:
           - string
           - 'null'
-        country:
+        owner:
           type:
           - string
           - 'null'
+        hasSubaccounts:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
       additionalProperties: false
-    DTools.Cloud.Data.AddressDetail:
+    DTools.Cloud.Data.Client:
       type: object
       properties:
+        type:
+          type:
+          - string
+          - 'null'
         name:
           type:
           - string
           - 'null'
-        addressLine1:
+        number:
           type:
           - string
           - 'null'
-        addressLine2:
+        email:
           type:
           - string
           - 'null'
-        city:
+        secondaryEmail:
           type:
           - string
           - 'null'
-        state:
+        mobile:
           type:
           - string
           - 'null'
-        postalCode:
+        phone:
           type:
           - string
           - 'null'
-        country:
+        fax:
           type:
           - string
           - 'null'
+        website:
+          type:
+          - string
+          - 'null'
+        owner:
+          type:
+          - string
+          - 'null'
+        isExemptFromTax:
+          type:
+          - boolean
+          - 'null'
+        isActive:
+          type:
+          - boolean
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        siteAddresses:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.Contact'
       additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
@@ -778,3 +779,18 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    DTools.Cloud.Data.FileInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false

@@ -4,25 +4,7 @@ info:
   description: 'The API allows integrations to:
 
 
-    - Publish catalogs and projects to SI users.
-
-    - Subscribe to projects and catalogs published by SI users.
-
-
-    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
-
-
-    An API key is specific to a SI user and an integration.
-
-
-    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
-
-
-    ```
-
-    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
-
-    ```'
+    - Publish catalogs and projects to SI users.'
   version: 1.0.0
 servers:
 - url: https://api.d-tools.com/si
@@ -34,7 +16,7 @@ paths:
     post:
       tags:
       - PublishClients
-      summary: Publish a list of clients to SI.
+      summary: Publish a list of clients to SI
       requestBody:
         description: The client list.
         content:
@@ -76,6 +58,8 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/PublishResponse'
+      operationId: postPublishClients
+      x-operation-id-source: derived
   /Publish/Clients/Update:
     post:
       tags:
@@ -122,48 +106,92 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/PublishResponse'
+      operationId: postPublishClientsUpdate
+      x-operation-id-source: derived
 components:
   schemas:
-    UpdateClient:
+    Address:
       type: object
       properties:
-        integrationId:
+        street1:
           type:
           - 'null'
           - string
-          description: Integration Id of client to update (Must pass either IntegrationId Or Client Number)
-        number:
+        street2:
           type:
           - 'null'
           - string
-          description: Number of client to update (Must pass either IntegrationId Or Client Number)
-        updateFields:
+        city:
           type:
           - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/UpdateClientField'
-          description: List of UpdateFields for the client. Each UpdateField has a Id and a Value.
-        siteAddress:
-          description: Client Site Address
-          $ref: '#/components/schemas/Address'
-        billingAddress:
-          description: Client Billing Address
-          $ref: '#/components/schemas/Address'
-      description: Update Project
-    PublishResponse:
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    ClientAddress:
       type: object
       properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Client Addres Type - must be type 1 = Billing, 2 = Site, 3 = Other
+          format: uint8
+        name:
           type:
           - 'null'
           - string
-          description: Success Message
-      description: Project publish response
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+      description: Client address object
     ClientContact:
       type: object
       properties:
@@ -228,29 +256,6 @@ components:
           - 'null'
           - string
       description: Client contact object
-    UpdateClientField:
-      type: object
-      properties:
-        clientFieldId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'ClientFieldId (pass the correct Id for the field you want to udpate)
-
-            Name = 1, Number = 2, Phone = 3, Fax = 4, Email = 5, Website = 6, Inactive = 7,  IntegrationId = 8
-
-            CustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,
-
-            CustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,
-
-            CustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124'
-          format: uint8
-        value:
-          type:
-          - 'null'
-          - string
-          description: Value for the client field. Datetime and decimal should be invariant.
     ClientList:
       type: object
       properties:
@@ -498,85 +503,66 @@ components:
           - string
           description: CustomField24 (Hyperlink) (BETA).
       description: Client object
-    Address:
+    PublishResponse:
       type: object
       properties:
-        street1:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
           type:
           - 'null'
           - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-    ClientAddress:
+          description: Success Message
+      description: Project publish response
+    UpdateClientField:
       type: object
       properties:
-        typeId:
+        clientFieldId:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
-          description: Client Addres Type - must be type 1 = Billing, 2 = Site, 3 = Other
+          description: 'ClientFieldId (pass the correct Id for the field you want to udpate)
+
+            Name = 1, Number = 2, Phone = 3, Fax = 4, Email = 5, Website = 6, Inactive = 7,  IntegrationId = 8
+
+            CustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,
+
+            CustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,
+
+            CustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124'
           format: uint8
-        name:
+        value:
           type:
           - 'null'
           - string
-        street1:
+          description: Value for the client field. Datetime and decimal should be invariant.
+    UpdateClient:
+      type: object
+      properties:
+        integrationId:
           type:
           - 'null'
           - string
-        street2:
+          description: Integration Id of client to update (Must pass either IntegrationId Or Client Number)
+        number:
           type:
           - 'null'
           - string
-        city:
+          description: Number of client to update (Must pass either IntegrationId Or Client Number)
+        updateFields:
           type:
           - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-      description: Client address object
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateClientField'
+          description: List of UpdateFields for the client. Each UpdateField has a Id and a Value.
+        siteAddress:
+          description: Client Site Address
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          description: Client Billing Address
+          $ref: '#/components/schemas/Address'
+      description: Update Project

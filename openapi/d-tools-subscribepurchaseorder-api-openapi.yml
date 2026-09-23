@@ -4,25 +4,7 @@ info:
   description: 'The API allows integrations to:
 
 
-    - Publish catalogs and projects to SI users.
-
-    - Subscribe to projects and catalogs published by SI users.
-
-
-    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
-
-
-    An API key is specific to a SI user and an integration.
-
-
-    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
-
-
-    ```
-
-    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
-
-    ```'
+    - Publish catalogs and projects to SI users.'
   version: 1.0.0
 servers:
 - url: https://api.d-tools.com/si
@@ -34,7 +16,7 @@ paths:
     get:
       tags:
       - SubscribePurchaseOrder
-      summary: Get purchase orders published by a SI user.
+      summary: Get purchase orders published by a SI user
       parameters:
       - name: vendors
         in: query
@@ -99,11 +81,13 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/PurchaseOrdersResult'
+      operationId: getSubscribePurchaseOrders
+      x-operation-id-source: derived
   /Subscribe/PurchaseOrders/MarkAsImported:
     put:
       tags:
       - SubscribePurchaseOrder
-      summary: Mark a purchase order as imported for a given purchase order id.
+      summary: Mark a purchase order as imported for a given purchase order id
       parameters:
       - name: id
         in: query
@@ -123,11 +107,13 @@ paths:
       responses:
         '200':
           description: ''
+      operationId: putSubscribePurchaseOrdersMarkAsImported
+      x-operation-id-source: derived
   /Subscribe/PurchaseOrders/{id}:
     get:
       tags:
       - SubscribePurchaseOrder
-      summary: Get a purchase order for a given purchase order id.
+      summary: Get a purchase order for a given purchase order id
       parameters:
       - name: id
         in: path
@@ -151,158 +137,10 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/PurchaseOrder'
+      operationId: getSubscribePurchaseOrdersById
+      x-operation-id-source: derived
 components:
   schemas:
-    PurchaseOrder:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id
-        vendor:
-          type:
-          - 'null'
-          - string
-          description: Vendor name (Rrequired)
-        projects:
-          type:
-          - 'null'
-          - string
-          description: Projects
-        number:
-          type:
-          - 'null'
-          - string
-          description: Number (Required)
-        status:
-          type:
-          - 'null'
-          - string
-          description: Status (Required)
-        date:
-          type: string
-          description: Date
-          format: date-time
-        requestDeliveryDate:
-          type:
-          - 'null'
-          - string
-          description: Request delivery date
-          format: date-time
-        shipPref:
-          type:
-          - 'null'
-          - string
-          description: Shipment preference
-        vendorRefNumber:
-          type:
-          - 'null'
-          - string
-          description: Vendor reference number
-        trackingNumber:
-          type:
-          - 'null'
-          - string
-          description: Tracking number
-        acctgNumber:
-          type:
-          - 'null'
-          - string
-          description: Accounting number
-        terms:
-          type:
-          - 'null'
-          - string
-          description: Terms
-        notes:
-          type:
-          - 'null'
-          - string
-          description: Notes
-        serviceOrders:
-          type:
-          - 'null'
-          - string
-          description: Service Orders
-        currencyCode:
-          type:
-          - 'null'
-          - string
-          description: Currency code
-        currencyRate:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Currency rate
-          format: double
-        createdOn:
-          type:
-          - 'null'
-          - string
-          description: Date the purchase order was created (UTC Time)
-          format: date-time
-        updatedOn:
-          type:
-          - 'null'
-          - string
-          description: Date the purchase order was updated  (UTC Time)
-          format: date-time
-        createdBy:
-          type:
-          - 'null'
-          - string
-          description: Purchase order Created By
-        updatedBy:
-          type:
-          - 'null'
-          - string
-          description: Purchase order Updated By
-        publishedBy:
-          type:
-          - 'null'
-          - string
-          description: Purchase order Published By
-        contacts:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/PurchaseOrderContact'
-          description: Contacts information
-        vendorAddress:
-          description: Vendor address information
-          $ref: '#/components/schemas/Address'
-        shipToAddress:
-          description: Ship To address information
-          $ref: '#/components/schemas/ShipToAddress'
-        purchaseOrderItems:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/PurchaseOrderItem'
-        purchaseOrderTaxes:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/PurchaseOrderTax'
-        publishedOn:
-          type: string
-          description: Date purchase order was published by SI
-          format: date-time
-        publishedOnUnixTimeMs:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Date purchase order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Purchase Order as Imported method optionally to make sure the purchase order was not updated in SI since it was published.
-          format: int64
-      description: Purchase order object
     PurchaseOrderTax:
       type: object
       properties:
@@ -334,45 +172,6 @@ components:
             - integer
             - string
             format: int32
-    ShipToAddress:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
     PurchaseOrderItem:
       type: object
       properties:
@@ -547,6 +346,41 @@ components:
           - string
           description: Total count of purchase order
           format: int32
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
     PurchaseOrderInfo:
       type: object
       properties:
@@ -593,41 +427,156 @@ components:
           - boolean
           description: Purchase order deleted
       description: Purchase Order Information
-    Address:
+    PurchaseOrder:
       type: object
       properties:
-        street1:
+        id:
           type:
           - 'null'
           - string
-        street2:
+          description: Unique Id
+        vendor:
           type:
           - 'null'
           - string
-        city:
+          description: Vendor name (Rrequired)
+        projects:
           type:
           - 'null'
           - string
-        state:
+          description: Projects
+        number:
           type:
           - 'null'
           - string
-        postalCode:
+          description: Number (Required)
+        status:
           type:
           - 'null'
           - string
-        country:
+          description: Status (Required)
+        date:
+          type: string
+          description: Date
+          format: date-time
+        requestDeliveryDate:
           type:
           - 'null'
           - string
-        phone:
+          description: Request delivery date
+          format: date-time
+        shipPref:
           type:
           - 'null'
           - string
-        fax:
+          description: Shipment preference
+        vendorRefNumber:
           type:
           - 'null'
           - string
+          description: Vendor reference number
+        trackingNumber:
+          type:
+          - 'null'
+          - string
+          description: Tracking number
+        acctgNumber:
+          type:
+          - 'null'
+          - string
+          description: Accounting number
+        terms:
+          type:
+          - 'null'
+          - string
+          description: Terms
+        notes:
+          type:
+          - 'null'
+          - string
+          description: Notes
+        serviceOrders:
+          type:
+          - 'null'
+          - string
+          description: Service Orders
+        currencyCode:
+          type:
+          - 'null'
+          - string
+          description: Currency code
+        currencyRate:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Currency rate
+          format: double
+        createdOn:
+          type:
+          - 'null'
+          - string
+          description: Date the purchase order was created (UTC Time)
+          format: date-time
+        updatedOn:
+          type:
+          - 'null'
+          - string
+          description: Date the purchase order was updated  (UTC Time)
+          format: date-time
+        createdBy:
+          type:
+          - 'null'
+          - string
+          description: Purchase order Created By
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Purchase order Updated By
+        publishedBy:
+          type:
+          - 'null'
+          - string
+          description: Purchase order Published By
+        contacts:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderContact'
+          description: Contacts information
+        vendorAddress:
+          description: Vendor address information
+          $ref: '#/components/schemas/Address'
+        shipToAddress:
+          description: Ship To address information
+          $ref: '#/components/schemas/ShipToAddress'
+        purchaseOrderItems:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderItem'
+        purchaseOrderTaxes:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderTax'
+        publishedOn:
+          type: string
+          description: Date purchase order was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date purchase order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Purchase Order as Imported method optionally to make sure the purchase order was not updated in SI since it was published.
+          format: int64
+      description: Purchase order object
     PurchaseOrderContact:
       type: object
       properties:
@@ -668,3 +617,42 @@ components:
           - 'null'
           - string
       description: Purchase Order Contact
+    ShipToAddress:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string

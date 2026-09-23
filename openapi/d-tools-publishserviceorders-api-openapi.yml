@@ -4,25 +4,7 @@ info:
   description: 'The API allows integrations to:
 
 
-    - Publish catalogs and projects to SI users.
-
-    - Subscribe to projects and catalogs published by SI users.
-
-
-    All API calls must pass an API key in the request header. The API key can be generated in SI 2016 Control Panel using the ''Manage Integrations'' feature.
-
-
-    An API key is specific to a SI user and an integration.
-
-
-    API callers must add to each call a custom header named **X-DTSI-ApiKey** along with the value of the API key. For example, if the API key value is `q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg`, the custom header would be as follows:
-
-
-    ```
-
-    X-DTSI-ApiKey: q54R39UBr0Skgd7VHvEbuwiRAOArUpt02o7z/vY+iwrg
-
-    ```'
+    - Publish catalogs and projects to SI users.'
   version: 1.0.0
 servers:
 - url: https://api.d-tools.com/si
@@ -34,7 +16,7 @@ paths:
     post:
       tags:
       - PublishServiceOrders
-      summary: Publish a new service order to SI.
+      summary: Publish a new service order to SI
       requestBody:
         description: The Service Order.
         content:
@@ -76,11 +58,13 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/PublishResponse'
+      operationId: postPublishServiceOrder
+      x-operation-id-source: derived
   /Publish/UpdateServiceOrder:
     post:
       tags:
       - PublishServiceOrders
-      summary: Update an existing service order in SI.
+      summary: Update an existing service order in SI
       requestBody:
         description: Update Service Order.
         content:
@@ -122,21 +106,10 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/PublishResponse'
+      operationId: postPublishUpdateServiceOrder
+      x-operation-id-source: derived
 components:
   schemas:
-    PublishResponse:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
-          type:
-          - 'null'
-          - string
-          description: Success Message
-      description: Project publish response
     NewServiceOrder:
       type: object
       properties:
@@ -210,29 +183,6 @@ components:
           type:
           - 'null'
           - string
-    UpdateServiceOrderField:
-      type: object
-      properties:
-        serviceOrderFieldId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'ServiceOrderFieldId (pass the correct Id for the field you want to update)
-
-            Service Order Name = 1, Description = 2, Start Date = 3, End Date = 4, Accounting estimate number = 5, Status = 6, Percent complete = 7, Notes = 8, Priority = 9,
-
-            CustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,
-
-            CustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,
-
-            CustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124'
-          format: uint8
-        value:
-          type:
-          - 'null'
-          - string
-          description: Value for the service order field.
     Address:
       type: object
       properties:
@@ -268,6 +218,42 @@ components:
           type:
           - 'null'
           - string
+    UpdateServiceOrderField:
+      type: object
+      properties:
+        serviceOrderFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'ServiceOrderFieldId (pass the correct Id for the field you want to update)
+
+            Service Order Name = 1, Description = 2, Start Date = 3, End Date = 4, Accounting estimate number = 5, Status = 6, Percent complete = 7, Notes = 8, Priority = 9,
+
+            CustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,
+
+            CustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,
+
+            CustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124'
+          format: uint8
+        value:
+          type:
+          - 'null'
+          - string
+          description: Value for the service order field.
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
     UpdateServiceOrder:
       type: object
       properties:
