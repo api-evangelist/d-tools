@@ -141,37 +141,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PurchaseOrderTax:
-      type: object
-      properties:
-        taxId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        name:
-          type:
-          - 'null'
-          - string
-        rate:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-        group:
-          type: boolean
-        items:
-          type:
-          - 'null'
-          - array
-          items:
-            pattern: ^-?(?:0|[1-9]\d*)$
-            type:
-            - integer
-            - string
-            format: int32
     PurchaseOrderItem:
       type: object
       properties:
@@ -329,58 +298,6 @@ components:
           - string
           description: TaxId
           format: int32
-    PurchaseOrdersResult:
-      type: object
-      properties:
-        purchaseOrders:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/PurchaseOrderInfo'
-          description: Purchase orders array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of purchase order
-          format: int32
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
     PurchaseOrderInfo:
       type: object
       properties:
@@ -427,6 +344,93 @@ components:
           - boolean
           description: Purchase order deleted
       description: Purchase Order Information
+    ShipToAddress:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    PurchaseOrderTax:
+      type: object
+      properties:
+        taxId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+        rate:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        group:
+          type: boolean
+        items:
+          type:
+          - 'null'
+          - array
+          items:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+            - integer
+            - string
+            format: int32
+    PurchaseOrdersResult:
+      type: object
+      properties:
+        purchaseOrders:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderInfo'
+          description: Purchase orders array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of purchase order
+          format: int32
     PurchaseOrder:
       type: object
       properties:
@@ -617,13 +621,9 @@ components:
           - 'null'
           - string
       description: Purchase Order Contact
-    ShipToAddress:
+    Address:
       type: object
       properties:
-        name:
-          type:
-          - 'null'
-          - string
         street1:
           type:
           - 'null'

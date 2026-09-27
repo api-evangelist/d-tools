@@ -196,30 +196,49 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.PurchaseOrderDealerContact:
+    DTools.Cloud.Data.FileInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.AddressDetail:
       type: object
       properties:
         name:
           type:
           - string
           - 'null'
-        firstName:
+        addressLine1:
           type:
           - string
           - 'null'
-        lastName:
+        addressLine2:
           type:
           - string
           - 'null'
-        title:
+        city:
           type:
           - string
           - 'null'
-        email:
+        state:
           type:
           - string
           - 'null'
-        phone:
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
           type:
           - string
           - 'null'
@@ -344,51 +363,6 @@ components:
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderProduct'
       additionalProperties: false
-    DTools.Cloud.Data.AddressDetail:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        addressLine1:
-          type:
-          - string
-          - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        postalCode:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.GetPurchaseOrdersResult:
-      type: object
-      properties:
-        purchaseOrders:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderLite'
-        totalPurchaseOrders:
-          type: integer
-          format: int32
-      additionalProperties: false
     DTools.Cloud.Data.PurchaseOrderSupplierContact:
       type: object
       properties:
@@ -471,45 +445,18 @@ components:
         isArchived:
           type: boolean
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
+    DTools.Cloud.Data.GetPurchaseOrdersResult:
       type: object
       properties:
-        type:
+        purchaseOrders:
           type:
-          - string
+          - array
           - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderLite'
+        totalPurchaseOrders:
+          type: integer
           format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    DTools.Cloud.Data.FileInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     DTools.Cloud.Data.PurchaseOrderProduct:
       type: object
@@ -591,3 +538,56 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    DTools.Cloud.Data.PurchaseOrderDealerContact:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}

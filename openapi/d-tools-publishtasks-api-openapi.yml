@@ -158,6 +158,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    DeleteTasksRequest:
+      type: object
+      properties:
+        ids:
+          type:
+          - 'null'
+          - array
+          items:
+            type: string
+          description: Ids of tasks to delete (Required and must match existing task ids in SI) (BETA).
     ContactInfo:
       type: object
       properties:
@@ -182,127 +192,6 @@ components:
           type:
           - 'null'
           - string
-    ResourceInfo:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the resource
-        email:
-          type:
-          - 'null'
-          - string
-          description: Email of the resource
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-    TaskResource:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the resource
-        email:
-          type:
-          - 'null'
-          - string
-        estimatedHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          format: double
-        actualHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          format: double
-        cost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          format: double
-        estimatedCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-        actualCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-    PublishTaskResponse:
-      type: object
-      properties:
-        taskId:
-          type:
-          - 'null'
-          - string
-          description: Unique Id of task (will be generated if not provided. Can be used to update task)
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
-          type:
-          - 'null'
-          - string
-          description: Success Message
-      description: Task publish response
-    DeleteTasksRequest:
-      type: object
-      properties:
-        ids:
-          type:
-          - 'null'
-          - array
-          items:
-            type: string
-          description: Ids of tasks to delete (Required and must match existing task ids in SI) (BETA).
     NewTask:
       type: object
       properties:
@@ -485,9 +374,29 @@ components:
           - string
           description: CustomField24 (Text)
       description: New Task
-    PublishResponse:
+    UpdateTaskField:
       type: object
       properties:
+        taskFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: "TaskFieldId (pass the correct Id for the field you want to update)\nTask Name = 1, Description = 2, Start Date = 3, End Date = 4, Status = 5, Percent complete = 6, Notes = 7, \nCustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,\nCustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,\nCustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124"
+          format: uint8
+        value:
+          type:
+          - 'null'
+          - string
+          description: Value for the task field.
+    PublishTaskResponse:
+      type: object
+      properties:
+        taskId:
+          type:
+          - 'null'
+          - string
+          description: Unique Id of task (will be generated if not provided. Can be used to update task)
         messageId:
           type: string
           description: Check the status of the transaction using this Message Id
@@ -497,7 +406,20 @@ components:
           - 'null'
           - string
           description: Success Message
-      description: Project publish response
+      description: Task publish response
+    ResourceInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+          description: Email of the resource
     UpdateTask:
       type: object
       properties:
@@ -533,18 +455,96 @@ components:
           items:
             $ref: '#/components/schemas/UpdateTaskField'
           description: List of UpdateFields for the task. Each UpdateField has a Id and a Value.
-    UpdateTaskField:
+    TaskResource:
       type: object
       properties:
-        taskFieldId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: "TaskFieldId (pass the correct Id for the field you want to update)\nTask Name = 1, Description = 2, Start Date = 3, End Date = 4, Status = 5, Percent complete = 6, Notes = 7, \nCustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,\nCustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,\nCustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124"
-          format: uint8
-        value:
+        name:
           type:
           - 'null'
           - string
-          description: Value for the task field.
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+        estimatedHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        actualHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        cost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        estimatedCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        actualCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string

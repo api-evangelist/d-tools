@@ -183,41 +183,31 @@ components:
           type:
           - 'null'
           - string
-    Address:
+    UpdateServiceOrder:
       type: object
       properties:
-        street1:
+        serviceOrderId:
           type:
           - 'null'
           - string
-        street2:
+          description: Id of service order to update (Required).
+        contact:
+          description: Contact information
+          $ref: '#/components/schemas/ContactInfo'
+        billingAddress:
+          description: Billing address information
+          $ref: '#/components/schemas/Address'
+        siteAddress:
+          description: Site address information
+          $ref: '#/components/schemas/Address'
+        updateFields:
           type:
           - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateServiceOrderField'
+          description: List of UpdateFields for the service order. Each UpdateField has a Id and a Value.
+      description: Update Service Order
     UpdateServiceOrderField:
       type: object
       properties:
@@ -254,28 +244,38 @@ components:
           - string
           description: Success Message
       description: Project publish response
-    UpdateServiceOrder:
+    Address:
       type: object
       properties:
-        serviceOrderId:
+        street1:
           type:
           - 'null'
           - string
-          description: Id of service order to update (Required).
-        contact:
-          description: Contact information
-          $ref: '#/components/schemas/ContactInfo'
-        billingAddress:
-          description: Billing address information
-          $ref: '#/components/schemas/Address'
-        siteAddress:
-          description: Site address information
-          $ref: '#/components/schemas/Address'
-        updateFields:
+        street2:
           type:
           - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/UpdateServiceOrderField'
-          description: List of UpdateFields for the service order. Each UpdateField has a Id and a Value.
-      description: Update Service Order
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string

@@ -110,21 +110,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    UpdateTimeSheetsRequest:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name (Optional)
-        updateTimeSheets:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/UpdateTimeSheet'
-          description: Array of update time sheets
     NewTimeSheetsRequest:
       type: object
       properties:
@@ -409,19 +394,21 @@ components:
           - 'null'
           - string
           description: Description
-    PublishResponse:
+    UpdateTimeSheetsRequest:
       type: object
       properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
+        name:
           type:
           - 'null'
           - string
-          description: Success Message
-      description: Project publish response
+          description: Name (Optional)
+        updateTimeSheets:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateTimeSheet'
+          description: Array of update time sheets
     UpdateTimeSheet:
       type: object
       properties:
@@ -686,3 +673,16 @@ components:
           - 'null'
           - string
           description: Description
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response

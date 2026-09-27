@@ -234,6 +234,19 @@ components:
         isArchived:
           type: boolean
       additionalProperties: false
+    DTools.Cloud.Data.GetTimeEntriesResult:
+      type: object
+      properties:
+        timeEntries:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.TimeEntryDetail'
+        totalTimeEntries:
+          type: integer
+          format: int32
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -259,16 +272,3 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    DTools.Cloud.Data.GetTimeEntriesResult:
-      type: object
-      properties:
-        timeEntries:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.TimeEntryDetail'
-        totalTimeEntries:
-          type: integer
-          format: int32
-      additionalProperties: false

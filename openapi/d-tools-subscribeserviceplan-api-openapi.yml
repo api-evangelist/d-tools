@@ -141,121 +141,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ContactInfo:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the contact
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
-    ServicePlanInfo:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id
-        client:
-          type:
-          - 'null'
-          - string
-          description: Client name
-        number:
-          type:
-          - 'null'
-          - string
-          description: Service Plan Number
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name
-        status:
-          type:
-          - 'null'
-          - string
-          description: Status
-        description:
-          type:
-          - 'null'
-          - string
-          description: Service plan description
-        importedOn:
-          type:
-          - 'null'
-          - string
-          description: Date service plan was imported by SI user
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date service plan was published by SI
-          format: date-time
-        publishedOnUnixTimeMs:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Date service plan was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Plan as Imported method optionally to make sure the service plan was not updated in SI since it was published.
-          format: int64
-        deleted:
-          type:
-          - 'null'
-          - boolean
-          description: Service plan deleted
-      description: Service Plan Information
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
     ServicePlan:
       type: object
       properties:
@@ -819,24 +704,23 @@ components:
           - 'null'
           - string
           description: Service plan Published By
-    ServicePlanFeature:
+    ServicePlansResult:
       type: object
       properties:
-        id:
+        servicePlans:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServicePlanInfo'
+          description: Service plans array
+        totalCount:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
+          description: Total count of service plans
           format: int32
-        name:
-          type:
-          - 'null'
-          - string
-        description:
-          type:
-          - 'null'
-          - string
-      description: Service Plan Feature
     ServicePlanProjectItem:
       type: object
       properties:
@@ -948,23 +832,80 @@ components:
           type:
           - 'null'
           - string
-    ServicePlansResult:
+    ServicePlanInfo:
       type: object
       properties:
-        servicePlans:
+        id:
           type:
           - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ServicePlanInfo'
-          description: Service plans array
-        totalCount:
+          - string
+          description: Unique Id
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Service Plan Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name
+        status:
+          type:
+          - 'null'
+          - string
+          description: Status
+        description:
+          type:
+          - 'null'
+          - string
+          description: Service plan description
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date service plan was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date service plan was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
-          description: Total count of service plans
+          description: Date service plan was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Plan as Imported method optionally to make sure the service plan was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Service plan deleted
+      description: Service Plan Information
+    ServicePlanFeature:
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
           format: int32
+        name:
+          type:
+          - 'null'
+          - string
+        description:
+          type:
+          - 'null'
+          - string
+      description: Service Plan Feature
     ServicePlanItem:
       type: object
       properties:
@@ -1019,3 +960,62 @@ components:
           description: Number of payments
           format: int32
       description: Service Plan Item object
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string

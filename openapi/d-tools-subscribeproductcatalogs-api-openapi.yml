@@ -148,60 +148,6 @@ components:
           - string
           description: Total count of catalogs
           format: int32
-    ProductCatalog:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the catalog
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name for the catalog (Required)
-        description:
-          type:
-          - 'null'
-          - string
-          description: Catalog description
-        priceType:
-          type:
-          - 'null'
-          - string
-          description: Price type
-        priceTypeDisplayName:
-          type:
-          - 'null'
-          - string
-          description: Price type display name
-        isMetric:
-          type: boolean
-          description: Catalog Item H,W,D are in inches for non-metric catalogs and millimeters for metric catalogs. Item weight is in pounds for non-metric catalogs and kilograms for metric catalogs.
-        totalProductsCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total Products Count
-          format: int32
-        products:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/Product'
-          description: Products in the catalog.
-        deletedProductIds:
-          type:
-          - 'null'
-          - array
-          items:
-            type: string
-            format: uuid
-          description: Product Ids deleted (available only with automated SI Server Exports)
-      description: Product catalog object
     Product:
       type: object
       properties:
@@ -949,6 +895,84 @@ components:
           - boolean
           description: Product Discontinued
       description: Product object
+    ProductCatalog:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the catalog
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name for the catalog (Required)
+        description:
+          type:
+          - 'null'
+          - string
+          description: Catalog description
+        priceType:
+          type:
+          - 'null'
+          - string
+          description: Price type
+        priceTypeDisplayName:
+          type:
+          - 'null'
+          - string
+          description: Price type display name
+        isMetric:
+          type: boolean
+          description: Catalog Item H,W,D are in inches for non-metric catalogs and millimeters for metric catalogs. Item weight is in pounds for non-metric catalogs and kilograms for metric catalogs.
+        totalProductsCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total Products Count
+          format: int32
+        products:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Product'
+          description: Products in the catalog.
+        deletedProductIds:
+          type:
+          - 'null'
+          - array
+          items:
+            type: string
+            format: uuid
+          description: Product Ids deleted (available only with automated SI Server Exports)
+      description: Product catalog object
+    ItemLaborType:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Labor Type name
+        hours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Labor Type Hours
+          format: double
+        totalHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
+          format: double
     CatalogInfo:
       type: object
       properties:
@@ -978,27 +1002,3 @@ components:
           description: Date catalog was published
           format: date-time
       description: Catalog Information
-    ItemLaborType:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Labor Type name
-        hours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Labor Type Hours
-          format: double
-        totalHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
-          format: double

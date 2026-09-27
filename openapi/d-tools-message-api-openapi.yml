@@ -103,22 +103,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    MessageResponse:
-      type: object
-      properties:
-        messageStatuses:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/MessageStatus'
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-      description: Message response
     MessageStatus:
       type: object
       properties:
@@ -152,3 +136,19 @@ components:
           - string
           description: Error message (populated if StatusId = 3 (Failed)
       description: Message status
+    MessageResponse:
+      type: object
+      properties:
+        messageStatuses:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/MessageStatus'
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+      description: Message response
