@@ -70,28 +70,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.FileDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
-        parentObjectType:
-          type:
-          - string
-          - 'null'
-        parentObjectId:
-          type: string
-          format: uuid
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -117,3 +95,25 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    DTools.Cloud.Data.FileDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+        parentObjectType:
+          type:
+          - string
+          - 'null'
+        parentObjectId:
+          type: string
+          format: uuid
+      additionalProperties: false

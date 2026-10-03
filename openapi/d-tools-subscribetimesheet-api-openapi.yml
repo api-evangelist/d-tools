@@ -134,6 +134,23 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    TimeSheetsResult:
+      type: object
+      properties:
+        timeSheets:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TimeSheetInfo'
+          description: Time sheets array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of time sheet
+          format: int32
     TimeSheetEntry:
       type: object
       properties:
@@ -523,23 +540,6 @@ components:
           - string
           description: Date time sheet was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Time Sheet as Imported method optionally to make sure the time sheet was not updated in SI since it was published.
           format: int64
-    TimeSheetsResult:
-      type: object
-      properties:
-        timeSheets:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/TimeSheetInfo'
-          description: Time sheets array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of time sheet
-          format: int32
     TimeSheetInfo:
       type: object
       properties:

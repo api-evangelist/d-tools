@@ -196,49 +196,164 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.FileInfo:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DTools.Cloud.Data.GetPurchaseOrdersResult:
+      type: object
+      properties:
+        purchaseOrders:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderLite'
+        totalPurchaseOrders:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.PurchaseOrderLite:
       type: object
       properties:
         id:
+          type: string
+          format: uuid
+        supplier:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        productsCount:
+          type: integer
+          format: int32
+        total:
+          type: number
+          format: double
+        orderedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        receivedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.PurchaseOrderProduct:
+      type: object
+      properties:
+        catalogId:
           type: string
           format: uuid
         name:
           type:
           - string
           - 'null'
-        url:
+        brand:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.AddressDetail:
-      type: object
-      properties:
-        name:
+        model:
           type:
           - string
           - 'null'
-        addressLine1:
+        partNumber:
           type:
           - string
           - 'null'
-        addressLine2:
+        supplierPartNumber:
           type:
           - string
           - 'null'
-        city:
+        upcBarcode:
           type:
           - string
           - 'null'
-        state:
+        eanBarcode:
           type:
           - string
           - 'null'
-        postalCode:
+        itfBarcode:
           type:
           - string
           - 'null'
-        country:
+        description:
+          type:
+          - string
+          - 'null'
+        imageUrl:
+          type:
+          - string
+          - 'null'
+        quantity:
+          type: integer
+          format: int32
+        receivedQuantity:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        unitCost:
+          type: number
+          format: double
+        etaDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        shipmentTrackingNumber:
+          type:
+          - string
+          - 'null'
+        projectId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        project:
+          type:
+          - string
+          - 'null'
+        projectNumber:
           type:
           - string
           - 'null'
@@ -401,143 +516,6 @@ components:
         isPrimary:
           type: boolean
       additionalProperties: false
-    DTools.Cloud.Data.PurchaseOrderLite:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        supplier:
-          type:
-          - string
-          - 'null'
-        number:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        productsCount:
-          type: integer
-          format: int32
-        total:
-          type: number
-          format: double
-        orderedDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        receivedDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
-        isArchived:
-          type: boolean
-      additionalProperties: false
-    DTools.Cloud.Data.GetPurchaseOrdersResult:
-      type: object
-      properties:
-        purchaseOrders:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.PurchaseOrderLite'
-        totalPurchaseOrders:
-          type: integer
-          format: int32
-      additionalProperties: false
-    DTools.Cloud.Data.PurchaseOrderProduct:
-      type: object
-      properties:
-        catalogId:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        brand:
-          type:
-          - string
-          - 'null'
-        model:
-          type:
-          - string
-          - 'null'
-        partNumber:
-          type:
-          - string
-          - 'null'
-        supplierPartNumber:
-          type:
-          - string
-          - 'null'
-        upcBarcode:
-          type:
-          - string
-          - 'null'
-        eanBarcode:
-          type:
-          - string
-          - 'null'
-        itfBarcode:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        imageUrl:
-          type:
-          - string
-          - 'null'
-        quantity:
-          type: integer
-          format: int32
-        receivedQuantity:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        unitCost:
-          type: number
-          format: double
-        etaDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        shipmentTrackingNumber:
-          type:
-          - string
-          - 'null'
-        projectId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        project:
-          type:
-          - string
-          - 'null'
-        projectNumber:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     DTools.Cloud.Data.PurchaseOrderDealerContact:
       type: object
       properties:
@@ -566,28 +544,50 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
+    DTools.Cloud.Data.FileInfo:
       type: object
       properties:
-        type:
+        id:
+          type: string
+          format: uuid
+        name:
           type:
           - string
           - 'null'
-        title:
+        url:
           type:
           - string
           - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
+      additionalProperties: false
+    DTools.Cloud.Data.AddressDetail:
+      type: object
+      properties:
+        name:
           type:
           - string
           - 'null'
-      additionalProperties: {}
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false

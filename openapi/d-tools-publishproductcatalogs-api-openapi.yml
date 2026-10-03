@@ -62,6 +62,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ItemLaborType:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Labor Type name
+        hours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Labor Type Hours
+          format: double
+        totalHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
+          format: double
     Product:
       type: object
       properties:
@@ -809,6 +833,19 @@ components:
           - boolean
           description: Product Discontinued
       description: Product object
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
     ProductCatalog:
       type: object
       properties:
@@ -863,40 +900,3 @@ components:
             format: uuid
           description: Product Ids deleted (available only with automated SI Server Exports)
       description: Product catalog object
-    PublishResponse:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
-          type:
-          - 'null'
-          - string
-          description: Success Message
-      description: Project publish response
-    ItemLaborType:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Labor Type name
-        hours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Labor Type Hours
-          format: double
-        totalHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
-          format: double

@@ -110,19 +110,123 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PublishResponse:
+    ClientList:
       type: object
       properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
+        id:
           type:
           - 'null'
           - string
-          description: Success Message
-      description: Project publish response
+          description: Unique Id for the client (Required)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name for the client list (Required)
+        description:
+          type:
+          - 'null'
+          - string
+          description: Client list description
+        clients:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Client'
+          description: Client list.
+      description: Client List objects
+    ClientContact:
+      type: object
+      properties:
+        firstName:
+          type:
+          - 'null'
+          - string
+        lastName:
+          type:
+          - 'null'
+          - string
+        company:
+          type:
+          - 'null'
+          - string
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        notes:
+          type:
+          - 'null'
+          - string
+      description: Client contact object
+    UpdateClient:
+      type: object
+      properties:
+        integrationId:
+          type:
+          - 'null'
+          - string
+          description: Integration Id of client to update (Must pass either IntegrationId Or Client Number)
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number of client to update (Must pass either IntegrationId Or Client Number)
+        updateFields:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateClientField'
+          description: List of UpdateFields for the client. Each UpdateField has a Id and a Value.
+        siteAddress:
+          description: Client Site Address
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          description: Client Billing Address
+          $ref: '#/components/schemas/Address'
+      description: Update Project
     Client:
       type: object
       properties:
@@ -344,29 +448,54 @@ components:
           - string
           description: CustomField24 (Hyperlink) (BETA).
       description: Client object
-    UpdateClientField:
+    PublishResponse:
       type: object
       properties:
-        clientFieldId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'ClientFieldId (pass the correct Id for the field you want to udpate)
-
-            Name = 1, Number = 2, Phone = 3, Fax = 4, Email = 5, Website = 6, Inactive = 7,  IntegrationId = 8
-
-            CustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,
-
-            CustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,
-
-            CustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124'
-          format: uint8
-        value:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
           type:
           - 'null'
           - string
-          description: Value for the client field. Datetime and decimal should be invariant.
+          description: Success Message
+      description: Project publish response
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
     ClientAddress:
       type: object
       properties:
@@ -414,155 +543,26 @@ components:
           - 'null'
           - string
       description: Client address object
-    UpdateClient:
+    UpdateClientField:
       type: object
       properties:
-        integrationId:
+        clientFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'ClientFieldId (pass the correct Id for the field you want to udpate)
+
+            Name = 1, Number = 2, Phone = 3, Fax = 4, Email = 5, Website = 6, Inactive = 7,  IntegrationId = 8
+
+            CustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,
+
+            CustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,
+
+            CustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124'
+          format: uint8
+        value:
           type:
           - 'null'
           - string
-          description: Integration Id of client to update (Must pass either IntegrationId Or Client Number)
-        number:
-          type:
-          - 'null'
-          - string
-          description: Number of client to update (Must pass either IntegrationId Or Client Number)
-        updateFields:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/UpdateClientField'
-          description: List of UpdateFields for the client. Each UpdateField has a Id and a Value.
-        siteAddress:
-          description: Client Site Address
-          $ref: '#/components/schemas/Address'
-        billingAddress:
-          description: Client Billing Address
-          $ref: '#/components/schemas/Address'
-      description: Update Project
-    ClientContact:
-      type: object
-      properties:
-        firstName:
-          type:
-          - 'null'
-          - string
-        lastName:
-          type:
-          - 'null'
-          - string
-        company:
-          type:
-          - 'null'
-          - string
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        notes:
-          type:
-          - 'null'
-          - string
-      description: Client contact object
-    ClientList:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the client (Required)
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name for the client list (Required)
-        description:
-          type:
-          - 'null'
-          - string
-          description: Client list description
-        clients:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/Client'
-          description: Client list.
-      description: Client List objects
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
+          description: Value for the client field. Datetime and decimal should be invariant.

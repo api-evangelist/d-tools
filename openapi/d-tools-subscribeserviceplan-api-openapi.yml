@@ -704,23 +704,6 @@ components:
           - 'null'
           - string
           description: Service plan Published By
-    ServicePlansResult:
-      type: object
-      properties:
-        servicePlans:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ServicePlanInfo'
-          description: Service plans array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of service plans
-          format: int32
     ServicePlanProjectItem:
       type: object
       properties:
@@ -832,6 +815,101 @@ components:
           type:
           - 'null'
           - string
+    ServicePlansResult:
+      type: object
+      properties:
+        servicePlans:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServicePlanInfo'
+          description: Service plans array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of service plans
+          format: int32
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    ServicePlanItem:
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Unique Id (Required)
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description
+        frequency:
+          type:
+          - 'null'
+          - string
+          description: Frequency
+        calculated:
+          type: boolean
+          description: Calculated field for service plan item.
+        price:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Price for the service plan item.
+          format: double
+        taxable:
+          type: boolean
+          description: Taxable
+        startDate:
+          type:
+          - 'null'
+          - string
+          description: Start Date
+          format: date-time
+        numberOfPayments:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Number of payments
+          format: int32
+      description: Service Plan Item object
     ServicePlanInfo:
       type: object
       properties:
@@ -888,102 +966,6 @@ components:
           - boolean
           description: Service plan deleted
       description: Service Plan Information
-    ServicePlanFeature:
-      type: object
-      properties:
-        id:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        name:
-          type:
-          - 'null'
-          - string
-        description:
-          type:
-          - 'null'
-          - string
-      description: Service Plan Feature
-    ServicePlanItem:
-      type: object
-      properties:
-        id:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Unique Id (Required)
-          format: int32
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name
-        description:
-          type:
-          - 'null'
-          - string
-          description: Description
-        frequency:
-          type:
-          - 'null'
-          - string
-          description: Frequency
-        calculated:
-          type: boolean
-          description: Calculated field for service plan item.
-        price:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Price for the service plan item.
-          format: double
-        taxable:
-          type: boolean
-          description: Taxable
-        startDate:
-          type:
-          - 'null'
-          - string
-          description: Start Date
-          format: date-time
-        numberOfPayments:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          description: Number of payments
-          format: int32
-      description: Service Plan Item object
-    ContactInfo:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the contact
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
     Address:
       type: object
       properties:
@@ -1019,3 +1001,21 @@ components:
           type:
           - 'null'
           - string
+    ServicePlanFeature:
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+        description:
+          type:
+          - 'null'
+          - string
+      description: Service Plan Feature

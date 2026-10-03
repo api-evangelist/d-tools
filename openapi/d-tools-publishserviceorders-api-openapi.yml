@@ -159,6 +159,29 @@ components:
           - string
           description: Description of the SO
       description: Service Order Information
+    UpdateServiceOrderField:
+      type: object
+      properties:
+        serviceOrderFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'ServiceOrderFieldId (pass the correct Id for the field you want to update)
+
+            Service Order Name = 1, Description = 2, Start Date = 3, End Date = 4, Accounting estimate number = 5, Status = 6, Percent complete = 7, Notes = 8, Priority = 9,
+
+            CustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,
+
+            CustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,
+
+            CustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124'
+          format: uint8
+        value:
+          type:
+          - 'null'
+          - string
+          description: Value for the service order field.
     ContactInfo:
       type: object
       properties:
@@ -183,54 +206,6 @@ components:
           type:
           - 'null'
           - string
-    UpdateServiceOrder:
-      type: object
-      properties:
-        serviceOrderId:
-          type:
-          - 'null'
-          - string
-          description: Id of service order to update (Required).
-        contact:
-          description: Contact information
-          $ref: '#/components/schemas/ContactInfo'
-        billingAddress:
-          description: Billing address information
-          $ref: '#/components/schemas/Address'
-        siteAddress:
-          description: Site address information
-          $ref: '#/components/schemas/Address'
-        updateFields:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/UpdateServiceOrderField'
-          description: List of UpdateFields for the service order. Each UpdateField has a Id and a Value.
-      description: Update Service Order
-    UpdateServiceOrderField:
-      type: object
-      properties:
-        serviceOrderFieldId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'ServiceOrderFieldId (pass the correct Id for the field you want to update)
-
-            Service Order Name = 1, Description = 2, Start Date = 3, End Date = 4, Accounting estimate number = 5, Status = 6, Percent complete = 7, Notes = 8, Priority = 9,
-
-            CustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,
-
-            CustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,
-
-            CustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124'
-          format: uint8
-        value:
-          type:
-          - 'null'
-          - string
-          description: Value for the service order field.
     PublishResponse:
       type: object
       properties:
@@ -279,3 +254,28 @@ components:
           type:
           - 'null'
           - string
+    UpdateServiceOrder:
+      type: object
+      properties:
+        serviceOrderId:
+          type:
+          - 'null'
+          - string
+          description: Id of service order to update (Required).
+        contact:
+          description: Contact information
+          $ref: '#/components/schemas/ContactInfo'
+        billingAddress:
+          description: Billing address information
+          $ref: '#/components/schemas/Address'
+        siteAddress:
+          description: Site address information
+          $ref: '#/components/schemas/Address'
+        updateFields:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateServiceOrderField'
+          description: List of UpdateFields for the service order. Each UpdateField has a Id and a Value.
+      description: Update Service Order

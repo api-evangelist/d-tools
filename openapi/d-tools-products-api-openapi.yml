@@ -386,85 +386,31 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.ProductSubscription:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
-        itemId:
-          type: string
-          format: uuid
-        name:
+        type:
           type:
           - string
           - 'null'
-        quantity:
-          type: integer
-          format: int32
-      additionalProperties: false
-    DTools.Cloud.Data.ProductLaborItem:
-      type: object
-      properties:
-        laborType:
+        title:
           type:
           - string
           - 'null'
-        time:
-          type: integer
-          format: int32
-        price:
-          type: number
-          format: double
-        timePerLength:
+        status:
           type:
           - integer
           - 'null'
           format: int32
-        pricePerLength:
-          type:
-          - number
-          - 'null'
-          format: double
-        phase:
+        detail:
           type:
           - string
           - 'null'
-        isBillable:
-          type: boolean
-      additionalProperties: false
-    DTools.Cloud.Data.ProductPrice:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        msrp:
+        instance:
           type:
-          - number
+          - string
           - 'null'
-          format: double
-        unitCost:
-          type:
-          - number
-          - 'null'
-          format: double
-        unitPrice:
-          type:
-          - number
-          - 'null'
-          format: double
-      additionalProperties: false
-    DTools.Cloud.Data.GetProductsResult:
-      type: object
-      properties:
-        products:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.ProductDetail'
-        totalProducts:
-          type: integer
-          format: int32
-      additionalProperties: false
+      additionalProperties: {}
     DTools.Cloud.Data.ProductImage:
       type: object
       properties:
@@ -491,6 +437,33 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.GetProductsResult:
+      type: object
+      properties:
+        products:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ProductDetail'
+        totalProducts:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ProductSubscription:
+      type: object
+      properties:
+        itemId:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        quantity:
+          type: integer
+          format: int32
       additionalProperties: false
     DTools.Cloud.Data.ProductDetail:
       type: object
@@ -693,6 +666,51 @@ components:
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.ProductSubscription'
       additionalProperties: false
+    DTools.Cloud.Data.ProductStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        isDiscontinued:
+          type:
+          - boolean
+          - 'null'
+        isActive:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ProductLaborItem:
+      type: object
+      properties:
+        laborType:
+          type:
+          - string
+          - 'null'
+        time:
+          type: integer
+          format: int32
+        price:
+          type: number
+          format: double
+        timePerLength:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        pricePerLength:
+          type:
+          - number
+          - 'null'
+          format: double
+        phase:
+          type:
+          - string
+          - 'null'
+        isBillable:
+          type: boolean
+      additionalProperties: false
     DTools.Cloud.Data.ProductBarcode:
       type: object
       properties:
@@ -712,46 +730,6 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    DTools.Cloud.Data.ProductStatus:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        isDiscontinued:
-          type:
-          - boolean
-          - 'null'
-        isActive:
-          type:
-          - boolean
-          - 'null'
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     DTools.Cloud.Data.ProductAccessory:
       type: object
       properties:
@@ -787,4 +765,26 @@ components:
           readOnly: true
         isBillable:
           type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.ProductPrice:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        msrp:
+          type:
+          - number
+          - 'null'
+          format: double
+        unitCost:
+          type:
+          - number
+          - 'null'
+          format: double
+        unitPrice:
+          type:
+          - number
+          - 'null'
+          format: double
       additionalProperties: false

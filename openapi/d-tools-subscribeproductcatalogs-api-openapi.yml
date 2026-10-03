@@ -131,23 +131,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CatalogsResult:
-      type: object
-      properties:
-        catalogs:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/CatalogInfo'
-          description: Catalogs array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of catalogs
-          format: int32
     Product:
       type: object
       properties:
@@ -895,6 +878,23 @@ components:
           - boolean
           description: Product Discontinued
       description: Product object
+    CatalogsResult:
+      type: object
+      properties:
+        catalogs:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/CatalogInfo'
+          description: Catalogs array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of catalogs
+          format: int32
     ProductCatalog:
       type: object
       properties:
@@ -949,30 +949,6 @@ components:
             format: uuid
           description: Product Ids deleted (available only with automated SI Server Exports)
       description: Product catalog object
-    ItemLaborType:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Labor Type name
-        hours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Labor Type Hours
-          format: double
-        totalHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
-          format: double
     CatalogInfo:
       type: object
       properties:
@@ -1002,3 +978,27 @@ components:
           description: Date catalog was published
           format: date-time
       description: Catalog Information
+    ItemLaborType:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Labor Type name
+        hours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Labor Type Hours
+          format: double
+        totalHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
+          format: double

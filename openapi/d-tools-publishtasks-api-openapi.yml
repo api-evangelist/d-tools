@@ -168,30 +168,39 @@ components:
           items:
             type: string
           description: Ids of tasks to delete (Required and must match existing task ids in SI) (BETA).
-    ContactInfo:
+    PublishTaskResponse:
       type: object
       properties:
-        name:
+        taskId:
           type:
           - 'null'
           - string
-          description: Name of the contact
-        title:
+          description: Unique Id of task (will be generated if not provided. Can be used to update task)
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
           type:
           - 'null'
           - string
-        email:
+          description: Success Message
+      description: Task publish response
+    UpdateTaskField:
+      type: object
+      properties:
+        taskFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: "TaskFieldId (pass the correct Id for the field you want to update)\nTask Name = 1, Description = 2, Start Date = 3, End Date = 4, Status = 5, Percent complete = 6, Notes = 7, \nCustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,\nCustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,\nCustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124"
+          format: uint8
+        value:
           type:
           - 'null'
           - string
-        phone:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
+          description: Value for the task field.
     NewTask:
       type: object
       properties:
@@ -374,29 +383,33 @@ components:
           - string
           description: CustomField24 (Text)
       description: New Task
-    UpdateTaskField:
+    ContactInfo:
       type: object
       properties:
-        taskFieldId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: "TaskFieldId (pass the correct Id for the field you want to update)\nTask Name = 1, Description = 2, Start Date = 3, End Date = 4, Status = 5, Percent complete = 6, Notes = 7, \nCustomField1 = 101, CustomField2 = 102, CustomField3 = 103, CustomField4 = 104, CustomField5 = 105, CustomField6 = 106, CustomField7 = 107, CustomField8 = 108, CustomField9 = 109, CustomField10 = 110,\nCustomField11 = 111, CustomField12 = 112, CustomField13 = 113, CustomField14 = 114, CustomField15 = 115, CustomField16 = 116, CustomField17 = 117, CustomField18 = 118, CustomField19 = 119, CustomField20 = 120,\nCustomField21 = 121, CustomField22 = 122, CustomField23 = 123, CustomField24 = 124"
-          format: uint8
-        value:
+        name:
           type:
           - 'null'
           - string
-          description: Value for the task field.
-    PublishTaskResponse:
-      type: object
-      properties:
-        taskId:
+          description: Name of the contact
+        title:
           type:
           - 'null'
           - string
-          description: Unique Id of task (will be generated if not provided. Can be used to update task)
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    PublishResponse:
+      type: object
+      properties:
         messageId:
           type: string
           description: Check the status of the transaction using this Message Id
@@ -406,55 +419,7 @@ components:
           - 'null'
           - string
           description: Success Message
-      description: Task publish response
-    ResourceInfo:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the resource
-        email:
-          type:
-          - 'null'
-          - string
-          description: Email of the resource
-    UpdateTask:
-      type: object
-      properties:
-        taskId:
-          type:
-          - 'null'
-          - string
-          description: Id of task to update (Required and must match an existing task id in SI).
-        contact:
-          description: Contact information
-          $ref: '#/components/schemas/ContactInfo'
-        siteAddress:
-          description: Site address information
-          $ref: '#/components/schemas/Address'
-        resources:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/TaskResource'
-          description: Resources in a task
-        resourcesToDelete:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ResourceInfo'
-          description: Resource to delete on task
-        updateFields:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/UpdateTaskField'
-          description: List of UpdateFields for the task. Each UpdateField has a Id and a Value.
+      description: Project publish response
     TaskResource:
       type: object
       properties:
@@ -500,19 +465,6 @@ components:
           - number
           - string
           format: double
-    PublishResponse:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
-          type:
-          - 'null'
-          - string
-          description: Success Message
-      description: Project publish response
     Address:
       type: object
       properties:
@@ -548,3 +500,51 @@ components:
           type:
           - 'null'
           - string
+    UpdateTask:
+      type: object
+      properties:
+        taskId:
+          type:
+          - 'null'
+          - string
+          description: Id of task to update (Required and must match an existing task id in SI).
+        contact:
+          description: Contact information
+          $ref: '#/components/schemas/ContactInfo'
+        siteAddress:
+          description: Site address information
+          $ref: '#/components/schemas/Address'
+        resources:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TaskResource'
+          description: Resources in a task
+        resourcesToDelete:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ResourceInfo'
+          description: Resource to delete on task
+        updateFields:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateTaskField'
+          description: List of UpdateFields for the task. Each UpdateField has a Id and a Value.
+    ResourceInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+          description: Email of the resource

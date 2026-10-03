@@ -110,187 +110,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    VendorList:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the Vendor (Required)
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name for the Vendor list (Required)
-        description:
-          type:
-          - 'null'
-          - string
-          description: Vendor list description
-        vendors:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/Vendor'
-          description: Vendor list.
-      description: Vendor List objects
-    VendorAddress:
-      type: object
-      properties:
-        typeId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Vendor Address Type - must be type 1 = Billing, 2 = Site, 3 = Other
-          format: uint8
-        name:
-          type:
-          - 'null'
-          - string
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-      description: Vendor address object
-    UpdateVendor:
-      type: object
-      properties:
-        integrationId:
-          type:
-          - 'null'
-          - string
-          description: Integration Id of vendor to update (Must pass either IntegrationId Or Vendor Number)
-        number:
-          type:
-          - 'null'
-          - string
-          description: Number of vendor to update (Must pass either IntegrationId Or Vendor Number)
-        updateFields:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/UpdateVendorField'
-          description: List of UpdateFields for the vendor. Each UpdateField has a Id and a Value.
-        siteAddress:
-          description: Vendor Site Address
-          $ref: '#/components/schemas/Address'
-        billingAddress:
-          description: Vendor Billing Address
-          $ref: '#/components/schemas/Address'
-      description: Update Vendor
-    VendorContact:
-      type: object
-      properties:
-        firstName:
-          type:
-          - 'null'
-          - string
-        lastName:
-          type:
-          - 'null'
-          - string
-        company:
-          type:
-          - 'null'
-          - string
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        notes:
-          type:
-          - 'null'
-          - string
-      description: Vendor contact object
-    UpdateVendorField:
-      type: object
-      properties:
-        vendorFieldId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'VendorFieldId (pass the correct Id for the field you want to update)
-
-            Name = 1, Number = 2, Phone = 3, Fax = 4, Email = 5, Website = 6, Inactive = 7,  IntegrationId = 8, Terms = 9'
-          format: uint8
-        value:
-          type:
-          - 'null'
-          - string
-          description: Value for the vendor field. date time and decimal should be invariant.
     Vendor:
       type: object
       properties:
@@ -372,6 +191,140 @@ components:
             $ref: '#/components/schemas/VendorContact'
           description: Vendor contacts for Vendor
       description: Vendor object
+    UpdateVendor:
+      type: object
+      properties:
+        integrationId:
+          type:
+          - 'null'
+          - string
+          description: Integration Id of vendor to update (Must pass either IntegrationId Or Vendor Number)
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number of vendor to update (Must pass either IntegrationId Or Vendor Number)
+        updateFields:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateVendorField'
+          description: List of UpdateFields for the vendor. Each UpdateField has a Id and a Value.
+        siteAddress:
+          description: Vendor Site Address
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          description: Vendor Billing Address
+          $ref: '#/components/schemas/Address'
+      description: Update Vendor
+    UpdateVendorField:
+      type: object
+      properties:
+        vendorFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'VendorFieldId (pass the correct Id for the field you want to update)
+
+            Name = 1, Number = 2, Phone = 3, Fax = 4, Email = 5, Website = 6, Inactive = 7,  IntegrationId = 8, Terms = 9'
+          format: uint8
+        value:
+          type:
+          - 'null'
+          - string
+          description: Value for the vendor field. date time and decimal should be invariant.
+    VendorList:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the Vendor (Required)
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name for the Vendor list (Required)
+        description:
+          type:
+          - 'null'
+          - string
+          description: Vendor list description
+        vendors:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Vendor'
+          description: Vendor list.
+      description: Vendor List objects
+    VendorContact:
+      type: object
+      properties:
+        firstName:
+          type:
+          - 'null'
+          - string
+        lastName:
+          type:
+          - 'null'
+          - string
+        company:
+          type:
+          - 'null'
+          - string
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        notes:
+          type:
+          - 'null'
+          - string
+      description: Vendor contact object
     PublishResponse:
       type: object
       properties:
@@ -420,3 +373,50 @@ components:
           type:
           - 'null'
           - string
+    VendorAddress:
+      type: object
+      properties:
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Vendor Address Type - must be type 1 = Billing, 2 = Site, 3 = Other
+          format: uint8
+        name:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+      description: Vendor address object
