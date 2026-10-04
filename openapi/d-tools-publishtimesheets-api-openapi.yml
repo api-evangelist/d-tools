@@ -374,6 +374,19 @@ components:
           - 'null'
           - string
           description: Description
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
     UpdateTimeSheetsRequest:
       type: object
       properties:
@@ -389,19 +402,6 @@ components:
           items:
             $ref: '#/components/schemas/UpdateTimeSheet'
           description: Array of update time sheets
-    PublishResponse:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
-          type:
-          - 'null'
-          - string
-          description: Success Message
-      description: Project publish response
     NewTimeSheetsRequest:
       type: object
       properties:

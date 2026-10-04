@@ -158,16 +158,41 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DeleteTasksRequest:
+    Address:
       type: object
       properties:
-        ids:
+        street1:
           type:
           - 'null'
-          - array
-          items:
-            type: string
-          description: Ids of tasks to delete (Required and must match existing task ids in SI) (BETA).
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
     PublishTaskResponse:
       type: object
       properties:
@@ -383,6 +408,32 @@ components:
           - string
           description: CustomField24 (Text)
       description: New Task
+    ResourceInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+          description: Email of the resource
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
     ContactInfo:
       type: object
       properties:
@@ -407,19 +458,6 @@ components:
           type:
           - 'null'
           - string
-    PublishResponse:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
-          type:
-          - 'null'
-          - string
-          description: Success Message
-      description: Project publish response
     TaskResource:
       type: object
       properties:
@@ -465,41 +503,16 @@ components:
           - number
           - string
           format: double
-    Address:
+    DeleteTasksRequest:
       type: object
       properties:
-        street1:
+        ids:
           type:
           - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
+          - array
+          items:
+            type: string
+          description: Ids of tasks to delete (Required and must match existing task ids in SI) (BETA).
     UpdateTask:
       type: object
       properties:
@@ -535,16 +548,3 @@ components:
           items:
             $ref: '#/components/schemas/UpdateTaskField'
           description: List of UpdateFields for the task. Each UpdateField has a Id and a Value.
-    ResourceInfo:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the resource
-        email:
-          type:
-          - 'null'
-          - string
-          description: Email of the resource

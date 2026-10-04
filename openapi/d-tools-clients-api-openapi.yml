@@ -308,38 +308,39 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    DTools.Cloud.Data.Contact:
+    DTools.Cloud.Data.FileInfo:
       type: object
       properties:
         id:
+          type: string
+          format: uuid
+        name:
           type:
           - string
           - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.GetClientsResult:
+      type: object
+      properties:
+        clients:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.ClientLite'
+        totalClients:
+          type: integer
+          format: int32
+      additionalProperties: false
+    DTools.Cloud.Data.ContactDetail:
+      type: object
+      properties:
+        id:
+          type: string
           format: uuid
         name:
           type:
@@ -410,13 +411,9 @@ components:
           - string
           - 'null'
         isActive:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         isPrimary:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
       additionalProperties: false
     DTools.Cloud.Data.Address:
       type: object
@@ -516,6 +513,116 @@ components:
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.Contact'
       additionalProperties: false
+    DTools.Cloud.Data.Contact:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        secondaryEmail:
+          type:
+          - string
+          - 'null'
+        mobile:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        fax:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        isActive:
+          type:
+          - boolean
+          - 'null'
+        isPrimary:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     DTools.Cloud.Data.AddressDetail:
       type: object
       properties:
@@ -547,19 +654,6 @@ components:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.GetClientsResult:
-      type: object
-      properties:
-        clients:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.ClientLite'
-        totalClients:
-          type: integer
-          format: int32
       additionalProperties: false
     DTools.Cloud.Data.ClientDetail:
       type: object
@@ -649,100 +743,6 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/DTools.Cloud.Data.FileInfo'
-      additionalProperties: false
-    DTools.Cloud.Data.FileInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.ContactDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        company:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        secondaryEmail:
-          type:
-          - string
-          - 'null'
-        mobile:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-        fax:
-          type:
-          - string
-          - 'null'
-        addressLine1:
-          type:
-          - string
-          - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        postalCode:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-        isActive:
-          type: boolean
-        isPrimary:
-          type: boolean
       additionalProperties: false
     DTools.Cloud.Data.ClientLite:
       type: object

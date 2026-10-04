@@ -162,45 +162,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ClientInfo:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the client list
-        name:
-          type:
-          - 'null'
-          - string
-          description: Client name
-        email:
-          type:
-          - 'null'
-          - string
-          description: Client Email
-        phone:
-          type:
-          - 'null'
-          - string
-          description: Client Phone
-        deleted:
-          type:
-          - 'null'
-          - boolean
-          description: Client deleted
-        importedOn:
-          type:
-          - 'null'
-          - string
-          description: Date client list was imported by SI user
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date client list was published
-          format: date-time
-      description: Client List Information
     ClientContact:
       type: object
       properties:
@@ -265,21 +226,53 @@ components:
           - 'null'
           - string
       description: Client contact object
-    ClientsResult:
+    ClientAddress:
       type: object
       properties:
-        clientInfos:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ClientInfo'
-        totalCount:
+        typeId:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
-          format: int32
+          description: Client Addres Type - must be type 1 = Billing, 2 = Site, 3 = Other
+          format: uint8
+        name:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+      description: Client address object
     Client:
       type: object
       properties:
@@ -501,50 +494,57 @@ components:
           - string
           description: CustomField24 (Hyperlink) (BETA).
       description: Client object
-    ClientAddress:
+    ClientInfo:
       type: object
       properties:
-        typeId:
-          pattern: ^-?(?:0|[1-9]\d*)$
+        id:
           type:
-          - integer
+          - 'null'
           - string
-          description: Client Addres Type - must be type 1 = Billing, 2 = Site, 3 = Other
-          format: uint8
+          description: Unique Id for the client list
         name:
           type:
           - 'null'
           - string
-        street1:
+          description: Client name
+        email:
           type:
           - 'null'
           - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
+          description: Client Email
         phone:
           type:
           - 'null'
           - string
-        fax:
+          description: Client Phone
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Client deleted
+        importedOn:
           type:
           - 'null'
           - string
-      description: Client address object
+          description: Date client list was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date client list was published
+          format: date-time
+      description: Client List Information
+    ClientsResult:
+      type: object
+      properties:
+        clientInfos:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ClientInfo'
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32

@@ -131,6 +131,35 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    CatalogInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id for the catalog
+        name:
+          type:
+          - 'null'
+          - string
+          description: Catalog name
+        description:
+          type:
+          - 'null'
+          - string
+          description: Catalog description
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date catalog was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date catalog was published
+          format: date-time
+      description: Catalog Information
     Product:
       type: object
       properties:
@@ -878,23 +907,6 @@ components:
           - boolean
           description: Product Discontinued
       description: Product object
-    CatalogsResult:
-      type: object
-      properties:
-        catalogs:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/CatalogInfo'
-          description: Catalogs array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of catalogs
-          format: int32
     ProductCatalog:
       type: object
       properties:
@@ -949,35 +961,6 @@ components:
             format: uuid
           description: Product Ids deleted (available only with automated SI Server Exports)
       description: Product catalog object
-    CatalogInfo:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id for the catalog
-        name:
-          type:
-          - 'null'
-          - string
-          description: Catalog name
-        description:
-          type:
-          - 'null'
-          - string
-          description: Catalog description
-        importedOn:
-          type:
-          - 'null'
-          - string
-          description: Date catalog was imported by SI user
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date catalog was published
-          format: date-time
-      description: Catalog Information
     ItemLaborType:
       type: object
       properties:
@@ -1002,3 +985,20 @@ components:
           - string
           description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
           format: double
+    CatalogsResult:
+      type: object
+      properties:
+        catalogs:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/CatalogInfo'
+          description: Catalogs array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of catalogs
+          format: int32

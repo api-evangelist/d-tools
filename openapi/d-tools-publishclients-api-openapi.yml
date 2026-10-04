@@ -110,6 +110,54 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
     ClientList:
       type: object
       properties:
@@ -200,6 +248,53 @@ components:
           - 'null'
           - string
       description: Client contact object
+    ClientAddress:
+      type: object
+      properties:
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Client Addres Type - must be type 1 = Billing, 2 = Site, 3 = Other
+          format: uint8
+        name:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+      description: Client address object
     UpdateClient:
       type: object
       properties:
@@ -448,101 +543,6 @@ components:
           - string
           description: CustomField24 (Hyperlink) (BETA).
       description: Client object
-    PublishResponse:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
-          type:
-          - 'null'
-          - string
-          description: Success Message
-      description: Project publish response
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-    ClientAddress:
-      type: object
-      properties:
-        typeId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Client Addres Type - must be type 1 = Billing, 2 = Site, 3 = Other
-          format: uint8
-        name:
-          type:
-          - 'null'
-          - string
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-      description: Client address object
     UpdateClientField:
       type: object
       properties:

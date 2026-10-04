@@ -178,24 +178,41 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SiteNote:
+    Address:
       type: object
       properties:
-        notes:
+        street1:
           type:
           - 'null'
           - string
-          description: Task Notes
-        updatedOn:
-          type: string
-          description: Updated On
-          format: date-time
-        updatedBy:
+        street2:
           type:
           - 'null'
           - string
-          description: Updated By
-      description: Mobile Install Site Notes
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
     ServiceOrderProduct:
       type: object
       properties:
@@ -699,65 +716,24 @@ components:
           - 'null'
           - string
       description: Labor Object
-    ServiceOrderRepairItem:
+    SiteNote:
       type: object
       properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id required
-        manufacturer:
-          type:
-          - 'null'
-          - string
-          description: Manufacturer required for repair item.
-        model:
-          type:
-          - 'null'
-          - string
-          description: Model required for repair item.
-        partNumber:
-          type:
-          - 'null'
-          - string
-          description: Part number of the repair item.
-        category:
-          type:
-          - 'null'
-          - string
-          description: Category of the repair item.
-        componentId:
-          type:
-          - 'null'
-          - string
-          description: ComponentId of the repair item.
-        serialNumber:
-          type:
-          - 'null'
-          - string
-          description: Serial number of the repair item.
-        description:
-          type:
-          - 'null'
-          - string
-          description: Description of the repair item.
         notes:
           type:
           - 'null'
           - string
-          description: Notes of the repair item.
-        location:
+          description: Task Notes
+        updatedOn:
+          type: string
+          description: Updated On
+          format: date-time
+        updatedBy:
           type:
           - 'null'
           - string
-          description: Location of the repair item.
-        system:
-          type:
-          - 'null'
-          - string
-          description: Description of the repair item.
-      description: Repair item Object
+          description: Updated By
+      description: Mobile Install Site Notes
     ContactInfo:
       type: object
       properties:
@@ -782,58 +758,112 @@ components:
           type:
           - 'null'
           - string
-    ServiceOrdersResult:
+    ServiceOrderInfo:
       type: object
       properties:
-        serviceOrders:
+        id:
           type:
           - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ServiceOrderInfo'
-          description: Service orders
-        totalCount:
+          - string
+          description: Unique Id for the service order
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client Name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Service Order Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Service order name
+        progress:
+          type:
+          - 'null'
+          - string
+          description: Project progress
+        description:
+          type:
+          - 'null'
+          - string
+          description: Service order description
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date service order was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date service order was published by SI user
+          format: date-time
+        publishedOnUnixTimeMs:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
-          description: Total count of service orders
-          format: int32
-    Address:
+          description: Date service order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Order as Imported method optionally to make sure the service order was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Service order deleted
+      description: Service Order Information
+    ServiceOrderResource:
       type: object
       properties:
-        street1:
+        name:
           type:
           - 'null'
           - string
-        street2:
+          description: Name of the resource
+        email:
           type:
           - 'null'
           - string
-        city:
+          description: Email
+        estimatedHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
           type:
           - 'null'
+          - number
           - string
-        state:
+          description: Estimated hours
+          format: double
+        actualHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
           type:
           - 'null'
+          - number
           - string
-        postalCode:
+          description: Actual hours
+          format: double
+        cost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
           type:
           - 'null'
+          - number
           - string
-        country:
+          description: Cost
+          format: double
+        estimatedCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
           type:
-          - 'null'
+          - number
           - string
-        phone:
+          format: double
+        actualCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
           type:
-          - 'null'
+          - number
           - string
-        fax:
-          type:
-          - 'null'
-          - string
+          format: double
+      description: Service Order Resource Object
     ServiceOrder:
       type: object
       properties:
@@ -1164,109 +1194,79 @@ components:
           - 'null'
           - string
           description: Service order Published By
-    ServiceOrderInfo:
+    ServiceOrderRepairItem:
       type: object
       properties:
         id:
           type:
           - 'null'
           - string
-          description: Unique Id for the service order
-        client:
+          description: Unique Id required
+        manufacturer:
           type:
           - 'null'
           - string
-          description: Client Name
-        number:
+          description: Manufacturer required for repair item.
+        model:
           type:
           - 'null'
           - string
-          description: Service Order Number
-        name:
+          description: Model required for repair item.
+        partNumber:
           type:
           - 'null'
           - string
-          description: Service order name
-        progress:
+          description: Part number of the repair item.
+        category:
           type:
           - 'null'
           - string
-          description: Project progress
+          description: Category of the repair item.
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: ComponentId of the repair item.
+        serialNumber:
+          type:
+          - 'null'
+          - string
+          description: Serial number of the repair item.
         description:
           type:
           - 'null'
           - string
-          description: Service order description
-        importedOn:
+          description: Description of the repair item.
+        notes:
           type:
           - 'null'
           - string
-          description: Date service order was imported by SI user
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date service order was published by SI user
-          format: date-time
-        publishedOnUnixTimeMs:
+          description: Notes of the repair item.
+        location:
+          type:
+          - 'null'
+          - string
+          description: Location of the repair item.
+        system:
+          type:
+          - 'null'
+          - string
+          description: Description of the repair item.
+      description: Repair item Object
+    ServiceOrdersResult:
+      type: object
+      properties:
+        serviceOrders:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServiceOrderInfo'
+          description: Service orders
+        totalCount:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
-          description: Date service order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Order as Imported method optionally to make sure the service order was not updated in SI since it was published.
-          format: int64
-        deleted:
-          type:
-          - 'null'
-          - boolean
-          description: Service order deleted
-      description: Service Order Information
-    ServiceOrderResource:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the resource
-        email:
-          type:
-          - 'null'
-          - string
-          description: Email
-        estimatedHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Estimated hours
-          format: double
-        actualHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Actual hours
-          format: double
-        cost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Cost
-          format: double
-        estimatedCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-        actualCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-      description: Service Order Resource Object
+          description: Total count of service orders
+          format: int32

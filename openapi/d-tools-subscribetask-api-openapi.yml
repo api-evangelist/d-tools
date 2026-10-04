@@ -213,146 +213,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    TaskItem:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id (Required)
-        siItemId:
-          type:
-          - 'null'
-          - string
-          description: SIItemId - unique id of item in SI project
-        typeId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'TypeId: 1 = Product, 2 = Labor, 3 = Allowance, 4 = Bundled Cable (Required)'
-          format: uint8
-        manufacturer:
-          type:
-          - 'null'
-          - string
-          description: Manufacturer (Required for product and labor)
-        model:
-          type:
-          - 'null'
-          - string
-          description: Model (Required for product and labor)
-        packageName:
-          type:
-          - 'null'
-          - string
-          description: Package Name for allowance, bundled cable and placeholder (required).
-        partNumber:
-          type:
-          - 'null'
-          - string
-        category:
-          type:
-          - 'null'
-          - string
-        subcategory:
-          type:
-          - 'null'
-          - string
-        componentId:
-          type:
-          - 'null'
-          - string
-          description: ComponentId (Required)
-        location:
-          type:
-          - 'null'
-          - string
-        system:
-          type:
-          - 'null'
-          - string
-        serialNumber:
-          type:
-          - 'null'
-          - string
-        ipAddress1:
-          type:
-          - 'null'
-          - string
-        ipAddress2:
-          type:
-          - 'null'
-          - string
-        macAddress1:
-          type:
-          - 'null'
-          - string
-        macAddress2:
-          type:
-          - 'null'
-          - string
-        picked:
-          type: boolean
-        pickedDate:
-          type:
-          - 'null'
-          - string
-          format: date-time
-        installed:
-          type: boolean
-        installedOn:
-          type:
-          - 'null'
-          - string
-          format: date-time
-        installedNotes:
-          type:
-          - 'null'
-          - string
-      description: Task Item
-    TasksResult:
-      type: object
-      properties:
-        tasks:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/TaskInfo'
-          description: Tasks array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of tasks
-          format: int32
-    ContactInfo:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the contact
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
     SITask:
       type: object
       properties:
@@ -622,6 +482,227 @@ components:
           - 'null'
           - string
           description: Task Published By
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    TaskItem:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id (Required)
+        siItemId:
+          type:
+          - 'null'
+          - string
+          description: SIItemId - unique id of item in SI project
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'TypeId: 1 = Product, 2 = Labor, 3 = Allowance, 4 = Bundled Cable (Required)'
+          format: uint8
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer (Required for product and labor)
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model (Required for product and labor)
+        packageName:
+          type:
+          - 'null'
+          - string
+          description: Package Name for allowance, bundled cable and placeholder (required).
+        partNumber:
+          type:
+          - 'null'
+          - string
+        category:
+          type:
+          - 'null'
+          - string
+        subcategory:
+          type:
+          - 'null'
+          - string
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: ComponentId (Required)
+        location:
+          type:
+          - 'null'
+          - string
+        system:
+          type:
+          - 'null'
+          - string
+        serialNumber:
+          type:
+          - 'null'
+          - string
+        ipAddress1:
+          type:
+          - 'null'
+          - string
+        ipAddress2:
+          type:
+          - 'null'
+          - string
+        macAddress1:
+          type:
+          - 'null'
+          - string
+        macAddress2:
+          type:
+          - 'null'
+          - string
+        picked:
+          type: boolean
+        pickedDate:
+          type:
+          - 'null'
+          - string
+          format: date-time
+        installed:
+          type: boolean
+        installedOn:
+          type:
+          - 'null'
+          - string
+          format: date-time
+        installedNotes:
+          type:
+          - 'null'
+          - string
+      description: Task Item
+    SiteNote:
+      type: object
+      properties:
+        notes:
+          type:
+          - 'null'
+          - string
+          description: Task Notes
+        updatedOn:
+          type: string
+          description: Updated On
+          format: date-time
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Updated By
+      description: Mobile Install Site Notes
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    TaskResource:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+        estimatedHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        actualHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        cost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        estimatedCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        actualCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
     TaskInfo:
       type: object
       properties:
@@ -678,101 +759,20 @@ components:
           - boolean
           description: Task deleted
       description: Task Information
-    TaskResource:
+    TasksResult:
       type: object
       properties:
-        name:
+        tasks:
           type:
           - 'null'
-          - string
-          description: Name of the resource
-        email:
+          - array
+          items:
+            $ref: '#/components/schemas/TaskInfo'
+          description: Tasks array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
           type:
-          - 'null'
+          - integer
           - string
-        estimatedHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          format: double
-        actualHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          format: double
-        cost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          format: double
-        estimatedCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-        actualCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-    SiteNote:
-      type: object
-      properties:
-        notes:
-          type:
-          - 'null'
-          - string
-          description: Task Notes
-        updatedOn:
-          type: string
-          description: Updated On
-          format: date-time
-        updatedBy:
-          type:
-          - 'null'
-          - string
-          description: Updated By
-      description: Mobile Install Site Notes
+          description: Total count of tasks
+          format: int32

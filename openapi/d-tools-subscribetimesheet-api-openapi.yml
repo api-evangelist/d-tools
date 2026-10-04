@@ -151,7 +151,7 @@ components:
           - string
           description: Total count of time sheet
           format: int32
-    TimeSheetEntry:
+    TimeSheetInfo:
       type: object
       properties:
         id:
@@ -159,60 +159,39 @@ components:
           - 'null'
           - string
           description: Unique Id
-        phase:
+        client:
           type:
           - 'null'
           - string
-          description: Phase
-        laborType:
+          description: Client name
+        number:
           type:
           - 'null'
           - string
-          description: Labor Type
-        subLaborType:
+          description: Project Number or Task Number or Service Order Number
+        importedOn:
           type:
           - 'null'
           - string
-          description: 'Sub-Labor Type: Values can be Install, Miscellaneous, Management, Design'
-        typeId:
+          description: Date time sheet was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date time sheet was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
-          description: 'Type: Duration = 1, Time In/Out = 2 (Required)'
-          format: uint8
-        duration:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Duration in Hours (applicable if TypeId =  1 (Duration))
-          format: double
-        startTime:
-          type:
-          - 'null'
-          - string
-          description: Start Time (applicable if TypeId =  2 (Time In/Out))
-          format: date-time
-        endTime:
-          type:
-          - 'null'
-          - string
-          description: End Time (applicable if TypeId =  2 (Time In/Out))
-          format: date-time
-        billable:
+          description: Date time sheet was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Time Sheet as Imported method optionally to make sure the time sheet was not updated in SI since it was published.
+          format: int64
+        deleted:
           type:
           - 'null'
           - boolean
-          description: Billable
-        overtime:
-          type: boolean
-          description: Overtime
-        description:
-          type:
-          - 'null'
-          - string
-          description: Description
+          description: Time sheet deleted
+      description: Time Sheet Information
     TimeSheet:
       type: object
       properties:
@@ -540,7 +519,7 @@ components:
           - string
           description: Date time sheet was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Time Sheet as Imported method optionally to make sure the time sheet was not updated in SI since it was published.
           format: int64
-    TimeSheetInfo:
+    TimeSheetEntry:
       type: object
       properties:
         id:
@@ -548,36 +527,57 @@ components:
           - 'null'
           - string
           description: Unique Id
-        client:
+        phase:
           type:
           - 'null'
           - string
-          description: Client name
-        number:
+          description: Phase
+        laborType:
           type:
           - 'null'
           - string
-          description: Project Number or Task Number or Service Order Number
-        importedOn:
+          description: Labor Type
+        subLaborType:
           type:
           - 'null'
           - string
-          description: Date time sheet was imported by SI user
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date time sheet was published by SI
-          format: date-time
-        publishedOnUnixTimeMs:
+          description: 'Sub-Labor Type: Values can be Install, Miscellaneous, Management, Design'
+        typeId:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
-          description: Date time sheet was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Time Sheet as Imported method optionally to make sure the time sheet was not updated in SI since it was published.
-          format: int64
-        deleted:
+          description: 'Type: Duration = 1, Time In/Out = 2 (Required)'
+          format: uint8
+        duration:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Duration in Hours (applicable if TypeId =  1 (Duration))
+          format: double
+        startTime:
+          type:
+          - 'null'
+          - string
+          description: Start Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        endTime:
+          type:
+          - 'null'
+          - string
+          description: End Time (applicable if TypeId =  2 (Time In/Out))
+          format: date-time
+        billable:
           type:
           - 'null'
           - boolean
-          description: Time sheet deleted
-      description: Time Sheet Information
+          description: Billable
+        overtime:
+          type: boolean
+          description: Overtime
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description
