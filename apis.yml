@@ -43,7 +43,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.23'
 created: '2026-08-11'
-modified: '2026-08-11'
+modified: '2026-10-06'
 tags:
 - av-integration
 - Systems Integration
@@ -947,6 +947,10 @@ apis:
   - type: LLMsTxt
     url: llms/d-tools-si-llms.txt
 common:
+- url: https://www.d-tools.com/resource-center
+  type: Blog
+- url: https://www.d-tools.com/resource-center/rss.xml
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/d-tools-capability-edges.yml
   name: D-Tools Business Capability Map
