@@ -84,3 +84,46 @@ free_tier: false
 trial:
   offered: true
   url: https://www.d-tools.com/cloud-free-trial
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  units: []
+  plans:
+  - name: Single
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Duo
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Team
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Company
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: System Integrator
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
