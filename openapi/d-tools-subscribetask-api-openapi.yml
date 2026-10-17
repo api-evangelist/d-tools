@@ -482,6 +482,69 @@ components:
           - 'null'
           - string
           description: Task Published By
+    TaskResource:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+        estimatedHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        actualHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        cost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          format: double
+        estimatedCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        actualCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+    SiteNote:
+      type: object
+      properties:
+        notes:
+          type:
+          - 'null'
+          - string
+          description: Task Notes
+        updatedOn:
+          type: string
+          description: Updated On
+          format: date-time
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Updated By
+      description: Mobile Install Site Notes
     Address:
       type: object
       properties:
@@ -517,6 +580,103 @@ components:
           type:
           - 'null'
           - string
+    ContactInfo:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+    TaskInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Task Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Task name
+        progress:
+          type:
+          - 'null'
+          - string
+          description: Project progress
+        description:
+          type:
+          - 'null'
+          - string
+          description: Task description
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date task was imported by SI
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date task was published by SI user
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date task was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Task as Imported method optionally to make sure the task was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Task deleted
+      description: Task Information
+    TasksResult:
+      type: object
+      properties:
+        tasks:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/TaskInfo'
+          description: Tasks array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of tasks
+          format: int32
     TaskItem:
       type: object
       properties:
@@ -616,163 +776,3 @@ components:
           - 'null'
           - string
       description: Task Item
-    SiteNote:
-      type: object
-      properties:
-        notes:
-          type:
-          - 'null'
-          - string
-          description: Task Notes
-        updatedOn:
-          type: string
-          description: Updated On
-          format: date-time
-        updatedBy:
-          type:
-          - 'null'
-          - string
-          description: Updated By
-      description: Mobile Install Site Notes
-    ContactInfo:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the contact
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
-    TaskResource:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the resource
-        email:
-          type:
-          - 'null'
-          - string
-        estimatedHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          format: double
-        actualHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          format: double
-        cost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          format: double
-        estimatedCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-        actualCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-    TaskInfo:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id
-        client:
-          type:
-          - 'null'
-          - string
-          description: Client name
-        number:
-          type:
-          - 'null'
-          - string
-          description: Task Number
-        name:
-          type:
-          - 'null'
-          - string
-          description: Task name
-        progress:
-          type:
-          - 'null'
-          - string
-          description: Project progress
-        description:
-          type:
-          - 'null'
-          - string
-          description: Task description
-        importedOn:
-          type:
-          - 'null'
-          - string
-          description: Date task was imported by SI
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date task was published by SI user
-          format: date-time
-        publishedOnUnixTimeMs:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Date task was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Task as Imported method optionally to make sure the task was not updated in SI since it was published.
-          format: int64
-        deleted:
-          type:
-          - 'null'
-          - boolean
-          description: Task deleted
-      description: Task Information
-    TasksResult:
-      type: object
-      properties:
-        tasks:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/TaskInfo'
-          description: Tasks array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of tasks
-          format: int32

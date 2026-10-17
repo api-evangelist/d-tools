@@ -141,6 +141,262 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ServicePlanItem:
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Unique Id (Required)
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description
+        frequency:
+          type:
+          - 'null'
+          - string
+          description: Frequency
+        calculated:
+          type: boolean
+          description: Calculated field for service plan item.
+        price:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Price for the service plan item.
+          format: double
+        taxable:
+          type: boolean
+          description: Taxable
+        startDate:
+          type:
+          - 'null'
+          - string
+          description: Start Date
+          format: date-time
+        numberOfPayments:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          description: Number of payments
+          format: int32
+      description: Service Plan Item object
+    ServicePlansResult:
+      type: object
+      properties:
+        servicePlans:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServicePlanInfo'
+          description: Service plans array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of service plans
+          format: int32
+    ServicePlanProjectItem:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id (Required)
+        typeId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'TypeId: 1 = Product, 2 = Labor, 3 = Allowance, 4 = Bundled Cable, 5 = Placeholder (Required)'
+          format: uint8
+        siItemId:
+          type:
+          - 'null'
+          - string
+          description: SIItemId - unique id of project item in SI.
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer for the project item. Required for product and labor.
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model for the project item. Required for product and labor.
+        acctgItemName:
+          type:
+          - 'null'
+          - string
+          description: Accounting item name.
+        quantity:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          description: Quantity
+          format: double
+        packageName:
+          type:
+          - 'null'
+          - string
+          description: Package Name for the allowance, bundled cable and placeholder.
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part Number
+        category:
+          type:
+          - 'null'
+          - string
+          description: Category
+        subcategory:
+          type:
+          - 'null'
+          - string
+          description: Subcategory
+        description:
+          type:
+          - 'null'
+          - string
+          description: Short description
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: Component ID
+        serialNumber:
+          type:
+          - 'null'
+          - string
+          description: Serial number
+        ipAddress:
+          type:
+          - 'null'
+          - string
+          description: IP Address 1
+        ipAddress2:
+          type:
+          - 'null'
+          - string
+          description: IP Address 2
+        macAddress1:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 1
+        macAddress2:
+          type:
+          - 'null'
+          - string
+          description: MAC Address 2
+        location:
+          type:
+          - 'null'
+          - string
+          description: Location
+        system:
+          type:
+          - 'null'
+          - string
+          description: System
+        name:
+          type:
+          - 'null'
+          - string
+    ServicePlanInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id
+        client:
+          type:
+          - 'null'
+          - string
+          description: Client name
+        number:
+          type:
+          - 'null'
+          - string
+          description: Service Plan Number
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name
+        status:
+          type:
+          - 'null'
+          - string
+          description: Status
+        description:
+          type:
+          - 'null'
+          - string
+          description: Service plan description
+        importedOn:
+          type:
+          - 'null'
+          - string
+          description: Date service plan was imported by SI user
+          format: date-time
+        publishedOn:
+          type: string
+          description: Date service plan was published by SI
+          format: date-time
+        publishedOnUnixTimeMs:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Date service plan was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Plan as Imported method optionally to make sure the service plan was not updated in SI since it was published.
+          format: int64
+        deleted:
+          type:
+          - 'null'
+          - boolean
+          description: Service plan deleted
+      description: Service Plan Information
+    ServicePlanFeature:
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+        description:
+          type:
+          - 'null'
+          - string
+      description: Service Plan Feature
     Address:
       type: object
       properties:
@@ -176,23 +432,30 @@ components:
           type:
           - 'null'
           - string
-    ServicePlansResult:
+    ContactInfo:
       type: object
       properties:
-        servicePlans:
+        name:
           type:
           - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ServicePlanInfo'
-          description: Service plans array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
           - string
-          description: Total count of service plans
-          format: int32
+          description: Name of the contact
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
     ServicePlan:
       type: object
       properties:
@@ -756,266 +1019,3 @@ components:
           - 'null'
           - string
           description: Service plan Published By
-    ServicePlanFeature:
-      type: object
-      properties:
-        id:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        name:
-          type:
-          - 'null'
-          - string
-        description:
-          type:
-          - 'null'
-          - string
-      description: Service Plan Feature
-    ServicePlanItem:
-      type: object
-      properties:
-        id:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Unique Id (Required)
-          format: int32
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name
-        description:
-          type:
-          - 'null'
-          - string
-          description: Description
-        frequency:
-          type:
-          - 'null'
-          - string
-          description: Frequency
-        calculated:
-          type: boolean
-          description: Calculated field for service plan item.
-        price:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Price for the service plan item.
-          format: double
-        taxable:
-          type: boolean
-          description: Taxable
-        startDate:
-          type:
-          - 'null'
-          - string
-          description: Start Date
-          format: date-time
-        numberOfPayments:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          description: Number of payments
-          format: int32
-      description: Service Plan Item object
-    ServicePlanProjectItem:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id (Required)
-        typeId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'TypeId: 1 = Product, 2 = Labor, 3 = Allowance, 4 = Bundled Cable, 5 = Placeholder (Required)'
-          format: uint8
-        siItemId:
-          type:
-          - 'null'
-          - string
-          description: SIItemId - unique id of project item in SI.
-        manufacturer:
-          type:
-          - 'null'
-          - string
-          description: Manufacturer for the project item. Required for product and labor.
-        model:
-          type:
-          - 'null'
-          - string
-          description: Model for the project item. Required for product and labor.
-        acctgItemName:
-          type:
-          - 'null'
-          - string
-          description: Accounting item name.
-        quantity:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          description: Quantity
-          format: double
-        packageName:
-          type:
-          - 'null'
-          - string
-          description: Package Name for the allowance, bundled cable and placeholder.
-        partNumber:
-          type:
-          - 'null'
-          - string
-          description: Part Number
-        category:
-          type:
-          - 'null'
-          - string
-          description: Category
-        subcategory:
-          type:
-          - 'null'
-          - string
-          description: Subcategory
-        description:
-          type:
-          - 'null'
-          - string
-          description: Short description
-        componentId:
-          type:
-          - 'null'
-          - string
-          description: Component ID
-        serialNumber:
-          type:
-          - 'null'
-          - string
-          description: Serial number
-        ipAddress:
-          type:
-          - 'null'
-          - string
-          description: IP Address 1
-        ipAddress2:
-          type:
-          - 'null'
-          - string
-          description: IP Address 2
-        macAddress1:
-          type:
-          - 'null'
-          - string
-          description: MAC Address 1
-        macAddress2:
-          type:
-          - 'null'
-          - string
-          description: MAC Address 2
-        location:
-          type:
-          - 'null'
-          - string
-          description: Location
-        system:
-          type:
-          - 'null'
-          - string
-          description: System
-        name:
-          type:
-          - 'null'
-          - string
-    ContactInfo:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the contact
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
-    ServicePlanInfo:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id
-        client:
-          type:
-          - 'null'
-          - string
-          description: Client name
-        number:
-          type:
-          - 'null'
-          - string
-          description: Service Plan Number
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name
-        status:
-          type:
-          - 'null'
-          - string
-          description: Status
-        description:
-          type:
-          - 'null'
-          - string
-          description: Service plan description
-        importedOn:
-          type:
-          - 'null'
-          - string
-          description: Date service plan was imported by SI user
-          format: date-time
-        publishedOn:
-          type: string
-          description: Date service plan was published by SI
-          format: date-time
-        publishedOnUnixTimeMs:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Date service plan was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Service Plan as Imported method optionally to make sure the service plan was not updated in SI since it was published.
-          format: int64
-        deleted:
-          type:
-          - 'null'
-          - boolean
-          description: Service plan deleted
-      description: Service Plan Information

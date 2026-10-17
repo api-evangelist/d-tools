@@ -62,19 +62,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PublishResponse:
+    ItemLaborType:
       type: object
       properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
+        name:
           type:
           - 'null'
           - string
-          description: Success Message
-      description: Project publish response
+          description: Labor Type name
+        hours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Labor Type Hours
+          format: double
+        totalHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
+          format: double
     ProductCatalog:
       type: object
       properties:
@@ -129,30 +140,19 @@ components:
             format: uuid
           description: Product Ids deleted (available only with automated SI Server Exports)
       description: Product catalog object
-    ItemLaborType:
+    PublishResponse:
       type: object
       properties:
-        name:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
           type:
           - 'null'
           - string
-          description: Labor Type name
-        hours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Labor Type Hours
-          format: double
-        totalHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Total Labor Hours includes Base, Misc, Mgt and Design hours and accounts for wire length (if any) and quantity
-          format: double
+          description: Success Message
+      description: Project publish response
     Product:
       type: object
       properties:

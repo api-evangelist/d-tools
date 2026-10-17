@@ -110,41 +110,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
     VendorList:
       type: object
       properties:
@@ -171,36 +136,6 @@ components:
             $ref: '#/components/schemas/Vendor'
           description: Vendor list.
       description: Vendor List objects
-    UpdateVendorField:
-      type: object
-      properties:
-        vendorFieldId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: 'VendorFieldId (pass the correct Id for the field you want to update)
-
-            Name = 1, Number = 2, Phone = 3, Fax = 4, Email = 5, Website = 6, Inactive = 7,  IntegrationId = 8, Terms = 9'
-          format: uint8
-        value:
-          type:
-          - 'null'
-          - string
-          description: Value for the vendor field. date time and decimal should be invariant.
-    PublishResponse:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
-          type:
-          - 'null'
-          - string
-          description: Success Message
-      description: Project publish response
     UpdateVendor:
       type: object
       properties:
@@ -228,6 +163,19 @@ components:
           description: Vendor Billing Address
           $ref: '#/components/schemas/Address'
       description: Update Vendor
+    PublishResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
+          type:
+          - 'null'
+          - string
+          description: Success Message
+      description: Project publish response
     VendorContact:
       type: object
       properties:
@@ -292,6 +240,58 @@ components:
           - 'null'
           - string
       description: Vendor contact object
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    UpdateVendorField:
+      type: object
+      properties:
+        vendorFieldId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: 'VendorFieldId (pass the correct Id for the field you want to update)
+
+            Name = 1, Number = 2, Phone = 3, Fax = 4, Email = 5, Website = 6, Inactive = 7,  IntegrationId = 8, Terms = 9'
+          format: uint8
+        value:
+          type:
+          - 'null'
+          - string
+          description: Value for the vendor field. date time and decimal should be invariant.
     VendorAddress:
       type: object
       properties:

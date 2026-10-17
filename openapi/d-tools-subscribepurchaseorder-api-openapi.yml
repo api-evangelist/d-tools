@@ -141,6 +141,133 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    PurchaseOrderContact:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        firstName:
+          type:
+          - 'null'
+          - string
+        lastName:
+          type:
+          - 'null'
+          - string
+        group:
+          type:
+          - 'null'
+          - string
+        company:
+          type:
+          - 'null'
+          - string
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+        notes:
+          type:
+          - 'null'
+          - string
+      description: Purchase Order Contact
+    PurchaseOrderTax:
+      type: object
+      properties:
+        taxId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type:
+          - 'null'
+          - string
+        rate:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        group:
+          type: boolean
+        items:
+          type:
+          - 'null'
+          - array
+          items:
+            pattern: ^-?(?:0|[1-9]\d*)$
+            type:
+            - integer
+            - string
+            format: int32
+    ShipToAddress:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    PurchaseOrdersResult:
+      type: object
+      properties:
+        purchaseOrders:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderInfo'
+          description: Purchase orders array
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of purchase order
+          format: int32
     PurchaseOrderItem:
       type: object
       properties:
@@ -298,137 +425,6 @@ components:
           - string
           description: TaxId
           format: int32
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-    PurchaseOrdersResult:
-      type: object
-      properties:
-        purchaseOrders:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/PurchaseOrderInfo'
-          description: Purchase orders array
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of purchase order
-          format: int32
-    ShipToAddress:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-    PurchaseOrderContact:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-        firstName:
-          type:
-          - 'null'
-          - string
-        lastName:
-          type:
-          - 'null'
-          - string
-        group:
-          type:
-          - 'null'
-          - string
-        company:
-          type:
-          - 'null'
-          - string
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
-        notes:
-          type:
-          - 'null'
-          - string
-      description: Purchase Order Contact
     PurchaseOrderInfo:
       type: object
       properties:
@@ -475,6 +471,41 @@ components:
           - boolean
           description: Purchase order deleted
       description: Purchase Order Information
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
     PurchaseOrder:
       type: object
       properties:
@@ -625,34 +656,3 @@ components:
           description: Date purchase order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Purchase Order as Imported method optionally to make sure the purchase order was not updated in SI since it was published.
           format: int64
       description: Purchase order object
-    PurchaseOrderTax:
-      type: object
-      properties:
-        taxId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        name:
-          type:
-          - 'null'
-          - string
-        rate:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-        group:
-          type: boolean
-        items:
-          type:
-          - 'null'
-          - array
-          items:
-            pattern: ^-?(?:0|[1-9]\d*)$
-            type:
-            - integer
-            - string
-            format: int32

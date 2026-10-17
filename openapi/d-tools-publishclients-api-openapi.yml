@@ -110,54 +110,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-    PublishResponse:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: Check the status of the transaction using this Message Id
-          format: uuid
-        message:
-          type:
-          - 'null'
-          - string
-          description: Success Message
-      description: Project publish response
     ClientList:
       type: object
       properties:
@@ -184,70 +136,6 @@ components:
             $ref: '#/components/schemas/Client'
           description: Client list.
       description: Client List objects
-    ClientContact:
-      type: object
-      properties:
-        firstName:
-          type:
-          - 'null'
-          - string
-        lastName:
-          type:
-          - 'null'
-          - string
-        company:
-          type:
-          - 'null'
-          - string
-        title:
-          type:
-          - 'null'
-          - string
-        email:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
-        mobile:
-          type:
-          - 'null'
-          - string
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        notes:
-          type:
-          - 'null'
-          - string
-      description: Client contact object
     ClientAddress:
       type: object
       properties:
@@ -295,33 +183,19 @@ components:
           - 'null'
           - string
       description: Client address object
-    UpdateClient:
+    PublishResponse:
       type: object
       properties:
-        integrationId:
+        messageId:
+          type: string
+          description: Check the status of the transaction using this Message Id
+          format: uuid
+        message:
           type:
           - 'null'
           - string
-          description: Integration Id of client to update (Must pass either IntegrationId Or Client Number)
-        number:
-          type:
-          - 'null'
-          - string
-          description: Number of client to update (Must pass either IntegrationId Or Client Number)
-        updateFields:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/UpdateClientField'
-          description: List of UpdateFields for the client. Each UpdateField has a Id and a Value.
-        siteAddress:
-          description: Client Site Address
-          $ref: '#/components/schemas/Address'
-        billingAddress:
-          description: Client Billing Address
-          $ref: '#/components/schemas/Address'
-      description: Update Project
+          description: Success Message
+      description: Project publish response
     Client:
       type: object
       properties:
@@ -543,6 +417,132 @@ components:
           - string
           description: CustomField24 (Hyperlink) (BETA).
       description: Client object
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+    ClientContact:
+      type: object
+      properties:
+        firstName:
+          type:
+          - 'null'
+          - string
+        lastName:
+          type:
+          - 'null'
+          - string
+        company:
+          type:
+          - 'null'
+          - string
+        title:
+          type:
+          - 'null'
+          - string
+        email:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
+        mobile:
+          type:
+          - 'null'
+          - string
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        notes:
+          type:
+          - 'null'
+          - string
+      description: Client contact object
+    UpdateClient:
+      type: object
+      properties:
+        integrationId:
+          type:
+          - 'null'
+          - string
+          description: Integration Id of client to update (Must pass either IntegrationId Or Client Number)
+        number:
+          type:
+          - 'null'
+          - string
+          description: Number of client to update (Must pass either IntegrationId Or Client Number)
+        updateFields:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/UpdateClientField'
+          description: List of UpdateFields for the client. Each UpdateField has a Id and a Value.
+        siteAddress:
+          description: Client Site Address
+          $ref: '#/components/schemas/Address'
+        billingAddress:
+          description: Client Billing Address
+          $ref: '#/components/schemas/Address'
+      description: Update Project
     UpdateClientField:
       type: object
       properties:

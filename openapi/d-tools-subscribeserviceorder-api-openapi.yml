@@ -178,41 +178,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Address:
-      type: object
-      properties:
-        street1:
-          type:
-          - 'null'
-          - string
-        street2:
-          type:
-          - 'null'
-          - string
-        city:
-          type:
-          - 'null'
-          - string
-        state:
-          type:
-          - 'null'
-          - string
-        postalCode:
-          type:
-          - 'null'
-          - string
-        country:
-          type:
-          - 'null'
-          - string
-        phone:
-          type:
-          - 'null'
-          - string
-        fax:
-          type:
-          - 'null'
-          - string
     ServiceOrderProduct:
       type: object
       properties:
@@ -450,6 +415,59 @@ components:
           - 'null'
           - string
       description: Product Object
+    SiteNote:
+      type: object
+      properties:
+        notes:
+          type:
+          - 'null'
+          - string
+          description: Task Notes
+        updatedOn:
+          type: string
+          description: Updated On
+          format: date-time
+        updatedBy:
+          type:
+          - 'null'
+          - string
+          description: Updated By
+      description: Mobile Install Site Notes
+    Address:
+      type: object
+      properties:
+        street1:
+          type:
+          - 'null'
+          - string
+        street2:
+          type:
+          - 'null'
+          - string
+        city:
+          type:
+          - 'null'
+          - string
+        state:
+          type:
+          - 'null'
+          - string
+        postalCode:
+          type:
+          - 'null'
+          - string
+        country:
+          type:
+          - 'null'
+          - string
+        phone:
+          type:
+          - 'null'
+          - string
+        fax:
+          type:
+          - 'null'
+          - string
     ServiceOrderLabor:
       type: object
       properties:
@@ -716,24 +734,115 @@ components:
           - 'null'
           - string
       description: Labor Object
-    SiteNote:
+    ServiceOrderRepairItem:
       type: object
       properties:
+        id:
+          type:
+          - 'null'
+          - string
+          description: Unique Id required
+        manufacturer:
+          type:
+          - 'null'
+          - string
+          description: Manufacturer required for repair item.
+        model:
+          type:
+          - 'null'
+          - string
+          description: Model required for repair item.
+        partNumber:
+          type:
+          - 'null'
+          - string
+          description: Part number of the repair item.
+        category:
+          type:
+          - 'null'
+          - string
+          description: Category of the repair item.
+        componentId:
+          type:
+          - 'null'
+          - string
+          description: ComponentId of the repair item.
+        serialNumber:
+          type:
+          - 'null'
+          - string
+          description: Serial number of the repair item.
+        description:
+          type:
+          - 'null'
+          - string
+          description: Description of the repair item.
         notes:
           type:
           - 'null'
           - string
-          description: Task Notes
-        updatedOn:
-          type: string
-          description: Updated On
-          format: date-time
-        updatedBy:
+          description: Notes of the repair item.
+        location:
           type:
           - 'null'
           - string
-          description: Updated By
-      description: Mobile Install Site Notes
+          description: Location of the repair item.
+        system:
+          type:
+          - 'null'
+          - string
+          description: Description of the repair item.
+      description: Repair item Object
+    ServiceOrderResource:
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+          description: Name of the resource
+        email:
+          type:
+          - 'null'
+          - string
+          description: Email
+        estimatedHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Estimated hours
+          format: double
+        actualHours:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Actual hours
+          format: double
+        cost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - 'null'
+          - number
+          - string
+          description: Cost
+          format: double
+        estimatedCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+        actualCost:
+          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
+          type:
+          - number
+          - string
+          format: double
+      description: Service Order Resource Object
     ContactInfo:
       type: object
       properties:
@@ -758,6 +867,23 @@ components:
           type:
           - 'null'
           - string
+    ServiceOrdersResult:
+      type: object
+      properties:
+        serviceOrders:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/ServiceOrderInfo'
+          description: Service orders
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          description: Total count of service orders
+          format: int32
     ServiceOrderInfo:
       type: object
       properties:
@@ -814,56 +940,6 @@ components:
           - boolean
           description: Service order deleted
       description: Service Order Information
-    ServiceOrderResource:
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-          description: Name of the resource
-        email:
-          type:
-          - 'null'
-          - string
-          description: Email
-        estimatedHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Estimated hours
-          format: double
-        actualHours:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Actual hours
-          format: double
-        cost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - 'null'
-          - number
-          - string
-          description: Cost
-          format: double
-        estimatedCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-        actualCost:
-          pattern: ^-?(?:0|[1-9]\d*)(?:\.\d+)?$
-          type:
-          - number
-          - string
-          format: double
-      description: Service Order Resource Object
     ServiceOrder:
       type: object
       properties:
@@ -1194,79 +1270,3 @@ components:
           - 'null'
           - string
           description: Service order Published By
-    ServiceOrderRepairItem:
-      type: object
-      properties:
-        id:
-          type:
-          - 'null'
-          - string
-          description: Unique Id required
-        manufacturer:
-          type:
-          - 'null'
-          - string
-          description: Manufacturer required for repair item.
-        model:
-          type:
-          - 'null'
-          - string
-          description: Model required for repair item.
-        partNumber:
-          type:
-          - 'null'
-          - string
-          description: Part number of the repair item.
-        category:
-          type:
-          - 'null'
-          - string
-          description: Category of the repair item.
-        componentId:
-          type:
-          - 'null'
-          - string
-          description: ComponentId of the repair item.
-        serialNumber:
-          type:
-          - 'null'
-          - string
-          description: Serial number of the repair item.
-        description:
-          type:
-          - 'null'
-          - string
-          description: Description of the repair item.
-        notes:
-          type:
-          - 'null'
-          - string
-          description: Notes of the repair item.
-        location:
-          type:
-          - 'null'
-          - string
-          description: Location of the repair item.
-        system:
-          type:
-          - 'null'
-          - string
-          description: Description of the repair item.
-      description: Repair item Object
-    ServiceOrdersResult:
-      type: object
-      properties:
-        serviceOrders:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/ServiceOrderInfo'
-          description: Service orders
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          description: Total count of service orders
-          format: int32

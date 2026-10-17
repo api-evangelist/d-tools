@@ -353,7 +353,39 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DTools.Cloud.Data.FileInfo:
+    DTools.Cloud.Data.Address:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.ContactDetail:
       type: object
       properties:
         id:
@@ -363,10 +395,74 @@ components:
           type:
           - string
           - 'null'
-        url:
+        firstName:
           type:
           - string
           - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        secondaryEmail:
+          type:
+          - string
+          - 'null'
+        mobile:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        fax:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        isActive:
+          type: boolean
+        isPrimary:
+          type: boolean
       additionalProperties: false
     DTools.Cloud.Data.UpdateOpportunity:
       type: object
@@ -485,6 +581,228 @@ components:
           items:
             type: string
       additionalProperties: false
+    DTools.Cloud.Data.Contact:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        company:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        secondaryEmail:
+          type:
+          - string
+          - 'null'
+        mobile:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        fax:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        isActive:
+          type:
+          - boolean
+          - 'null'
+        isPrimary:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    DTools.Cloud.Data.NewOpportunity:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        associatedProjectId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        clientId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        clientType:
+          type:
+          - string
+          - 'null'
+        clientName:
+          type:
+          - string
+          - 'null'
+        clientEmail:
+          type:
+          - string
+          - 'null'
+        clientPhone:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        number:
+          type:
+          - string
+          - 'null'
+        buildingType:
+          type:
+          - string
+          - 'null'
+        marketSector:
+          type:
+          - string
+          - 'null'
+        projectType:
+          type:
+          - string
+          - 'null'
+        quoteType:
+          type:
+          - string
+          - 'null'
+        quoteTemplate:
+          type:
+          - string
+          - 'null'
+        priority:
+          type:
+          - string
+          - 'null'
+        budget:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        owner:
+          type:
+          - string
+          - 'null'
+        projectArea:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        fulfillmentLocation:
+          type:
+          - string
+          - 'null'
+        estimatedCloseDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        leadSource:
+          type:
+          - string
+          - 'null'
+        billingAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        siteAddress:
+          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.Contact'
+        resources:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    DTools.Cloud.Data.ResourceDetail:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     DTools.Cloud.Data.OpportunityLite:
       type: object
       properties:
@@ -582,6 +900,76 @@ components:
           format: date-time
         isArchived:
           type: boolean
+      additionalProperties: false
+    DTools.Cloud.Data.GetOpportunitiesResult:
+      type: object
+      properties:
+        opportunities:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DTools.Cloud.Data.OpportunityLite'
+        totalOpportunities:
+          type: integer
+          format: int32
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DTools.Cloud.Data.AddressDetail:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     DTools.Cloud.Data.OpportunityDetail:
       type: object
@@ -763,7 +1151,7 @@ components:
             type: string
             format: uuid
       additionalProperties: false
-    DTools.Cloud.Data.ContactDetail:
+    DTools.Cloud.Data.FileInfo:
       type: object
       properties:
         id:
@@ -773,395 +1161,7 @@ components:
           type:
           - string
           - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        company:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        secondaryEmail:
-          type:
-          - string
-          - 'null'
-        mobile:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-        fax:
-          type:
-          - string
-          - 'null'
-        addressLine1:
-          type:
-          - string
-          - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        postalCode:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-        isActive:
-          type: boolean
-        isPrimary:
-          type: boolean
-      additionalProperties: false
-    DTools.Cloud.Data.Address:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        addressLine1:
-          type:
-          - string
-          - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        postalCode:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.GetOpportunitiesResult:
-      type: object
-      properties:
-        opportunities:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.OpportunityLite'
-        totalOpportunities:
-          type: integer
-          format: int32
-      additionalProperties: false
-    DTools.Cloud.Data.ResourceDetail:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.NewOpportunity:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        associatedProjectId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        clientId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        clientType:
-          type:
-          - string
-          - 'null'
-        clientName:
-          type:
-          - string
-          - 'null'
-        clientEmail:
-          type:
-          - string
-          - 'null'
-        clientPhone:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        number:
-          type:
-          - string
-          - 'null'
-        buildingType:
-          type:
-          - string
-          - 'null'
-        marketSector:
-          type:
-          - string
-          - 'null'
-        projectType:
-          type:
-          - string
-          - 'null'
-        quoteType:
-          type:
-          - string
-          - 'null'
-        quoteTemplate:
-          type:
-          - string
-          - 'null'
-        priority:
-          type:
-          - string
-          - 'null'
-        budget:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        owner:
-          type:
-          - string
-          - 'null'
-        projectArea:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        fulfillmentLocation:
-          type:
-          - string
-          - 'null'
-        estimatedCloseDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        leadSource:
-          type:
-          - string
-          - 'null'
-        billingAddress:
-          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
-        siteAddress:
-          $ref: '#/components/schemas/DTools.Cloud.Data.Address'
-        contacts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DTools.Cloud.Data.Contact'
-        resources:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    DTools.Cloud.Data.Contact:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        company:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        secondaryEmail:
-          type:
-          - string
-          - 'null'
-        mobile:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-        fax:
-          type:
-          - string
-          - 'null'
-        addressLine1:
-          type:
-          - string
-          - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        postalCode:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-        isActive:
-          type:
-          - boolean
-          - 'null'
-        isPrimary:
-          type:
-          - boolean
-          - 'null'
-      additionalProperties: false
-    DTools.Cloud.Data.AddressDetail:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        addressLine1:
-          type:
-          - string
-          - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        postalCode:
-          type:
-          - string
-          - 'null'
-        country:
+        url:
           type:
           - string
           - 'null'
