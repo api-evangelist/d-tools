@@ -1270,3 +1270,9 @@ components:
           - 'null'
           - string
           description: Service order Published By
+x-provenance:
+  method: harvested
+  publisher: D-Tools
+  source: https://api.d-tools.com/si/openapi/v1.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

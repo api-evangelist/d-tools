@@ -1193,3 +1193,9 @@ components:
           type: string
           format: date-time
       additionalProperties: false
+x-provenance:
+  method: harvested
+  publisher: D-Tools
+  source: https://dtcloudapi.d-tools.cloud/swagger/v1/swagger.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

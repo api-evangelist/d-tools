@@ -656,3 +656,9 @@ components:
           description: Date purchase order was published by SI user in Unix epoch milliseconds (UTC). This property can be passed to the Mark Purchase Order as Imported method optionally to make sure the purchase order was not updated in SI since it was published.
           format: int64
       description: Purchase order object
+x-provenance:
+  method: harvested
+  publisher: D-Tools
+  source: https://api.d-tools.com/si/openapi/v1.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
