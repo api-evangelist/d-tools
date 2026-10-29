@@ -64,17 +64,160 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-D-Tools Inc. builds estimation, system design, project management and field-service software for audio-visual,
-low-voltage, security and systems-integration contractors. Two products carry two distinct public APIs, and both
-publish a machine-readable specification.
+D-Tools Inc. builds estimation, system design, project management and field-service software for audio-visual, low-voltage, security and systems-integration contractors. Two products carry two distinct public APIs. D-Tools Cloud is the web-native platform, and its REST API (dtcloudapi.d-tools.cloud) exposes Clients, Products, Opportunities, Quotes, Projects, Change Orders, Purchase Orders, Service Contracts, Files and Time Entries with documented rate limits, webhooks and a downloadable Postman collection. D-Tools System Integrator (SI) is the on-premises/hosted Windows product; because SI itself has no directly reachable API, D-Tools operates a cloud middleware queue at api.d-tools.com/si where third parties publish projects, change orders, tasks, service orders, purchase orders, time sheets, product catalogs, clients and vendors to an SI user and subscribe to what that SI user exports. Both APIs publish machine-readable specifications: OpenAPI 3.1.1 for SI and OpenAPI 3.0.4 for Cloud.
 
-- Website: https://www.d-tools.com/
-- **D-Tools Cloud API** — REST, OpenAPI 3.0.4, 26 operations.
-  Reference: https://dtcloudapi.d-tools.cloud/apidocs/index.html
-  Docs: https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation
-- **D-Tools System Integrator (SI) API** — REST, OpenAPI 3.1.1, 56 operations. A cloud store-and-forward queue
-  that bridges the on-premises SI application to third-party systems.
-  Reference: https://api.d-tools.com/si/doc
-  Docs: https://docs.d-tools.com/en/articles/9225625-d-tools-si-api-overview
-- Status: https://status.d-tools.cloud/
-- Ideas / roadmap: https://feedback.d-tools.cloud/
+**Areas:** av-integration · Systems Integration · Project Management · Estimation · Quoting · Field Service Management · Construction Technology · low-voltage · Product Catalog · ERP Integration · Vertical SaaS
+
+## D-Tools on APIs.io
+
+Everything profiled for D-Tools is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/d-tools/](https://apis.io/providers/d-tools/)** — or go straight to one of the APIs or properties below.
+
+### APIs (27)
+
+- [D-Tools Clients API](https://apis.io/apis/d-tools/d-tools-clients-api/) — The Clients API from D-Tools — 4 operation(s) for clients.
+- [D-Tools Files API](https://apis.io/apis/d-tools/d-tools-files-api/) — The Files API from D-Tools — 1 operation(s) for files.
+- [D-Tools Message API](https://apis.io/apis/d-tools/d-tools-message-api/) — The Message API from D-Tools — 2 operation(s) for message.
+- [D-Tools Opportunities API](https://apis.io/apis/d-tools/d-tools-opportunities-api/) — The Opportunities API from D-Tools — 4 operation(s) for opportunities.
+- [D-Tools Products API](https://apis.io/apis/d-tools/d-tools-products-api/) — The Products API from D-Tools — 5 operation(s) for products.
+- [D-Tools Projects API](https://apis.io/apis/d-tools/d-tools-projects-api/) — The Projects API from D-Tools — 3 operation(s) for projects.
+- [D-Tools Publish Clients API](https://apis.io/apis/d-tools/d-tools-publishclients-api/) — Allows an integration to update a client list to a SI user.
+- [D-Tools Publish Product Catalogs API](https://apis.io/apis/d-tools/d-tools-publishproductcatalogs-api/) — Allows an integration to publish a product catalog to a SI user.
+- [D-Tools Publish Projects API](https://apis.io/apis/d-tools/d-tools-publishprojects-api/) — Allows an integration to publish or update a project to a SI user.
+- [D-Tools Publish Service Orders API](https://apis.io/apis/d-tools/d-tools-publishserviceorders-api/) — Allows an integration to publish a service order to a SI user.
+- [D-Tools Publish Tasks API](https://apis.io/apis/d-tools/d-tools-publishtasks-api/) — Allows an integration to publish a task to a SI user.
+- [D-Tools Publish Time Sheets API](https://apis.io/apis/d-tools/d-tools-publishtimesheets-api/) — Allows an integration to publish a time sheet to a SI user.
+- [D-Tools Publish Vendors API](https://apis.io/apis/d-tools/d-tools-publishvendors-api/) — Allows an integration to update a vendor list to a SI user. d
+- [D-Tools Quotes API](https://apis.io/apis/d-tools/d-tools-quotes-api/) — The Quotes API from D-Tools — 2 operation(s) for quotes.
+- [D-Tools Service Contracts API](https://apis.io/apis/d-tools/d-tools-servicecontracts-api/) — The ServiceContracts API from D-Tools — 2 operation(s) for servicecontracts.
+- [D-Tools Subscribe Clients API](https://apis.io/apis/d-tools/d-tools-subscribeclients-api/) — Allows an integration to subscribe to clients published by SI users.
+- [D-Tools Subscribe Partial Projects API](https://apis.io/apis/d-tools/d-tools-subscribepartialprojects-api/) — Allows an integration to subscribe to partial projects published by SI users.
+- [D-Tools Subscribe Product Catalogs API](https://apis.io/apis/d-tools/d-tools-subscribeproductcatalogs-api/) — Allows an integration to subscribe to product catalogs published by SI users.
+- [D-Tools Subscribe Projects API](https://apis.io/apis/d-tools/d-tools-subscribeprojects-api/) — Allows an integration to subscribe to projects and change orders published by SI users.
+- [D-Tools Subscribe Purchase Order API](https://apis.io/apis/d-tools/d-tools-subscribepurchaseorder-api/) — Allows an integration to subscribe to Purchase orders published by SI users.
+- [D-Tools Subscribe Service Order API](https://apis.io/apis/d-tools/d-tools-subscribeserviceorder-api/) — Allows an integration to subscribe to Service orders published by SI users.
+- [D-Tools Subscribe Service Plan API](https://apis.io/apis/d-tools/d-tools-subscribeserviceplan-api/) — Allows an integration to subscribe to Service plan published by SI users.
+- [D-Tools Subscribe Task API](https://apis.io/apis/d-tools/d-tools-subscribetask-api/) — Allows an integration to subscribe to Tasks published by SI users.
+- [D-Tools Subscribe Time Sheet API](https://apis.io/apis/d-tools/d-tools-subscribetimesheet-api/) — Allows an integration to subscribe to Time sheets published by SI users.
+- [D-Tools Change Orders API](https://apis.io/apis/d-tools/d-tools-change-orders-api/) — The Change Orders API from D-Tools — 2 operation(s) for change orders.
+- [D-Tools Purchase Orders API](https://apis.io/apis/d-tools/d-tools-purchase-orders-api/) — The Purchase Orders API from D-Tools — 2 operation(s) for purchase orders.
+- [D-Tools Time Entries API](https://apis.io/apis/d-tools/d-tools-time-entries-api/) — The Time Entries API from D-Tools — 1 operation(s) for time entries.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [D Tools Cloud Webhooks](https://apis.io/asyncapis/d-tools/d-tools-cloud-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [d-tools-mcp.yml](https://apis.io/servers/d-tools/d-tools-mcp-yml/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [D-Tools Cloud API](https://apis.io/collections/d-tools/open-d-tools-cloud-api/)
+- [D-Tools SI API Documentation](https://apis.io/collections/d-tools/open-d-tools-si-api/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [D Tools Cloud Api Overlay](https://apis.io/overlays/d-tools/d-tools-cloud-api-overlay/)
+- [D Tools Si Api Overlay](https://apis.io/overlays/d-tools/d-tools-si-api-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [D Tools Authentication](https://apis.io/security/d-tools/d-tools-authentication/)
+- [D Tools Domain Security](https://apis.io/security/d-tools/d-tools-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [D Tools Plans Pricing](https://apis.io/plans/d-tools/d-tools-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [D Tools Rate Limits](https://apis.io/rate-limits/d-tools/d-tools-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.d-tools.com/)
+- [Documentation](https://docs.d-tools.cloud/en/collections/7640732-cloud-api-documentation)
+- [Getting started](https://docs.d-tools.cloud/en/articles/9344578-best-practices-for-developing-api-integrations)
+- [API reference](https://dtcloudapi.d-tools.cloud/apidocs/index.html)
+- [Pricing](https://www.d-tools.com/cloud-pricing)
+- [Sign up](https://www.d-tools.com/cloud-free-trial)
+- [Support](https://www.d-tools.com/support)
+- [Blog](https://www.d-tools.com/resource-center)
+- [Terms of service](https://www.d-tools.com/d-tools-software-terms-of-services)
+- [Privacy policy](https://www.d-tools.com/privacy)
+- [Status](https://status.d-tools.cloud/)
+
+## API Evangelist rating
+
+**Kin Score 54.5** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 51.2 |
+| Contract governance | 4.5 |
+| Operational transparency | 67.1 |
+| Developer ergonomics | 45.8 |
+| Access clarity | 76.3 |
+
+**Agent readiness 29.4** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/d-tools/](https://apis.io/providers/d-tools/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for D-Tools: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/d-tools/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
